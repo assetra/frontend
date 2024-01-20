@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.PhoneInput input {
+  height: 80%;
+  border-radius: 7px;
+}
