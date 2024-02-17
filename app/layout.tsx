@@ -3,6 +3,9 @@ import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/universal/navbar";
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
