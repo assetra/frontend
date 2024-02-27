@@ -5,9 +5,9 @@ import { BsBoxArrowInDown } from "react-icons/bs";
 import { IoGlobeOutline } from "react-icons/io5";
 import Link from "next/link";
 
-const Navbar = () => {
+const NavbarAuth = () => {
   return (
-    <div className="flex flex-row bg-black text-white text-xs justify-between items-center px-4 py-5">
+    <div className="flex flex-row bg-black text-white text-xs justify-between items-center px-12 py-5 h-16 h-top">
       <Image src={"/images/logo.png"} alt="GTX logo" width={70} height={70} />
       <div className="flex flex-row items-center gap-4">
         <div className="flex flex-row items-center">
@@ -60,4 +60,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarAuth;

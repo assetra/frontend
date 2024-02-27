@@ -22,7 +22,7 @@ const Login = () => {
     //   setClicked(false);
   };
   return (
-    <div className="grid grid-cols-2 h-screen">
+    <div className="grid grid-cols-2 h-main">
       <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
         <h1 className="text-3xl font-bold text-center">
           Trade securely and with peace of mind.

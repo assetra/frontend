@@ -35,3 +35,24 @@
 .resend {
   font-size: 12px;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #212432;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #34384C;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(112, 112, 112)84C;
+}
