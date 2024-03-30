@@ -1,11 +1,18 @@
-import React from "react";
+"use client";
+import React, { useContext, useEffect } from "react";
 import localFont from "next/font/local";
 import CardSlider from "./cardSlider";
 import Card from "./card";
+import { AuthContext } from "@/context/AddContext";
 
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
 
 const Market = () => {
+  const appContext = useContext(AuthContext);
+  useEffect(() => {
+    appContext.setNavbarState(true);
+  }, []);
+
   const symbols = [
     "BINANCE:BTCUSD",
     "COINBASE:ETHUSD",
@@ -190,10 +197,12 @@ const Market = () => {
         <div className="flex h-full w-1/4 pr-3">
           <div className="flex flex-col w-full h-full text-white">
             <div className="flex flex-col pb-6">
-              <div className="text-base pb-2">In the past 24 hours</div>
+              <div className="text-base pb-2 text-[#A5ADCF]">
+                In the past 24 hours
+              </div>
               <div>
                 <h1 className="text-xl font-semibold">
-                  Market is up <span>6.73%</span>
+                  Market is up <span className="text-[#11CABE]">6.73%</span>
                 </h1>
               </div>
             </div>
@@ -209,26 +218,26 @@ const Market = () => {
         <div className="flex h-full w-3/4 pl-3">
           <div className="flex w-full h-full text-white rounded-xl p-6 bg-[#1E1F25]">
             <div className="flex flex-col w-full h-full">
-              <div className="flex flex-row justify-between w-full h-full">
+              <div className="flex flex-row justify-between w-full h-[30px]">
                 <div>Market Table</div>
-                <div>
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full">
+                <div className="text-[#5D6588]">
+                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
                     All Assets
                   </button>
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full">
+                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
                     Gainers
                   </button>
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full">
+                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
                     Lasers
                   </button>
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full">
+                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
                     Tradeble
                   </button>
                 </div>
               </div>
-              <table className="w-full flex flex-col h-[724px]">
-                <tbody className="flex flex-col w-full overflow-auto">
-                  <tr className="flex flex-row w-full justify-between h-20 border-b-2 py-7">
+              <table className="flex flex-col w-full h-[779px]">
+                <thead className="flex flex-col w-full">
+                  <tr className="flex flex-row w-full justify-between h-20 border-b-2 py-7 text-[#5D6588]">
                     <td className="w-1/4">Asserts</td>
                     <td className="w-1/6">Last Price</td>
                     <td className="w-1/6">Martket cap</td>
@@ -236,6 +245,8 @@ const Market = () => {
                     <td className="w-1/5">Chart</td>
                     <td className="w-1/10">Trade</td>
                   </tr>
+                </thead>
+                <tbody className="flex flex-col w-full overflow-auto">
                   {data.map((item) => (
                     <tr className="flex flex-row w-full justify-between items-center h-20 py-7">
                       <td className="flex flex-row py-2 w-1/4">
@@ -243,7 +254,7 @@ const Market = () => {
                           <img src={item.icon} />
                         </div>
                         <div className="pr-9">{item.type}</div>
-                        <div>{item.name}</div>
+                        <div className="text-[#A5ADCF]">{item.name}</div>
                       </td>
                       <td className="w-1/6">
                         <div className="w-full">{item.price}</div>

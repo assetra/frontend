@@ -2,7 +2,7 @@ import React from "react";
 import Exchange from "./exchange";
 import CustomChart from "./customChart";
 
-export default function Second() {
+export default function ExchangeChart() {
   return (
     <div
       id="second"

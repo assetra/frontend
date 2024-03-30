@@ -44,7 +44,8 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #1e1f25;
+  /* background: #34384c; */
   border-radius: 5px;
 }
 
