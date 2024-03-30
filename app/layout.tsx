@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/universal/navbar";
+import Navbar from "@/components/navbar";
+import NavbarAuth from "@/components/navbar/navbarAuth";
+import NavbarDashboard from "@/components/navbar/navbarDashboard";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { AppWrapper } from "@/context/AddContext";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -26,9 +29,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        {" "}
-        <Navbar />
-        {children}
+        <AppWrapper>
+          <Navbar />
+          {children}
+        </AppWrapper>
       </body>
     </html>
   );
