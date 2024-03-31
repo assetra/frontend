@@ -24,7 +24,7 @@ function CardSlider() {
       <Slider className="flex space-x-2" {...settings}>
         {symbols.map((slide: String, i: number) => {
           return (
-            <div className="px-2 py-4 rounded-3xl">
+            <div className="px-2 py-2 rounded-3xl">
               <ExchangeSlide
                 cryptoPair={slide}
                 key={i}
