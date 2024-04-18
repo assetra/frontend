@@ -14,7 +14,7 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-screen px-7 bg-[#000] h-screen">
+    <div className="flex flex-col w-screen px-7 bg-[#000] h-[100vh]">
       <BalanceTransaction />
       <ExchangeChart />
       <CardSlider />

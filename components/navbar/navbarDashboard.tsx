@@ -10,7 +10,7 @@ const NavbarDashboard = () => {
   };
 
   return (
-    <div className="flex flex-row bg-black text-white justify-between items-center px-12 h-top text-base">
+    <div className="flex flex-row bg-black text-white justify-between items-center px-12 py-2 h-top text-base">
       <div className="flex flex-row justify-between items-center gap-28">
         <Image src={"/images/logo.png"} alt="GTX logo" width={70} height={70} />
         <div className="flex flex-row items-center gap-12 font-normal">
