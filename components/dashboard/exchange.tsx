@@ -31,10 +31,7 @@ const Exchange = () => {
   };
 
   return (
-    <div
-      className="flex flex-col text-white px-7 py-5 font-medium bg-[#1E1F25] rounded-xl"
-      // style={{ height: "100%" }}
-    >
+    <div className="flex flex-col w-full h-full text-white px-7 py-4 font-medium bg-[#1E1F25] rounded-xl">
       <div
         className="flex flex-row space-x-10 mb-4 items-center "
         style={{ justifyContent: "space-between" }}
@@ -83,11 +80,7 @@ const Exchange = () => {
               id="getCurrency"
               className="bg-[#1E1F25] border--none rounded-2xl px-4 py-0.5 w-full h-[30px]"
             >
-              <option className="w-full h-[25px]" value="BTC">
-                {/* <img
-                  className="w-full h-[25px]"
-                  src="/images/bitcoin-icon-medium.png"
-                /> */}
+              <option className="w-full h-[30px]" value="BTC">
                 BTC
               </option>
               <option value="ETH">ETH</option>

@@ -14,10 +14,16 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="flex flex-col w-screen px-7 bg-[#000] h-[100vh]">
-      <BalanceTransaction />
-      <ExchangeChart />
-      <CardSlider />
+    <div className="flex flex-col w-full px-7  h-full">
+      <div className="h-2/5">
+        <BalanceTransaction />
+      </div>
+      <div className="h-2/5 w-full bg-white">
+        <ExchangeChart />
+      </div>
+      <div className="h-1/5">
+        <CardSlider />
+      </div>
     </div>
   );
 };

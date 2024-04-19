@@ -192,7 +192,7 @@ const Market = () => {
   ];
 
   return (
-    <div className="flex w-screen h-full bg-[#000] px-11 pt-14">
+    <div className="flex w-screen h-[870px] bg-[#000] px-11 pt-7">
       <div className="flex w-full h-full">
         <div className="flex h-full w-1/4 pr-3">
           <div className="flex flex-col w-full h-full text-white">
@@ -206,7 +206,7 @@ const Market = () => {
                 </h1>
               </div>
             </div>
-            <div className="flex flex-col w-full">
+            <div className="flex flex-col justify-between w-full h-full">
               {symbols.map((symbol) => (
                 <div className="w-full py-[18px] px-0">
                   <Card cryptoPair={symbol} />
@@ -235,18 +235,18 @@ const Market = () => {
                   </button>
                 </div>
               </div>
-              <table className="flex flex-col w-full h-[779px]">
+              <table className="flex flex-col w-full h-full">
                 <thead className="flex flex-col w-full">
                   <tr className="flex flex-row w-full justify-between h-20 border-b-2 py-7 text-[#5D6588]">
                     <td className="w-1/4">Asserts</td>
                     <td className="w-1/6">Last Price</td>
                     <td className="w-1/6">Martket cap</td>
-                    <td className="w-1/10">Change</td>
+                    <td className="w-1/6">Change</td>
                     <td className="w-1/5">Chart</td>
                     <td className="w-1/10">Trade</td>
                   </tr>
                 </thead>
-                <tbody className="flex flex-col w-full overflow-auto">
+                <tbody className="flex flex-col w-full h-full overflow-auto">
                   {data.map((item) => (
                     <tr className="flex flex-row w-full justify-between items-center h-20 py-7">
                       <td className="flex flex-row py-2 w-1/4">
@@ -262,7 +262,7 @@ const Market = () => {
                       <td className="w-1/6">
                         <div className="w-full">{item.price}</div>
                       </td>
-                      <td className="w-1/10">
+                      <td className="w-1/6">
                         <div className="w-full">{item.change}</div>
                       </td>
                       <td className="w-1/5">

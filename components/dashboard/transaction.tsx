@@ -21,18 +21,25 @@ export default function Transaction() {
   ];
 
   return (
-    <div className="bg-[#1E1F25] rounded-xl w-1/3 flex flex-col p-5 text-white overflow-y-auto">
-      <div className="flex justify-between">
-        <div className="flex flex-row justify-between items-start px-4 w-full">
-          <div className="text-white text-xl font-bold">Transaction</div>
-          <div className="flex justify-between items-center text-white text-base border-white border rounded-full w-20 h-10 px-4 py-2 cursor-pointer">
-            All
-            <img src="/images/arrow-down-white.png" alt="arrow-down-white" />
-          </div>
-        </div>
-      </div>
-      <table>
-        <tbody>
+    <div className="flex flex-col rounded-xl w-1/3 p-5 text-white bg-[#1E1F25]">
+      <table className="flex flex-col w-full h-full">
+        <thead className="flex flex-col w-full">
+          <tr className="flex flex-row w-full justify-between">
+            <td>
+              <div className="text-white text-xl font-bold">Transaction</div>
+            </td>
+            <td>
+              <div className="flex justify-between items-center text-white text-base border-white border rounded-full w-20 h-10 px-4 py-2 cursor-pointer">
+                All
+                <img
+                  src="/images/arrow-down-white.png"
+                  alt="arrow-down-white"
+                />
+              </div>
+            </td>
+          </tr>
+        </thead>
+        <tbody className=" overflow-y-auto">
           {data.map((item) => (
             <tr className="flex justify-between items-center h-10">
               <td className="flex items-center justify-between w-1/2">

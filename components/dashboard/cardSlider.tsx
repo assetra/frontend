@@ -20,7 +20,7 @@ function CardSlider() {
     slidesToScroll: 1,
   };
   return (
-    <div className="slider-container">
+    <div className="slider-container m-0">
       <Slider className="flex space-x-2" {...settings}>
         {symbols.map((slide: String, i: number) => {
           return (

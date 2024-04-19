@@ -98,7 +98,7 @@ const ExchangePage = () => {
   ];
 
   return (
-    <div className="flex flex-row w-full h-[913px] px-11 pb-5 bg-black">
+    <div className="flex flex-row w-full h-[896px] px-11 pb-5 bg-black">
       <div className="flex flex-col w-3/4 h-full mr-6">
         <div className="flex flex-row w-full h-[15%] mb-4">
           <div className="flex flex-row items-center w-1/4 h-full mr-4 p-3 rounded-xl bg-[#1E1F25]">
@@ -207,18 +207,22 @@ const ExchangePage = () => {
             <table className="w-full flex flex-col h-full text-white">
               <thead className="flex flex-col w-full h-full">
                 <tr className="flex flex-row w-full justify-between h-[48px] pt-3">
-                  <p className="">Market Trades</p>
-                  <p className="flex flex-row h-full">
-                    <button className="flex items-center h-full text-white rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white">
-                      <p>Open Orders</p>
-                    </button>
-                    <button className="flex items-center text-white rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white">
-                      <p>Order History</p>
-                    </button>
-                    <button className="flex items-center text-white rounded-full px-4 py-2 focus:bg-black focus:text-white">
-                      <p>Order Book</p>
-                    </button>
-                  </p>
+                  <td>
+                    <div className="">Market Trades</div>
+                  </td>
+                  <td>
+                    <div className="flex flex-row h-full">
+                      <button className="flex items-center h-full text-white rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white">
+                        <div>Open Orders</div>
+                      </button>
+                      <button className="flex items-center text-white rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white">
+                        <div>Order History</div>
+                      </button>
+                      <button className="flex items-center text-white rounded-full px-4 py-2 focus:bg-black focus:text-white">
+                        <div>Order Book</div>
+                      </button>
+                    </div>
+                  </td>
                 </tr>
                 <tr className="flex flex-row w-full justify-between h-[48px] border-b-2 pt-3">
                   <td className="w-1/4">Time</td>
@@ -234,10 +238,10 @@ const ExchangePage = () => {
                     className="flex flex-row w-full justify-between items-center h-15 py-2"
                   >
                     <td className="flex flex-row py-2 w-1/4">
-                      <p className="w-full">{item.time}</p>
+                      <div className="w-full">{item.time}</div>
                     </td>
                     <td className="w-1/4">
-                      <p className="w-full">
+                      <div className="w-full">
                         <div
                           className={`${
                             item.change > 0
@@ -247,7 +251,7 @@ const ExchangePage = () => {
                         >
                           {Math.abs(item.price)}
                         </div>
-                      </p>
+                      </div>
                     </td>
                     <td className="w-1/4">
                       <p className="w-full">{item.amount}</p>
