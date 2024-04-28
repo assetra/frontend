@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Chart from "react-apexcharts";
+import DonutChart from "./donutChart";
 
 const Balance = () => {
   const state = {
@@ -52,12 +53,9 @@ const Balance = () => {
           </div>
           <div className="flex flex-row w-full h-full justify-between">
             <div className="w-3/5 donut">
-              <Chart
-                options={state.options}
-                series={state.series}
-                type="donut"
-                width="380"
-              />
+              <div className="relative flex items-center justify-center h-full">
+                <DonutChart />
+              </div>
             </div>
             <div className="flex flex-col w-2/5 h-full p-2 justify-between">
               <div className="flex flex-row w-full h-1/3 m-2">

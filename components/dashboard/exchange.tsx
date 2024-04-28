@@ -31,9 +31,9 @@ const Exchange = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-full text-white px-7 py-4 font-medium bg-[#1E1F25] rounded-xl">
+    <div className="flex flex-col w-full h-full text-white px-7 py-6 font-medium bg-[#1E1F25] rounded-xl">
       <div
-        className="flex flex-row space-x-10 mb-4 items-center "
+        className="flex flex-row space-x-10 items-center "
         style={{ justifyContent: "space-between" }}
       >
         <div className={`text-white text-xl font-bold ${sofia.className}`}>
@@ -47,34 +47,36 @@ const Exchange = () => {
           />
         </button>
       </div>
-      <div className="flex flex-row items-center text-xs justify-between mb-2">
+      <div className="flex flex-row items-center text-xs justify-between py-1">
         <div className="flex flex-row gap-2 items-center">
           <div className="text-white text-xl font-semibold">1</div>
-          <div className="text-gtxTextLight text-base">BTC</div>
+          <div className="text-gtxTextLight text-base text-[#A5ADCF]">BTC</div>
         </div>
         <img src="/images/arrow-right.png" alt="arrow-right" />
-        <div className="flex flex-row gap-4 items-center py-1">
+        <div className="flex flex-row gap-4 items-center">
           {/* <div className="text-white text-xl font-semibold"> */}
           <input
-            className="bg-[#1E1F25] text-xl font-semibold w-40"
+            className="bg-[#1E1F25] text-xl font-semibold w-40 border-none"
             value={rate}
             onChange={(e) => setRate(parseFloat(e.target.value))}
           />
           {/* </div> */}
-          <div className="text-gtxTextLight text-base">USD</div>
+          <div className="text-gtxTextLight text-base text-[#A5ADCF]">USD</div>
         </div>
       </div>
       <div className={`flex flex-col gap-2 ${graphik.className} py-1 mb-2`}>
-        <div className="flex justify-start text-gtxText text-base">Get</div>
-        <div className="flex flex-row justify-center items-center rounded-full w-full border border-gtxBackLight bg-search px-4 py-2">
-          <div className="flex justify-start basis-2/3 text-lg text-white pr-4 border-r border-r-gtxBackLight">
+        <div className="flex justify-start text-gtxText text-base text-[#A5ADCF]">
+          Get
+        </div>
+        <div className="flex flex-row justify-center items-center rounded-full w-full border bg-search px-4 py-2">
+          <div className="flex w-2/3 justify-start basis-2/3 text-lg text-white pr-4 border-r border-r-[#ffffff]">
             <input
               className="bg-[#1E1F25]"
               value={usd}
               onChange={(e) => setUsd(parseFloat(e.target.value))}
             ></input>
           </div>
-          <div className="flex flex-row justify-between items-center gap-2 pl-4 w-full">
+          <div className="flex w-1/3 flex-row justify-between items-center gap-2 pl-4 w-full">
             <select
               name="getCurrency"
               id="getCurrency"
@@ -94,23 +96,27 @@ const Exchange = () => {
           </div>
         </div>
       </div>
-      <div className={`flex flex-col gap-2 ${graphik.className} py-1 mb-4`}>
-        <div className="flex justify-start text-gtxText text-base">Pay</div>
-        <div className="flex flex-row justify-center items-center rounded-full w-full border border-gtxBackLight bg-search px-4 py-2">
-          <div className="flex justify-start basis-2/3 text-lg text-white pr-4 border-r border-r-gtxBackLight">
+      <div className={`flex flex-col gap-2 ${graphik.className} py-1 mb-2`}>
+        <div className="flex justify-start text-gtxText text-base text-[#A5ADCF]">
+          Pay
+        </div>
+        <div className="flex flex-row justify-center items-center rounded-full w-full border bg-search px-4 py-2">
+          <div className="flex w-2/3 justify-start basis-2/3 text-lg text-white pr-4 border-r border-r-[#ffffff]">
             <input
               className="bg-[#1E1F25]"
-              value={btc}
-              onChange={(e) => setBtc(parseFloat(e.target.value))}
+              value={usd}
+              onChange={(e) => setUsd(parseFloat(e.target.value))}
             ></input>
           </div>
-          <div className="flex flex-row justify-between items-center gap-2 pl-4">
+          <div className="flex w-1/3 flex-row justify-between items-center gap-2 pl-4 w-full">
             <select
               name="getCurrency"
               id="getCurrency"
-              className="bg-[#1E1F25] border--none rounded-2xl px-4 py-0.5"
+              className="bg-[#1E1F25] border--none rounded-2xl px-4 py-0.5 w-full h-[30px]"
             >
-              <option value="BTC">BTC</option>
+              <option className="w-full h-[30px]" value="BTC">
+                BTC
+              </option>
               <option value="ETH">ETH</option>
               <option value="LTC">LTC</option>
               <option value="BCH">BCH</option>

@@ -212,23 +212,24 @@ const ExchangePage = () => {
                   </td>
                   <td>
                     <div className="flex flex-row h-full">
-                      <button className="flex items-center h-full text-white rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white">
+                      <button className="flex items-center h-full rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
                         <div>Open Orders</div>
                       </button>
-                      <button className="flex items-center text-white rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white">
+                      <button className="flex items-center h-full rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
                         <div>Order History</div>
                       </button>
-                      <button className="flex items-center text-white rounded-full px-4 py-2 focus:bg-black focus:text-white">
+                      <button className="flex items-center h-full rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
                         <div>Order Book</div>
                       </button>
                     </div>
                   </td>
                 </tr>
                 <tr className="flex flex-row w-full justify-between h-[48px] border-b-2 pt-3">
-                  <td className="w-1/4">Time</td>
-                  <td className="w-1/4">Price(ETH)</td>
-                  <td className="w-1/4">Amount(BTC)</td>
-                  <td className="w-1/4">Total(ETH)</td>
+                  <td className="w-1/4 text-[#5D6588]">Time</td>
+                  <td className="w-1/4 text-[#5D6588]">Price(ETH)</td>
+                  <td className="w-1/4 text-[#5D6588]">Amount(BTC)</td>
+                  <td className="w-1/4 text-[#5D6588]">Amount(BTC)</td>
+                  <td className="w-1/4 text-[#5D6588]">Total(ETH)</td>
                 </tr>
               </thead>
               <tbody className="flex flex-col w-full h-full overflow-auto">

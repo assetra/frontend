@@ -137,7 +137,7 @@ const Wallet = () => {
   const [selectedSummary, setSummary] = useState(summary[0]);
 
   return (
-    <div className="flex flex-row w-full h-[885px] bg-[#000] px-11 pb-7">
+    <div className="flex flex-row w-full h-[810px] bg-[#000] px-11 py-7">
       <div className="flex flex-col w-1/4 h-full pr-7">
         <div className="flex flex-col w-full h-full">
           <div className="flex flex-col w-full h-1/4 rounded-xl mb-4 px-6 py-4 border-2 border-[#246CF9]">
@@ -148,7 +148,7 @@ const Wallet = () => {
               </div>
               <div className="text-[#11CABE]">0.25%</div>
             </div>
-            <div className="text-[25px] text-white mb-2">0.2133214214</div>
+            <div className="text-[25px] text-white">0.2133214214</div>
             <div className="text-[#A5ADCF] text-base">3,230.98 USD</div>
             <div className="">
               <img src="/images/wallet-icon/BTC.png" />
@@ -157,12 +157,12 @@ const Wallet = () => {
           <div className="flex flex-col w-full h-1/4 rounded-xl mb-4 px-6 py-4 bg-[#1E1F25]">
             <div className="flex flex-row justify-between items-center mb-4">
               <div className="flex flex-row">
-                <img src="/images/market-icon/BTC.png" />
-                <div className="px-5">BTC</div>
+                <img src="/images/market-icon/ETH.png" />
+                <div className="px-5 text-white">ETH</div>
               </div>
               <div className="text-[#FA2256]">0.12%</div>
             </div>
-            <div className="text-[25px] text-white mb-2">0.3454364</div>
+            <div className="text-[25px] text-white">0.3454364</div>
             <div className="text-[#A5ADCF] text-base">2,345.21 USD</div>
             <div>
               <img src="/images/wallet-icon/ETH.png" />
@@ -171,12 +171,12 @@ const Wallet = () => {
           <div className="flex flex-col w-full h-1/4 rounded-xl mb-4 px-6 py-4 bg-[#1E1F25]">
             <div className="flex flex-row justify-between items-center mb-4">
               <div className="flex flex-row">
-                <img src="/images/market-icon/BTC.png" />
-                <div className="px-5">BTC</div>
+                <img src="/images/market-icon/USDT.png" />
+                <div className="px-5 text-white">USDT</div>
               </div>
               <div className="text-[#11CABE]">0.25%</div>
             </div>
-            <div className="text-[25px] text-white mb-2">0.3454364</div>
+            <div className="text-[25px] text-white">0.3454364</div>
             <div className="text-[#A5ADCF] text-base">2,345.21 USD</div>
             <div>
               <img src="/images/wallet-icon/USDT.png" />
@@ -195,7 +195,7 @@ const Wallet = () => {
       <div className="flex flex-col w-3/4 h-full">
         <div className="flex flex-row w-full h-2/5 bg-[#1E1F25] rounded-xl mb-4 p-8">
           <div className="flex flex-col justify-betw een w-2/5 h-full border-r-[1px] border-[#34384C]">
-            <div className="flex flex-row items-center">
+            <div className="flex flex-row items-center pb-4">
               <img src="/images/wallet-icon/Bitcoin.png" />
               <div className="text-white mx-3">{selectedSummary.type}</div>
             </div>
@@ -230,10 +230,7 @@ const Wallet = () => {
               </div>
               <div className="flex w-full h-[8px]">
                 <div className="w-full bg-gray-200 rounded-full h-1 dark:bg-gray-700">
-                  <div
-                    className="bg-pink-600 h-1 rounded-full"
-                    style={{ width: "45%" }}
-                  ></div>
+                  <div className="bg-pink-600 h-1 rounded-full w-[45px]"></div>
                 </div>
               </div>
             </div>
@@ -273,7 +270,9 @@ const Wallet = () => {
                 <td className="w-[16%]">Avaliable Balance</td>
                 <td className="w-[16%]">Total Balance</td>
                 <td className="w-1/10">Change</td>
-                <td className="w-1/10">Trade</td>
+                <td className="w-1/10 pr-4">
+                  <div className="flex justify-center">Trade</div>
+                </td>
               </tr>
             </thead>
             <tbody className="flex flex-col w-full overflow-auto">

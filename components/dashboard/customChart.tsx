@@ -65,7 +65,7 @@ export const data = {
 
 export default function CustomChart() {
   return (
-    <div className="w-full h-full bg-[blue]">
+    <div className="w-full h-full">
       <div className="bg-[#1E1F25] flex flex-col rounded-xl h-full ">
         <div
           className="text-white flex font-sans"
