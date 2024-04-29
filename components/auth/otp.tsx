@@ -84,8 +84,10 @@ const OTPField = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
+    <div className="grid grid-cols-2 h-screen w-screen">
+      <div
+        className={` ${microsoft.className} bg-black text-white py-8 px-6 h-full`}
+      >
         <h1 className="text-3xl font-bold text-center">
           Trade securely and with peace of mind.
         </h1>
@@ -95,7 +97,7 @@ const OTPField = () => {
           accountability."
         </p>
       </div>
-      <div className="container-fluid bg-body-tertiary d-block">
+      <div className="container-fluid bg-body-tertiary bg-white d-block h-full">
         <div className="row justify-content-center">
           <div
             className="col-12 col-md-6 col-lg-4"

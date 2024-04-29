@@ -21,7 +21,7 @@ const CreatePassword = () => {
           accountability."
         </p>
       </div>
-      <div className="main-container p-12">
+      <div className="main-container p-12 bg-white">
         <h4 className=" text-2xl font-extrabold">Create a password</h4>
         <div className="my-4"></div>
         <input

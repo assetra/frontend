@@ -1,8 +1,17 @@
-import Dashboard from "@/components/dashboard/dashboard";
-import React from "react";
+"use client";
+import Dash from "@/components/dash/dash";
+import { AuthContext } from "@/context/AddContext";
+import { useContext, useEffect } from "react";
 
-const Page = () => {
-  return <Dashboard />;
-};
+export default function Page() {
+  const appContext = useContext(AuthContext);
+  useEffect(() => {
+    appContext.setNavbarState(true);
+  }, []);
 
-export default Page;
+  return (
+    <div className="flex flex-col pt-7 pb-[45px] pl-[42px] pr-7 w-screen h-[810px]">
+      <Dash />
+    </div>
+  );
+}
