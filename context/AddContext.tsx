@@ -5,15 +5,15 @@ import { createContext, useContext, useState, useEffect } from "react";
 interface IAuthContextProps {
   dashboardState: number;
   setDashboardState: (_: number) => void;
-  navbarState: boolean;
-  setNavbarState: (_: boolean) => void;
+  navbarState: number;
+  setNavbarState: (_: number) => void;
 }
 
 const defaultValue: IAuthContextProps = {
   dashboardState: 1,
   setDashboardState: (_: number) => {},
-  navbarState: false,
-  setNavbarState: (_: boolean) => {},
+  navbarState: 0,
+  setNavbarState: (_: number) => {},
 };
 
 export const AuthContext = createContext<IAuthContextProps>(defaultValue);
@@ -24,7 +24,7 @@ interface IAppWrapperProps {
 
 export function AppWrapper({ children }: IAppWrapperProps) {
   const [dashboardState, setDashboardState] = useState<number>(1);
-  const [navbarState, setNavbarState] = useState<boolean>(false);
+  const [navbarState, setNavbarState] = useState<number>(0);
 
   const sharedState = {
     dashboardState: dashboardState,
