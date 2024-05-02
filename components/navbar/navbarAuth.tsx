@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdKeyboardArrowRight } from "react-icons/md";
 import { IoGlobeOutline } from "react-icons/io5";
 import Link from "next/link";
 import { Roboto } from "next/font/google";
@@ -15,7 +15,7 @@ const NavbarAuth = () => {
   return (
     <div className="flex flex-row bg-background text-white text-xs justify-between items-center pl-[42px] pr-5  h-[70px]">
       <Image src={"/images/logo.png"} alt="GTX logo" width={70} height={70} />
-      <div className="flex flex-row items-center gap-4 text-[13px]/[14px]">
+      <div className="flex flex-row items-center gap-4 text-[13px]/[14px] hiddend xl:flex">
         <div className="flex flex-row items-center">
           <a href="/buy">Buy crypto</a>
           <MdKeyboardArrowDown />
@@ -48,120 +48,60 @@ const NavbarAuth = () => {
           <MdKeyboardArrowDown />
         </div>
       </div>
-      <div>
-        <button
-          id="multiLevelDropdownButton"
-          data-dropdown-toggle="multi-dropdown"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          type="button"
-        >
-          <FaBars></FaBars>
-        </button>
 
-        <div
-          id="multi-dropdown"
-          className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-        >
-          <ul
-            className="py-2 text-sm text-gray-700 dark:text-gray-200"
-            aria-labelledby="multiLevelDropdownButton"
-          >
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Dashboard
-              </a>
-            </li>
-            <li>
-              <button
-                id="doubleDropdownButton"
-                data-dropdown-toggle="doubleDropdown"
-                data-dropdown-placement="right-start"
-                type="button"
-                className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Dropdown
-                <svg
-                  className="w-2.5 h-2.5 ms-3 rtl:rotate-180"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 6 10"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m1 9 4-4-4-4"
-                  />
-                </svg>
-              </button>
-              <div
-                id="doubleDropdown"
-                className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-              >
-                <ul
-                  className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                  aria-labelledby="doubleDropdownButton"
-                >
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Overview
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      My downloads
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Billing
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Rewards
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Earnings
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-              >
-                Sign out
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
       <div className="flex flex-row space-x-5 items-center font-semibold text-[14px]/[18.2px]">
+        <div className="xl:hidden block">
+          <button
+            id="multiLevelDropdownButton"
+            data-dropdown-toggle="multi-dropdown"
+            className="text-white "
+            type="button"
+          >
+            <FaBars className="w-5 h-5"></FaBars>
+          </button>
+
+          <div
+            id="multi-dropdown"
+            className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          >
+            <ul
+              className="py-2 text-sm text-gray-700 dark:text-gray-200"
+              aria-labelledby="multiLevelDropdownButton"
+            >
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">Buy crypto</a>
+                <MdKeyboardArrowRight />
+              </li>
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">Discover</a>
+                <MdKeyboardArrowRight />
+              </li>
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">Trade</a>
+                <MdKeyboardArrowRight />
+              </li>
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">Grow</a>
+                <MdKeyboardArrowRight />
+              </li>
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">Build</a>
+                <MdKeyboardArrowRight />
+              </li>
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">Institutional</a>
+                <MdKeyboardArrowRight />
+              </li>
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">Learn</a>
+              </li>
+              <li className="flex items-center justify-between w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <a href="/buy">More</a>
+                <MdKeyboardArrowRight />
+              </li>
+            </ul>
+          </div>
+        </div>
         <Link href="/login" className={`${roboto.className} `}>
           Log In
         </Link>

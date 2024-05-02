@@ -24,9 +24,11 @@
   text-align: center;
   border: 1px solid #ddd;
 }
+
 .otp-field input:focus {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
+
 .otp-field input::-webkit-inner-spin-button,
 .otp-field input::-webkit-outer-spin-button {
   display: none;
@@ -58,4 +60,14 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: gray;
+}
+
+@layer utilities {
+  .hiddend {
+    display: none;
+  }
+
+  .blocked {
+    display: block;
+  }
 }
