@@ -3,8 +3,7 @@ import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 
 import Navbar from "@/components/navbar";
-import NavbarAuth from "@/components/navbar/navbarAuth";
-import NavbarDashboard from "@/components/navbar/navbarDashboard";
+
 import { AppWrapper } from "@/context/AddContext";
 // Import css files
 import "slick-carousel/slick/slick.css";

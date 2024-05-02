@@ -12,8 +12,8 @@ const Balance = () => {
   };
 
   return (
-    <div className="pr-8 bg-[#1E1F25] rounded-xl w-full h-full">
-      <div className="gap-45 flex flex-row w-full text-white h-full ">
+    <div className="pr-8 bg-[#1E1F25] rounded-xl w-full ">
+      <div className="gap-45 flex flex-row w-full text-white">
         <div className="w-5/12 flex flex-col p-6 h-full ">
           <div className="flex flex-col justify-between border-r-2 border-[#34384C] h-full pr-10 ">
             <div className="w-full flex justify-between pb-5">

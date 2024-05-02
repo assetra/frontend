@@ -19,7 +19,7 @@ const DonutChart = () => {
     plotOptions: {
       pie: {
         donut: {
-          size: "65%",
+          // size: "65%",
           background: "transparent",
           labels: {
             show: true,
@@ -30,9 +30,6 @@ const DonutChart = () => {
               fontWeight: 600,
               color: "undefined",
               offsetY: -10,
-              // formatter: function (val: any) {
-              //   return val;
-              // },
             },
             value: {
               show: false,
@@ -40,7 +37,7 @@ const DonutChart = () => {
               fontFamily: "Helvetica, Arial, sans-serif",
               fontWeight: 400,
               color: "undefined",
-              offsetY: 16,
+              offsetY: 20,
               // formatter: function (val: any) {
               //   return val;
               // },
@@ -61,25 +58,26 @@ const DonutChart = () => {
             },
           },
         },
+        size: 200,
       },
     },
     tooltip: {
       enabled: true,
       theme: "dark",
     },
-    responsive: [
-      {
-        breakpoint: 480,
-        options: {
-          chart: {
-            // width: 200,
-          },
-          legend: {
-            position: "bottom",
-          },
-        },
-      },
-    ],
+    // responsive: [
+    //   {
+    //     breakpoint: 480,
+    //     options: {
+    //       chart: {
+    //         // width: 200,
+    //       },
+    //       legend: {
+    //         position: "bottom",
+    //       },
+    //     },
+    //   },
+    // ],
   };
 
   const series = [2.36, 1.8, 1.64];

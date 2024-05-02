@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Slider from "react-slick";
 
 function CardSlider() {
+  const width = window.innerWidth;
   const symbols = [
     "BINANCE:BTCUSD",
     "COINBASE:ETHUSD",
@@ -16,7 +17,7 @@ function CardSlider() {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: width > 1024 ? 4 : 2,
     slidesToScroll: 1,
   };
   return (

@@ -8,23 +8,20 @@ import Link from "next/link";
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
 const SignUp = () => {
-  // const [value, setValue] = useState<any>();
   const [clicked, setClicked] = useState(false);
   const [password, setPassword] = useState<string | number>("");
-  // const [number, setNumber] = useState<any>(" ");
   const [value, setValue] = useState<any>();
 
-  // submit form
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setClicked(true);
-
-    //   setClicked(false);
   };
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
-        <h1 className="text-3xl font-bold text-center">
+    <div className="lg:grid lg:grid-cols-2 h-[calc(100vh-70px)] flex flex-col">
+      <div
+        className={` ${microsoft.className} bg-white text-black lg:bg-black lg:text-white pt-10 lg:pt-20 px-6 flex-grow`}
+      >
+        <h1 className="text-[24px]/[30px] xl:text-3xl/[42.24px] font-bold text-center">
           Trade securely and with peace of mind.
         </h1>
         <p className="text-[0.8rem] py-4">
@@ -33,7 +30,7 @@ const SignUp = () => {
           accountability."
         </p>
       </div>
-      <div className="bg-white text-black text-center px-6 py-8">
+      <div className="bg-white text-black text-center px-6 pt-[30px] lg:pt-[90px] flex flex-col">
         <h1 className="text-xl font-">Sign Up</h1>
         <div className=" text-sm text-[#6978A0]">
           Hello there! Create an account to get started
@@ -94,12 +91,15 @@ const SignUp = () => {
               </svg>{" "}
             </button>
           ) : (
-            <button type="submit" className="px-3 py-1.5 bg-black text-white">
-              Sign In
+            <button
+              type="submit"
+              className="px-3 py-1.5 rounded-[4px] bg-black text-white"
+            >
+              Sign Up
             </button>
           )}
         </form>
-        <div className="py-8 text-xs font-light">
+        <div className="mt-[68px] text-xs font-light">
           Already have an account? &nbsp;
           <span className=" font-bold">
             <Link href="/login"> Log In</Link>
@@ -159,7 +159,7 @@ const SignUp = () => {
           </div>
         </div>
 
-        <div className="relative text-xs text-[#6E6E6E]">
+        <div className="relative text-xs text-[#6E6E6E] mt-[80px] lg:mt-[100px] mb-[20px]">
           <div className=" bottom-8">
             By creating an account, I agree to GTX{" "}
             <span className=" text-black font-bold">

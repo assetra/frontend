@@ -15,9 +15,9 @@ const config: Config = {
       },
       colors: {
         background: "#121212",
+        search: "#2f3241",
       },
     },
   },
-  plugins: [],
 };
 export default config;

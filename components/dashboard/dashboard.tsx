@@ -10,18 +10,18 @@ import { AuthContext } from "@/context/AddContext";
 const Dashboard = () => {
   const appContext = useContext(AuthContext);
   useEffect(() => {
-    appContext.setNavbarState(true);
+    appContext.setNavbarState(0);
   }, []);
 
   return (
     <div className="flex flex-col w-full px-7  h-full">
-      <div className="h-2/5">
+      <div className="">
         <BalanceTransaction />
       </div>
-      <div className="h-2/5 w-full bg-white">
+      <div className=" w-full bg-white">
         <ExchangeChart />
       </div>
-      <div className="h-1/5">
+      <div className="">
         <CardSlider />
       </div>
     </div>

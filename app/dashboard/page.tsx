@@ -1,6 +1,5 @@
 "use client";
 import Dash from "@/components/dash/dash";
-import MobileHome from "@/components/mobile/homePage";
 import { AuthContext } from "@/context/AddContext";
 import { useContext, useEffect } from "react";
 
@@ -11,7 +10,7 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="flex flex-col pt-7 pb-[45px] pl-[42px] pr-7 w-screen min-w-[1440px] h-[810px]">
+    <div className="flex flex-col pt-[18px]  pl-[42px] pr-7 w-screen h-fit ">
       <Dash />
     </div>
   );

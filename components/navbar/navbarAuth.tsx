@@ -49,7 +49,7 @@ const NavbarAuth = () => {
         </div>
       </div>
 
-      <div className="flex flex-row space-x-5 items-center font-semibold text-[14px]/[18.2px]">
+      <div className="flex flex-row space-x-3 md:space-x-5 items-center font-semibold text-[14px]/[18.2px]">
         <div className="xl:hidden block">
           <button
             id="multiLevelDropdownButton"
