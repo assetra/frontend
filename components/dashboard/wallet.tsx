@@ -6,7 +6,7 @@ import { Progress } from "flowbite-react";
 const Wallet = () => {
   const appContext = useContext(AuthContext);
   useEffect(() => {
-    appContext.setNavbarState(1);
+    appContext.setNavbarState(3);
   }, []);
 
   const data = [
