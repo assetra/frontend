@@ -16,7 +16,9 @@ const Login = () => {
     <div className={`signin ${poppins.className} px-[33px] pt-[73px]`}>
       <div className="signin-header w-full flex justify-between items-center">
         <p className="text-white text-[15px]/[22.5px]">Sign In</p>
-        <ScanIcon />
+        <Link href={"/mobile/auth/scan"}>
+          <ScanIcon />
+        </Link>
       </div>
       <h1 className="title text-white text-[32px]/[41.12px] mt-[26px]">
         Log into <br />

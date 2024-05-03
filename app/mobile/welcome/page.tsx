@@ -2,6 +2,7 @@
 import { AuthContext } from "@/context/AddContext";
 import React, { useContext, useEffect } from "react";
 import { Poppins } from "next/font/google";
+import Link from "next/link";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,9 +25,14 @@ const Welcome = () => {
           All your crypto transactions in one place! Track coins, aadd
           portfolios, buy & sell.
         </p>
-        <button className="mt-[33px] bg-white px-[64px] py-[13px] rounded-[24px] text-base text-black font-bold">
-          Sign in
-        </button>
+        <div className="mt-[33px]">
+          <Link
+            href={"/mobile/auth/login"}
+            className=" bg-white px-[64px] py-[13px] rounded-[24px] text-base text-black font-bold"
+          >
+            Sign in
+          </Link>
+        </div>
       </div>
     </div>
   );

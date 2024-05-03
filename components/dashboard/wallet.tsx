@@ -3,138 +3,135 @@ import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "@/context/AddContext";
 import { Progress } from "flowbite-react";
 
+const data = [
+  {
+    icon: "/images/market-icon/BTC.png",
+    type: "BTC",
+    name: "Bitcoin",
+    price: "USD 53,260,20",
+    change: 0.25,
+    graph: "/images/market-graph/BTC.png",
+  },
+  {
+    icon: "/images/market-icon/ETH.png",
+    type: "ETH",
+    name: "Ethereum",
+    price: "USD 53,260,20",
+    change: -4.51,
+    graph: "/images/market-graph/ETH.png",
+  },
+  {
+    icon: "/images/market-icon/BTC.png",
+    type: "BTC",
+    name: "Bitcoin",
+    price: "USD 53,260,20",
+    change: 0.25,
+    graph: "/images/market-graph/BTC.png",
+  },
+  {
+    icon: "/images/market-icon/ETH.png",
+    type: "ETH",
+    name: "Ethereum",
+    price: "USD 53,260,20",
+    change: -4.51,
+    graph: "/images/market-graph/ETH.png",
+  },
+  {
+    icon: "/images/market-icon/BTC.png",
+    type: "BTC",
+    name: "Bitcoin",
+    price: "USD 53,260,20",
+    change: 0.25,
+    graph: "/images/market-graph/BTC.png",
+  },
+  {
+    icon: "/images/market-icon/ETH.png",
+    type: "ETH",
+    name: "Ethereum",
+    price: "USD 53,260,20",
+    change: -4.51,
+    graph: "/images/market-graph/ETH.png",
+  },
+  {
+    icon: "/images/market-icon/BTC.png",
+    type: "BTC",
+    name: "Bitcoin",
+    price: "USD 53,260,20",
+    change: 0.25,
+    graph: "/images/market-graph/BTC.png",
+  },
+  {
+    icon: "/images/market-icon/ETH.png",
+    type: "ETH",
+    name: "Ethereum",
+    price: "USD 53,260,20",
+    change: -4.51,
+    graph: "/images/market-graph/ETH.png",
+  },
+  {
+    icon: "/images/market-icon/BTC.png",
+    type: "BTC",
+    name: "Bitcoin",
+    price: "USD 53,260,20",
+    change: 0.25,
+    graph: "/images/market-graph/BTC.png",
+  },
+  {
+    icon: "/images/market-icon/ETH.png",
+    type: "ETH",
+    name: "Ethereum",
+    price: "USD 53,260,20",
+    change: -4.51,
+    graph: "/images/market-graph/ETH.png",
+  },
+  {
+    icon: "/images/market-icon/BTC.png",
+    type: "BTC",
+    name: "Bitcoin",
+    price: "USD 53,260,20",
+    change: 0.25,
+    graph: "/images/market-graph/BTC.png",
+  },
+  {
+    icon: "/images/market-icon/ETH.png",
+    type: "ETH",
+    name: "Ethereum",
+    price: "USD 53,260,20",
+    change: -4.51,
+    graph: "/images/market-graph/ETH.png",
+  },
+  {
+    icon: "/images/market-icon/BTC.png",
+    type: "BTC",
+    name: "Bitcoin",
+    price: "USD 53,260,20",
+    change: 0.25,
+    graph: "/images/market-graph/BTC.png",
+  },
+  {
+    icon: "/images/market-icon/ETH.png",
+    type: "ETH",
+    name: "Ethereum",
+    price: "USD 53,260,20",
+    change: -4.51,
+    graph: "/images/market-graph/ETH.png",
+  },
+];
+const summary = [
+  {
+    type: "BTC",
+    description: "Total Balance",
+    price: 0.2133214214,
+    usd: 3230.98,
+    change: -0.25,
+  },
+];
 const Wallet = () => {
+  const [selectedSummary, setSummary] = useState(summary[0]);
   const appContext = useContext(AuthContext);
   useEffect(() => {
     appContext.setNavbarState(3);
   }, []);
-
-  const data = [
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-  ];
-
-  const summary = [
-    {
-      type: "BTC",
-      description: "Total Balance",
-      price: 0.2133214214,
-      usd: 3230.98,
-      change: -0.25,
-    },
-  ];
-
-  const [selectedSummary, setSummary] = useState(summary[0]);
 
   return (
     <div className="flex flex-row w-full h-[810px] bg-[#000] px-3 lg:px-11">
@@ -206,7 +203,7 @@ const Wallet = () => {
       </div>
       <div className="flex flex-col w-3/4 h-full">
         <div className="flex flex-row w-full  bg-[#1E1F25] rounded-xl mb-2 lg:mb-6 p-2 lg:p-8">
-          <div className="flex flex-col justify-betw een w-2/5 h-full border-r-[1px] border-[#34384C]">
+          <div className="flex flex-col justify-between w-2/5 h-full border-r-[1px] border-[#34384C]">
             <div className="flex flex-row items-center pb-4">
               <img src="/images/wallet-icon/Bitcoin.png" />
               <div className="text-white mx-3 ">{selectedSummary.type}</div>
@@ -289,7 +286,7 @@ const Wallet = () => {
                 </td>
               </tr>
             </thead>
-            <tbody className="flex flex-col w-full overflow-auto text-sm lg:text-base ">
+            <tbody className="flex flex-col w-full overflow-auto text-sm lg:text-base">
               {data.map((item) => (
                 <tr className="flex flex-row w-full justify-between items-center h-20 py-7">
                   <td className="flex flex-row py-2 w-[20%] gap-x-4 flex-wrap items-center">

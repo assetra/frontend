@@ -1,5 +1,7 @@
+"use client";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { BiLeftArrowAlt, BiSolidLeftArrow } from "react-icons/bi";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
@@ -9,10 +11,16 @@ const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 const Forgot = () => {
+  const router = useRouter();
   return (
     <div className={`signin ${poppins.className} px-[33px] pt-[73px]`}>
       <div className="signin-header w-full flex justify-between items-center">
-        <BiLeftArrowAlt className="text-white w-4 h-4"></BiLeftArrowAlt>
+        <BiLeftArrowAlt
+          onClick={(e) => {
+            router.back();
+          }}
+          className="text-white w-4 h-4"
+        ></BiLeftArrowAlt>
       </div>
       <h1 className="title text-white text-[32px]/[41.12px] mt-[26px]">
         Forgot password

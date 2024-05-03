@@ -11,7 +11,7 @@ const QRIcon = () => {
     >
       <rect width="250" height="250" rx="30" fill="black" />
       <rect x="10" y="10" width="230" height="230" rx="24" fill="#FEFEFE" />
-      <g clip-path="url(#clip0_14_2923)">
+      <g clipPath="url(#clip0_14_2923)">
         <path
           d="M45 45V98.125H98.125V45H45ZM85.625 85.625H57.5V57.5H85.625V85.625Z"
           fill="#111111"
