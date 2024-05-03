@@ -3,7 +3,7 @@
 import { BiDotsHorizontal } from "react-icons/bi";
 import { FiBarChart2 } from "react-icons/fi";
 import { Poppins } from "next/font/google";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Icon1 from "@/components/icons/portfolio/Icon1";
 import Icon2 from "@/components/icons/portfolio/Icon2";
@@ -13,6 +13,7 @@ import Icon5 from "@/components/icons/portfolio/Icon5";
 import MyPortfolioModal from "@/components/modal/MyPortfolioModal";
 import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
 import Icon3_2 from "@/components/icons/portfolio/Icon3_2";
+import { BsSearch } from "react-icons/bs";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -428,76 +429,116 @@ const data = [
 const Portfolio = () => {
   const [open, setOpen] = useState(false);
   const [settingOpen, setSettingOpen] = useState(false);
+  const [searchWord, setSearchWord] = useState("");
+  const [isSearch, setSearch] = useState(false);
+  const searchRef = useRef(null);
   const handleClick = (id: number) => {
     if (id === 1) setOpen(true);
     else if (id === 2) setSettingOpen(true);
     else setSettingOpen(false);
   };
+
+  useEffect(() => {
+    searchRef.current?.focus();
+  }, [isSearch]);
   return (
     <div className="portfolio pt-[94px] max-h-screen">
       <div className="header px-5 flex w-full justify-between items-center">
+        <BsSearch
+          className="text-white w-4 h-4"
+          onClick={(e) => {
+            setSearch(!isSearch);
+            // searchRef.current?.focus();
+          }}
+        ></BsSearch>
+        <h2 className="title text-white text-sm font-bold"> Coin Market</h2>
         <FiBarChart2 className="w-[13px] h-4 text-white"></FiBarChart2>
-        <h2 className="title text-white text-sm font-bold">
-          {" "}
-          Default Portfolio
-        </h2>
-        <BiDotsHorizontal className="text-white w-4 h-4"></BiDotsHorizontal>
       </div>
       <div className={`${poppins.className} mt-10 px-5`}>
-        <h1 className={`  price text-[32px]/[48px] font-bold text-white`}>
-          $14,634.06
-        </h1>
-        <p className="text-[#32CC86] font-normal text-sm">+ $248.23(+0.35)</p>
-        <div className="flex justify-between mt-[25px]">
-          <p className="p-2 text-white text-xs bg-white/[.05]">
-            Highest holdings
-          </p>
-          <p className="p-2 text-white text-xs bg-white/[.05]">24 Hours</p>
-        </div>
-      </div>
-      <div className="info-wrapper mt-5 h-[calc(100vh-410px)] overflow-auto">
-        {data.map((item) => {
-          const Icon = dynamic(
-            () => import(`@/components/icons/${item.abbr}Icon`)
-          );
-          return (
-            <div className="flex justify-between items-center p-4">
-              <div className="description flex items-center gap-x-2">
-                <div className="icon-wrapper bg-[#1b1c24] w-9 h-9 rounded-[50%] flex items-center justify-center">
-                  <Icon />
-                </div>
-                <div className="flex flex-col justify-between h-9">
-                  <p className="text-white text-[15px]/[17.9px] font-bold">
-                    {item.type}{" "}
-                    <span className="text-[#666666] text-[12px]/[14.32px] font-bold">
-                      ({item.abbr})
-                    </span>
-                  </p>
-                  <p className="text-[#ffffff]/[.5] text-[12px]/[14.32px] font-normal">
-                    $ {item.amount} Billions
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col items-end h-9 justify-between">
-                <h4 className="text-white text-[15px]/[17.9px] font-bold">
-                  ${item.price}
-                </h4>
-                <p
-                  className={` ${
-                    item.delta > 0 ? "text-[#32CC86]" : "text-[#FC3044]"
-                  } text-[12px]/[14.32px] font-normal`}
-                >
-                  {item.delta > 0 ? `+$${item.delta}` : `$${item.delta}`} (
-                  {item.percent > 0 ? `+${item.percent}%` : `${item.percent}%`})
-                </p>
-              </div>
+        {!isSearch ? (
+          <div className="flex justify-between mt-[25px]">
+            <div className="flex gap-x-5">
+              <p className="p-2 text-white text-xs bg-white/[.05]">Rank</p>
+              <p className="p-2 text-white text-xs bg-white/[.05]">Volume</p>
             </div>
-          );
-        })}
+            <p className="p-2 text-white text-xs bg-white/[.05]">24 Hours</p>
+          </div>
+        ) : (
+          <input
+            type="text"
+            ref={searchRef}
+            value={searchWord}
+            onChange={(e) => setSearchWord(e.target.value)}
+            className="px-2 text-[26px]/[32px] text-white placeholder-[#ffffff]/[.2] w-full bg-transparent  border-transparent focus:ring-transparent focus:border-transparent focus:ring-offset-0 focus:outline-none"
+            placeholder="Search"
+          />
+        )}
+      </div>
+      <div className="info-wrapper mt-5 h-[calc(100vh-300px)] overflow-auto">
+        {data
+          .filter((item) => {
+            return (
+              item.type
+                .toLocaleLowerCase()
+                .includes(searchWord.toLocaleLowerCase()) ||
+              item.amount
+                .toString()
+                .toLocaleLowerCase()
+                .includes(searchWord.toLocaleLowerCase()) ||
+              item.price
+                .toString()
+                .toLocaleLowerCase()
+                .includes(searchWord.toLocaleLowerCase()) ||
+              item.abbr
+                .toLocaleLowerCase()
+                .includes(searchWord.toLocaleLowerCase())
+            );
+          })
+          .map((item) => {
+            const Icon = dynamic(
+              () => import(`@/components/icons/${item.abbr}Icon`)
+            );
+            return (
+              <div className="flex justify-between items-center p-4">
+                <div className="description flex items-center gap-x-2">
+                  <div className="icon-wrapper bg-[#1b1c24] w-9 h-9 rounded-[50%] flex items-center justify-center">
+                    <Icon />
+                  </div>
+                  <div className="flex flex-col justify-between h-9">
+                    <p className="text-white text-[15px]/[17.9px] font-bold">
+                      {item.type}{" "}
+                      <span className="text-[#666666] text-[12px]/[14.32px] font-bold">
+                        ({item.abbr})
+                      </span>
+                    </p>
+                    <p className="text-[#ffffff]/[.5] text-[12px]/[14.32px] font-normal">
+                      $ {item.amount} Billions
+                    </p>
+                  </div>
+                </div>
+                <div className="flex flex-col items-end h-9 justify-between">
+                  <h4 className="text-white text-[15px]/[17.9px] font-bold">
+                    ${item.price}
+                  </h4>
+                  <p
+                    className={` ${
+                      item.delta > 0 ? "text-[#32CC86]" : "text-[#FC3044]"
+                    } text-[12px]/[14.32px] font-normal`}
+                  >
+                    {item.delta > 0 ? `+$${item.delta}` : `$${item.delta}`} (
+                    {item.percent > 0
+                      ? `+${item.percent}%`
+                      : `${item.percent}%`}
+                    )
+                  </p>
+                </div>
+              </div>
+            );
+          })}
       </div>
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full">
-        <Icon1 onClick={() => handleClick(1)} />
-        <Icon2 />
+        <Icon1 onClick={() => handleClick(1)} isActive={false} />
+        <Icon2 isActive={true} />
         {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
         <Icon4 />
         <Icon5 onClick={() => handleClick(2)} />
