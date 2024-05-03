@@ -11,6 +11,9 @@ import Icon5 from "@/components/icons/portfolio/Icon5";
 import Icon3_2 from "@/components/icons/portfolio/Icon3_2";
 import Icon3 from "@/components/icons/portfolio/Icon3";
 import { AdvancedChart, MiniChart } from "react-tradingview-embed";
+import Icon6 from "@/components/icons/portfolio/Icon6";
+import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
+import CoinSettingModal from "@/components/modal/CoinScreenSettingModal";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -33,14 +36,17 @@ const series = [
     data: [30, 40, 45, 50, 49, 60, 70, 91],
   },
 ];
-
-const AddedOverview = () => {
+const ranges = ["1H", "1D", "1W", "1M", "6M", "1Y", "ALL"];
+const CandleStick = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [settingOpen, setSettingOpen] = useState(false);
-  const [searchWord, setSearchWord] = useState("");
-  const [isSearch, setSearch] = useState(false);
+  // const [searchWord, setSearchWord] = useState("");
+  // const [isSearch, setSearch] = useState(false);
   const [active, setActive] = useState(-1);
+  const [range, setRange] = useState("1D");
+  const [style, setStyle] = useState("2");
+
   // const searchRef = useRef(null);
   const handleActive = (id: number) => {
     if (id == active) {
@@ -48,9 +54,8 @@ const AddedOverview = () => {
     } else setActive(id);
   };
   const handleClick = (id: number) => {
-    alert("dd ");
     if (id === 1) setOpen(true);
-    else if (id === 2) setSettingOpen(true);
+    else if (id === 5) setSettingOpen(true);
     else setSettingOpen(false);
   };
   return (
@@ -102,22 +107,67 @@ const AddedOverview = () => {
           </svg>
         </div>
       </div>
+      <div className="mt-5 flex justify-between items-center w-full">
+        <div className="flex flex-col gap-y-2 text-[12px]/[14.32px]">
+          <p className=" font-normal text-white/[.5]">Portfolio</p>
+          <p className="font-bold text-white">41,375.00 BTC</p>
+        </div>
+        <div className="flex flex-col gap-y-2 text-[12px]/[14.32px]">
+          <p className=" font-normal text-white/[.5]">Market Value</p>
+          <p className="font-bold text-white">$1,200.000.00</p>
+        </div>
+        <div className="flex flex-col gap-y-2 text-[12px]/[14.32px]">
+          <p className=" font-normal text-white/[.5]">New Cost</p>
+          <p className="font-bold text-white">$800.000.00</p>
+        </div>
+      </div>
       <div className="mt-5 px-[23px] flex justify-between">
         <button className="text-white bg-white/[.05] text-[12px]/[14.32px] font-extrabold py-2 px-2">
           Global Average
         </button>
         <div className="flex gap-x-5">
-          <button className="w-[30px] h-[30px] flex justify-center items-center bg-white/[.05] rounded-[8px]">
-            <svg
-              width="6"
-              height="14"
-              viewBox="0 0 6 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M3 1V13" stroke="white" stroke-linecap="round" />
-              <rect y="4" width="6" height="6" rx="2" fill="white" />
-            </svg>
+          <button
+            className="w-[30px] h-[30px] flex justify-center items-center bg-white/[.05] rounded-[8px]"
+            onClick={(e) => {
+              if (style == "2") {
+                setStyle("8");
+              } else {
+                setStyle("2");
+              }
+            }}
+          >
+            {style == "2" ? (
+              <svg
+                width="6"
+                height="14"
+                viewBox="0 0 6 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M3 1V13" stroke="white" stroke-linecap="round" />
+                <rect y="4" width="6" height="6" rx="2" fill="white" />
+              </svg>
+            ) : (
+              <svg
+                width="16"
+                height="13"
+                viewBox="0 0 16 13"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6.5 12.5L1 1" stroke="white" stroke-linecap="round" />
+                <path
+                  d="M6.5 12.5L11.5 5.5"
+                  stroke="white"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M14.951 8.519L11.5 5.5"
+                  stroke="white"
+                  stroke-linecap="round"
+                />
+              </svg>
+            )}
           </button>
           <button className="w-[30px] h-[30px] flex justify-center items-center bg-white/[.05] rounded-[8px]">
             <svg
@@ -155,76 +205,103 @@ const AddedOverview = () => {
           </button>
         </div>
       </div>
-      <div className="h-[calc(100vh-400px)] overflow-auto">
+      <div className="h-[calc(100vh-420px)] overflow-auto">
         <div className="mt-[20px]">
-          <Chart options={options} series={series} type="line" height={466} />
+          <AdvancedChart
+            widgetProps={{
+              width: "100%",
+              height: "300px",
+              theme: "dark",
+              hide_top_toolbar: true,
+              withdateranges: false,
+              range: range,
+              hide_side_toolbar: true,
+              style: style,
+              backgroundColor: "black",
+            }}
+          />
         </div>
         <div className="flex justify-evenly">
-          <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-            1H
-          </p>
-          <p className="py-2 px-3 text-white text-[12px]/[14.32px] font-bold bg-[#0057FF] rounded-[12px]">
-            1D
-          </p>
-          <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-            1W
-          </p>
-          <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-            6M
-          </p>
-          <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-            1Y
-          </p>
-          <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-            ALL
-          </p>
+          {ranges.map((rangeItem) => {
+            console.log(rangeItem);
+            console.log(range);
+            return (
+              <p
+                onClick={(e) => setRange(rangeItem)}
+                className={`py-2 px-3 cursor-pointer rounded-lg  text-white text-[12px]/[14.32px] font-bold ${
+                  range == rangeItem ? "bg-[#0057FF]" : ""
+                } `}
+              >
+                {rangeItem}
+              </p>
+            );
+          })}
         </div>
-        <div className="flex justify-center gap-x-10 mt-[20px]">
+
+        <div className="grid grid-cols-2 mt-[20px] gap-y-10 place-items-center px-[40px]">
+          <div>
+            <p className="text-white/[.5] text-[12px]/[14.32px] mb-2">
+              Market Cap
+            </p>
+            <p className="text-white text-[16px]/[19.09px] font-bold">
+              41,375.00 BTC
+            </p>
+          </div>
           <div>
             <p className="text-white/[.5] text-[12px]/[14.32px] mb-2">
               Volume (24 hours)
             </p>
             <p className="text-white text-[16px]/[19.09px] font-bold">
-              $10.412.422.409
+              $98,669.59
             </p>
           </div>
           <div>
             <p className="text-white/[.5] text-[12px]/[14.32px] mb-2">
-              BTC Dominance
+              Available Supply
             </p>
             <p className="text-white text-[16px]/[19.09px] font-bold">
-              53.612%
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-center gap-x-10 mt-[20px]">
-          <div>
-            <p className="text-white/[.5] text-[12px]/[14.32px] mb-2">
-              Volume (24 hours)
-            </p>
-            <p className="text-white text-[16px]/[19.09px] font-bold">
-              $10.412.422.409
+              17.332.275
             </p>
           </div>
           <div>
             <p className="text-white/[.5] text-[12px]/[14.32px] mb-2">
-              BTC Dominance
+              Total Supply
             </p>
             <p className="text-white text-[16px]/[19.09px] font-bold">
-              53.612%
+              17.332.275
+            </p>
+          </div>
+          <div>
+            <p className="text-white/[.5] text-[12px]/[14.32px] mb-2">
+              Low (24 hours)
+            </p>
+            <p className="text-white text-[16px]/[19.09px] font-bold">
+              $98,669.59
+            </p>
+          </div>
+          <div>
+            <p className="text-white/[.5] text-[12px]/[14.32px] mb-2">
+              High (24 hours)
+            </p>
+            <p className="text-white text-[16px]/[19.09px] font-bold">
+              11,669.59
             </p>
           </div>
         </div>
       </div>
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
-        <Icon1 onClick={() => handleClick(1)} isActive={false} />
+        <Icon6 onClick={() => handleClick(1)} isActive={true} />
         <Icon2 isActive={false} onClick={() => handleClick(4)} />
         {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
         <Icon4 isActive={true} onClick={() => handleClick(4)} />
         <Icon5 onClick={() => handleClick(5)} />
       </div>
+      <CoinSettingModal
+        isOpen={settingOpen}
+        openChange={() => setSettingOpen(false)}
+      ></CoinSettingModal>
     </div>
   );
 };
 
-export default AddedOverview;
+export default CandleStick;
