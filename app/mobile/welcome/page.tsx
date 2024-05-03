@@ -1,0 +1,35 @@
+"use client";
+import { AuthContext } from "@/context/AddContext";
+import React, { useContext, useEffect } from "react";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+const Welcome = () => {
+  const appContext = useContext(AuthContext);
+  useEffect(() => {
+    appContext.setNavbarState(3);
+  }, []);
+  return (
+    <div
+      className={`${poppins.className} flex flex-col items-center justify-center h-screen px-10`}
+    >
+      <div className="title text-center">
+        <h1 className=" text-[32px]/[48px] text-white font-bold">
+          Welcome to GTX
+        </h1>
+        <p className="text-sm text-white/[.7]">
+          All your crypto transactions in one place! Track coins, aadd
+          portfolios, buy & sell.
+        </p>
+        <button className="mt-[33px] bg-white px-[64px] py-[13px] rounded-[24px] text-base text-black font-bold">
+          Sign in
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Welcome;
