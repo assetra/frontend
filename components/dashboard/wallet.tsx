@@ -6,7 +6,7 @@ import { Progress } from "flowbite-react";
 const Wallet = () => {
   const appContext = useContext(AuthContext);
   useEffect(() => {
-    appContext.setNavbarState(true);
+    appContext.setNavbarState(3);
   }, []);
 
   const data = [
@@ -137,52 +137,64 @@ const Wallet = () => {
   const [selectedSummary, setSummary] = useState(summary[0]);
 
   return (
-    <div className="flex flex-row w-full h-[810px] bg-[#000] px-11 py-7">
-      <div className="flex flex-col w-1/4 h-full pr-7">
+    <div className="flex flex-row w-full h-[810px] bg-[#000] px-3 lg:px-11">
+      <div className="flex flex-col w-1/4 h-full pr-2 lg:pr-6 gap-y-2 lg:gap-y-6">
         <div className="flex flex-col w-full h-full">
-          <div className="flex flex-col w-full h-1/4 rounded-xl mb-4 px-6 py-4 border-2 border-[#246CF9]">
-            <div className="flex flex-row justify-between items-center mb-4">
+          <div className="flex flex-col w-full rounded-xl mb-2 lg:mb-6 px-2 lg:px-6 py-4 border-2 border-[#246CF9]">
+            <div className="flex flex-row justify-between items-center mb-6">
               <div className="flex flex-row">
                 <img src="/images/market-icon/BTC.png" />
                 <div className="px-5 text-white">BTC</div>
               </div>
               <div className="text-[#11CABE]">0.25%</div>
             </div>
-            <div className="text-[25px] text-white">0.2133214214</div>
-            <div className="text-[#A5ADCF] text-base">3,230.98 USD</div>
+            <div className=" text-[20px] lg:text-[25px] text-white">
+              0.2133214214
+            </div>
+            <div className="text-[#A5ADCF]  text-sm lg:text-base">
+              3,230.98 USD
+            </div>
             <div className="">
               <img src="/images/wallet-icon/BTC.png" />
             </div>
           </div>
-          <div className="flex flex-col w-full h-1/4 rounded-xl mb-4 px-6 py-4 bg-[#1E1F25]">
-            <div className="flex flex-row justify-between items-center mb-4">
+          <div className="flex flex-col w-full rounded-xl mb-2 lg:mb-6 px-2 lg:px-6 py-4 bg-[#1E1F25]">
+            <div className="flex flex-row justify-between items-center mb-6">
               <div className="flex flex-row">
                 <img src="/images/market-icon/ETH.png" />
                 <div className="px-5 text-white">ETH</div>
               </div>
               <div className="text-[#FA2256]">0.12%</div>
             </div>
-            <div className="text-[25px] text-white">0.3454364</div>
-            <div className="text-[#A5ADCF] text-base">2,345.21 USD</div>
+            <div className=" text-[20px] lg:text-[25px] text-white">
+              0.3454364
+            </div>
+            <div className="text-[#A5ADCF] text-sm lg:text-base">
+              2,345.21 USD
+            </div>
             <div>
               <img src="/images/wallet-icon/ETH.png" />
             </div>
           </div>
-          <div className="flex flex-col w-full h-1/4 rounded-xl mb-4 px-6 py-4 bg-[#1E1F25]">
-            <div className="flex flex-row justify-between items-center mb-4">
+          <div className="flex flex-col w-full rounded-xl mb-2 lg:mb-6 px-2 lg:px-6 py-4 bg-[#1E1F25]">
+            <div className="flex flex-row justify-between items-center mb-6">
               <div className="flex flex-row">
                 <img src="/images/market-icon/USDT.png" />
                 <div className="px-5 text-white">USDT</div>
               </div>
               <div className="text-[#11CABE]">0.25%</div>
             </div>
-            <div className="text-[25px] text-white">0.3454364</div>
-            <div className="text-[#A5ADCF] text-base">2,345.21 USD</div>
+            <div className=" text-[20px] lg:text-[25px] text-white">
+              0.3454364
+            </div>
+            <div className="text-[#A5ADCF] text-sm lg:text-base">
+              2,345.21 USD
+            </div>
             <div>
               <img src="/images/wallet-icon/USDT.png" />
             </div>
           </div>
-          <div className="flex flex-col justify-center w-full h-1/4 rounded-xl border-2 border-[#34384C] border-dashed">
+          <div className="flex flex-col justify-center w-full rounded-xl border-2 border-[#34384C] border-dashed">
             <button className="flex justify-center">
               <img src="/images/wallet-icon/Add Button.png" />
             </button>
@@ -193,37 +205,39 @@ const Wallet = () => {
         </div>
       </div>
       <div className="flex flex-col w-3/4 h-full">
-        <div className="flex flex-row w-full h-2/5 bg-[#1E1F25] rounded-xl mb-4 p-8">
+        <div className="flex flex-row w-full  bg-[#1E1F25] rounded-xl mb-2 lg:mb-6 p-2 lg:p-8">
           <div className="flex flex-col justify-betw een w-2/5 h-full border-r-[1px] border-[#34384C]">
             <div className="flex flex-row items-center pb-4">
               <img src="/images/wallet-icon/Bitcoin.png" />
-              <div className="text-white mx-3">{selectedSummary.type}</div>
+              <div className="text-white mx-3 ">{selectedSummary.type}</div>
             </div>
             <div className="text-[#5D6588] text-base">
               {selectedSummary.description}
             </div>
-            <div className="text-white text-[39px]">
+            <div className="text-white text-[26px] lg:text-[39px]">
               {selectedSummary.price}
             </div>
-            <div className="text-[#A5ADCF] text-[25px] mb-3">{`${selectedSummary.usd} USD`}</div>
-            <div className="flex flex-row text-white text-[14px]">
-              <button className="bg-[#246CF9] rounded-full border-2 p-2 mr-2">
+            <div className="text-[#A5ADCF] text-[20px] lg:text-[25px] mb-3">{`${selectedSummary.usd} USD`}</div>
+            <div className="flex flex-col lg:flex-row text-white text-[14px] items-center gap-x-3 gap-y-3  w-full">
+              <button className="bg-[#246CF9] rounded-full px-6 py-3 text-[14px]/[22.4px] border-2 border-transparent">
                 Withdraw
               </button>
-              <button className="rounded-full border-2 p-2">Deposit</button>
+              <button className="rounded-full border-2 px-6 py-3 text-[14px]/[22.4px]">
+                Deposit
+              </button>
             </div>
           </div>
-          <div className="flex flex-col w-3/5 h-full pl-[68px] ">
+          <div className="flex flex-col w-3/5 h-full pl-[20px] lg:pl-[68px] ">
             <div className="flex flex-col w-full h-1/2 p-2 ">
               <div className="flex flex-row justify-between w-full h-full">
-                <div className="flex flex-col w-1/3 h-full">
+                <div className="flex flex-col h-full">
                   <div className="text-[#5D6588] text-base">
                     Exchange Balance
                   </div>
                   <div className="text-white text-[25px]">0.213435345</div>
                   <div className="text-[#11CABE] text-[18px]">3,897.98 USD</div>
                 </div>
-                <div className="flex flex-col justify-end w-1/3 h-full">
+                <div className="flex flex-col justify-end h-full">
                   <img src="/images/exchange-graph-0.png" />
                   <div className="flex justify-end text-white">+0.55%</div>
                 </div>
@@ -236,7 +250,7 @@ const Wallet = () => {
             </div>
             <div className="flex flex-col w-full h-1/2 p-2 ">
               <div className="flex flex-row justify-between w-full h-full">
-                <div className="flex flex-col w-1/3 h-full">
+                <div className="flex flex-col  h-full">
                   <div className="text-[#5D6588] text-base">
                     Exchange Balance
                   </div>
@@ -261,10 +275,10 @@ const Wallet = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row w-full h-3/5 rounded-xl bg-[#1E1F25] p-6">
+        <div className="flex flex-row w-full h-[600px] rounded-xl bg-[#1E1F25] p-2 lg:p-6">
           <table className="w-full flex flex-col h-full text-white">
             <thead className="flex flex-col w-full">
-              <tr className="flex flex-row w-full justify-between h-20 border-b-2 py-7">
+              <tr className="flex flex-row w-full justify-between h-20 border-b-2 py-5 text-sm lg:text-base text-[#5d6588]">
                 <td className="w-[20%]">Assets</td>
                 <td className="w-[16%]">On Orders</td>
                 <td className="w-[16%]">Avaliable Balance</td>
@@ -275,14 +289,14 @@ const Wallet = () => {
                 </td>
               </tr>
             </thead>
-            <tbody className="flex flex-col w-full overflow-auto">
+            <tbody className="flex flex-col w-full overflow-auto text-sm lg:text-base ">
               {data.map((item) => (
                 <tr className="flex flex-row w-full justify-between items-center h-20 py-7">
-                  <td className="flex flex-row py-2 w-[20%]">
-                    <div className="pr-4">
+                  <td className="flex flex-row py-2 w-[20%] gap-x-4 flex-wrap items-center">
+                    <div className=" flex-shrink-0">
                       <img src={item.icon} />
                     </div>
-                    <div className="pr-9">{item.type}</div>
+                    <div className="">{item.type}</div>
                     <div>{item.name}</div>
                   </td>
                   <td className="w-[16%]">

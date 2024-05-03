@@ -4,51 +4,53 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import localFont from "next/font/local";
 import Link from "next/link";
+import { TiEye } from "react-icons/ti";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
 const Login = () => {
-  // const [value, setValue] = useState<any>();
   const [clicked, setClicked] = useState(false);
   const [password, setPassword] = useState<string | number>("");
-  // const [number, setNumber] = useState<any>(" ");
   const [value, setValue] = useState<any>();
 
-  // submit form
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setClicked(true);
-
-    //   setClicked(false);
   };
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
-        <h1 className="text-3xl font-bold text-center">
+    <div className="lg:grid lg:grid-cols-2 h-[calc(100vh-70px)] flex flex-col">
+      <div
+        className={` ${microsoft.className} bg-white text-black lg:bg-black lg:text-white pt-10 lg:pt-20 px-6 flex-grow`}
+      >
+        <h1 className="text-[24px]/[30px] xl:text-3xl/[42.24px] font-bold text-center">
           Trade securely and with peace of mind.
         </h1>
-        <p className="text-[0.8rem] py-4">
+        <p className="text-[12px]/[14px] xl:text-[15px]/[20px] text-center mt-3 xl:mt-0">
           "We maintain a constant 1:1 backing of your funds on GTX, and we
           routinely release Proof of Reserve audits to ensure transparency and
           accountability."
         </p>
       </div>
-      <div className="bg-white text-black text-center px-6 py-8">
-        <h1 className="text-xl font-">Log In</h1>
-        <div className=" text-sm text-[#6978A0]">
+      <div className="bg-white text-black text-center px-6 pt-[30px] lg:pt-[90px] flex flex-col">
+        <h1 className=" text-[40px]/[60px] text-[#081131]">Log In</h1>
+        <div className=" text-[20px]/[30px] text-[#6978A0]">
           Welcome back, you’ve been missed!
         </div>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col mx-auto gap-7 py-6 w-full md:w-2/3"
+          className="flex flex-col mx-auto mt-[30px] w-2/3"
         >
           <div className="flex flex-col items-start">
-            <label htmlFor="phone" className="text-xs font-semibold">
-              Phone Number
+            <label
+              htmlFor="phone"
+              className="text-[14px]/[21px] font-medium text-[#191919]"
+            >
+              Phone Number &nbsp;{" "}
+              <span className="text-[#909090]">Email Address</span>
             </label>
             <PhoneInput
               international
-              className="PhoneInput rounded-[7px]  border border-black h-[50px] px-5  w-full tracking-[0.5px] leading-[50px] focus-visible:outline-none"
+              className="PhoneInput rounded-[4px]  border border-black h-[50px] px-5 py-4 mt-[10px]  w-full tracking-[0.5px] leading-[50px] focus-visible:outline-none text-[14px]/[21px]"
               defaultCountry="GH"
               //   country=""
               name="phone"
@@ -56,19 +58,25 @@ const Login = () => {
               onChange={setValue}
             />
           </div>
-          <div className="flex flex-col items-start">
-            <label htmlFor="phone" className="text-xs font-semibold">
+          <div className="flex flex-col items-start mt-[10px]">
+            <label
+              htmlFor="phone"
+              className="text-[14px]/[21px] font-medium text-[#191919]"
+            >
               Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              className="border border-black rounded-[7px] h-[50px] px-5 w-full"
-            />
+            </label>{" "}
+            <div className=" relative w-full">
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                className="border border-black rounded-[4px] mt-[10px] h-[50px] px-5 py-4 w-full"
+              ></input>
+              <TiEye className="absolute right-3 z-[1000] top-[40%] w-5 h-5 text-[#b0b7c3]"></TiEye>
+            </div>
           </div>
           {clicked ? (
             <button className="px-3 py-1.5 bg-blue-700 text-white flex items-center justify-center">
@@ -84,7 +92,7 @@ const Login = () => {
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="4"
+                  strokeWidth="4"
                 ></circle>
                 <path
                   className="opacity-75"
@@ -94,12 +102,15 @@ const Login = () => {
               </svg>{" "}
             </button>
           ) : (
-            <button type="submit" className="px-3 py-1.5 bg-black text-white">
+            <button
+              type="submit"
+              className="px-2 bg-[#121212] rounded-[12px] py-4 text-base/[24px] text-white mt-[35px] font-bold"
+            >
               Sign In
             </button>
           )}
         </form>
-        <div className="py-8 text-xs font-light">
+        <div className="mt-[68px] text-xs font-light">
           Don’t have an account? &nbsp;
           <span className=" font-bold">
             <Link href="/signup"> Sign Up</Link>
@@ -159,7 +170,7 @@ const Login = () => {
           </div>
         </div>
 
-        <div className="relative text-xs text-[#6E6E6E]">
+        <div className="relative text-xs text-[#6E6E6E] mt-[80px] lg:mt-[100px] mb-[20px]">
           <div className=" bottom-8">
             By creating an account, I agree to GTX{" "}
             <span className=" text-black font-bold">

@@ -21,8 +21,8 @@ export default function Transaction() {
   ];
 
   return (
-    <div className="flex flex-col rounded-xl w-1/3 p-5 text-white bg-[#1E1F25]">
-      <table className="flex flex-col w-full h-full">
+    <div className="rounded-xl w-full xl:w-1/3 p-5 text-white bg-[#1E1F25] h-[267px] px-20 lg:px-4">
+      <table className="flex flex-col w-full  ">
         <thead className="flex flex-col w-full">
           <tr className="flex flex-row w-full justify-between">
             <td>
@@ -39,7 +39,7 @@ export default function Transaction() {
             </td>
           </tr>
         </thead>
-        <tbody className=" overflow-y-auto">
+        <tbody className=" overflow-y-auto h-[200px]">
           {data.map((item) => (
             <tr className="flex justify-between items-center h-10">
               <td className="flex items-center justify-between w-1/2">
@@ -67,7 +67,6 @@ export default function Transaction() {
                 />
                 {item.value}
               </td>
-              {/* <td>{item.value}</td> */}
             </tr>
           ))}
         </tbody>

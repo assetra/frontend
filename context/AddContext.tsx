@@ -24,7 +24,7 @@ interface IAppWrapperProps {
 
 export function AppWrapper({ children }: IAppWrapperProps) {
   const [dashboardState, setDashboardState] = useState<number>(1);
-  const [navbarState, setNavbarState] = useState<number>(0);
+  const [navbarState, setNavbarState] = useState<number>(2);
 
   const sharedState = {
     dashboardState: dashboardState,

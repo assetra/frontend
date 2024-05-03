@@ -65,18 +65,11 @@ export const data = {
 
 export default function CustomChart() {
   return (
-    <div className="w-full h-full">
-      <div className="bg-[#1E1F25] flex flex-col rounded-xl h-full ">
-        <div
-          className="text-white flex font-sans"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "20px",
-          }}
-        >
+    <div className=" w-full lg:w-[calc(100vw-320px)] flex ">
+      <div className="bg-[#1E1F25] flex flex-col rounded-xl h-full w-full">
+        <div className="text-white flex flex-col justify-between lg:flex-row font-sans p-5">
           <div className="text-white text-xl font-bold">Overall Growth</div>
-          <h1 className="flex">
+          <h1>
             <button className="text-base font-semibold cursor-pointer px-4 py-2 rounded-full text-gtxText focus:bg-black focus:text-white">
               1 min
             </button>

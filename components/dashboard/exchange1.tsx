@@ -6,7 +6,7 @@ import localFont from "next/font/local";
 const sofia = localFont({ src: "../../public/fonts/Sofia Pro Regular.ttf" });
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
 
-const Exchange = () => {
+const Exchange1 = () => {
   const [usd, setUsd] = useState(5000);
   const [btc, setBtc] = useState(0.8511);
   const [rate, setRate] = useState(53260.2);
@@ -28,7 +28,7 @@ const Exchange = () => {
   };
 
   return (
-    <div className="exchange-wrapper flex flex-col h-full text-white px-20 lg:px-7 py-6 font-medium bg-[#1E1F25] rounded-xl flex-shrink-0 w-full lg:w-[320px]">
+    <div className="exchange-wrapper flex flex-col text-white px-20 lg:px-7 py-6 font-medium bg-[#1E1F25] rounded-xl  w-full">
       <div className="flex flex-row space-x-5 items-center justify-between">
         <div className={`text-white text-xl font-bold ${sofia.className}`}>
           Exchange
@@ -138,13 +138,14 @@ const Exchange = () => {
         </div>
       </div>
 
-      <div
-        className={`flex justify-center items-center rounded-full cursor-pointer w-full text-white font-semibold bg-black px-8 py-4 my-1 ${sofia.className}`}
+      <button
+        onClick={onExchange}
+        className={`flex justify-center items-center rounded-full cursor-pointer w-full text-white font-semibold bg-[#246CF9] px-8 py-4 my-1 ${sofia.className}`}
       >
-        <button onClick={onExchange}>Exchange</button>
-      </div>
+        Exchange
+      </button>
     </div>
   );
 };
 
-export default Exchange;
+export default Exchange1;

@@ -3,11 +3,13 @@ import React, { useState, useContext, useEffect } from "react";
 import { AdvancedChart } from "react-tradingview-embed";
 import Exchange from "./exchange";
 import { AuthContext } from "@/context/AddContext";
+import Exchange1 from "./exchange1";
 
 const ExchangePage = () => {
   const appContext = useContext(AuthContext);
+  const width = window.innerWidth;
   useEffect(() => {
-    appContext.setNavbarState(true);
+    appContext.setNavbarState(1);
   }, []);
 
   const data = [
@@ -98,16 +100,16 @@ const ExchangePage = () => {
   ];
 
   return (
-    <div className="flex flex-row w-full h-[896px] px-11 pb-5 bg-black">
-      <div className="flex flex-col w-3/4 h-full mr-6">
-        <div className="flex flex-row w-full h-[15%] mb-4">
-          <div className="flex flex-row items-center w-1/4 h-full mr-4 p-3 rounded-xl bg-[#1E1F25]">
-            <div className="flex flex-row justify-between items-center w-full h-full p-6">
+    <div className="flex flex-col lg:flex-row w-full px-11 pb-5 bg-black">
+      <div className="flex flex-col w-full lg:w-3/5 xl:w-3/4 h-full mr-6">
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-x-5 gap-y-5 w-full mb-4">
+          <div className="flex flex-row items-center mr-4 p-3 rounded-xl bg-[#1E1F25] h-[100px] w-full">
+            <div className="flex flex-row justify-between items-center w-full p-6 ">
               <div>
                 <img src="/images/bitcoin-icon-large.png" />
               </div>
               <div className="flex flex-col w-full h-full ml-4">
-                <div className="flex flex-row justify-between items-center w-full h-1/2">
+                <div className="flex flex-row justify-between items-center w-full ">
                   <div className="flex items-center text-base text-[#5D6588]">
                     Bitcoin
                   </div>
@@ -117,13 +119,13 @@ const ExchangePage = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-row items-center w-1/4 h-full mr-4 p-4 rounded-xl bg-[#1E1F25]">
-            <div className="flex flex-row items-center p-3 w-full h-full">
-              <div className="flex flex-col items-center w-3/5 h-full">
-                <div className="flex w-full h-1/2 items-center text-[16px] text-[#5D6588]">
+          <div className="flex flex-row items-center w-full  mr-4 p-4 rounded-xl bg-[#1E1F25]  h-[100px]">
+            <div className="flex flex-row items-center p-2 w-full h-full">
+              <div className="flex flex-col items-center  ">
+                <div className="flex w-full  items-center text-[16px] text-[#5D6588]">
                   24h Change
                 </div>
-                <div className="flex flex-row items-center w-full h-1/2">
+                <div className="flex flex-row items-center w-full ">
                   <div className="mr-2">
                     <img src="/images/Arrow - Up 3.png" />
                   </div>
@@ -137,7 +139,7 @@ const ExchangePage = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center w-1/4 h-full mr-4 p-4 rounded-xl bg-[#1E1F25]">
+          <div className="flex items-center w-full  mr-4 p-4 rounded-xl bg-[#1E1F25]  h-[100px]">
             <div className="flex flex-col items-center p-3 w-full h-full">
               <div className="flex w-full h-1/2 items-center text-[16px] text-[#5D6588]">
                 Last Price
@@ -147,7 +149,7 @@ const ExchangePage = () => {
               </div>
             </div>
           </div>
-          <div className="flex items-center w-1/4 h-full p-4 rounded-xl bg-[#1E1F25]">
+          <div className="flex items-center w-full p-4 rounded-xl bg-[#1E1F25]  h-[100px]">
             <div className="flex flex-col items-center p-3 w-full h-full">
               <div className="flex w-full h-1/2 items-center text-[16px] text-[#5D6588]">
                 24h Low
@@ -158,81 +160,98 @@ const ExchangePage = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full h-[55%] mb-4 p-4 rounded-xl bg-[#1E1F25]">
-          <div className="flex flex-col w-full h-full">
-            <div className="flex flex-row justify-between w-full h-[10%]">
-              <div className="flex flex-row justify-between items-center w-2/3 h-full">
-                <div className="flex items-center w-1/5">BTC/USD</div>
-                <div className="flex flex-row justify-between w-full h-full">
-                  <div className="flex flex-row items-center mr-4">
-                    <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
-                    <div className="text-[14px] text-[#11CABE]">18432.320</div>
-                  </div>
-                  <div className="flex flex-row items-center mr-4">
-                    <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
-                    <div className="text-[14px] text-[#11CABE]">18432.320</div>
-                  </div>
-                  <div className="flex flex-row items-center mr-4">
-                    <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
-                    <div className="text-[14px] text-[#11CABE]">18432.320</div>
-                  </div>
-                  <div className="flex flex-row items-center mr-4">
-                    <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
-                    <div className="text-[14px] text-[#11CABE]">18432.320</div>
-                  </div>
+        <div className="flex flex-col w-full mb-4 p-4 rounded-xl bg-[#1E1F25]">
+          <div className="flex justify-between flex-wrap">
+            <div className="flex flex-row gap-x-4 flex-wrap">
+              <div className="flex items-center text-[25px]/[30px] text-white font-bold">
+                BTC&#47;USD
+              </div>
+              <div className="flex gap-x-2 xl:gap-x-4">
+                <div className="flex flex-row items-center mr-4">
+                  <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
+                  <div className="text-[14px] text-[#11CABE]">18432.320</div>
+                </div>
+                <div className="flex flex-row items-center mr-4">
+                  <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
+                  <div className="text-[14px] text-[#11CABE]">18432.320</div>
+                </div>
+                <div className="flex flex-row items-center mr-4">
+                  <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
+                  <div className="text-[14px] text-[#11CABE]">18432.320</div>
+                </div>
+                <div className="flex flex-row items-center mr-4">
+                  <div className="text-[14px] text-[#5D6588] mr-1">Open:</div>
+                  <div className="text-[14px] text-[#11CABE]">18432.320</div>
                 </div>
               </div>
-              <div className="flex flex-row justify-end items-center w-1/3 h-full">
-                <button className="flex flex-row items-center h-full p-4 border-2 rounded-full">
-                  <div className="text-white">Price</div>
-                  <img className="ml-2" src="/images/arrow-down-white.png" />
-                </button>
-                <button className="flex flex-row items-center h-full p-4 border-2 rounded-full">
-                  <div className="text-white">1 min</div>
-                  <img className="ml-2" src="/images/arrow-down-white.png" />
-                </button>
-              </div>
             </div>
-            <div className="flex flex-row justify-between w-full h-[90%] pt-5">
-              <div className="h-full">
-                <AdvancedChart
-                  widgetProps={{ width: "440%", height: "100%", theme: "dark" }}
-                />
-              </div>
+            <div className="flex flex-row justify-end items-center gap-x-4">
+              <select
+                name=""
+                id=""
+                className="border border-white py-2 px-4 rounded-[50px] text-base bg-transparent text-whit  text-white"
+              >
+                <option value="">Price</option>
+                <option value="">Price</option>
+                <option value="">Price</option>
+                <option value="">Price</option>
+                <option value="">Price</option>
+              </select>
+              <select
+                name=""
+                id=""
+                className="border border-white py-2 px-4 rounded-[50px] text-base bg-transparent text-white"
+              >
+                <option value="">1 min</option>
+                <option value="">1 min</option>
+                <option value="">Price</option>
+                <option value="">Price</option>
+                <option value="">Price</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex flex-row justify-between w-full  pt-[1px]">
+            <div className="h-full">
+              <AdvancedChart
+                widgetProps={{
+                  width: width > 1280 ? "68vw" : width > 1024 ? "52vw" : "86vw",
+                  height: "478px",
+                  theme: "dark",
+                }}
+              />
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full h-[30%] bg-[#1E1F25] rounded-xl">
-          <div className="flex w-full h-full p-4">
-            <table className="w-full flex flex-col h-full text-white">
-              <thead className="flex flex-col w-full h-full">
-                <tr className="flex flex-row w-full justify-between h-[48px] pt-3">
+        <div className="flex flex-col w-full bg-[#1E1F25] rounded-xl h-[350px] mb-5">
+          <div className="flex w-full  p-4">
+            <table className="w-full flex flex-col  text-white ">
+              <thead className="flex flex-col w-full ">
+                <tr className="flex flex-row w-full justify-between">
                   <td>
                     <div className="">Market Trades</div>
                   </td>
                   <td>
-                    <div className="flex flex-row h-full">
-                      <button className="flex items-center h-full rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
+                    <div className="flex flex-row">
+                      <button className="flex items-center rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
                         <div>Open Orders</div>
                       </button>
-                      <button className="flex items-center h-full rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
+                      <button className="flex items-center rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
                         <div>Order History</div>
                       </button>
-                      <button className="flex items-center h-full rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
+                      <button className="flex items-center rounded-full mr-4 px-4 py-2 focus:bg-black focus:text-white text-[#5D6588]">
                         <div>Order Book</div>
                       </button>
                     </div>
                   </td>
                 </tr>
-                <tr className="flex flex-row w-full justify-between h-[48px] border-b-2 pt-3">
+                <tr className="flex flex-row w-full justify-between  border-b-2 mt-2">
                   <td className="w-1/4 text-[#5D6588]">Time</td>
                   <td className="w-1/4 text-[#5D6588]">Price(ETH)</td>
-                  <td className="w-1/4 text-[#5D6588]">Amount(BTC)</td>
                   <td className="w-1/4 text-[#5D6588]">Amount(BTC)</td>
                   <td className="w-1/4 text-[#5D6588]">Total(ETH)</td>
                 </tr>
               </thead>
-              <tbody className="flex flex-col w-full h-full overflow-auto">
+              <tbody className="flex flex-col w-full  overflow-y-auto h-[30%] text-sm xl:text-base">
                 {data.map((item) => (
                   <tr
                     key={item.change}
@@ -267,14 +286,14 @@ const ExchangePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-1/4 h-full">
-        <div className="flex w-full h-[55.55%] mb-4 rounded-xl bg-[#1E1F25]">
+      <div className="flex flex-col w-full lg:w-2/5 xl:w-1/4">
+        <div className="flex w-full mb-6 rounded-xl bg-[#1E1F25]">
           <div className="flex flex-col jusitfy-between px-6 py-4 w-full h-full">
             <div className="flex flex-row justify-between items-center w-full h-[15%] mb-4">
               <div className="text-white">Bitcoin</div>
               <img src="/images/bitcoin-icon-big.png" />
             </div>
-            <div className="flex flex-col h-[20%] mb-4">
+            <div className="flex flex-col mb-4">
               <div className="text-[#5D6588] text-base h-full">
                 Current Balance
               </div>
@@ -283,7 +302,7 @@ const ExchangePage = () => {
                 <div>BTC</div>
               </div>
             </div>
-            <div className="flex flex-col h-[20%] mb-8">
+            <div className="flex flex-col mb-8">
               <div className="flex flex-row justify-between h-full py-4">
                 <div className="text-[#5D6588]">Volume (24h)</div>
                 <div className="text-[#11CABE]">2.36%</div>
@@ -293,7 +312,7 @@ const ExchangePage = () => {
                 <div>USD</div>
               </div>
             </div>
-            <div className="flex flex-col h-[25%] mb-8">
+            <div className="flex flex-col mb-8">
               <div className="text-[#5D6588] h-full py-4">Payment Method</div>
               <button className="flex flex-row justify-between items-center px-6 py-3 mb-4 rounded-full bg-[#34384C] text-white h-full">
                 <div className="flex flex-row h-full items-center">
@@ -303,18 +322,18 @@ const ExchangePage = () => {
                 <img src="/images/arrow-down-medium.png" />
               </button>
             </div>
-            <div className="flex flex-row justify-between h-full">
-              <button className="text-[#11CABE] px-16 py-3 rounded-full border-2 border-[#11CABE]">
+            <div className="flex flex-row justify-between">
+              <button className="text-[#11CABE] text-center py-4 w-[128px] rounded-full border-2 border-[#11CABE] text-base">
                 Buy
               </button>
-              <button className="text-[#FA2256] px-16 py-3 rounded-full border-2 border-[#FA2256]">
-                Buy
+              <button className="text-[#FA2256] w-[128px] py-4 text-center rounded-full border-2 border-[#FA2256] text-base">
+                Sell
               </button>
             </div>
           </div>
         </div>
-        <div className="flex w-full h-[44.44%] rounded-xl bg-[#1E1F25]">
-          <Exchange />
+        <div className="flex w-full rounded-xl bg-[#1E1F25]">
+          <Exchange1 />
         </div>
       </div>
     </div>
