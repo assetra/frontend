@@ -496,10 +496,10 @@ const Portfolio = () => {
         })}
       </div>
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full">
-        <Icon1 onClick={() => handleClick(1)} />
-        <Icon2 />
+        <Icon1 isActive={true} onClick={() => handleClick(1)} />
+        <Icon2 isActive={true} onClick={() => handleClick(2)} />
         {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
-        <Icon4 />
+        <Icon4 isActive={true} onClick={() => handleClick(4)} />
         <Icon5 onClick={() => handleClick(2)} />
       </div>
       <MyPortfolioModal isOpen={open} openChange={() => setOpen(false)} />

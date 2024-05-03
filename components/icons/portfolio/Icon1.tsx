@@ -1,7 +1,12 @@
-import { IconProps } from "@/app/Type";
+// import { IconProps } from "@/app/Type";
 import React from "react";
 
-const Icon1 = ({ onClick, isActive }: IconProps) => {
+interface IIconProps {
+  onClick: () => void;
+  isActive: boolean;
+}
+
+const Icon1 = ({ onClick, isActive }: IIconProps) => {
   if (isActive)
     return (
       <svg
@@ -10,7 +15,7 @@ const Icon1 = ({ onClick, isActive }: IconProps) => {
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        onClick={(e) => onClick()}
+        onClick={onClick}
       >
         <path
           d="M3 2H21"
@@ -43,6 +48,7 @@ const Icon1 = ({ onClick, isActive }: IconProps) => {
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        onClick={onClick}
       >
         <g opacity="0.23">
           <path
