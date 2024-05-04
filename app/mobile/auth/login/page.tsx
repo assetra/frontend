@@ -1,15 +1,17 @@
 "use client";
 
-import ScanIcon from "@/components/icons/ScanIcon";
-import { Poppins } from "next/font/google";
-import Link from "next/link";
 import React, { useState } from "react";
+import Link from "next/link";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { Poppins } from "next/font/google";
+
+import ScanIcon from "@/components/icons/ScanIcon";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
+
 const Login = () => {
   const [show, setShow] = useState(false);
   return (

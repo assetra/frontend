@@ -1,15 +1,15 @@
 "use client";
+
+import React from "react";
 import { Poppins } from "next/font/google";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { BiLeftArrowAlt, BiSolidLeftArrow } from "react-icons/bi";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { BiLeftArrowAlt } from "react-icons/bi";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
+
 const Forgot = () => {
   const router = useRouter();
   return (

@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 
 import Navbar from "@/components/navbar";
-
+import { Providers } from "@/context/providers";
 import { AppWrapper } from "@/context/AddContext";
 // Import css files
 import "slick-carousel/slick/slick.css";
@@ -29,10 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className + " bg-black"}>
-        <AppWrapper>
-          <Navbar />
-          {children}
-        </AppWrapper>
+        <Providers>
+          <AppWrapper>
+            <Navbar />
+            {children}
+          </AppWrapper>
+        </Providers>
         <script
           src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"
           defer

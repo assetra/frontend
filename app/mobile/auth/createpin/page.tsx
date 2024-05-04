@@ -1,10 +1,8 @@
 "use client";
 
+import React from "react";
 import { Poppins } from "next/font/google";
-import Link from "next/link";
-import React, { useState } from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const poppins = Poppins({
   subsets: ["latin"],

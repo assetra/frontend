@@ -114,7 +114,7 @@ const AddedOverview = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d="M3 1V13" stroke="white" stroke-linecap="round" />
+              <path d="M3 1V13" stroke="white" strokeLinecap="round" />
               <rect y="4" width="6" height="6" rx="2" fill="white" />
             </svg>
           </button>
@@ -129,26 +129,26 @@ const AddedOverview = () => {
               <path
                 d="M7.66699 1H11V4.333"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M4.333 11H1V7.66699"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M11 1L7.11099 4.889"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
               <path
                 d="M1 11.0003L4.889 7.11133"
                 stroke="white"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
           </button>
