@@ -1,53 +1,34 @@
 "use client";
-import { Plus_Jakarta_Sans } from "next/font/google";
+
 import React, { useState } from "react";
-import { BiLeftArrowAlt, BiSolidLeftArrow } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import Chart from "react-apexcharts";
-import Icon1 from "@/components/icons/portfolio/Icon1";
+import { AdvancedChart } from "react-tradingview-embed";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { BiLeftArrowAlt } from "react-icons/bi";
+
 import Icon2 from "@/components/icons/portfolio/Icon2";
 import Icon4 from "@/components/icons/portfolio/Icon4";
 import Icon5 from "@/components/icons/portfolio/Icon5";
-import Icon3_2 from "@/components/icons/portfolio/Icon3_2";
 import Icon3 from "@/components/icons/portfolio/Icon3";
-import { AdvancedChart, MiniChart } from "react-tradingview-embed";
 import Icon6 from "@/components/icons/portfolio/Icon6";
-import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
+
 import CoinSettingModal from "@/components/modal/CoinScreenSettingModal";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
-const options = {
-  chart: {
-    id: "basic-bar",
-  },
-  grid: {
-    show: false,
-  },
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-  },
-};
-const series = [
-  {
-    name: "series-1",
-    data: [30, 40, 45, 50, 49, 60, 70, 91],
-  },
-];
+
 const ranges = ["1H", "1D", "1W", "1M", "6M", "1Y", "ALL"];
+
 const CandleStick = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [settingOpen, setSettingOpen] = useState(false);
-  // const [searchWord, setSearchWord] = useState("");
-  // const [isSearch, setSearch] = useState(false);
   const [active, setActive] = useState(-1);
   const [range, setRange] = useState("1D");
   const [style, setStyle] = useState("2");
 
-  // const searchRef = useRef(null);
   const handleActive = (id: number) => {
     if (id == active) {
       setActive(-1);
@@ -217,11 +198,11 @@ const CandleStick = () => {
               range: range,
               hide_side_toolbar: true,
               style: style,
-              backgroundColor: "black",
             }}
+            widgetPropsAny={{ backgroundColor: "black" }}
           />
         </div>
-        <div className="flex justify-evenly">
+        <div className="flex justify-evenly mt-5">
           {ranges.map((rangeItem) => {
             console.log(rangeItem);
             console.log(range);
@@ -292,13 +273,16 @@ const CandleStick = () => {
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
         <Icon6 onClick={() => handleClick(1)} isActive={true} />
         <Icon2 isActive={false} onClick={() => handleClick(4)} />
-        {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
+        <Icon3
+          isActive={settingOpen}
+          onClick={() => setSettingOpen(!settingOpen)}
+        />
         <Icon4 isActive={true} onClick={() => handleClick(4)} />
         <Icon5 onClick={() => handleClick(5)} />
       </div>
       <CoinSettingModal
+        openChange={() => {}}
         isOpen={settingOpen}
-        openChange={() => setSettingOpen(false)}
       ></CoinSettingModal>
     </div>
   );

@@ -1,10 +1,10 @@
 "use client";
 
-import { Poppins } from "next/font/google";
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
+import { Poppins } from "next/font/google";
 import { RxCross2 } from "react-icons/rx";
-import { useParams, useRouter } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -95,15 +95,8 @@ const data = [
 ];
 const AddTransaction = () => {
   const [searchWord, setSearchWord] = useState("");
-  const searchRef = useRef(null);
-  const [activeTab, setActiveTab] = useState(1);
+  const searchRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const params = useParams();
-  const items1 = ["Binance", "Binance"];
-  const items2 = ["ETH/BTC", "ETH/BTC"];
-  const items3 = ["Default Portfolio", "Default Portfolio"];
-  const items4 = ["%ETH", "%ETH"];
-  console.log(params);
   useEffect(() => {
     searchRef.current?.focus();
   }, []);

@@ -1,10 +1,12 @@
 "use client";
 
+import React, { useState } from "react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { FiBarChart2 } from "react-icons/fi";
 import { Poppins } from "next/font/google";
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
+
 import Icon1 from "@/components/icons/portfolio/Icon1";
 import Icon2 from "@/components/icons/portfolio/Icon2";
 import Icon3 from "@/components/icons/portfolio/Icon3";
@@ -12,7 +14,6 @@ import Icon4 from "@/components/icons/portfolio/Icon4";
 import Icon5 from "@/components/icons/portfolio/Icon5";
 import MyPortfolioModal from "@/components/modal/MyPortfolioModal";
 import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
-import Icon3_2 from "@/components/icons/portfolio/Icon3_2";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -436,12 +437,17 @@ const Portfolio = () => {
   return (
     <div className="portfolio pt-[94px] max-h-screen">
       <div className="header px-5 flex w-full justify-between items-center">
-        <FiBarChart2 className="w-[13px] h-4 text-white"></FiBarChart2>
+        <Link href={"/mobile/portfolio/overview"}>
+          <FiBarChart2 className="w-[13px] h-4 text-white"></FiBarChart2>
+        </Link>
         <h2 className="title text-white text-sm font-bold">
           {" "}
           Default Portfolio
         </h2>
-        <BiDotsHorizontal className="text-white w-4 h-4"></BiDotsHorizontal>
+        <BiDotsHorizontal
+          className="text-white w-4 h-4"
+          onClick={() => setOpen(true)}
+        ></BiDotsHorizontal>
       </div>
       <div className={`${poppins.className} mt-10 px-5`}>
         <h1 className={`  price text-[32px]/[48px] font-bold text-white`}>
@@ -497,9 +503,13 @@ const Portfolio = () => {
       </div>
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full">
         <Icon1 isActive={true} onClick={() => handleClick(1)} />
-        <Icon2 isActive={true} onClick={() => handleClick(2)} />
-        {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
-        <Icon4 isActive={true} onClick={() => handleClick(4)} />
+        <Icon2 isActive={false} onClick={() => handleClick(2)} />
+        <Icon3
+          isActive={settingOpen}
+          onClick={() => setSettingOpen(!settingOpen)}
+        />
+
+        <Icon4 isActive={false} onClick={() => handleClick(4)} />
         <Icon5 onClick={() => handleClick(2)} />
       </div>
       <MyPortfolioModal isOpen={open} openChange={() => setOpen(false)} />

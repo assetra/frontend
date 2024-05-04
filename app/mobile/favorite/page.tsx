@@ -1,9 +1,11 @@
 "use client";
 
-import { FiBarChart2 } from "react-icons/fi";
-import { Poppins } from "next/font/google";
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import { Poppins } from "next/font/google";
+import { BsSearch, BsTrash } from "react-icons/bs";
+import { BiTrash } from "react-icons/bi";
+
 import Icon1 from "@/components/icons/portfolio/Icon1";
 import Icon2 from "@/components/icons/portfolio/Icon2";
 import Icon3 from "@/components/icons/portfolio/Icon3";
@@ -11,9 +13,6 @@ import Icon4 from "@/components/icons/portfolio/Icon4";
 import Icon5 from "@/components/icons/portfolio/Icon5";
 import MyPortfolioModal from "@/components/modal/MyPortfolioModal";
 import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
-import Icon3_2 from "@/components/icons/portfolio/Icon3_2";
-import { BsSearch, BsTrash } from "react-icons/bs";
-import { BiTrash } from "react-icons/bi";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -72,7 +71,7 @@ const Favourite = () => {
   const [searchWord, setSearchWord] = useState("");
   const [isSearch, setSearch] = useState(false);
   const [active, setActive] = useState(-1);
-  const searchRef = useRef(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const handleActive = (id: number) => {
     if (id == active) {
       setActive(-1);
@@ -96,7 +95,6 @@ const Favourite = () => {
           className="text-white w-4 h-4"
           onClick={(e) => {
             setSearch(!isSearch);
-            // searchRef.current?.focus();
           }}
         ></BsSearch>
       </div>
@@ -197,7 +195,7 @@ const Favourite = () => {
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
         <Icon1 onClick={() => handleClick(1)} isActive={false} />
         <Icon2 isActive={false} onClick={() => handleClick(4)} />
-        {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
+        <Icon3 isActive={settingOpen} onClick={() => handleClick(3)} />
         <Icon4 isActive={true} onClick={() => handleClick(4)} />
         <Icon5 onClick={() => handleClick(5)} />
       </div>

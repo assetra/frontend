@@ -1,34 +1,21 @@
 "use client";
-import { Plus_Jakarta_Sans } from "next/font/google";
-import React from "react";
-import { BiLeftArrowAlt, BiSolidLeftArrow } from "react-icons/bi";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Chart from "react-apexcharts";
+import { AdvancedChart } from "react-tradingview-embed";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { BiLeftArrowAlt } from "react-icons/bi";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
-const options = {
-  chart: {
-    id: "basic-bar",
-  },
-  grid: {
-    show: false,
-  },
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-  },
-};
-const series = [
-  {
-    name: "series-1",
-    data: [30, 40, 45, 50, 49, 60, 70, 91],
-  },
-];
+
+const ranges = ["1H", "1D", "1W", "1M", "6M", "1Y", "ALL"];
 
 const OverView = () => {
   const router = useRouter();
+  const [range, setRange] = useState("1D");
+
   return (
     <div className={`signin ${jakarta.className} px-[10px] pt-[73px] h-screen`}>
       <div className="signin-header w-full flex justify-center items-center px-[23px]">
@@ -51,27 +38,35 @@ const OverView = () => {
         </p>
       </div>
       <div className="mt-[60px]">
-        <Chart options={options} series={series} type="line" height={466} />
+        <AdvancedChart
+          widgetProps={{
+            width: "100%",
+            height: "466px",
+            theme: "dark",
+            hide_top_toolbar: true,
+            withdateranges: false,
+            range: range,
+            hide_side_toolbar: true,
+            style: "2",
+          }}
+          widgetPropsAny={{ backgroundColor: "black" }}
+        />
       </div>
-      <div className="flex justify-evenly">
-        <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-          1H
-        </p>
-        <p className="py-2 px-3 text-white text-[12px]/[14.32px] font-bold bg-[#0057FF] rounded-[12px]">
-          1D
-        </p>
-        <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-          1W
-        </p>
-        <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-          6M
-        </p>
-        <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-          1Y
-        </p>
-        <p className="py-2 px-3 bg-transparent text-white text-[12px]/[14.32px] font-bold">
-          ALL
-        </p>
+      <div className="flex justify-evenly mt-5">
+        {ranges.map((rangeItem) => {
+          console.log(rangeItem);
+          console.log(range);
+          return (
+            <p
+              onClick={(e) => setRange(rangeItem)}
+              className={`py-2 px-3 cursor-pointer rounded-lg  text-white text-[12px]/[14.32px] font-bold ${
+                range == rangeItem ? "bg-[#0057FF]" : ""
+              } `}
+            >
+              {rangeItem}
+            </p>
+          );
+        })}
       </div>
       <div className="flex justify-center gap-x-10 mt-[20px]">
         <div>

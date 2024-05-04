@@ -1,17 +1,13 @@
 "use client";
 
-import { Poppins } from "next/font/google";
 import React, { useEffect, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { useParams, useRouter } from "next/navigation";
+
 import Accordion from "@/components/Accordian";
 import { useTransactionContext } from "@/context/TransactionContext";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 const data = [
   {
     id: 1,
@@ -96,7 +92,7 @@ const data = [
   },
 ];
 const AddTransaction = () => {
-  const searchRef = useRef(null);
+  const searchRef = useRef<any>(null);
   const router = useRouter();
   const params = useParams();
   const [activeTab, setActiveTab] = useState(1);

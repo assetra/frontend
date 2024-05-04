@@ -15,7 +15,9 @@ const poppins = Poppins({
 const Login = () => {
   const [show, setShow] = useState(false);
   return (
-    <div className={`signin ${poppins.className} px-[33px] pt-[73px]`}>
+    <div
+      className={`signin ${poppins.className} px-[33px] pt-[73px] min-h-screen`}
+    >
       <div className="signin-header w-full flex justify-between items-center">
         <p className="text-white text-[15px]/[22.5px]">Sign In</p>
         <Link href={"/mobile/auth/scan"}>

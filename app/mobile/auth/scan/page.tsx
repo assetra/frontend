@@ -1,16 +1,21 @@
 "use client";
-import { Plus_Jakarta_Sans } from "next/font/google";
+
 import React from "react";
-import { BiLeftArrowAlt, BiSolidLeftArrow } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { BiLeftArrowAlt } from "react-icons/bi";
+
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
+
 const Scan = () => {
   const router = useRouter();
   return (
-    <div className={`signin ${jakarta.className} px-[33px] pt-[73px]`}>
+    <div
+      className={`signin ${jakarta.className} px-[33px] pt-[73px] min-h-screen`}
+    >
       <div className="signin-header w-full flex justify-center items-center">
         <h2 className="text-[#fefefe] font-bold text-[18px]/[26px] text-center">
           Scan QR Code

@@ -1,21 +1,13 @@
 "use client";
 
-import { FiBarChart2 } from "react-icons/fi";
-import { Poppins } from "next/font/google";
 import React, { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-import { RxCross2 } from "react-icons/rx";
-import { BiLeftArrowAlt, BiSearch } from "react-icons/bi";
 import { useParams, useRouter } from "next/navigation";
-import Accordion from "@/components/Accordian";
-import { title } from "process";
-import { useTransactionContext } from "@/context/TransactionContext";
-const colors = ["#13141D", "#0E0F18"];
+import { BiLeftArrowAlt, BiSearch } from "react-icons/bi";
+import { Poppins } from "next/font/google";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
+import { useTransactionContext } from "@/context/TransactionContext";
+
+const colors = ["#13141D", "#0E0F18"];
 
 const titles = [
   "Select exchange",
@@ -28,10 +20,10 @@ const titles = [
 ];
 const Select = () => {
   const [searchWord, setSearchWord] = useState("");
-  const searchRef = useRef(null);
-  const amountRef = useRef(null);
-  const dateRef = useRef(null);
-  const timeRef = useRef(null);
+  const searchRef = useRef<any>(null);
+  const amountRef = useRef<any>(null);
+  const dateRef = useRef<any>(null);
+  const timeRef = useRef<any>(null);
   const router = useRouter();
   const {
     setExchange,
@@ -70,7 +62,7 @@ const Select = () => {
       router.back();
     }
     if (params.type == "3") {
-      setAmount(amountRef.current?.value);
+      setAmount(amountRef.current.value);
       router.back();
     }
     if (params.type == "4") {
@@ -92,7 +84,7 @@ const Select = () => {
   };
   useEffect(() => {
     searchRef.current?.focus();
-  }, []);
+  }, [isSearch]);
 
   const content = () => {
     if (params.type == "1") {

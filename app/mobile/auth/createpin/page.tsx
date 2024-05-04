@@ -3,16 +3,24 @@
 import React from "react";
 import { Poppins } from "next/font/google";
 import { BiLeftArrowAlt } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 const CreatePin = () => {
+  const router = useRouter();
+
   return (
-    <div className={`signin ${poppins.className} px-[33px] pt-[73px]`}>
+    <div
+      className={`signin ${poppins.className} px-[33px] pt-[73px] min-h-screen`}
+    >
       <div className="signin-header w-full flex justify-between items-center">
-        <BiLeftArrowAlt className="text-white w-4 h-4"></BiLeftArrowAlt>
+        <BiLeftArrowAlt
+          className="text-white w-4 h-4"
+          onClick={() => router.back()}
+        ></BiLeftArrowAlt>
         <p className="text-white text-[15px]/[22.5px]">Skip</p>
       </div>
       <h1 className="title text-white text-[32px]/[41.12px] mt-[26px]">
@@ -45,7 +53,7 @@ const CreatePin = () => {
             maxLength={1}
           />
         </div>
-        <button className="w-full bg-white rounded-[24px] py-4 text-center text-black text-base font-semibold mt-[26px]">
+        <button className="w-full bg-white rounded-[24px] py-4 text-center text-black text-base font-semibold mt-[32px]">
           Save Pin
         </button>
       </form>

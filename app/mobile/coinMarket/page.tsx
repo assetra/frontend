@@ -1,10 +1,12 @@
 "use client";
 
-import { BiDotsHorizontal } from "react-icons/bi";
-import { FiBarChart2 } from "react-icons/fi";
-import { Poppins } from "next/font/google";
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Poppins } from "next/font/google";
+import { FiBarChart2 } from "react-icons/fi";
+import { BsSearch } from "react-icons/bs";
+
 import Icon1 from "@/components/icons/portfolio/Icon1";
 import Icon2 from "@/components/icons/portfolio/Icon2";
 import Icon3 from "@/components/icons/portfolio/Icon3";
@@ -12,13 +14,12 @@ import Icon4 from "@/components/icons/portfolio/Icon4";
 import Icon5 from "@/components/icons/portfolio/Icon5";
 import MyPortfolioModal from "@/components/modal/MyPortfolioModal";
 import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
-import Icon3_2 from "@/components/icons/portfolio/Icon3_2";
-import { BsSearch } from "react-icons/bs";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
+
 const data = [
   {
     id: 1,
@@ -431,7 +432,7 @@ const Portfolio = () => {
   const [settingOpen, setSettingOpen] = useState(false);
   const [searchWord, setSearchWord] = useState("");
   const [isSearch, setSearch] = useState(false);
-  const searchRef = useRef(null);
+  const searchRef = useRef<HTMLInputElement>(null);
   const handleClick = (id: number) => {
     if (id === 1) setOpen(true);
     else if (id === 2) setSettingOpen(true);
@@ -448,11 +449,12 @@ const Portfolio = () => {
           className="text-white w-4 h-4"
           onClick={(e) => {
             setSearch(!isSearch);
-            // searchRef.current?.focus();
           }}
         ></BsSearch>
         <h2 className="title text-white text-sm font-bold"> Coin Market</h2>
-        <FiBarChart2 className="w-[13px] h-4 text-white"></FiBarChart2>
+        <Link href={"/mobile/coinMarket/overview"}>
+          <FiBarChart2 className="w-[13px] h-4 text-white"></FiBarChart2>
+        </Link>
       </div>
       <div className={`${poppins.className} mt-10 px-5`}>
         {!isSearch ? (
@@ -538,9 +540,9 @@ const Portfolio = () => {
       </div>
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full">
         <Icon1 onClick={() => handleClick(1)} isActive={false} />
-        <Icon2 isActive={false} />
-        {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
-        <Icon4 />
+        <Icon2 isActive={true} onClick={() => {}} />
+        <Icon3 isActive={settingOpen} onClick={() => handleClick(3)} />
+        <Icon4 isActive={false} onClick={() => {}} />
         <Icon5 onClick={() => handleClick(2)} />
       </div>
       <MyPortfolioModal isOpen={open} openChange={() => setOpen(false)} />

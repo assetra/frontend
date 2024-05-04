@@ -1,7 +1,9 @@
 "use client";
+
+import React, { useContext, useEffect } from "react";
+
 import LogoIcon from "@/components/icons/LogoIcon";
 import { AuthContext } from "@/context/AddContext";
-import React, { useContext, useEffect } from "react";
 
 const Splash = () => {
   const appContext = useContext(AuthContext);
@@ -10,7 +12,7 @@ const Splash = () => {
   }, []);
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <LogoIcon />
+      <LogoIcon onClick={() => {}} />
     </div>
   );
 };

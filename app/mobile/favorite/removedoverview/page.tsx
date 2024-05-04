@@ -1,16 +1,15 @@
 "use client";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import React, { useState } from "react";
-import { BiLeftArrowAlt, BiSolidLeftArrow } from "react-icons/bi";
 import { useRouter } from "next/navigation";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { BiLeftArrowAlt } from "react-icons/bi";
 import Chart from "react-apexcharts";
+
 import Icon1 from "@/components/icons/portfolio/Icon1";
 import Icon2 from "@/components/icons/portfolio/Icon2";
 import Icon4 from "@/components/icons/portfolio/Icon4";
 import Icon5 from "@/components/icons/portfolio/Icon5";
-import Icon3_2 from "@/components/icons/portfolio/Icon3_2";
 import Icon3 from "@/components/icons/portfolio/Icon3";
-import { AdvancedChart, MiniChart } from "react-tradingview-embed";
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -38,10 +37,7 @@ const AddedOverview = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [settingOpen, setSettingOpen] = useState(false);
-  const [searchWord, setSearchWord] = useState("");
-  const [isSearch, setSearch] = useState(false);
   const [active, setActive] = useState(-1);
-  // const searchRef = useRef(null);
   const handleActive = (id: number) => {
     if (id == active) {
       setActive(-1);
@@ -219,7 +215,7 @@ const AddedOverview = () => {
       <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
         <Icon1 onClick={() => handleClick(1)} isActive={false} />
         <Icon2 isActive={false} onClick={() => handleClick(4)} />
-        {settingOpen ? <Icon3_2 onClick={() => handleClick(3)} /> : <Icon3 />}
+        <Icon3 isActive={settingOpen} onClick={() => handleClick(3)} />
         <Icon4 isActive={true} onClick={() => handleClick(4)} />
         <Icon5 onClick={() => handleClick(5)} />
       </div>
