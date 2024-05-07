@@ -97,6 +97,7 @@ const Select = () => {
         .map((item, index) => {
           return (
             <div
+              key={index}
               className={` p-5 bg-[${colors[index % 2]}]`}
               onClick={(e) => {
                 handleClick(item);
@@ -119,6 +120,7 @@ const Select = () => {
         .map((item, index) => {
           return (
             <div
+              key={index}
               className={` p-5 bg-[${colors[index % 2]}]`}
               onClick={(e) => {
                 handleClick(item);
@@ -162,6 +164,7 @@ const Select = () => {
         .map((item, index) => {
           return (
             <div
+              key={index}
               className={` p-5 bg-[${colors[index % 2]}]`}
               onClick={(e) => {
                 handleClick(item);
@@ -231,6 +234,7 @@ const Select = () => {
               onClick={(e) => {
                 handleClick(item);
               }}
+              key={index}
             >
               <div className="description text-white text-sm font-bold">
                 {item}

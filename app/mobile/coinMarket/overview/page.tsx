@@ -53,11 +53,10 @@ const OverView = () => {
         />
       </div>
       <div className="flex justify-evenly mt-5">
-        {ranges.map((rangeItem) => {
-          console.log(rangeItem);
-          console.log(range);
+        {ranges.map((rangeItem, index) => {
           return (
             <p
+              key={index}
               onClick={(e) => setRange(rangeItem)}
               className={`py-2 px-3 cursor-pointer rounded-lg  text-white text-[12px]/[14.32px] font-bold ${
                 range == rangeItem ? "bg-[#0057FF]" : ""

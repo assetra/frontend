@@ -40,7 +40,7 @@ export default function Accordion({
           <path
             d="M1.56006 13.5L7.84806 7.5L1.56006 1.5"
             stroke="#666666"
-            stroke-width="2"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
