@@ -1,17 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { useParams, useRouter } from "next/navigation";
-
-import Accordion from "@/components/Accordian";
 import { BsChevronRight, BsTrash } from "react-icons/bs";
-import TransactionDeleteModal from "@/components/modal/TransactionDeleteModal";
-import Icon1 from "@/components/icons/portfolio/Icon6";
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon3 from "@/components/icons/portfolio/Icon3";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
+
+import MenuBar from "@/components/mobile/MenuBar";
+import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
 
 const Setting = () => {
   const router = useRouter();
@@ -24,7 +19,7 @@ const Setting = () => {
     else setSettingOpen(false);
   };
   return (
-    <div className="portfolio pt-[94px] min-h-screen h-screen overflow-auto">
+    <div className=" font-SFPro pt-[94px] min-h-screen h-screen overflow-auto">
       <div className="header px-4 flex w-full items-center justify-between">
         <BiLeftArrowAlt
           onClick={(e) => {
@@ -55,7 +50,10 @@ const Setting = () => {
           <h2 className="setting-title text-white font-bold text-[32px]/[28px] px-4 mb-3">
             Accounts
           </h2>
-          <div className="setting-item w-full flex justify-between px-4 items-center py-4">
+          <div
+            className="setting-item w-full flex justify-between px-4 items-center py-4"
+            onClick={() => router.push("/mobile/profile")}
+          >
             <p className="font-bold text-white text-sm">User profile</p>
             <BsChevronRight className="text-[#666666] w-4 h-4" />
           </div>
@@ -82,17 +80,15 @@ const Setting = () => {
           </div>
         </div>
       </div>
-      <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full">
-        <Icon1 isActive={false} onClick={() => handleClick(1)} />
-        <Icon2 isActive={false} onClick={() => handleClick(2)} />
-        <Icon3
-          isActive={settingOpen}
-          onClick={() => setSettingOpen(!settingOpen)}
-        />
-
-        <Icon4 isActive={false} onClick={() => handleClick(4)} />
-        <Icon5 isActive={true} onClick={() => handleClick(2)} />
-      </div>
+      <MenuBar
+        active={5}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
+      <PortfolioSettingModal
+        isOpen={settingOpen}
+        openChange={() => setSettingOpen(false)}
+      />
     </div>
   );
 };

@@ -5,19 +5,11 @@ import { BiLeftArrowAlt } from "react-icons/bi";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { AdvancedChart } from "react-tradingview-embed";
 
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
-import Icon3 from "@/components/icons/portfolio/Icon3";
-import Icon6 from "@/components/icons/portfolio/Icon6";
 import CoinSettingModal from "@/components/modal/CoinScreenSettingModal";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-});
+import MenuBar2 from "@/components/mobile/MenuBar2";
 
 const ranges = ["1H", "1D", "1W", "1M", "6M", "1Y", "ALL"];
+
 const LineView = () => {
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -38,10 +30,8 @@ const LineView = () => {
     else setSettingOpen(false);
   };
   return (
-    <div
-      className={`signin ${jakarta.className} px-[10px] pt-[73px] min-h-screen`}
-    >
-      <div className="signin-header w-full flex justify-center items-center px-[23px]">
+    <div className={` font-SFPro px-[10px] pt-[73px] min-h-screen`}>
+      <div className=" w-full flex justify-center items-center px-[23px]">
         <h2 className="text-[#fefefe] font-bold text-sm text-center">
           Bitcoin{" "}
           <span className="text-white/[.5] text-[12px]/[14.32px]">(BTC)</span>
@@ -253,16 +243,11 @@ const LineView = () => {
           </div>
         </div>
       </div>
-      <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
-        <Icon6 onClick={() => handleClick(1)} isActive={true} />
-        <Icon2 isActive={false} onClick={() => handleClick(4)} />
-        <Icon3
-          isActive={settingOpen}
-          onClick={() => setSettingOpen(!settingOpen)}
-        />
-        <Icon4 isActive={true} onClick={() => handleClick(4)} />
-        <Icon5 onClick={() => handleClick(5)} />
-      </div>
+      <MenuBar2
+        active={1}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
       <CoinSettingModal
         openChange={() => {}}
         isOpen={settingOpen}

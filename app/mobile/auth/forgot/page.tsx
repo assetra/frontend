@@ -13,10 +13,8 @@ const poppins = Poppins({
 const Forgot = () => {
   const router = useRouter();
   return (
-    <div
-      className={`signin ${poppins.className} px-[33px] pt-[73px] min-h-screen`}
-    >
-      <div className="signin-header w-full flex justify-between items-center">
+    <div className={` ${poppins.className} px-[33px] pt-[73px] min-h-screen`}>
+      <div className=" w-full flex justify-between items-center">
         <BiLeftArrowAlt
           onClick={(e) => {
             router.back();

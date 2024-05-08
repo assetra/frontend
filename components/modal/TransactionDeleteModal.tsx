@@ -12,7 +12,7 @@ const TransactionDeleteModal = ({ isOpen, openChange }: ModalProps) => {
   if (isOpen)
     return (
       <div
-        className={` fixed top-0 left-0 h-screen w-screen bg-[#000] transition-all ease-out`}
+        className={` fixed top-0 left-0 h-screen w-screen bg-[#000] transition-all ease-out font-SFPro`}
       >
         <div className="modal-content h-full flex flex-col justify-center items-center px-5 gap-y-8">
           <DeleteIcon />

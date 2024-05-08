@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { BiLeftArrowAlt, BiSearch } from "react-icons/bi";
-import { Poppins } from "next/font/google";
 
 import { useTransactionContext } from "@/context/TransactionContext";
 
@@ -18,6 +17,22 @@ const titles = [
   "Select transaction time",
   "Select transaction fee",
 ];
+const items1 = [
+  "Binance",
+  "Kraken",
+  "Coinbase",
+  "Qryptos",
+  "OKEx",
+  "Huobi",
+  "Bitfinex",
+  "HitBTC",
+  "Bibox",
+  "IDAX",
+];
+const items2 = ["ETH/BTC", "ETH/USDT", "ETH/LTC"];
+const items3 = ["Default Portfolio", "Binance Portfolio", "Kraken Portfolio"];
+const items4 = ["%ETH", "%ETH"];
+
 const Select = () => {
   const [searchWord, setSearchWord] = useState("");
   const searchRef = useRef<any>(null);
@@ -36,21 +51,7 @@ const Select = () => {
     setFee,
   } = useTransactionContext();
   const params = useParams<any>();
-  const items1 = [
-    "Binance",
-    "Kraken",
-    "Coinbase",
-    "Qryptos",
-    "OKEx",
-    "Huobi",
-    "Bitfinex",
-    "HitBTC",
-    "Bibox",
-    "IDAX",
-  ];
-  const items2 = ["ETH/BTC", "ETH/USDT", "ETH/LTC"];
-  const items3 = ["Default Portfolio", "Binance Portfolio", "Kraken Portfolio"];
-  const items4 = ["%ETH", "%ETH"];
+
   const [isSearch, setSearch] = useState(false);
   const handleClick = (item: string) => {
     if (params.type == "1") {
@@ -134,7 +135,6 @@ const Select = () => {
         });
     }
     if (params.type == "3") {
-      // alert("dd");
       return (
         <div className="mt-[20px] px-5">
           <input
@@ -199,15 +199,12 @@ const Select = () => {
       );
     }
     if (params.type == "6") {
-      // alert("dd");
       return (
         <div className="mt-[20px] px-5">
           <input
             type="time"
             ref={timeRef}
-            // defaultValue={Date.now()}
             className="px-2 text-[26px]/[32px] text-white placeholder-[#ffffff]/[.2] w-full bg-transparent  border-transparent focus:ring-transparent focus:border-transparent focus:ring-offset-0 focus:outline-none"
-            // placeholder="Enter amount"
           />
           <button
             className="mt-[80px] text-white bg-[#0057FF] py-5 text-center w-full text-[16px]/[19px] rounded-[20px]"
@@ -245,8 +242,8 @@ const Select = () => {
     }
   };
   return (
-    <div className="portfolio pt-[94px] min-h-screen h-screen overflow-auto">
-      <div className="header px-1 flex w-full items-center justify-between">
+    <div className=" font-SFPro pt-[94px] min-h-screen h-screen overflow-auto">
+      <div className="header px-4 flex w-full items-center justify-between">
         <BiLeftArrowAlt
           onClick={(e) => {
             router.back();
@@ -270,12 +267,12 @@ const Select = () => {
             ref={searchRef}
             value={searchWord}
             onChange={(e) => setSearchWord(e.target.value)}
-            className="px-2 text-[26px]/[32px] text-white placeholder-[#ffffff]/[.2] w-full bg-transparent  border-transparent focus:ring-transparent focus:border-transparent focus:ring-offset-0 focus:outline-none"
+            className="px-2 text-[26px]/[32px] text-white placeholder-white/[.2] w-full bg-transparent  border-transparent focus:ring-transparent focus:border-transparent focus:ring-offset-0 focus:outline-none"
             placeholder="Search"
           />
         </div>
       )}
-      <div className="search-items">{content()}</div>
+      <div className="search-items mt-5">{content()}</div>
     </div>
   );
 };

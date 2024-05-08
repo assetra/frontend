@@ -2,13 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AdvancedChart } from "react-tradingview-embed";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { BiLeftArrowAlt } from "react-icons/bi";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-});
 
 const ranges = ["1H", "1D", "1W", "1M", "6M", "1Y", "ALL"];
 
@@ -17,8 +11,8 @@ const OverView = () => {
   const [range, setRange] = useState("1D");
 
   return (
-    <div className={`signin ${jakarta.className} px-[10px] pt-[73px] h-screen`}>
-      <div className="signin-header w-full flex justify-center items-center px-[23px]">
+    <div className={` px-[10px] pt-[73px] h-screen font-SFPro`}>
+      <div className=" w-full flex justify-center items-center px-[23px]">
         <h2 className="text-[#fefefe] font-bold text-sm text-center">
           Market Overview
         </h2>

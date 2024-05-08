@@ -1,6 +1,5 @@
 import React from "react";
-import { FiCopy, FiPlus } from "react-icons/fi";
-import { RxCross1 } from "react-icons/rx";
+import { FiPlus } from "react-icons/fi";
 
 interface IPortfolioModalProps {
   isOpen: boolean;
@@ -11,7 +10,7 @@ const CoinSettingModal = ({ isOpen, openChange }: IPortfolioModalProps) => {
   if (isOpen)
     return (
       <div
-        className={` fixed top-0 left-0 h-[calc(100vh-110px)] w-screen bg-[#000]/[.8] transition-all ease-out `}
+        className={` fixed top-0 left-0 h-[calc(100vh-110px)] w-screen bg-[#000]/[.8] transition-all ease-out font-SFPro`}
       >
         <div className="modal-content px-[25px] py-[60px] pb-[24px] bg-[#0e0f18] rounded-t-[12px] fixed bottom-[110px] w-full">
           <div className="title relative">

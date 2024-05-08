@@ -13,10 +13,8 @@ const jakarta = Plus_Jakarta_Sans({
 const Scan = () => {
   const router = useRouter();
   return (
-    <div
-      className={`signin ${jakarta.className} px-[33px] pt-[73px] min-h-screen`}
-    >
-      <div className="signin-header w-full flex justify-center items-center">
+    <div className={` ${jakarta.className} px-[33px] pt-[73px] min-h-screen`}>
+      <div className=" w-full flex justify-center items-center">
         <h2 className="text-[#fefefe] font-bold text-[18px]/[26px] text-center">
           Scan QR Code
         </h2>

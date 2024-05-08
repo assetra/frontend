@@ -7,13 +7,8 @@ import { Poppins } from "next/font/google";
 import { FiBarChart2 } from "react-icons/fi";
 import { BsSearch } from "react-icons/bs";
 
-import Icon1 from "@/components/icons/portfolio/Icon1";
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon3 from "@/components/icons/portfolio/Icon3";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
-import MyPortfolioModal from "@/components/modal/MyPortfolioModal";
 import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
+import MenuBar from "@/components/mobile/MenuBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -443,7 +438,7 @@ const Portfolio = () => {
     searchRef.current?.focus();
   }, [isSearch]);
   return (
-    <div className="portfolio pt-[94px] max-h-screen">
+    <div className="pt-[94px] max-h-screen font-SFPro">
       <div className="header px-5 flex w-full justify-between items-center">
         <BsSearch
           className="text-white w-4 h-4"
@@ -496,12 +491,15 @@ const Portfolio = () => {
                 .includes(searchWord.toLocaleLowerCase())
             );
           })
-          .map((item) => {
+          .map((item, index) => {
             const Icon = dynamic(
               () => import(`@/components/icons/${item.abbr}Icon`)
             );
             return (
-              <div className="flex justify-between items-center p-4">
+              <div
+                className="flex justify-between items-center p-4"
+                key={index}
+              >
                 <div className="description flex items-center gap-x-2">
                   <div className="icon-wrapper bg-[#1b1c24] w-9 h-9 rounded-[50%] flex items-center justify-center">
                     <Icon />
@@ -538,14 +536,15 @@ const Portfolio = () => {
             );
           })}
       </div>
-      <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full">
-        <Icon1 onClick={() => handleClick(1)} isActive={false} />
-        <Icon2 isActive={true} onClick={() => {}} />
-        <Icon3 isActive={settingOpen} onClick={() => handleClick(3)} />
-        <Icon4 isActive={false} onClick={() => {}} />
-        <Icon5 onClick={() => handleClick(2)} />
-      </div>
-      <MyPortfolioModal isOpen={open} openChange={() => setOpen(false)} />
+      <MenuBar
+        active={2}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
+      <PortfolioSettingModal
+        isOpen={settingOpen}
+        openChange={() => setSettingOpen(false)}
+      />
       <PortfolioSettingModal
         isOpen={settingOpen}
         openChange={() => setSettingOpen(false)}

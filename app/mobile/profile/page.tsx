@@ -1,30 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
-import { useParams, useRouter } from "next/navigation";
-
-import Accordion from "@/components/Accordian";
-import { BsChevronRight, BsTrash } from "react-icons/bs";
-import TransactionDeleteModal from "@/components/modal/TransactionDeleteModal";
-import Icon1 from "@/components/icons/portfolio/Icon6";
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon3 from "@/components/icons/portfolio/Icon3";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
+import { useRouter } from "next/navigation";
+import { BsChevronRight } from "react-icons/bs";
 
 const Profile = () => {
   const router = useRouter();
-  const params = useParams<any>();
-  const [open, setOpen] = useState(false);
-  const [settingOpen, setSettingOpen] = useState(false);
-  const handleClick = (id: number) => {
-    if (id === 1) setOpen(true);
-    else if (id === 2) setSettingOpen(true);
-    else setSettingOpen(false);
-  };
   return (
-    <div className="portfolio pt-[94px] min-h-screen h-screen overflow-auto">
+    <div className=" font-SFPro pt-[94px] min-h-screen h-screen overflow-auto">
       <div className="header px-4 flex w-full items-center justify-center relative">
         <BiLeftArrowAlt
           onClick={(e) => {
@@ -45,7 +29,6 @@ const Profile = () => {
               </p>
               <p className="font-bold text-white text-sm">Victor</p>
             </div>
-            {/* <BsChevronRight className="text-[#666666] w-4 h-4" /> */}
           </div>
           <div className="profile-item w-full flex justify-between px-4 items-center py-4 bg-[#13141D]">
             <div>

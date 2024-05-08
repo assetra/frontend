@@ -71,3 +71,8 @@
     display: block;
   }
 }
+
+@font-face {
+  font-family: "SFPro";
+  src: url("../public/fonts/SF-Pro.ttf");
+}

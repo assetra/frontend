@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Poppins } from "next/font/google";
 import { BiLeftArrowAlt } from "react-icons/bi";
-import { useRouter } from "next/navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -13,10 +13,8 @@ const CreatePin = () => {
   const router = useRouter();
 
   return (
-    <div
-      className={`signin ${poppins.className} px-[33px] pt-[73px] min-h-screen`}
-    >
-      <div className="signin-header w-full flex justify-between items-center">
+    <div className={` ${poppins.className} px-[33px] pt-[73px] min-h-screen`}>
+      <div className=" w-full flex justify-between items-center">
         <BiLeftArrowAlt
           className="text-white w-4 h-4"
           onClick={() => router.back()}

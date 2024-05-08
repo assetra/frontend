@@ -113,7 +113,7 @@ const AddTransaction = () => {
     searchRef.current?.focus();
   }, []);
   return (
-    <div className="portfolio pt-[94px] min-h-screen h-screen overflow-auto">
+    <div className=" font-SFPro pt-[94px] min-h-screen h-screen overflow-auto">
       <div className="header px-1 flex w-full items-center justify-between">
         <BiLeftArrowAlt
           onClick={(e) => {

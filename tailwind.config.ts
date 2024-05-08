@@ -17,6 +17,9 @@ const config: Config = {
         background: "#121212",
         search: "#2f3241",
       },
+      fontFamily: {
+        SFPro: ["SFPro", "sans-serif"],
+      },
     },
   },
   plugins: [require("daisyui")],

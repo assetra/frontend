@@ -2,18 +2,15 @@
 
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { FiBarChart2 } from "react-icons/fi";
 import { Poppins } from "next/font/google";
 
-import Icon1 from "@/components/icons/portfolio/Icon1";
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon3 from "@/components/icons/portfolio/Icon3";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
 import MyPortfolioModal from "@/components/modal/MyPortfolioModal";
 import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
+import MenuBar from "@/components/mobile/MenuBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -426,6 +423,7 @@ const data = [
     percent: -2.89,
   },
 ];
+
 const Portfolio = () => {
   const [open, setOpen] = useState(false);
   const [settingOpen, setSettingOpen] = useState(false);
@@ -440,7 +438,7 @@ const Portfolio = () => {
         <Link href={"/mobile/portfolio/overview"}>
           <FiBarChart2 className="w-[13px] h-4 text-white"></FiBarChart2>
         </Link>
-        <h2 className="title text-white text-sm font-bold">
+        <h2 className={`title text-white text-sm font-bold font-SFPro`}>
           {" "}
           Default Portfolio
         </h2>
@@ -454,14 +452,16 @@ const Portfolio = () => {
           $14,634.06
         </h1>
         <p className="text-[#32CC86] font-normal text-sm">+ $248.23(+0.35)</p>
-        <div className="flex justify-between mt-[25px]">
+        <div className={`flex justify-between mt-[25px] font-SFPro`}>
           <p className="p-2 text-white text-xs bg-white/[.05]">
             Highest holdings
           </p>
           <p className="p-2 text-white text-xs bg-white/[.05]">24 Hours</p>
         </div>
       </div>
-      <div className="info-wrapper mt-5 h-[calc(100vh-410px)] overflow-auto">
+      <div
+        className={`info-wrapper mt-5 h-[calc(100vh-410px)] overflow-auto font-SFPro`}
+      >
         {data.map((item) => {
           const Icon = dynamic(
             () => import(`@/components/icons/${item.abbr}Icon`)
@@ -475,7 +475,7 @@ const Portfolio = () => {
                 <div className="flex flex-col justify-between h-9">
                   <p className="text-white text-[15px]/[17.9px] font-bold">
                     {item.type}{" "}
-                    <span className="text-[#666666] text-[12px]/[14.32px] font-bold">
+                    <span className="text-[#666666] text-[12px]/[14.32px] font-normal">
                       ({item.abbr})
                     </span>
                   </p>
@@ -501,17 +501,11 @@ const Portfolio = () => {
           );
         })}
       </div>
-      <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full">
-        <Icon1 isActive={true} onClick={() => handleClick(1)} />
-        <Icon2 isActive={false} onClick={() => handleClick(2)} />
-        <Icon3
-          isActive={settingOpen}
-          onClick={() => setSettingOpen(!settingOpen)}
-        />
-
-        <Icon4 isActive={false} onClick={() => handleClick(4)} />
-        <Icon5 onClick={() => handleClick(2)} />
-      </div>
+      <MenuBar
+        active={1}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
       <MyPortfolioModal isOpen={open} openChange={() => setOpen(false)} />
       <PortfolioSettingModal
         isOpen={settingOpen}

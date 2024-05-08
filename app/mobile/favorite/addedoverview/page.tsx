@@ -3,19 +3,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AdvancedChart } from "react-tradingview-embed";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { BiLeftArrowAlt } from "react-icons/bi";
 
-import Icon1 from "@/components/icons/portfolio/Icon1";
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
-import Icon3 from "@/components/icons/portfolio/Icon3";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-});
+import MenuBar from "@/components/mobile/MenuBar";
+import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
 
 const ranges = ["1H", "1D", "1W", "1M", "6M", "1Y", "ALL"];
 
@@ -25,6 +16,7 @@ const AddedOverview = () => {
   const [settingOpen, setSettingOpen] = useState(false);
   const [active, setActive] = useState(-1);
   const [range, setRange] = useState("1D");
+  const [style, setStyle] = useState("2");
 
   const handleActive = (id: number) => {
     if (id == active) {
@@ -38,10 +30,8 @@ const AddedOverview = () => {
     else setSettingOpen(false);
   };
   return (
-    <div
-      className={`signin ${jakarta.className} px-[10px] pt-[73px] min-h-screen`}
-    >
-      <div className="signin-header w-full flex justify-center items-center px-[23px]">
+    <div className={` font-SFPro px-[10px] pt-[73px] min-h-screen`}>
+      <div className=" w-full flex justify-center items-center px-[23px]">
         <h2 className="text-[#fefefe] font-bold text-sm text-center">
           Bitcoin{" "}
           <span className="text-white/[.5] text-[12px]/[14.32px]">(BTC)</span>
@@ -91,17 +81,46 @@ const AddedOverview = () => {
           Global Average
         </button>
         <div className="flex gap-x-5">
-          <button className="w-[30px] h-[30px] flex justify-center items-center bg-white/[.05] rounded-[8px]">
-            <svg
-              width="6"
-              height="14"
-              viewBox="0 0 6 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M3 1V13" stroke="white" strokeLinecap="round" />
-              <rect y="4" width="6" height="6" rx="2" fill="white" />
-            </svg>
+          <button
+            className="w-[30px] h-[30px] flex justify-center items-center bg-white/[.05] rounded-[8px]"
+            onClick={() => {
+              if (style == "2") {
+                setStyle("8");
+              } else setStyle("2");
+            }}
+          >
+            {style != "2" ? (
+              <svg
+                width="6"
+                height="14"
+                viewBox="0 0 6 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M3 1V13" stroke="white" strokeLinecap="round" />
+                <rect y="4" width="6" height="6" rx="2" fill="white" />
+              </svg>
+            ) : (
+              <svg
+                width="16"
+                height="13"
+                viewBox="0 0 16 13"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6.5 12.5L1 1" stroke="white" stroke-linecap="round" />
+                <path
+                  d="M6.5 12.5L11.5 5.5"
+                  stroke="white"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M14.951 8.519L11.5 5.5"
+                  stroke="white"
+                  stroke-linecap="round"
+                />
+              </svg>
+            )}
           </button>
           <button className="w-[30px] h-[30px] flex justify-center items-center bg-white/[.05] rounded-[8px]">
             <svg
@@ -150,7 +169,7 @@ const AddedOverview = () => {
               withdateranges: false,
               range: range,
               hide_side_toolbar: true,
-              style: "2",
+              style: style,
             }}
             widgetPropsAny={{ backgroundColor: "black" }}
           />
@@ -206,13 +225,15 @@ const AddedOverview = () => {
           </div>
         </div>
       </div>
-      <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
-        <Icon1 onClick={() => handleClick(1)} isActive={false} />
-        <Icon2 isActive={false} onClick={() => handleClick(4)} />
-        <Icon3 isActive={settingOpen} onClick={() => handleClick(3)} />
-        <Icon4 isActive={true} onClick={() => handleClick(4)} />
-        <Icon5 onClick={() => handleClick(5)} />
-      </div>
+      <MenuBar
+        active={4}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
+      <PortfolioSettingModal
+        isOpen={settingOpen}
+        openChange={() => setSettingOpen(false)}
+      />
     </div>
   );
 };

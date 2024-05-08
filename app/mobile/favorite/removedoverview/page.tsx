@@ -1,37 +1,11 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Plus_Jakarta_Sans } from "next/font/google";
 import { BiLeftArrowAlt } from "react-icons/bi";
 
-import Icon1 from "@/components/icons/portfolio/Icon1";
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
-import Icon3 from "@/components/icons/portfolio/Icon3";
 import { AdvancedChart } from "react-tradingview-embed";
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
-});
-const options = {
-  chart: {
-    id: "basic-bar",
-  },
-  grid: {
-    show: false,
-  },
-  xaxis: {
-    categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998],
-  },
-};
-const series = [
-  {
-    name: "series-1",
-    data: [30, 40, 45, 50, 49, 60, 70, 91],
-  },
-];
+import MenuBar from "@/components/mobile/MenuBar";
+import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
 
 const ranges = ["1H", "1D", "1W", "1M", "6M", "1Y", "ALL"];
 
@@ -53,10 +27,8 @@ const AddedOverview = () => {
     else setSettingOpen(false);
   };
   return (
-    <div
-      className={`signin ${jakarta.className} px-[10px] pt-[73px] min-h-screen`}
-    >
-      <div className="signin-header w-full flex justify-center items-center px-[23px]">
+    <div className={` font-SFPro px-[10px] pt-[73px] min-h-screen`}>
+      <div className=" w-full flex justify-center items-center px-[23px]">
         <h2 className="text-[#fefefe] font-bold text-sm text-center">
           Bitcoin{" "}
           <span className="text-white/[.5] text-[12px]/[14.32px]">(BTC)</span>
@@ -222,13 +194,15 @@ const AddedOverview = () => {
           </div>
         </div>
       </div>
-      <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
-        <Icon1 onClick={() => handleClick(1)} isActive={false} />
-        <Icon2 isActive={false} onClick={() => handleClick(4)} />
-        <Icon3 isActive={settingOpen} onClick={() => handleClick(3)} />
-        <Icon4 isActive={true} onClick={() => handleClick(4)} />
-        <Icon5 onClick={() => handleClick(5)} />
-      </div>
+      <MenuBar
+        active={4}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
+      <PortfolioSettingModal
+        isOpen={settingOpen}
+        openChange={() => setSettingOpen(false)}
+      />
     </div>
   );
 };

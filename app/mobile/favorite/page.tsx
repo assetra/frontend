@@ -6,18 +6,14 @@ import { Poppins } from "next/font/google";
 import { BsSearch, BsTrash } from "react-icons/bs";
 import { BiTrash } from "react-icons/bi";
 
-import Icon1 from "@/components/icons/portfolio/Icon1";
-import Icon2 from "@/components/icons/portfolio/Icon2";
-import Icon3 from "@/components/icons/portfolio/Icon3";
-import Icon4 from "@/components/icons/portfolio/Icon4";
-import Icon5 from "@/components/icons/portfolio/Icon5";
-import MyPortfolioModal from "@/components/modal/MyPortfolioModal";
 import PortfolioSettingModal from "@/components/modal/PortfolioSettingModal";
+import MenuBar from "@/components/mobile/MenuBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
+
 const data = [
   {
     id: 1,
@@ -77,17 +73,12 @@ const Favourite = () => {
       setActive(-1);
     } else setActive(id);
   };
-  const handleClick = (id: number) => {
-    alert("dd ");
-    if (id === 1) setOpen(true);
-    else if (id === 2) setSettingOpen(true);
-    else setSettingOpen(false);
-  };
+
   useEffect(() => {
     searchRef.current?.focus();
   }, [isSearch]);
   return (
-    <div className="portfolio pt-[94px] max-h-screen">
+    <div className=" pt-[94px] max-h-screen font-SFPro">
       <div className="header px-5 flex w-full justify-between items-center">
         <BsTrash className="w-4 h-4 text-white"></BsTrash>
         <h2 className="title text-white text-sm font-bold">Favorite Coins</h2>
@@ -140,7 +131,7 @@ const Favourite = () => {
                 .includes(searchWord.toLocaleLowerCase())
             );
           })
-          .map((item) => {
+          .map((item, index) => {
             const Icon = dynamic(
               () => import(`@/components/icons/${item.abbr}Icon`)
             );
@@ -150,6 +141,7 @@ const Favourite = () => {
                   active === item.id ? "translate-x-[-50px]" : ""
                 }`}
                 onClick={(e) => handleActive(item.id)}
+                key={index}
               >
                 <div className="description flex items-center gap-x-2">
                   <div className="icon-wrapper bg-[#1b1c24] w-9 h-9 rounded-[50%] flex items-center justify-center">
@@ -176,7 +168,10 @@ const Favourite = () => {
                       item.delta > 0 ? "text-[#32CC86]" : "text-[#FC3044]"
                     } text-[12px]/[14.32px] font-normal`}
                   >
-                    {item.delta > 0 ? `+$${item.delta}` : `$${item.delta}`} (
+                    {item.delta > 0
+                      ? `+$${item.delta}`
+                      : `${item.delta.toString().replace("-", "-$")}`}{" "}
+                    (
                     {item.percent > 0
                       ? `+${item.percent}%`
                       : `${item.percent}%`}
@@ -184,7 +179,14 @@ const Favourite = () => {
                   </p>
                 </div>
                 {active === item.id && (
-                  <div className="trash w-[60px] h-[60px] flex justify-center items-center bg-[#FC3044] absolute right-[-50px]">
+                  <div
+                    className="trash w-[60px] h-[60px] flex justify-center items-center bg-[#FC3044] absolute right-[-50px]"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      alert("Sure to delete?");
+                    }}
+                  >
                     <BiTrash className="text-white w-[18px] h-[18px]" />
                   </div>
                 )}
@@ -192,14 +194,20 @@ const Favourite = () => {
             );
           })}
       </div>
-      <div className="control-wrapper bg-[#0e0f18] pt-2 flex items-center justify-evenly h-[110px] fixed left-0 bottom-0 w-full z-[100]">
-        <Icon1 onClick={() => handleClick(1)} isActive={false} />
-        <Icon2 isActive={false} onClick={() => handleClick(4)} />
-        <Icon3 isActive={settingOpen} onClick={() => handleClick(3)} />
-        <Icon4 isActive={true} onClick={() => handleClick(4)} />
-        <Icon5 onClick={() => handleClick(5)} />
-      </div>
-      <MyPortfolioModal isOpen={open} openChange={() => setOpen(false)} />
+      <MenuBar
+        active={4}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
+      <PortfolioSettingModal
+        isOpen={settingOpen}
+        openChange={() => setSettingOpen(false)}
+      />{" "}
+      <MenuBar
+        active={4}
+        settingOpen={settingOpen}
+        setSettingOpen={setSettingOpen}
+      />
       <PortfolioSettingModal
         isOpen={settingOpen}
         openChange={() => setSettingOpen(false)}

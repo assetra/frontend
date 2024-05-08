@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { RxCross2 } from "react-icons/rx";
+import React, { useState } from "react";
 import { BiLeftArrowAlt } from "react-icons/bi";
 import { useParams, useRouter } from "next/navigation";
 
@@ -26,7 +25,7 @@ const TransactionDetail = () => {
   } = useTransactionContext();
   const [open, setOpen] = useState(false);
   return (
-    <div className="portfolio pt-[94px] min-h-screen h-screen overflow-auto">
+    <div className=" font-SFPro pt-[94px] min-h-screen h-screen overflow-auto">
       <div className="header px-4 flex w-full items-center justify-between">
         <BiLeftArrowAlt
           onClick={(e) => {

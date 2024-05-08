@@ -3,13 +3,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
-import { Poppins } from "next/font/google";
 import { RxCross2 } from "react-icons/rx";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-});
 const data = [
   {
     id: 1,
@@ -101,7 +96,7 @@ const AddTransaction = () => {
     searchRef.current?.focus();
   }, []);
   return (
-    <div className="portfolio pt-[94px] min-h-screen h-screen overflow-auto px-4">
+    <div className=" font-SFPro pt-[94px] min-h-screen h-screen overflow-auto px-4">
       <div className="header px-1 flex w-full justify-end">
         <RxCross2 className="w-4 h-4 text-white" />
       </div>
