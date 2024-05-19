@@ -1,4 +1,7 @@
 import React from "react";
+import Image from "next/image";
+import { RiArrowDownFill, RiArrowUpFill } from "react-icons/ri";
+import { BiChevronDown } from "react-icons/bi";
 
 export default function Transaction() {
   const data = [
@@ -31,10 +34,7 @@ export default function Transaction() {
             <td>
               <div className="flex justify-between items-center text-white text-base border-white border rounded-full w-20 h-10 px-4 py-2 cursor-pointer">
                 All
-                <img
-                  src="/images/arrow-down-white.png"
-                  alt="arrow-down-white"
-                />
+                <BiChevronDown size={14} color="white" />
               </div>
             </td>
           </tr>
@@ -44,27 +44,23 @@ export default function Transaction() {
             <tr className="flex justify-between items-center h-10">
               <td className="flex items-center justify-between w-1/2">
                 <div className="flex items-center">
-                  <img
-                    src={
-                      item.type === "BTC"
-                        ? "/images/bitcoin-icon-big.png"
-                        : "/images/eth-icon-big.png"
-                    }
+                  <Image
+                    src={item.type === "BTC" ? "/images/bitcoin-icon-big.png" : "/images/eth-icon-big.png"}
                     className="pr-4"
+                    width={32}
+                    height={32}
+                    alt="LOGO"
                   />
                   {item.type}
                 </div>
                 <div>{item.action}</div>
               </td>
               <td className="flex justify-between items-center w-1/2">
-                <img
-                  src={
-                    item.action === "Receive"
-                      ? "/images/arrow-down-green-big.png"
-                      : "/images/arrow-up-red-big.png"
-                  }
-                  className="pr-4"
-                />
+                {item.action === "Receive" ? (
+                  <RiArrowDownFill size={24} color="#11CABE" />
+                ) : (
+                  <RiArrowUpFill size={24} color="#FA2256" />
+                )}
                 {item.value}
               </td>
             </tr>

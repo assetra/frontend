@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
 
+import React, { useState } from "react";
 import localFont from "next/font/local";
+import { FiRefreshCw } from "react-icons/fi";
 
 const sofia = localFont({ src: "../../public/fonts/Sofia Pro Regular.ttf" });
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
@@ -30,15 +31,9 @@ const Exchange1 = () => {
   return (
     <div className="exchange-wrapper flex flex-col text-white px-20 lg:px-7 py-6 font-medium bg-[#1E1F25] rounded-xl  w-full">
       <div className="flex flex-row space-x-5 items-center justify-between">
-        <div className={`text-white text-xl font-bold ${sofia.className}`}>
-          Exchange
-        </div>
+        <div className={`text-white text-xl font-bold ${sofia.className}`}>Exchange</div>
         <button onClick={onClickHandler}>
-          <img
-            className="cursor-pointer"
-            src="/images/refresh-icon.png"
-            alt="refresh-icon"
-          />
+          <FiRefreshCw size={24} />
         </button>
       </div>
       <div className="flex items-center text-xs justify-evenly py-1 mt-[35px] w-full">
@@ -47,13 +42,7 @@ const Exchange1 = () => {
           <div className="text-gtxTextLight text-base text-[#A5ADCF]">BTC</div>
         </div>
         <div>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -71,19 +60,11 @@ const Exchange1 = () => {
         </div>{" "}
         <div className="text-gtxTextLight text-base text-[#A5ADCF]">USD</div>
       </div>
-      <div
-        className={`flex flex-col gap-2 ${graphik.className} py-1 mt-[24px]`}
-      >
-        <div className="flex justify-start text-gtxText text-base text-[#A5ADCF]">
-          Get
-        </div>
+      <div className={`flex flex-col gap-2 ${graphik.className} py-1 mt-[24px]`}>
+        <div className="flex justify-start text-gtxText text-base text-[#A5ADCF]">Get</div>
         <div className="flex flex-row justify-center items-center rounded-full w-full border  px-4 py-2">
           <div className="flex w-2/3 justify-start basis-2/3 text-lg text-white pr-4 border-r border-r-[#ffffff]">
-            <input
-              className="bg-[#1E1F25]"
-              value={usd}
-              onChange={(e) => setUsd(parseFloat(e.target.value))}
-            ></input>
+            <input className="bg-[#1E1F25]" value={usd} onChange={(e) => setUsd(parseFloat(e.target.value))}></input>
           </div>
           <div className="">
             <select
@@ -106,16 +87,10 @@ const Exchange1 = () => {
         </div>
       </div>
       <div className={`flex flex-col gap-2 ${graphik.className} py-1 mb-2`}>
-        <div className="flex justify-start text-gtxText text-base text-[#A5ADCF]">
-          Pay
-        </div>
+        <div className="flex justify-start text-gtxText text-base text-[#A5ADCF]">Pay</div>
         <div className="flex flex-row justify-center items-center rounded-full w-full border px-4 py-2">
           <div className="flex w-2/3 justify-start basis-2/3 text-lg text-white pr-4 border-r border-r-[#ffffff]">
-            <input
-              className="bg-[#1E1F25]"
-              value={usd}
-              onChange={(e) => setUsd(parseFloat(e.target.value))}
-            ></input>
+            <input className="bg-[#1E1F25]" value={usd} onChange={(e) => setUsd(parseFloat(e.target.value))}></input>
           </div>
           <div>
             <select

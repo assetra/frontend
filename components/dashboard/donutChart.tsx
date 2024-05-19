@@ -38,9 +38,6 @@ const DonutChart = () => {
               fontWeight: 400,
               color: "undefined",
               offsetY: 20,
-              // formatter: function (val: any) {
-              //   return val;
-              // },
             },
             total: {
               show: true,
@@ -50,11 +47,6 @@ const DonutChart = () => {
               fontFamily: "Helvetica, Arial, sans-serif",
               fontWeight: 600,
               color: "white",
-              // formatter: function (w: any) {
-              //   return w.globals.seriesTotals.reduce((a: any, b: any) => {
-              //     return a + b;
-              //   }, 0);
-              // },
             },
           },
         },
@@ -65,19 +57,6 @@ const DonutChart = () => {
       enabled: true,
       theme: "dark",
     },
-    // responsive: [
-    //   {
-    //     breakpoint: 480,
-    //     options: {
-    //       chart: {
-    //         // width: 200,
-    //       },
-    //       legend: {
-    //         position: "bottom",
-    //       },
-    //     },
-    //   },
-    // ],
   };
 
   const series = [2.36, 1.8, 1.64];

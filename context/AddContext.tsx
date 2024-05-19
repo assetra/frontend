@@ -24,7 +24,7 @@ interface IAppWrapperProps {
 
 export function AppWrapper({ children }: IAppWrapperProps) {
   const [dashboardState, setDashboardState] = useState<number>(1);
-  const [navbarState, setNavbarState] = useState<number>(1);
+  const [navbarState, setNavbarState] = useState<number>(0);
 
   const sharedState = {
     dashboardState: dashboardState,
@@ -33,7 +33,5 @@ export function AppWrapper({ children }: IAppWrapperProps) {
     setNavbarState: setNavbarState,
   };
 
-  return (
-    <AuthContext.Provider value={sharedState}>{children}</AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={sharedState}>{children}</AuthContext.Provider>;
 }

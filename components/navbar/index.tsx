@@ -10,7 +10,6 @@ const Navbar = () => {
   const appContext = useContext(AuthContext);
 
   return (
-    // <div>{!appContext.navbarState ? <NavbarAuth /> : <NavbarDashboard />}</div>
     <div>
       {appContext.navbarState === 0 ? (
         <NavbarAuth />
