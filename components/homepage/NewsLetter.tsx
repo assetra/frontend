@@ -3,9 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
+import Link from "next/link";
 
 import Back from "@/public/assets/news.png";
 import Logo from "@/public/assets/logo.png";
+import { socials } from "@/consts/social";
 
 interface INewsLetterProps {
   open: boolean;
@@ -56,14 +58,13 @@ const NewsLetter = ({ open, setOpen }: INewsLetterProps) => {
                 </div>
               </div>
               <div className="flex gap-x-6 sm:gap-x-4 justify-center">
-                <Image width={16} height={16} className="invert" src="/assets/x.png" alt="img" />
-                <Image width={16} height={16} className="invert" src="/assets/insta.png" alt="img" />
-                <Image width={16} height={16} className="invert" src="/assets/facebook.png" alt="img" />
-                <Image width={16} height={16} className="invert" src="/assets/image-11.png" alt="img" />
-                <Image width={16} height={16} className="invert" src="/assets/whatsapp.png" alt="img" />
-                <Image width={16} height={16} className="invert" src="/assets/linkedin.png" alt="img" />
-                <Image width={16} height={16} className="invert" src="/assets/telegram.png" alt="img" />
-                <Image width={16} height={16} className="invert" src="/assets/reddit.png" alt="img" />
+                {socials.map((social, index) => {
+                  return (
+                    <Link href={social.url} target="_blank">
+                      <Image width={16} height={16} src={social.img} className=" invert" alt="img" />
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>

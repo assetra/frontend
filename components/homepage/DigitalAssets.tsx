@@ -1,6 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
+import { socials } from "@/consts/social";
+import Link from "next/link";
+
 export default function DigitalAssets() {
   return (
     <div className="pt-24 p-4 pb-28 bg-gradient-to-r from-black from-10% via-blue-800/35 via-50% to-black to-90%">
@@ -11,17 +14,13 @@ export default function DigitalAssets() {
 
         <div className="mt-20 flex justify-center">
           <div className="w-96 md:w-[1000px] flex flex-wrap gap-10 md:gap-0 justify-center md:justify-evenly">
-            <Image width={45} height={40} src="/assets/x.png" alt="img" />
-            <Image width={45} height={40} src="/assets/insta.png" alt="img" />
-            <Image width={45} height={40} src="/assets/facebook.png" alt="img" />
-            <Image width={45} height={40} src="/assets/image-11.png" alt="img" />
-            <Image width={45} height={40} src="/assets/whatsapp.png" alt="img" />
-            <Image width={45} height={40} src="/assets/linkedin.png" alt="img" />
-            <Image width={45} height={40} src="/assets/telegram.png" alt="img" />
-            <Image width={45} height={40} src="/assets/reddit.png" alt="img" />
-            <Image width={45} height={40} src="/assets/cb.png" alt="img" />
-            <Image width={45} height={40} src="/assets/github.png" alt="img" />
-            <Image width={45} height={40} src="/assets/email.png" alt="img" />
+            {socials.map((social, index) => {
+              return (
+                <Link href={social.url} target="_blank">
+                  <Image width={45} height={40} src={social.img} alt="img" />
+                </Link>
+              );
+            })}
           </div>
         </div>
 

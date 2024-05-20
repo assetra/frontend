@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { socials } from "@/consts/social";
 
 export default function Footer() {
   return (
@@ -121,17 +123,14 @@ export default function Footer() {
         <div className="w-[1024px] flex flex-row-reverse">
           <div className="flex flex-wrap justify-center gap-4">
             <p className="text-white font-[700]">Community</p>
-            <Image width={18} height={17} src="/assets/x.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/insta.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/facebook.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/linkedin.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/image-11.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/whatsapp.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/telegram.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/reddit.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/cb.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/github.png" alt="x-logo" />
-            <Image width={18} height={17} src="/assets/Email.png" alt="x-logo" />
+
+            {socials.map((social, index) => {
+              return (
+                <Link href={social.url} target="_blank">
+                  <Image width={18} height={17} src={social.img} alt="img" />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>
