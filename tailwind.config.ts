@@ -15,8 +15,12 @@ const config: Config = {
       },
     },
   },
+<<<<<<< HEAD
   plugins: [
     require('daisyui'),
   ],
+=======
+  plugins: [],
+>>>>>>> origin/main
 }
 export default config
