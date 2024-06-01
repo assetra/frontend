@@ -41,7 +41,10 @@ const EmailInput: React.FC = () => {
 
   return (
     <div className="flex justify-center mt-6">
-      <div className="flex md:w-[500px] border-[1px] border-[#000000] rounded-full px-4 py-2 bg-[#34384c]">
+      <form
+        className="flex md:w-[500px] border-[1px] border-[#000000] rounded-full px-4 py-2 bg-[#34384c]"
+        onSubmit={handleSubmit}
+      >
         <input
           className="w-full outline-none bg-[#34384c] text-[#9ca3af] text-xs md:text-sm"
           type="text"
@@ -51,13 +54,13 @@ const EmailInput: React.FC = () => {
         />
         <div>
           <button
-            onClick={handleSubmit}
+            type="submit"
             className="text-[#FFFFFF] bg-[#1e68f6] px-12 py-3 rounded-full text-xs md:text-sm"
           >
             Get Started
           </button>
         </div>
-      </div>
+      </form>
       {showNotification && (
         <CustomModal
           message={notificationMessage}

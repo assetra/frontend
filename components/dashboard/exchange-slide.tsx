@@ -14,7 +14,7 @@ function ExchangeSlide({ cryptoPair }: any) {
         underLineColor: "rgba(101, 101, 101, 0.36)",
         isTransparent: false,
         autosize: false,
-        noTimeScale: true,
+        //noTimeScale: true,
       }}
     />
   );

@@ -247,8 +247,8 @@ const Market = () => {
                   </tr>
                 </thead>
                 <tbody className="flex flex-col w-full overflow-auto">
-                  {data.map((item) => (
-                    <tr className="flex flex-row w-full justify-between items-center h-20 py-7">
+                  {data.map((item, index) => (
+                    <tr key={index} className="flex flex-row w-full justify-between items-center h-20 py-7">
                       <td className="flex flex-row py-2 w-1/4">
                         <div className="pr-4">
                           <img src={item.icon} />

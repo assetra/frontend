@@ -1,7 +1,7 @@
 "use client";
 
 import ExchangeSlide from "./exchange-slide";
-import React, { useState } from "react";
+import React from "react";
 import Slider from "react-slick";
 
 function CardSlider() {
@@ -22,17 +22,14 @@ function CardSlider() {
   return (
     <div className="slider-container">
       <Slider className="flex space-x-2" {...settings}>
-        {symbols.map((slide: String, i: number) => {
-          return (
-            <div className="px-2 py-2 rounded-3xl">
-              <ExchangeSlide
-                cryptoPair={slide}
-                key={i}
-                className=" rounded-3xl"
-              />
-            </div>
-          );
-        })}
+        {symbols.map((slide, i) => (
+          <div key={slide} className="px-2 py-2 rounded-3xl">
+            <ExchangeSlide
+              cryptoPair={slide}
+              className=" rounded-3xl"
+            />
+          </div>
+        ))}
       </Slider>
     </div>
   );

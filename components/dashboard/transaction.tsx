@@ -33,8 +33,8 @@ export default function Transaction() {
       </div>
       <table>
         <tbody>
-          {data.map((item) => (
-            <tr className="flex justify-between items-center h-10">
+          {data.map((item, index) => (
+            <tr key={index} className="flex justify-between items-center h-10">
               <td className="flex items-center justify-between w-1/2">
                 <div className="flex items-center">
                   <img
