@@ -1,16 +1,22 @@
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { socials } from "@/consts/social";
+import EmailInputSm from "./EmailInputSm";
 
 export default function Footer() {
   return (
-    <div className=" bg-gradient-to-r from-black from-20% via-blue-800/30 via-50% to-black to-80%">
-      <div className="flex justify-center">
+    <div className="bg-footer-background-image bg-cover bg-no-repeat bg-center">
+      <div className="mt-10 flex justify-center">
         <div className="max-w-[1024px] mt-20">
           <div className="flex flex-col items-center md:items-start">
-            <Image width={80} height={60} src="/assets/footer-logo.png" alt="footer-logo" />
-            <p className="text-[#e5e6ed] text-sm text-center md:text-left">©2024 GTX Labs Ltd</p>
+            <Image
+              width={80}
+              height={60}
+              src="/assets/footer-logo.png"
+              alt="footer-logo"
+            />
+            <p className="text-[#e5e6ed] text-sm text-center md:text-left">
+              ©2024 GTX Labs Ltd
+            </p>
           </div>
 
           <div className="flex flex-col md:flex-row gap-14 mt-10">
@@ -47,13 +53,17 @@ export default function Footer() {
               <p className="font-[700] text-white">Services</p>
               <p className="text-[#CCCCCC] text-[14px]">Affiliate</p>
               <p className="text-[#CCCCCC] text-[14px]">V5 API</p>
-              <p className="text-[#CCCCCC] text-[14px]">Historical market data</p>
+              <p className="text-[#CCCCCC] text-[14px]">
+                Historical market data
+              </p>
               <p className="text-[#CCCCCC] text-[14px]">Fee schedule</p>
               <p className="text-[#CCCCCC] text-[14px]">Listing application</p>
               <p className="text-[#CCCCCC] text-[14px]">P2P Advertiser</p>
               <p className="text-[#CCCCCC] text-[14px]">application</p>
 
-              <p className="font-[700] mt-6 md:mt-0 text-white">Crypto Calculator</p>
+              <p className="font-[700] mt-6 md:mt-0 text-white">
+                Crypto Calculator
+              </p>
               <p className="text-[#CCCCCC] text-[14px]">BTC to USD</p>
               <p className="text-[#CCCCCC] text-[14px]">ETH to USD</p>
               <p className="text-[#CCCCCC] text-[14px]">USDT to USD</p>
@@ -85,32 +95,35 @@ export default function Footer() {
                 </div>
 
                 <div className="flex flex-col items-center md:items-start gap-6 w-full md:w-[155px]">
-                  <p className="font-[700] text-white">Trade on the go with GTX</p>
-                  <button className="bg-white text-black rounded-full px-10 py-2">Register</button>
-                  <Image width={150} height={150} src="/assets/qr.svg" alt="qr-image" />
-                  <p className="text-white font-[16px]">Scan to download GTX App</p>
+                  <p className="font-[700] text-white">
+                    Trade on the go with GTX
+                  </p>
+                  <button className="bg-white text-black rounded-full px-10 py-2">
+                    Register
+                  </button>
+                  <Image
+                    width={150}
+                    height={150}
+                    src="/assets/qr.svg"
+                    alt="qr-image"
+                  />
+                  <p className="text-white font-[16px]">
+                    Scan to download GTX App
+                  </p>
                 </div>
               </div>
 
               <div className="mt-20">
-                <p className="font-[700] text-white text-lg text-center">Subscribe for Updates</p>
+                <p className="font-[700] text-white text-lg text-center">
+                  Subscribe for Updates
+                </p>
 
-                <div className="flex justify-center">
-                  <div className="flex mt-4 w-[340px] border-[1px] border-[#000000] rounded-full px-2 py-1 bg-[#34384c]">
-                    <input
-                      className="w-full outline-none bg-[#34384c] text-[#9ca3af] text-sm"
-                      type="text"
-                      placeholder="Enter your email address"
-                    />
-                    <a href="#">
-                      <button className="text-[#FFFFFF] bg-[#1e68f6] px-8 py-2 rounded-full text-sm">GetStarted</button>
-                    </a>
-                  </div>
-                </div>
+                <EmailInputSm />
 
                 <div className="mt-4 flex justify-center">
                   <p className="text-sm text-center text-white w-80">
-                    Stay in the loop. Subscribe to our newsletter for the latest updates and exclusive content
+                    Stay in the loop. Subscribe to our newsletter for the latest
+                    updates and exclusive content
                   </p>
                 </div>
               </div>
@@ -123,14 +136,94 @@ export default function Footer() {
         <div className="w-[1024px] flex flex-row-reverse">
           <div className="flex flex-wrap justify-center gap-4">
             <p className="text-white font-[700]">Community</p>
-
-            {socials.map((social, index) => {
-              return (
-                <Link href={social.url} target="_blank">
-                  <Image width={18} height={17} src={social.img} alt="img" />
-                </Link>
-              );
-            })}
+            <a href="https://twitter.com/gtxdotcom">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/x.png"
+                alt="X/Twitter"
+              />
+            </a>
+            <a href="https://www.instagram.com/gtxdotcom/">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/insta.png"
+                alt="Instagram"
+              />
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100094228042198">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/facebook.png"
+                alt="Facebook"
+              />
+            </a>
+            <a href="https://medium.com/@gtxdotcom">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/image-11.png"
+                alt="Medium"
+              />
+            </a>
+            <a href="https://chat.whatsapp.com/DT7FIAWAJVgIRPHwkCfHfb">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/whatsapp.png"
+                alt="WhatsApp"
+              />
+            </a>
+            <a href="https://www.linkedin.com/company/gtxdotcom/">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/linkedin.png"
+                alt="LinkedIn"
+              />
+            </a>
+            <a href="https://t.me/gtxdotcom">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/telegram.png"
+                alt="Telegram"
+              />
+            </a>
+            <a href="https://discord.gg/dVmMCdf9jx">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/reddit.png"
+                alt="Discord"
+              />
+            </a>
+            <a href="https://www.crunchbase.com/organization/gtx-91c8">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/cb.png"
+                alt="Crunchbase"
+              />
+            </a>
+            <a href="https://github.com/gtxdotcom">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/github.png"
+                alt="Github"
+              />
+            </a>
+            <a href="mailto:info@gtx.com.co">
+              <Image
+                width={18}
+                height={17}
+                src="/assets/email.png"
+                alt="Email"
+              />
+            </a>
           </div>
         </div>
       </div>
