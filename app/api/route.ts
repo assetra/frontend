@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const client = await connectToDatabase();
-    const db = client.db();
+    const db = client.db("users");
 
     const collection = db.collection("newsletter");
 
