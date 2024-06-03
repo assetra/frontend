@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
 import EmailInput from "./EmailInput";
+import Image from "next/image";
+import React from "react";
 import Background from "../../public/assets/background.png";
 
 export default function DigitalAssets() {
