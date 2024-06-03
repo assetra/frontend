@@ -1,11 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import EmailInputSm from "./EmailInputSm";
+import Background from "../../public/assets/background.png";
 
 export default function Footer() {
   return (
-    <div className="bg-footer-background-image bg-cover bg-no-repeat bg-center">
-      <div className="mt-10 flex justify-center">
+    <div
+      style={{
+        backgroundImage: `url(${Background.src})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <div className="pt-10 flex justify-center">
         <div className="max-w-[1024px] mt-20">
           <div className="flex flex-col items-center md:items-start">
             <Image

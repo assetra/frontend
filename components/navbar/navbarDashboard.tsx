@@ -60,7 +60,7 @@ const NavbarDashboard = () => {
         <div className="flex relative group justify-center items-center z-1001">
           <input
             type="text"
-            className="w-52 px-6 py-2 block flex-1 border-transparent rounded-full bg-search/50 text-white placeholder:text-gtxText focus:ring-transparent border-transparent sm:text-sm sm:leading-6"
+            className="w-52 px-6 py-2 block flex-1 border-transparent rounded-full bg-search/50 text-white placeholder:text-gtxText focus:ring-transparent focus:border-transparent sm:text-sm sm:leading-6"
             placeholder="Search"
           />
           <img

@@ -1,9 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
+import Background from "../../public/assets/background.png";
 
 export default function Divider() {
   return (
-    <div className='mt-24'>
+    <div className='pt-24' style={{
+      backgroundImage: `url(${Background.src})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}>
       <Image
         width={1920}
         height={54}

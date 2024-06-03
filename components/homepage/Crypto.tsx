@@ -1,9 +1,15 @@
 import React from 'react'
 import Image from 'next/image'
+import Background from "../../public/assets/background.png";
 
 export default function Crypto() {
   return (
-    <div className='mt-32 flex justify-center p-4 md:p-0'>
+    <div className='pt-32 flex justify-center p-4 md:p-0' style={{
+      backgroundImage: `url(${Background.src})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}>
       <div className='max-w-[1024px]'>
         <div>
           <p className='text-white font-[700] text-center'>WHY GTX?</p>

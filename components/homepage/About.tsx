@@ -1,8 +1,14 @@
 import React from 'react'
+import Background from "../../public/assets/background.png";
 
 export default function About() {
   return (
-    <div className='flex justify-center mt-32 overflow-hidden'>
+    <div className='flex justify-center pt-32 overflow-hidden' style={{
+      backgroundImage: `url(${Background.src})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}>
       <div className='max-w-[1024px]'>
         <div className='text-[#ffffff] font-[700] text-[20px] text-center'>
           ABOUT GTX

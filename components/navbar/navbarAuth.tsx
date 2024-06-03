@@ -43,6 +43,7 @@ const NavbarAuth = () => {
         </div>
       </div>
       <div className="flex flex-row space-x-4 items-center font-semibold">
+        <Link href="/dashboard">Dashboard</Link> {/* added for demo purposes */}
         <Link href="/login">Log In</Link>
         <Link
           className="px-4 py-1.5 bg-white text-black rounded-2xl font-semibold"

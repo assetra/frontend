@@ -1,10 +1,16 @@
 import React from "react";
 import Image from "next/image";
 import EmailInput from "./EmailInput";
+import Background from "../../public/assets/background.png";
 
 export default function DigitalAssets() {
   return (
-    <div className="mt-20 p-4">
+    <div className="pt-20 pb-8 p-4" style={{
+      backgroundImage: `url(${Background.src})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}>
       <div>
         <div className="text-[#E5E6ED] font-[700] text-3xl md:text-5xl text-center flex justify-center">
           <p className="w-[900px] leading-[60px]">
@@ -105,7 +111,7 @@ export default function DigitalAssets() {
           </div>
         </div>
 
-        <div className="mt-20 flex justify-center">
+        <div className="pt-20 flex justify-center">
           <div>
             <p className="font-bold text-[#FFFFFF] text-[20px] text-center">
               STAY UPDATED

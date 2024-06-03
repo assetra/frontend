@@ -1,9 +1,15 @@
 import React from "react";
 import Image from "next/image";
+import Background from "../../public/assets/background.png";
 
 export default function Team() {
   return (
-    <div className="flex justify-center mt-32">
+    <div className="flex justify-center pt-32" style={{
+      backgroundImage: `url(${Background.src})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    }}>
       <div className="max-w-[1024px]">
         <div>
           <p className="text-white text-center font-[700]">OUR TEAM</p>
@@ -59,16 +65,17 @@ export default function Team() {
                 alt="cr-logo"
               />
               <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Mulaye Subakanya</p>
+                <p className="text-[16px] font-[700]">Jahmarley Henry</p>
                 <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Chief Technology Officer
+                  Chief Marketing Officer
                 </p>
               </div>
             </div>
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                An open-minded developer ready to reinvent the wheel
+                A WEB3 and blockchain enthusiatist that is always researching
+                and keeping up with new trends
               </p>
             </div>
 
@@ -93,17 +100,17 @@ export default function Team() {
                 alt="team-logo"
               />
               <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Jahmarley Henry</p>
+                <p className="text-[16px] font-[700]">Salimzhan Shaimerdenov</p>
                 <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Chief Marketing Officer
+                  Executive Director
                 </p>
               </div>
             </div>
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                A WEB3 and blockchain enthusiatist that is always researching
-                and keeping up with new trends
+                An aspiring developer always looking to work or build something
+                new
               </p>
             </div>
 
@@ -126,17 +133,16 @@ export default function Team() {
                 alt="cr-logo"
               />
               <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Salimzhan Shaimerdenov</p>
+                <p className="text-[16px] font-[700]">Mulaye Subakanya</p>
                 <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Executive Director
+                  Chief Technology Officer
                 </p>
               </div>
             </div>
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                An aspiring developer always looking to work or build something
-                new
+                An open-minded developer ready to reinvent the wheel
               </p>
             </div>
 
