@@ -1,22 +1,24 @@
 "use client";
-import { AdvancedChart, MiniChart } from "react-tradingview-embed";
+import { MiniChart } from "react-tradingview-embed";
 
 function ExchangeSlide({ cryptoPair }: any) {
   return (
-    <MiniChart
-      widgetProps={{
-        colorTheme: "dark",
-        symbol: cryptoPair,
-        width: "100%",
-        height: "100%",
-        locale: "en",
-        dateRange: "1D",
-        underLineColor: "rgba(101, 101, 101, 0.36)",
-        isTransparent: false,
-        autosize: false,
-        //noTimeScale: true,
-      }}
-    />
+    <div className="w-[24svw] rounded-[2rem] py-3 px-6">
+      <MiniChart
+        widgetProps={{
+          colorTheme: "dark",
+          symbol: cryptoPair,
+          width: "100%",
+          height: "100%",
+          locale: "en",
+          dateRange: "3M",
+          underLineColor: "rgba(101, 101, 101, 0.36)",
+          isTransparent: false,
+          autosize: false,
+          //noTimeScale: true,
+        }}
+      />
+    </div>
   );
 }
 

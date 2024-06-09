@@ -20,13 +20,12 @@ function CardSlider() {
     slidesToScroll: 1,
   };
   return (
-    <div className="slider-container">
+    <div className="slider-container px-6">
       <Slider className="flex space-x-2" {...settings}>
         {symbols.map((slide, i) => (
-          <div key={slide} className="px-2 py-2 rounded-3xl">
+          <div key={i}>
             <ExchangeSlide
               cryptoPair={slide}
-              className=" rounded-3xl"
             />
           </div>
         ))}

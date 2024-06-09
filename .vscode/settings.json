@@ -1,0 +1,22 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.words": [
+    "Achain",
+    "apexcharts",
+    "autosize",
+    "BNBUSD",
+    "BTCUSD",
+    "chartjs",
+    "ETHUSD",
+    "firstname",
+    "graphik",
+    "lastname",
+    "Paywallet",
+    "profilepage",
+    "tradingview",
+    "USDTUSD"
+  ]
+}

@@ -4,12 +4,15 @@ import Background from "../../public/assets/background.png";
 
 export default function Team() {
   return (
-    <div className="flex justify-center pt-32" style={{
-      backgroundImage: `url(${Background.src})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-    }}>
+    <div
+      className="flex justify-center pt-32"
+      style={{
+        backgroundImage: `url(${Background.src})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="max-w-[1024px]">
         <div>
           <p className="text-white text-center font-[700]">OUR TEAM</p>
@@ -46,19 +49,29 @@ export default function Team() {
               </p>
             </div>
 
-            <div className="mt-4">
-              <Image
-                width={18}
-                height={18}
-                src="/assets/linkedin.png"
-                alt="img"
-              />
+            <div className="flex gap-2 mt-4">
+              <a href="https://www.linkedin.com/in/giordano-bertin-maurice-52ba2a236/">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
+              <a href="https://t.me/jeeordahnoh">
+                <Image
+                  width={17}
+                  height={17}
+                  src="/assets/telegram.png"
+                  alt="img"
+                />
+              </a>
             </div>
           </div>
 
           <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
             <div className="flex gap-4">
-            <Image
+              <Image
                 width={70}
                 height={70}
                 src="/assets/avatar-4.png"
@@ -74,18 +87,20 @@ export default function Team() {
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                A WEB3 and blockchain enthusiatist that is always researching
-                and keeping up with new trends
+                A WEB3 and blockchain enthusiast that is always researching and
+                keeping up with new trends
               </p>
             </div>
 
             <div className="mt-4">
-              <Image
-                width={18}
-                height={18}
-                src="/assets/linkedin.png"
-                alt="img"
-              />
+              <a href="https://www.linkedin.com/in/jahmarleyhenry/">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
             </div>
           </div>
         </div>
@@ -93,14 +108,14 @@ export default function Team() {
         <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
           <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
             <div className="flex gap-4">
-            <Image
+              <Image
                 width={70}
                 height={70}
-                src="/assets/avatar-2.png"
+                src="/assets/avatar-8.png"
                 alt="team-logo"
               />
               <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Salimzhan Shaimerdenov</p>
+                <p className="text-[16px] font-[700]">Claude Zion</p>
                 <p className="text-[14px] text-[#1e68f6] font-[700]">
                   Executive Director
                 </p>
@@ -109,24 +124,34 @@ export default function Team() {
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                An aspiring developer always looking to work or build something
-                new
+                A passionate Software Engineer on an exhilarating journey
+                through the vast cosmos of computer science.
               </p>
             </div>
 
-            <div className="mt-4">
-              <Image
-                width={18}
-                height={18}
-                src="/assets/linkedin.png"
-                alt="img"
-              />
+            <div className="flex gap-2 mt-4">
+              <a href="https://www.linkedin.com/in/claudezion/">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
+              <a href="https://github.com/claudezion">
+                <Image
+                  width={16}
+                  height={16}
+                  src="/assets/github.png"
+                  alt="img"
+                />
+              </a>
             </div>
           </div>
 
           <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
             <div className="flex gap-4">
-            <Image
+              <Image
                 width={70}
                 height={70}
                 src="/assets/avatar-3.png"
@@ -147,12 +172,14 @@ export default function Team() {
             </div>
 
             <div className="mt-4">
-              <Image
-                width={18}
-                height={18}
-                src="/assets/linkedin.png"
-                alt="img"
-              />
+              <a href="https://www.linkedin.com/in/mulaye-s-14a5531b6">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
             </div>
           </div>
         </div>
@@ -179,12 +206,14 @@ export default function Team() {
             </div>
 
             <div className="mt-4">
-              <Image
-                width={18}
-                height={18}
-                src="/assets/linkedin.png"
-                alt="img"
-              />
+              <a href="https://www.linkedin.com/in/nitinvkumar/">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
             </div>
           </div>
 
@@ -212,12 +241,14 @@ export default function Team() {
             </div>
 
             <div className="mt-4">
-              <Image
-                width={18}
-                height={18}
-                src="/assets/linkedin.png"
-                alt="img"
-              />
+              <a href="https://github.com/trmvenus">
+                <Image
+                  width={16}
+                  height={16}
+                  src="/assets/github.png"
+                  alt="img"
+                />
+              </a>
             </div>
           </div>
         </div>
@@ -245,13 +276,18 @@ export default function Team() {
               </p>
             </div>
 
-            <div className="mt-4">
-              <Image
-                width={18}
-                height={18}
-                src="/assets/linkedin.png"
-                alt="img"
-              />
+            <div className="flex gap-2 mt-4">
+              <a href="https://www.linkedin.com/in/singhashmeet/">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
+              <a href="https://twitter.com/Ashmeet70884617">
+                <Image width={17} height={17} src="/assets/x.png" alt="img" />
+              </a>
             </div>
           </div>
         </div>

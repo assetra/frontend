@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const NavbarAuth = () => {
   return (
-    <div className="flex flex-row bg-black text-white text-xs justify-between items-center px-4 py-5">
+    <div className="flex flex-row bg-black text-white text-xs justify-between items-center px-4 py-5 top-0 fixed w-[100svw] max-h-20">
       <Image src={"/images/logo.png"} alt="GTX logo" width={70} height={70} />
       <div className="flex flex-row items-center gap-4">
         <div className="flex flex-row items-center">

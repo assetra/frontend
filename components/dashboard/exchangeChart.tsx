@@ -6,13 +6,13 @@ export default function ExchangeChart() {
   return (
     <div
       id="second"
-      className="w-screen flex pt-3 h-107"
-      style={{ width: "100%", height: "400px" }}
+      className="w-[100svh] flex pt-3"
+      style={{ width: "100%", height: "340px" }}
     >
-      <div className="w-1/4 pr-2 rounded-lg h-full">
+      <div className="w-[20%] pr-3 rounded-lg">
         <Exchange />
       </div>
-      <div className="w-full pl-2 rounded-lg" style={{ height: "100%" }}>
+      <div className="w-[80%] pl-6 rounded-lg">
         <CustomChart />
       </div>
     </div>

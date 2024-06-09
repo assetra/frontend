@@ -1,9 +1,9 @@
 "use client";
 import React, { useContext, useEffect } from "react";
 import localFont from "next/font/local";
-import CardSlider from "./cardSlider";
 import Card from "./card";
 import { AuthContext } from "@/context/AddContext";
+import Image from "next/image";
 
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
 
@@ -192,11 +192,11 @@ const Market = () => {
   ];
 
   return (
-    <div className="flex w-screen h-full bg-[#000] px-11 pt-14">
+    <div className="flex w-[100svw] h-[100svh] bg-[#000] px-11 pt-16">
       <div className="flex w-full h-full">
         <div className="flex h-full w-1/4 pr-3">
           <div className="flex flex-col w-full h-full text-white">
-            <div className="flex flex-col pb-6">
+            <div className="flex flex-col pt-12 pb-2">
               <div className="text-base pb-2 text-[#A5ADCF]">
                 In the past 24 hours
               </div>
@@ -206,16 +206,16 @@ const Market = () => {
                 </h1>
               </div>
             </div>
-            <div className="flex flex-col w-full">
-              {symbols.map((symbol) => (
-                <div className="w-full py-[18px] px-0">
+            <div className="flex flex-col w-full overflow-y-auto">
+              {symbols.map((symbol, index) => (
+                <div key={index} className="w-full py-4 pr-6">
                   <Card cryptoPair={symbol} />
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="flex h-full w-3/4 pl-3">
+        <div className="flex h-full w-3/4 pl-3 pt-12 pb-4">
           <div className="flex w-full h-full text-white rounded-xl p-6 bg-[#1E1F25]">
             <div className="flex flex-col w-full h-full">
               <div className="flex flex-row justify-between w-full h-[30px]">
@@ -231,52 +231,60 @@ const Market = () => {
                     Lasers
                   </button>
                   <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
-                    Tradeble
+                    Tradeable
                   </button>
                 </div>
               </div>
-              <table className="flex flex-col w-full h-[779px]">
-                <thead className="flex flex-col w-full">
-                  <tr className="flex flex-row w-full justify-between h-20 border-b-2 py-7 text-[#5D6588]">
-                    <td className="w-1/4">Asserts</td>
-                    <td className="w-1/6">Last Price</td>
-                    <td className="w-1/6">Martket cap</td>
-                    <td className="w-1/10">Change</td>
-                    <td className="w-1/5">Chart</td>
-                    <td className="w-1/10">Trade</td>
-                  </tr>
-                </thead>
-                <tbody className="flex flex-col w-full overflow-auto">
-                  {data.map((item, index) => (
-                    <tr key={index} className="flex flex-row w-full justify-between items-center h-20 py-7">
-                      <td className="flex flex-row py-2 w-1/4">
-                        <div className="pr-4">
-                          <img src={item.icon} />
-                        </div>
-                        <div className="pr-9">{item.type}</div>
-                        <div className="text-[#A5ADCF]">{item.name}</div>
-                      </td>
-                      <td className="w-1/6">
-                        <div className="w-full">{item.price}</div>
-                      </td>
-                      <td className="w-1/6">
-                        <div className="w-full">{item.price}</div>
-                      </td>
-                      <td className="w-1/10">
-                        <div className="w-full">{item.change}</div>
-                      </td>
-                      <td className="w-1/5">
-                        <img src={item.graph} />
-                      </td>
-                      <td className="w-1/10">
-                        <button className="rounded-full border-2 border-[#246CF9] px-4 py-2">
-                          Buy
-                        </button>
-                      </td>
+              <div className="overflow-y-auto h-full mt-6">
+                <table className="table table-pin-rows">
+                  <thead>
+                    <tr className="bg-[#1E1F25] border-[#5D6588] text-[#5D6588] text-[14px]">
+                      <th>Asserts</th>
+                      <th></th>
+                      <th>Last Price</th>
+                      <th>Market cap</th>
+                      <th>Change</th>
+                      <th>Chart</th>
+                      <th>Trade</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {data.map((item, index) => (
+                      <tr key={index} className="hover">
+                        <td className="flex gap-3 mt-2">
+                          <Image
+                            width={18}
+                            height={18}
+                            src={item.icon}
+                            alt="img"
+                          />
+                          <div>{item.type}</div>
+                        </td>
+                        <td>
+                          <div className="text-[#A5ADCF]">{item.name}</div>
+                        </td>
+                        <td>
+                          <div>{item.price}</div>
+                        </td>
+                        <td>
+                          <div>{item.price}</div>
+                        </td>
+                        <td>
+                          <div>{item.change}</div>
+                        </td>
+                        <td>
+                          <img src={item.graph} />
+                        </td>
+                        <td>
+                          <button className="rounded-full border-2 border-[#246CF9] px-4 py-2">
+                            Buy
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
