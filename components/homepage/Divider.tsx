@@ -4,7 +4,7 @@ import Background from "../../public/assets/background.png";
 
 export default function Divider() {
   return (
-    <div className='pt-24' style={{
+    <div className='mt-4' style={{
       backgroundImage: `url(${Background.src})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',

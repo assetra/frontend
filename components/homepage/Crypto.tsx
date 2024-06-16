@@ -12,7 +12,7 @@ export default function Crypto() {
     }}>
       <div className='max-w-[1024px]'>
         <div>
-          <p className='text-white font-[700] text-center'>WHY GTX?</p>
+          <p className='text-white font-[700] text-[20px] text-center'>WHY GTX?</p>
           <div className='flex justify-center mt-4'>
             <p className='text-white text-4xl md:w-[500px] text-center'>
               Why Choose GTX for Your Crypto Journey?

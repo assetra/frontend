@@ -42,11 +42,11 @@ const EmailInput: React.FC = () => {
   return (
     <div className="flex justify-center mt-6">
       <form
-        className="flex md:w-[500px] border-[1px] border-[#000000] rounded-full px-4 py-2 bg-[#34384c]"
+        className="flex md:w-[500px] border-[1px] border-[#000000] rounded-full px-4 py-2 bg-[#34384C] h-16"
         onSubmit={handleSubmit}
       >
         <input
-          className="w-full outline-none bg-[#34384c] text-[#9ca3af] text-xs md:text-sm"
+          className="w-full outline-none bg-[#34384C] text-[#9CA3AF] text-[1rem] md:text-sm h-12"
           type="text"
           placeholder="Enter your email address"
           value={email}
@@ -55,7 +55,7 @@ const EmailInput: React.FC = () => {
         <div>
           <button
             type="submit"
-            className="text-[#FFFFFF] bg-[#1e68f6] px-12 py-3 rounded-full text-xs md:text-sm"
+            className="text-[#FFFFFF] bg-[#1e68f6] px-4 py-2 rounded-full text-[1rem] h-12 w-[8rem]"
           >
             Get Started
           </button>

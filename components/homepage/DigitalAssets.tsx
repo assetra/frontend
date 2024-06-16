@@ -5,7 +5,7 @@ import Background from "../../public/assets/background.png";
 
 export default function DigitalAssets() {
   return (
-    <div className="pt-[10rem] pb-8 p-4" style={{
+    <div className="pt-[10rem] pb-8 p-4 h-[100svh]" style={{
       backgroundImage: `url(${Background.src})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',

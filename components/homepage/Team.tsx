@@ -15,7 +15,7 @@ export default function Team() {
     >
       <div className="max-w-[1024px]">
         <div>
-          <p className="text-white text-center font-[700]">OUR TEAM</p>
+          <p className="text-white text-center font-[700] text-[20px] ">OUR TEAM</p>
           <div className="flex justify-center mt-4">
             <p className="text-center text-white text-3xl w-80 md:w-[700px] leading-10">
               The GTX team excels in innovation and is dedicated to excellence

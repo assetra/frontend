@@ -3,7 +3,7 @@ import Background from "../../public/assets/background.png";
 
 export default function About() {
   return (
-    <div className='flex justify-center pt-32 overflow-hidden' style={{
+    <div className='flex justify-center align-middle pt-32 overflow-hidden h-[100svh]' style={{
       backgroundImage: `url(${Background.src})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
