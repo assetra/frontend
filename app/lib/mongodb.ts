@@ -1,6 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri: string = process.env.MONGO_URI ?? "";
+const uri: string = process.env.MONGO_URI ?? "mongodb+srv://gtxnewsletter:xhQqDbW4vLYhX63i@gtx.71q9aod.mongodb.net/?retryWrites=true&w=majority&appName=GTX";
+
 
 if (!uri) {
   throw new Error("MongoDB URI not specified in environment variables");
