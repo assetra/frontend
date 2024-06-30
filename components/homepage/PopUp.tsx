@@ -15,7 +15,7 @@ const PopUP: React.FC = () => {
 
     if (emailRegex.test(email)) {
       try {
-        const response = await fetch("https://gtx.pythonanywhere.com/login", {
+        const response = await fetch("https://gtx.pythonanywhere.com/notify", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
