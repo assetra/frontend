@@ -1,18 +1,20 @@
 import About from "@/components/homepage/About";
-import DigitalAssets from "@/components/homepage/DigitalAssets";
-import Divider from "@/components/homepage/Divider";
 import Footer from "@/components/homepage/Footer";
 import Team from "@/components/homepage/Team";
 import Crypto from "@/components/homepage/Crypto";
+import Hero from "@/components/homepage/Hero";
+import PopUp from "@/components/homepage/PopUp";
 
 export default function Home() {
   return (
     <>
-      <DigitalAssets />
-      <Divider />
-      <About />
-      <Crypto />
-      <Team />
+      <main className="pt-16 mx-auto bg-black">
+        <PopUp />
+        <Hero />
+        <About />
+        <Crypto />
+        <Team />
+      </main>
       <Footer />
     </>
   );

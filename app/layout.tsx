@@ -22,7 +22,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | GTX",
+    template: "GTX | %s",
     default: "GTX - Your Customizable Crypto Trading Platform",
   },
   description:
