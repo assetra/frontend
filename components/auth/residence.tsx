@@ -14,27 +14,27 @@ export default function Residence() {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
+    <div className="grid grid-cols-2 min-h-[100svh]">
+      <div className={` ${microsoft.className} bg-black text-white pb-8 px-6 pt-32`}>
         <h1 className="text-3xl font-bold text-center">
           Trade securely and with peace of mind.
         </h1>
-        <p className="text-[0.8rem] py-4">
+        <p className="text-[0.8rem] py-4 text-center">
           "We maintain a constant 1:1 backing of your funds on GTX, and we
           routinely release Proof of Reserve audits to ensure transparency and
           accountability."
         </p>
       </div>
-      <div className="main-container p-12">
-        <h4 className=" text-2xl font-extrabold">
+      <div className="bg-white text-black text-center px-12 md:px-20 pb-8 pt-32">
+        <h4 className="text-2xl text-[2rem] font-semibold text-left">
           Select country or region of residence
         </h4>
-        <p className=" text-sm py-4  text-[#6978A0]">
+        <p className="mt-4 text-sm text-[#6978A0] text-left">
           Ensure your residency matches the one on your ID or proof of address
           for account verification. To change it after confirmation, extra steps
           will be required.
         </p>
-        <div className="text-xs font-semibold py-3">
+        <div className="mt-4 text-xs font-semibold py-3 text-left">
           Country or Region of Residence
         </div>
         <ReactCountryFlagsSelect

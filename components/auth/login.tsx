@@ -4,70 +4,120 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import localFont from "next/font/local";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
 const Login = () => {
-  // const [value, setValue] = useState<any>();
   const [clicked, setClicked] = useState(false);
+  const [username, setUsername] = useState<string | number>("");
   const [password, setPassword] = useState<string | number>("");
-  // const [number, setNumber] = useState<any>(" ");
-  const [value, setValue] = useState<any>();
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const router = useRouter();
 
   // submit form
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setClicked(true);
 
-    //   setClicked(false);
+    if (username && password) {
+      try {
+        const response = await fetch("https://gtx.pythonanywhere.com/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          setUsername("");
+          setPassword("");
+          setFeedbackMessage("Login successful!");
+          setIsSuccess(true);
+          setTimeout(() => {
+            router.push("/dashboard"); // Redirect to dashboard page if the response is OK
+          }, 1000);
+        } else {
+          setFeedbackMessage(
+            result.message || "Login failed. Please try again."
+          );
+          setIsSuccess(false);
+          setClicked(false);
+        }
+      } catch (error) {
+        setFeedbackMessage("An error occurred. Please try again.");
+        setIsSuccess(false);
+      }
+    } else {
+      setFeedbackMessage("Please enter valid inputs.");
+      setIsSuccess(false);
+      setClicked(false);
+    }
   };
+
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
+    <div className="grid grid-cols-2 min-h-[100svh]">
+      <div
+        className={` ${microsoft.className} bg-black text-white pb-8 px-6 pt-32`}
+      >
         <h1 className="text-3xl font-bold text-center">
           Trade securely and with peace of mind.
         </h1>
-        <p className="text-[0.8rem] py-4">
+        <p className="text-[0.8rem] py-4 text-center">
           "We maintain a constant 1:1 backing of your funds on GTX, and we
           routinely release Proof of Reserve audits to ensure transparency and
           accountability."
         </p>
       </div>
-      <div className="bg-white text-black text-center px-6 py-8">
-        <h1 className="text-xl font-">Log In</h1>
-        <div className=" text-sm text-[#6978A0]">
+      <div className="bg-white text-black text-center px-6 pb-8 pt-32">
+        <h1 className="text-xl text-[2rem]">Log In</h1>
+        <div className="mt-2 text-sm text-[#6978A0]">
           Welcome back, you’ve been missed!
         </div>
+        {feedbackMessage && (
+          <div
+            className={`mt-2 text-sm ${
+              isSuccess ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {feedbackMessage}
+          </div>
+        )}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col mx-auto gap-7 py-6 w-full md:w-2/3"
         >
           <div className="flex flex-col items-start">
-            <label htmlFor="phone" className="text-xs font-semibold">
-              Phone Number
+            <label htmlFor="username" className="text-xs font-semibold">
+              Username
             </label>
-            <PhoneInput
-              international
-              className="PhoneInput rounded-[7px]  border border-black h-[50px] px-5  w-full tracking-[0.5px] leading-[50px] focus-visible:outline-none"
-              defaultCountry="GH"
-              //   country=""
-              name="phone"
-              value={value}
-              onChange={setValue}
+            <input
+              type="text"
+              name="username"
+              title="Enter your username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+              className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
             />
           </div>
           <div className="flex flex-col items-start">
-            <label htmlFor="phone" className="text-xs font-semibold">
+            <label htmlFor="password" className="text-xs font-semibold">
               Password
             </label>
             <input
               type="password"
               name="password"
+              title="Enter your password"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
-              className="border border-black rounded-[7px] h-[50px] px-5 w-full"
+              className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
             />
           </div>
           {clicked ? (
@@ -84,7 +134,7 @@ const Login = () => {
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="4"
+                  strokeWidth="4"
                 ></circle>
                 <path
                   className="opacity-75"
@@ -95,21 +145,21 @@ const Login = () => {
             </button>
           ) : (
             <button type="submit" className="px-3 py-1.5 bg-black text-white">
-              Sign In
+              Log In
             </button>
           )}
         </form>
         <div className="py-8 text-xs font-light">
           Don’t have an account? &nbsp;
-          <span className=" font-bold">
+          <span className="font-bold">
             <Link href="/signup"> Sign Up</Link>
           </span>
         </div>
 
         <div className="flex items-center justify-center gap-4 text-[#6E6E6E] text-center">
-          <hr className=" w-40" />{" "}
-          <span className=" text-[#6E6E6E] text-xs">or continue with</span>
-          <hr className=" w-40" />
+          <hr className="w-40" />{" "}
+          <span className="text-[#6E6E6E] text-xs">or continue with</span>
+          <hr className="w-40" />
         </div>
 
         <div className="py-5 flex flex-row gap-8 items-center justify-center">
@@ -134,41 +184,34 @@ const Login = () => {
                 fill="#FACC15"
               />
               <path
-                d="M10.1789 4.63331C11.8554 4.63331 12.9864 5.34303 13.6312 5.93613L16.1511 3.525C14.6035 2.11528 12.5895 1.25 10.1789 1.25C6.68676 1.25 3.67088 3.21387 2.20264 6.07218L5.08953 8.26944C5.81381 6.15972 7.81776 4.63331 10.1789 4.63331Z"
-                fill="#F15B5B"
+                d="M10.1789 4.63331C11.6474 4.63331 12.6468 5.21387 13.2234 5.7435L16.1576 2.96367C14.608 1.56514 12.5895 0.625 10.1789 0.625C6.68685 0.625 3.67098 2.58922 2.20276 5.44746L5.08932 7.64467C5.81388 5.53495 7.81782 4.63331 10.1789 4.63331Z"
+                fill="#EF4444"
               />
             </svg>
-
-            <p>Google</p>
+            Google
           </div>
-          <div className="flex flex-row gap-3 items-center justify-center text-xs border px-5 py-3 rounded-md">
+
+          <div className="flex flex-row items-center justify-center gap-3 text-xs border px-5 py-3 rounded-md">
             <svg
-              width="16"
-              height="19"
-              viewBox="0 0 16 19"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M15.6651 14.811C15.3882 15.4565 15.0461 16.072 14.6441 16.648C14.1071 17.415 13.6661 17.945 13.3281 18.24C12.8031 18.722 12.2391 18.97 11.6361 18.984C11.2041 18.984 10.6821 18.861 10.0741 18.611C9.46414 18.362 8.90414 18.24 8.39114 18.24C7.85414 18.24 7.27814 18.362 6.66114 18.611C6.04514 18.861 5.54714 18.992 5.16614 19.004C4.58914 19.029 4.01214 18.775 3.43714 18.24C3.07014 17.92 2.61114 17.37 2.06014 16.592C1.47014 15.763 0.985141 14.798 0.605141 13.701C0.198141 12.514 -0.00585938 11.366 -0.00585938 10.254C-0.00585938 8.98102 0.269141 7.88202 0.820141 6.96202C1.23689 6.23949 1.83269 5.63646 2.55014 5.21102C3.25761 4.78669 4.06523 4.55821 4.89014 4.54902C5.35014 4.54902 5.95314 4.69102 6.70014 4.97102C7.44714 5.25102 7.92714 5.39302 8.13614 5.39302C8.29414 5.39302 8.82514 5.22602 9.72914 4.89502C10.5821 4.58802 11.3021 4.46102 11.8921 4.51102C13.4921 4.64002 14.6931 5.27002 15.4921 6.40602C14.0621 7.27302 13.3551 8.48602 13.3691 10.043C13.3811 11.256 13.8221 12.265 14.6861 13.066C15.0681 13.4316 15.5138 13.7241 16.0011 13.929C15.8951 14.236 15.7831 14.529 15.6651 14.811ZM11.9981 0.380024C11.9981 1.33002 11.6501 2.21802 10.9591 3.03902C10.1231 4.01502 9.11314 4.58002 8.01814 4.49102C8.00382 4.37156 7.99681 4.25134 7.99714 4.13102C7.99714 3.21802 8.39314 2.24202 9.10014 1.44302C9.45214 1.03902 9.90014 0.702024 10.4431 0.434023C10.9851 0.170024 11.4971 0.0240234 11.9791 -0.000976562C11.9921 0.127023 11.9981 0.254024 11.9981 0.380024Z"
-                fill="#081131"
-              />
+              <g clipPath="url(#clip0_102_125)">
+                <path
+                  d="M19.1483 0H0.851737C0.381579 0 0 0.378947 0 0.845263V19.1547C0 19.6211 0.381579 20 0.851737 20H19.1474C19.6175 20 20 19.6211 20 19.1547V0.845263C20 0.378947 19.6175 0 19.1483 0V0ZM6.66779 17.4379H3.33368V7.62526H6.66779V17.4379ZM5.00179 6.32842C3.89789 6.32842 3 5.42421 3 4.31474C3 3.20526 3.89789 2.30105 5.00179 2.30105C6.10568 2.30105 7.00358 3.20526 7.00358 4.31474C7.00358 5.42421 6.10568 6.32842 5.00179 6.32842V6.32842ZM17.5002 17.4379H14.1674V12.5305C14.1674 11.3063 14.1431 9.68211 12.4306 9.68211C10.6942 9.68211 10.416 11.0721 10.416 12.4463V17.4379H7.08289V7.62526H10.2611V8.98632H10.3063C10.7632 8.09684 11.8971 7.16105 13.5213 7.16105C16.8263 7.16105 17.5002 9.33842 17.5002 12.0158V17.4379Z"
+                  fill="#2563EB"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_102_125">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
             </svg>
-
-            <p>Apple</p>
-          </div>
-        </div>
-
-        <div className="relative text-xs text-[#6E6E6E]">
-          <div className=" bottom-8">
-            By creating an account, I agree to GTX{" "}
-            <span className=" text-black font-bold">
-              <a href="/terms"> terms of service</a>
-            </span>{" "}
-            and{" "}
-            <span className="text-black font-bold">
-              <a href="/privacy">privacy policy</a>
-            </span>
+            LinkedIn
           </div>
         </div>
       </div>

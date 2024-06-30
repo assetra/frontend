@@ -1,73 +1,130 @@
 "use client";
 import React, { useState } from "react";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
 import localFont from "next/font/local";
+import { useRouter } from "next/navigation"; // Import useRouter for redirection
 import Link from "next/link";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
 const SignUp = () => {
-  // const [value, setValue] = useState<any>();
   const [clicked, setClicked] = useState(false);
+  const [username, setUsername] = useState<string | number>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string | number>("");
-  // const [number, setNumber] = useState<any>(" ");
-  const [value, setValue] = useState<any>();
+  const [feedbackMessage, setFeedbackMessage] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const router = useRouter(); // Initialize useRouter
 
   // submit form
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setClicked(true);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    //   setClicked(false);
+    if (emailRegex.test(email) && username && password) {
+      try {
+        const response = await fetch("https://gtx.pythonanywhere.com/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, email, password }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          setEmail("");
+          setPassword("");
+          setUsername("");
+          setFeedbackMessage("Subscription successful!");
+          setIsSuccess(true);
+          setTimeout(() => {
+            router.push("/login"); // Redirect to login page if the response is OK
+          }, 1000);
+        } else {
+          setFeedbackMessage(
+            result.message || "Subscription failed. Please try again."
+          );
+          setIsSuccess(false);
+          setClicked(false);
+        }
+      } catch (error) {
+        setFeedbackMessage("An error occurred. Please try again.");
+        setIsSuccess(false);
+        setClicked(false);
+      }
+    } else {
+      setFeedbackMessage("Please enter valid inputs.");
+      setIsSuccess(false);
+      setClicked(false);
+    }
   };
+
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
+    <div className="grid grid-cols-2 min-h-[100svh]">
+      <div
+        className={` ${microsoft.className} bg-black text-white pb-8 px-6 pt-32`}
+      >
         <h1 className="text-3xl font-bold text-center">
           Trade securely and with peace of mind.
         </h1>
-        <p className="text-[0.8rem] py-4">
+        <p className="text-[0.8rem] py-4 text-center">
           "We maintain a constant 1:1 backing of your funds on GTX, and we
           routinely release Proof of Reserve audits to ensure transparency and
           accountability."
         </p>
       </div>
-      <div className="bg-white text-black text-center px-6 py-8">
-        <h1 className="text-xl font-">Sign Up</h1>
-        <div className=" text-sm text-[#6978A0]">
+      <div className="bg-white text-black text-center px-6 pb-8 pt-32">
+        <h1 className="text-xl text-[2rem]">Sign Up</h1>
+        <div className="mt-2 text-sm text-[#6978A0]">
           Hello there! Create an account to get started
         </div>
+        {feedbackMessage && (
+          <div className={`mt-2 text-sm ${isSuccess ? "text-green-500" : "text-red-500"}`}>
+            {feedbackMessage}
+          </div>
+        )}
         <form
           onSubmit={handleSubmit}
           className="flex flex-col mx-auto gap-7 py-6 w-full md:w-2/3"
         >
           <div className="flex flex-col items-start">
-            <label htmlFor="phone" className="text-xs font-semibold">
-              Phone Number
+            <label htmlFor="email" className="text-xs font-semibold">
+              Email
             </label>
-            <PhoneInput
-              international
-              className="PhoneInput rounded-[7px]  border border-black h-[50px] px-5  w-full tracking-[0.5px] leading-[50px] focus-visible:outline-none"
-              defaultCountry="GH"
-              //   country=""
-              name="phone"
-              value={value}
-              onChange={setValue}
+            <input
+              type="text"
+              name="email"
+              title="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
             />
           </div>
           <div className="flex flex-col items-start">
-            <label htmlFor="phone" className="text-xs font-semibold">
+            <label htmlFor="username" className="text-xs font-semibold">
+              Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              title="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
+            />
+          </div>
+          <div className="flex flex-col items-start">
+            <label htmlFor="password" className="text-xs font-semibold">
               Password
             </label>
             <input
               type="password"
               name="password"
+              title="Enter your password"
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              className="border border-black rounded-[7px] h-[50px] px-5 w-full"
+              onChange={(e) => setPassword(e.target.value)}
+              className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
             />
           </div>
           {clicked ? (
@@ -84,14 +141,14 @@ const SignUp = () => {
                   cy="12"
                   r="10"
                   stroke="currentColor"
-                  stroke-width="4"
+                  strokeWidth="4"
                 ></circle>
                 <path
                   className="opacity-75"
                   fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
-              </svg>{" "}
+              </svg>
             </button>
           ) : (
             <button type="submit" className="px-3 py-1.5 bg-black text-white">
@@ -107,11 +164,10 @@ const SignUp = () => {
         </div>
 
         <div className="flex items-center justify-center gap-4 text-[#6E6E6E] text-center">
-          <hr className=" w-40" />{" "}
+          <hr className=" w-40" />
           <span className=" text-[#6E6E6E] text-xs">or continue with</span>
           <hr className=" w-40" />
         </div>
-
         <div className="py-5 flex flex-row gap-8 items-center justify-center">
           <div className="flex flex-row items-center justify-center gap-3 text-xs border px-5 py-3 rounded-md">
             <svg
@@ -134,41 +190,33 @@ const SignUp = () => {
                 fill="#FACC15"
               />
               <path
-                d="M10.1789 4.63331C11.8554 4.63331 12.9864 5.34303 13.6312 5.93613L16.1511 3.525C14.6035 2.11528 12.5895 1.25 10.1789 1.25C6.68676 1.25 3.67088 3.21387 2.20264 6.07218L5.08953 8.26944C5.81381 6.15972 7.81776 4.63331 10.1789 4.63331Z"
-                fill="#F15B5B"
+                d="M10.1789 4.63331C11.8554 4.63331 12.9864 5.37774 13.6605 6.00253L16.1515 3.61773C14.607 2.21052 12.5896 1.25 10.1789 1.25C6.6868 1.25 3.67094 3.21478 2.2027 6.07216L5.0903 8.26942C5.81385 6.15969 7.81779 4.63331 10.1789 4.63331Z"
+                fill="#E6492D"
               />
             </svg>
-
-            <p>Google</p>
+            Sign up with Google
           </div>
-          <div className="flex flex-row gap-3 items-center justify-center text-xs border px-5 py-3 rounded-md">
+          <div className="flex flex-row items-center justify-center gap-3 text-xs border px-5 py-3 rounded-md">
             <svg
-              width="16"
-              height="19"
-              viewBox="0 0 16 19"
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M15.6651 14.811C15.3882 15.4565 15.0461 16.072 14.6441 16.648C14.1071 17.415 13.6661 17.945 13.3281 18.24C12.8031 18.722 12.2391 18.97 11.6361 18.984C11.2041 18.984 10.6821 18.861 10.0741 18.611C9.46414 18.362 8.90414 18.24 8.39114 18.24C7.85414 18.24 7.27814 18.362 6.66114 18.611C6.04514 18.861 5.54714 18.992 5.16614 19.004C4.58914 19.029 4.01214 18.775 3.43714 18.24C3.07014 17.92 2.61114 17.37 2.06014 16.592C1.47014 15.763 0.985141 14.798 0.605141 13.701C0.198141 12.514 -0.00585938 11.366 -0.00585938 10.254C-0.00585938 8.98102 0.269141 7.88202 0.820141 6.96202C1.23689 6.23949 1.83269 5.63646 2.55014 5.21102C3.25761 4.78669 4.06523 4.55821 4.89014 4.54902C5.35014 4.54902 5.95314 4.69102 6.70014 4.97102C7.44714 5.25102 7.92714 5.39302 8.13614 5.39302C8.29414 5.39302 8.82514 5.22602 9.72914 4.89502C10.5821 4.58802 11.3021 4.46102 11.8921 4.51102C13.4921 4.64002 14.6931 5.27002 15.4921 6.40602C14.0621 7.27302 13.3551 8.48602 13.3691 10.043C13.3811 11.256 13.8221 12.265 14.6861 13.066C15.0681 13.4316 15.5138 13.7241 16.0011 13.929C15.8951 14.236 15.7831 14.529 15.6651 14.811ZM11.9981 0.380024C11.9981 1.33002 11.6501 2.21802 10.9591 3.03902C10.1231 4.01502 9.11314 4.58002 8.01814 4.49102C8.00382 4.37156 7.99681 4.25134 7.99714 4.13102C7.99714 3.21802 8.39314 2.24202 9.10014 1.44302C9.45214 1.03902 9.90014 0.702024 10.4431 0.434023C10.9851 0.170024 11.4971 0.0240234 11.9791 -0.000976562C11.9921 0.127023 11.9981 0.254024 11.9981 0.380024Z"
-                fill="#081131"
-              />
+              <g clipPath="url(#clip0_3013_24329)">
+                <path
+                  d="M17.5 9.06444C17.5 4.26778 13.92 0.5 9 0.5C4.08 0.5 0.5 4.26778 0.5 9.06444C0.5 13.0544 3.345 16.3822 7.205 17V11.3072H5.21001V9.06444H7.205V7.235C7.205 5.25556 8.365 4.16667 10.155 4.16667C10.959 4.16667 11.805 4.3 11.805 4.3V6.22722H10.795C9.8 6.22722 9.575 6.79444 9.575 7.38333V9.06444H11.715L11.35 11.3072H9.575V17C13.435 16.3822 16.28 13.0544 16.28 9.06444H17.5Z"
+                  fill="#2563EB"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_3013_24329">
+                  <rect width="18" height="18" fill="white" />
+                </clipPath>
+              </defs>
             </svg>
-
-            <p>Apple</p>
-          </div>
-        </div>
-
-        <div className="relative text-xs text-[#6E6E6E]">
-          <div className=" bottom-8">
-            By creating an account, I agree to GTX{" "}
-            <span className=" text-black font-bold">
-              <a href="/terms"> terms of service</a>
-            </span>{" "}
-            and{" "}
-            <span className="text-black font-bold">
-              <a href="/privacy">privacy policy</a>
-            </span>
+            Sign up with Facebook
           </div>
         </div>
       </div>

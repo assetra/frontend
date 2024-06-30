@@ -84,30 +84,32 @@ const OTPField = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 h-screen">
-      <div className={` ${microsoft.className} bg-black text-white py-8 px-6`}>
+    <div className="grid grid-cols-2 min-h-[100svh]">
+      <div
+        className={` ${microsoft.className} bg-black text-white pb-8 px-6 pt-32`}
+      >
         <h1 className="text-3xl font-bold text-center">
           Trade securely and with peace of mind.
         </h1>
-        <p className="text-[0.8rem] py-4">
+        <p className="text-[0.8rem] py-4 text-center">
           "We maintain a constant 1:1 backing of your funds on GTX, and we
           routinely release Proof of Reserve audits to ensure transparency and
           accountability."
         </p>
       </div>
-      <div className="container-fluid bg-body-tertiary d-block">
+      <div className="bg-white text-black text-center px-6 pb-8 pt-24">
         <div className="row justify-content-center">
           <div
             className="col-12 col-md-6 col-lg-4"
             style={{ minWidth: "500px" }}
           >
             <div
-              className="card bg-white mb-5 mt-5 border-0"
+              className="card bg-white mb-5 border-0"
               style={{ boxShadow: "0 12px 15px rgba(0, 0, 0, 0.02)" }}
             >
-              <div className="card-body p-5 text-center">
-                <h4 className=" text-2xl font-medium">One Time Password</h4>
-                <p className=" text-sm py-4  text-[#6978A0]">
+              <div className="card-body  text-center items-center">
+                <h4 className=" text-2xl text-[2rem]">One Time Password</h4>
+                <p className=" text-sm my-2  text-[#6978A0]">
                   Enter the One Time Password sent to your phone
                 </p>
 
