@@ -187,7 +187,7 @@ const Wallet = () => {
         </div>
       </div>
       <div className="flex flex-col w-full h-full pb-8 pt-2">
-        <div className="flex flex-row w-full h-1/3 bg-[#1E1F25] rounded-xl mb-4 px-8 py-4">
+        <div className="flex flex-row w-full h-[40%] sm:h-1/3  bg-[#1E1F25] rounded-xl mb-4 px-8 py-4">
           <div className="flex flex-col justify-between w-2/5 h-full border-r-[1px] border-[#34384C]">
             <div className="flex flex-row items-center mb-4">
               <Image
@@ -263,7 +263,7 @@ const Wallet = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row w-full h-2/3 rounded-xl bg-[#1E1F25] p-6">
+        <div className="flex flex-row w-full h-[60%] sm:h-2/3 rounded-xl bg-[#1E1F25] p-6">
           <table className="w-full flex flex-col h-full text-white">
             <thead className="flex flex-col w-full">
               <tr className="flex flex-row w-full justify-between pb-6 border-b-2 text-[#5D6588] pr-6">
