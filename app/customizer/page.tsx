@@ -28,11 +28,7 @@ import RandomCoinWidget from "@/components/widget/randomCoinWidget";
 import RandomCoinScript from "@/components/widget/randomCoinScript";
 import CoinListWidget from "@/components/widget/coinPriceMarqueeWidget";
 import CoinListScript from "@/components/widget/coinPriceMarqueeScript";
-import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: 'Customizer',
-};
 
 interface WidgetPack {
   widget: React.FC;
