@@ -7,7 +7,7 @@ const CustomModal: React.FC<{ message: string; onClose: () => void }> = ({
 }) => {
   return (
     <div className="modal modal-open" role="dialog">
-      <div className="modal-box">
+      <div className="modal-box  bg-black text-white">
         <Image width={80} height={60} src="/assets/logo.png" alt="gtx-logo" />
         <p className="py-4">{message}</p>
         <div className="modal-action">

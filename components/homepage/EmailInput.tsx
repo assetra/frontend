@@ -14,39 +14,56 @@ const EmailInput: React.FC = () => {
 
     if (emailRegex.test(email)) {
       try {
-        const response = await fetch("/api", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        });
+        const response = await fetch(
+          "https://gtx.pythonanywhere.com/newsletter",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          }
+        );
 
         const result = await response.json();
         if (response.ok) {
           setNotificationMessage(result.message);
           setEmail(""); // Clear email input
+          setShowNotification(true);
+          setTimeout(() => {
+            setShowNotification(false);
+          }, 1000); // Hide notification after a second
         } else {
           setNotificationMessage(result.message);
+          setShowNotification(true);
+          setTimeout(() => {
+            setShowNotification(false);
+          }, 3000); // Hide notification after 3 seconds
         }
       } catch (error) {
         setNotificationMessage("Server error. Please try again later.");
+        setShowNotification(true);
+        setTimeout(() => {
+          setShowNotification(false);
+        }, 3000); // Hide notification after 3 seconds
       }
     } else {
       setNotificationMessage("Please enter a valid email address.");
+      setShowNotification(true);
+      setTimeout(() => {
+        setShowNotification(false);
+      }, 3000); // Hide notification after 3 seconds
     }
-
-    setShowNotification(true);
   };
 
   return (
     <div className="flex justify-center mt-6">
       <form
-        className="flex md:w-[500px] border-[1px] border-[#000000] rounded-full px-4 py-2 bg-[#34384C] h-16"
+        className="flex md:w-[350px] border-[1px] border-[#000000] rounded-full p-2 bg-[#2F324180] max-h-12"
         onSubmit={handleSubmit}
       >
         <input
-          className="w-full outline-none bg-[#34384C] text-[#9CA3AF] text-[1rem] md:text-sm h-12"
+          className="ml-2 w-full outline-none bg-transparent text-[#9CA3AF] text-[1rem] md:text-sm max-h-8"
           type="text"
           placeholder="Enter your email address"
           value={email}
@@ -55,7 +72,7 @@ const EmailInput: React.FC = () => {
         <div>
           <button
             type="submit"
-            className="text-[#FFFFFF] bg-[#1e68f6] px-4 py-2 rounded-full text-[1rem] h-12 w-[8rem]"
+            className="ml-2 text-[#FFFFFF] bg-[#1e68f6] px-4 py-[5px] rounded-full text-[1rem] max-h-8 w-[8rem]"
           >
             Get Started
           </button>
