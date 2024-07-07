@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AuthContext } from "@/context/AddContext";
 import MultiLevelDropdown from "./MultiLevelDropdown";
-
+import ConnectWallet from "@/components/wallet/ConnectWallet";
 const NavbarDashboard: React.FC = () => {
   const appContext = useContext(AuthContext);
 
@@ -55,11 +55,7 @@ const NavbarDashboard: React.FC = () => {
           />
         </div>
         <div className="flex relative group justify-center items-center z-1001">
-          <div className="px-6 py-1 block flex-1 border-transparent rounded-full bg-gradient-to-r from-red-600 to-blue-700 text-white sm:text-sm sm:leading-6 cursor-pointer">
-            <label htmlFor="wallet_card" className="cursor-pointer">
-              Connect Wallet
-            </label>
-          </div>
+          <ConnectWallet />
         </div>
         <div className="flex flex-row space-x-2 items-center justify-center">
           <div className="dropdown dropdown-end">

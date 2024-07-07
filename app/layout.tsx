@@ -5,14 +5,12 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import '@rainbow-me/rainbowkit/styles.css';
+import { Providers } from '../components/wallet/providers';
+
 import Navbar from "@/components/navbar";
-import { ConnectWallet } from "@/components/wallet/ConnectWallet";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { AppWrapper } from "@/context/AddContext";
-import { Connect } from "@/components/wallet/Connect";
-import { ConnectError } from "@/components/wallet/connectionError";
-import { Retry } from "@/components/wallet/Retry";
-import { WalletDetails } from "@/components/wallet/WalletDetails";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -38,17 +36,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ThemeProvider>
-          <AppWrapper>
-            <Navbar />
-            {children}
-            <ConnectWallet />
-            <Connect />
-            <ConnectError />
-            <Retry />
-            <WalletDetails />
-          </AppWrapper>
-        </ThemeProvider>
+         <Providers>
+          <ThemeProvider>
+            <AppWrapper>
+              <Navbar />
+              {children}
+            </AppWrapper>
+          </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
