@@ -225,6 +225,53 @@ export default function Team() {
           </div>
 
           <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
+            <div className="flex gap-4">
+              <Image
+                width={70}
+                height={70}
+                src="/assets/Yash.png"
+                alt="team-logo"
+              />
+              <div className="text-white flex flex-col justify-center">
+                <p className="text-[16px] font-[700]">Yash Jain</p>
+                <p className="text-[14px] text-[#1e68f6] font-[700]">
+                  Full-Stack Developer
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-white text-sm">
+                Blockchain developer passionate about web 3, AI, and
+                sustainability, driving positive change through technology.
+              </p>
+            </div>
+
+            <div className="flex gap-2 mt-4">
+              <a href="https://www.linkedin.com/in/0xyashjain">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
+              <a href="https://github.com/yashj09">
+                <Image
+                  width={16}
+                  height={16}
+                  src="/assets/github.png"
+                  alt="img"
+                />
+              </a>
+              <a href="https://x.com/0xYash_Jain">
+                <Image width={17} height={17} src="/assets/x.png" alt="img" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
+          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
             <div className="flex gap-4 ">
               <div className=" flex w-[70px] p-4 items-center rounded-full bg-[#121212]">
                 <Image
