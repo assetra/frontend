@@ -38,13 +38,19 @@ export default function Footer() {
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               <li className="mb-4">
-                <a href="#" className="hover:underline">
+                <a
+                  href="#about"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
                   About us
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  Careers
+                <a
+                  href="#"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
+                  Contact us
                 </a>
               </li>
             </ul>
@@ -55,12 +61,18 @@ export default function Footer() {
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               <li className="mb-4">
-                <a href="#" className="hover:underline">
+                <a
+                  href="mailto:support@gtx.com.co"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
                   Support center
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a
+                  href="#"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
                   Connect with GTX
                 </a>
               </li>
@@ -72,13 +84,27 @@ export default function Footer() {
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
               <li className="mb-4">
-                <a href="#" className="hover:underline">
+                <a
+                  href="/policy"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
                   Privacy Policy
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:underline">
+              <li className="mb-4">
+                <a
+                  href="/terms"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
                   Terms &amp; Conditions
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/disclosure"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
+                  Risk Disclosure
                 </a>
               </li>
             </ul>
@@ -193,7 +219,10 @@ export default function Footer() {
         <div className="text-center mt-8">
           <span className="text-sm text-[#484D63] sm:text-center">
             © 2024{" "}
-            <a href="https://www.gtx.com.co/" className="hover:underline">
+            <a
+              href="https://www.gtx.com.co/"
+              className=" hover:border-white hover:border-b-2 hover:pb-1"
+            >
               GTX
             </a>
             . All Rights Reserved.
