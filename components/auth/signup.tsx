@@ -32,15 +32,40 @@ const SignUp = () => {
         });
 
         const result = await response.json();
+
         if (response.ok) {
-          setEmail("");
-          setPassword("");
-          setUsername("");
-          setFeedbackMessage("Subscription successful!");
-          setIsSuccess(true);
-          setTimeout(() => {
-            router.push("/login"); // Redirect to login page if the response is OK
-          }, 1000);
+          try {
+            await fetch(
+              "https://digital-astra-gtx-labs-8ff96cdb.koyeb.app/send_email",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: result.email,
+                  verification_link: result.verification_link,
+                }),
+              }
+            );
+
+            setEmail("");
+            setPassword("");
+            setUsername("");
+            setFeedbackMessage(
+              "Please verify your email address by clicking the link we sent to your inbox"
+            );
+            setIsSuccess(true);
+            setTimeout(() => {
+              router.push("/login"); // Redirect to login page if the response is OK
+            }, 3000);
+          } catch (error) {
+            setFeedbackMessage(
+              "An error occurred while sending verification email. Please try again."
+            );
+            setIsSuccess(false);
+            setClicked(false);
+          }
         } else {
           setFeedbackMessage(
             result.message || "Subscription failed. Please try again."
@@ -80,7 +105,11 @@ const SignUp = () => {
           Hello there! Create an account to get started
         </div>
         {feedbackMessage && (
-          <div className={`mt-2 text-sm ${isSuccess ? "text-green-500" : "text-red-500"}`}>
+          <div
+            className={`mt-2 text-sm ${
+              isSuccess ? "text-green-500" : "text-red-500"
+            }`}
+          >
             {feedbackMessage}
           </div>
         )}

@@ -1,13 +1,9 @@
 "use client";
 import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "@/context/AddContext";
 import Image from "next/image";
+import withAuth from "../auth/withAuth";
 
 const Wallet = () => {
-  const appContext = useContext(AuthContext);
-  useEffect(() => {
-    appContext.setNavbarState(true);
-  }, []);
 
   const data = [
     {
@@ -315,4 +311,4 @@ const Wallet = () => {
   );
 };
 
-export default Wallet;
+export default withAuth(Wallet);

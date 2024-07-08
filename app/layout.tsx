@@ -7,12 +7,16 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Navbar from "@/components/navbar";
 import { ConnectWallet } from "@/components/wallet/ConnectWallet";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { AppWrapper } from "@/context/AddContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+//import { AppWrapper } from "@/contexts/AddContext";
 import { Connect } from "@/components/wallet/Connect";
 import { ConnectError } from "@/components/wallet/connectionError";
 import { Retry } from "@/components/wallet/Retry";
 import { WalletDetails } from "@/components/wallet/WalletDetails";
+import BotIcon from "@/components/gnosis/botIcon";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { LoginPop } from "@/components/auth/loginPop";
+import { SignupPop } from "@/components/auth/signupPop";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -38,17 +42,22 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <ThemeProvider>
-          <AppWrapper>
+        <AuthProvider>
+          <ThemeProvider>
+            {/*  <AppWrapper>*/}
             <Navbar />
+            <BotIcon />
             {children}
             <ConnectWallet />
             <Connect />
             <ConnectError />
             <Retry />
             <WalletDetails />
-          </AppWrapper>
-        </ThemeProvider>
+            {/* </AppWrapper>*/}
+            <LoginPop />
+            <SignupPop />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -2,13 +2,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AdvancedChart } from "react-tradingview-embed";
 import Exchange from "./exchange";
-import { AuthContext } from "@/context/AddContext";
+import withAuth from "../auth/withAuth";
 
 const ExchangePage = () => {
-  const appContext = useContext(AuthContext);
-  useEffect(() => {
-    appContext.setNavbarState(true);
-  }, [appContext]);
 
   const data = [
     {
@@ -334,4 +330,4 @@ const ExchangePage = () => {
   );
 };
 
-export default ExchangePage;
+export default withAuth(ExchangePage);

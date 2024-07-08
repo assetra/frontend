@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AuthContext } from "@/context/AddContext";
+import { AuthContext } from "@/contexts/AddContext";
 import MultiLevelDropdown from "./MultiLevelDropdown";
 
 const NavbarDashboard: React.FC = () => {

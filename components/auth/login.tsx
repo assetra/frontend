@@ -1,10 +1,9 @@
 "use client";
-import React, { useState } from "react";
-import PhoneInput from "react-phone-number-input";
-import "react-phone-number-input/style.css";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import localFont from "next/font/local";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
@@ -15,8 +14,11 @@ const Login = () => {
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const { setUser, setIsAuthenticated } = useAuth();
 
-  // submit form
+  const redirectPath = searchParams.get("redirect") || "/dashboard";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setClicked(true);
@@ -37,8 +39,10 @@ const Login = () => {
           setPassword("");
           setFeedbackMessage("Login successful!");
           setIsSuccess(true);
+          setUser(result.user);
+          setIsAuthenticated(true);
           setTimeout(() => {
-            router.push("/dashboard"); // Redirect to dashboard page if the response is OK
+            router.push(redirectPath); // Redirect to intended route if login is successful
           }, 1000);
         } else {
           setFeedbackMessage(
@@ -180,38 +184,41 @@ const Login = () => {
                 fill="#22C55E"
               />
               <path
-                d="M5.10014 11.7306C4.91165 11.1862 4.80257 10.6028 4.80257 10C4.80257 9.39722 4.91165 8.81391 5.09022 8.26948L5.08523 8.15352L2.29464 6.02966L2.20333 6.07222C1.5982 7.25835 1.25098 8.59032 1.25098 10C1.25098 11.4098 1.5982 12.7417 2.20333 13.9278L5.10014 11.7306Z"
-                fill="#FACC15"
+                d="M5.10014 11.7306C4.91165 11.1862 4.80257 10.6028 4.80257 10C4.80257 9.39722 4.91165 8.81391 5.09022 8.26948L5.08523 8.15352L2.29464 6.02966L2.20333 6.07222C1.5982 7.25835 1.25 8.58887 1.25 10C1.25 11.411 1.5982 12.7415 2.20333 13.9277L5.10014 11.7306Z"
+                fill="#FBBC05"
               />
               <path
-                d="M10.1789 4.63331C11.6474 4.63331 12.6468 5.21387 13.2234 5.7435L16.1576 2.96367C14.608 1.56514 12.5895 0.625 10.1789 0.625C6.68685 0.625 3.67098 2.58922 2.20276 5.44746L5.08932 7.64467C5.81388 5.53495 7.81782 4.63331 10.1789 4.63331Z"
-                fill="#EF4444"
+                d="M10.1787 4.63348C11.7212 4.63348 12.7367 5.27887 13.339 5.83001L16.1588 3.14519C14.6076 1.74519 12.5894 1.25 10.1787 1.25C6.68668 1.25 3.67082 3.21406 2.20259 6.07225L5.08993 8.2695C5.81373 6.15981 7.81768 4.63348 10.1787 4.63348Z"
+                fill="#EA4335"
               />
-            </svg>
+            </svg>{" "}
             Google
           </div>
-
           <div className="flex flex-row items-center justify-center gap-3 text-xs border px-5 py-3 rounded-md">
             <svg
-              width="20"
+              width="22"
               height="20"
-              viewBox="0 0 20 20"
+              viewBox="0 0 22 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clipPath="url(#clip0_102_125)">
+              <g clipPath="url(#clip0_113_1092)">
                 <path
-                  d="M19.1483 0H0.851737C0.381579 0 0 0.378947 0 0.845263V19.1547C0 19.6211 0.381579 20 0.851737 20H19.1474C19.6175 20 20 19.6211 20 19.1547V0.845263C20 0.378947 19.6175 0 19.1483 0V0ZM6.66779 17.4379H3.33368V7.62526H6.66779V17.4379ZM5.00179 6.32842C3.89789 6.32842 3 5.42421 3 4.31474C3 3.20526 3.89789 2.30105 5.00179 2.30105C6.10568 2.30105 7.00358 3.20526 7.00358 4.31474C7.00358 5.42421 6.10568 6.32842 5.00179 6.32842V6.32842ZM17.5002 17.4379H14.1674V12.5305C14.1674 11.3063 14.1431 9.68211 12.4306 9.68211C10.6942 9.68211 10.416 11.0721 10.416 12.4463V17.4379H7.08289V7.62526H10.2611V8.98632H10.3063C10.7632 8.09684 11.8971 7.16105 13.5213 7.16105C16.8263 7.16105 17.5002 9.33842 17.5002 12.0158V17.4379Z"
-                  fill="#2563EB"
+                  d="M21.7695 10.1758C21.7695 4.55663 16.9092 0 11.0201 0C5.13092 0 0.270584 4.55663 0.270584 10.1758C0.270584 15.1964 3.99678 19.3955 8.74963 20V12.9812H6.40861V10.1758H8.74963V7.93682C8.74963 5.61026 10.2697 4.17756 12.4332 4.17756C13.4688 4.17756 14.5534 4.37027 14.5534 4.37027V6.64867H13.3262C12.1148 6.64867 11.7316 7.3898 11.7316 8.15191V10.1758H14.4404L13.9804 12.9812H11.7316V20C16.4844 19.3955 21.2106 15.1964 21.2106 10.1758H21.7695Z"
+                  fill="#1877F2"
+                />
+                <path
+                  d="M13.9803 12.9811L14.4403 10.1757H11.7315V8.15187C11.7315 7.38977 12.1147 6.64863 13.3262 6.64863H14.5534V4.37023C14.5534 4.37023 13.4688 4.17752 12.4332 4.17752C10.2697 4.17752 8.74963 5.61023 8.74963 7.93679V10.1757H6.40861V12.9811H8.74963V20C9.35747 20.1006 9.98049 20.1501 10.6131 20.1501C11.2458 20.1501 11.8688 20.1006 12.4767 20V12.9811H13.9803Z"
+                  fill="white"
                 />
               </g>
               <defs>
-                <clipPath id="clip0_102_125">
-                  <rect width="20" height="20" fill="white" />
+                <clipPath id="clip0_113_1092">
+                  <rect width="22" height="20" fill="white" />
                 </clipPath>
               </defs>
             </svg>
-            LinkedIn
+            Facebook
           </div>
         </div>
       </div>

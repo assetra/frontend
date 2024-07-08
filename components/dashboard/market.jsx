@@ -2,16 +2,12 @@
 import React, { useContext, useEffect } from "react";
 import localFont from "next/font/local";
 import Card from "./card";
-import { AuthContext } from "@/context/AddContext";
 import Image from "next/image";
+import withAuth from "../auth/withAuth";
 
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
 
 const Market = () => {
-  const appContext = useContext(AuthContext);
-  useEffect(() => {
-    appContext.setNavbarState(true);
-  }, []);
 
   const symbols = [
     "BINANCE:BTCUSD",
@@ -293,4 +289,4 @@ const Market = () => {
   );
 };
 
-export default Market;
+export default withAuth(Market);
