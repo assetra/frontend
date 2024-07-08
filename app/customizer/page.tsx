@@ -7,7 +7,7 @@ import {
   GridItemHTMLElement,
 } from "gridstack";
 import "gridstack/dist/gridstack.min.css";
-import { AuthContext } from "@/context/AddContext";
+import { AuthContext } from "@/contexts/AddContext";
 import CoinCompareChartWidget from "@/components/widget/coinCompareChartWidget";
 import CoinCompareChartScript from "@/components/widget/coinCompareChartScript";
 import CoinConverterWidget from "@/components/widget/coinConverterWidget";

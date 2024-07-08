@@ -4,6 +4,7 @@ import Background from "../../public/assets/background.png";
 export default function About() {
   return (
     <section
+      id="about"
       className="flex justify-center items-center min-h-[100svh] pt-16"
       style={{
         backgroundImage: `url(${Background.src})`,
