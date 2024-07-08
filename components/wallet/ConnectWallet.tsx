@@ -1,132 +1,105 @@
-"use client";
+import React from 'react';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-import React, { useRef } from "react";
-import InlineDivs from "./InlineDivs";
-import i from "/public/assets/bnb.jpg";
-
-interface Networks {
-  name: string;
-  initial: string;
-  image: string;
-}
-
-interface Wallets {
-  name: string;
-  image: string;
-}
-
-export const ConnectWallet: React.FC = () => {
-  // First set of div contents
-  const network: Networks[] = [
-    {
-      name: "Ethereum Network",
-      initial: "ETH",
-      image: "/assets/eth.png",
-    },
-    {
-      name: "Polygon network",
-      initial: "PLY",
-      image: "/assets/ply.png",
-    },
-    {
-      name: "Binance network",
-      initial: "BNB",
-      image: "/assets/bnb.jpg",
-    },
-    {
-      name: "Avalanche network",
-      initial: "AVA",
-      image: "/assets/ava.jpg",
-    },
-    {
-      name: "Solana network",
-      initial: "SOL",
-      image: "/assets/sol.png",
-    },
-  ];
-
-  // Second set of div contents
-  const wallet: Networks[] = [
-    {
-      initial: "Metamask",
-      name: "SOL",
-      image: "/assets/metamask.png",
-    },
-    {
-      initial: "Coinbase",
-      name: "SOL",
-      image: "/assets/coinbase.png",
-    },
-    {
-      initial: "Phantom",
-      name: "SOL",
-      image: "/assets/phantom.png",
-    },
-    {
-      initial: "Wallet Connect",
-      name: "SOL",
-      image: "/assets/wallet-connect.png",
-    },
-  ];
-
-  const connectLabelRef = useRef<HTMLLabelElement>(null);
-  const walletLabelRef = useRef<HTMLLabelElement>(null);
-
-  const handleProgrammaticClick = () => {
-    connectLabelRef.current?.click();
-    walletLabelRef.current?.click();
-  };
-
+const CustomConnectButton: React.FC = () => {
   return (
-    <>
-      <input type="checkbox" id="wallet_card" className="modal-toggle" />
-      <div className="modal text-base-content" role="dialog">
-        <div className="modal-box">
-          <div className="border-b-2 border-base-content flex justify-between p-4">
-            <h3 className="text-[20px] font-semibold">Connect Wallet & Network</h3>
-            <label
-              htmlFor="wallet_card"
-              ref={walletLabelRef}
-              className="border-0 bg-base-100 cursor-pointer hover:bg-base-100 text-[20px] font-semibold"
-            >
-              X
-            </label>
+    <ConnectButton.Custom>
+      {({
+        account,
+        chain,
+        openAccountModal,
+        openChainModal,
+        openConnectModal,
+        authenticationStatus,
+        mounted,
+        accountModalOpen,
+        chainModalOpen,
+        connectModalOpen,
+      }) => {
+        const ready = mounted && authenticationStatus !== 'loading';
+        const connected =
+          ready &&
+          account &&
+          chain &&
+          (!authenticationStatus ||
+            authenticationStatus === 'authenticated');
+
+        return (
+          <div
+            {...(!ready && {
+              'aria-hidden': true,
+              'style': {
+                opacity: 0,
+                pointerEvents: 'none',
+                userSelect: 'none',
+              },
+            })}
+          >
+            {(() => {
+              if (!connected) {
+                return (
+                  <button 
+                    onClick={openConnectModal} 
+                    type="button"
+                    className="px-6 py-1 block flex-1 border-transparent rounded-full bg-gradient-to-r from-red-600 to-blue-700 text-white sm:text-sm sm:leading-6 cursor-pointer"
+                  >
+                    Connect Wallet
+                  </button>
+                );
+              }
+
+              if (chain?.unsupported) {
+                return (
+                  <button onClick={openChainModal} type="button">
+                    Wrong network
+                  </button>
+                );
+              }
+
+              return (
+                <div style={{ display: 'flex', gap: 12 }}>
+                  <button
+                    onClick={openChainModal}
+                    style={{ display: 'flex', alignItems: 'center' }}
+                    type="button"
+                  >
+                    {chain?.hasIcon && (
+                      <div
+                        style={{
+                          background: chain.iconBackground,
+                          width: 12,
+                          height: 12,
+                          borderRadius: 999,
+                          overflow: 'hidden',
+                          marginRight: 4,
+                        }}
+                      >
+                        {chain.iconUrl && (
+                          <img
+                            alt={chain.name ?? 'Chain icon'}
+                            src={chain.iconUrl}
+                            style={{ width: 12, height: 12 }}
+                          />
+                        )}
+                      </div>
+                    )}
+                    {chain?.name}
+                  </button>
+
+                  <button onClick={openAccountModal} type="button">
+                    {account.displayName}
+                    {account.displayBalance
+                      ? ` (${account.displayBalance})`
+                      : ''}
+                  </button>
+                </div>
+              );
+            })()}
           </div>
-          <div className="">
-            <div className="collapse collapse-arrow">
-              <input type="checkbox" className="peer" />
-              <div className="collapse-title">Choose Network</div>
-              <div className="collapse-content">
-                <InlineDivs divContents={network} grid="5" />
-              </div>
-            </div>
-          </div>
-          <div className="">
-            <div className="collapse collapse-arrow">
-              <input type="checkbox" className="peer" />
-              <div className="collapse-title">Select Wallet</div>
-              <div className="collapse-content">
-                <InlineDivs divContents={wallet} grid="2" />
-              </div>
-            </div>
-          </div>
-          <div className="modal-action">
-            <label
-              htmlFor="connect_card"
-              ref={connectLabelRef}
-              className="hidden"
-            >
-              Connect
-            </label>
-            <button
-              className="btn"
-              onClick={handleProgrammaticClick}
-            >
-              Connect
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
+        );
+      }}
+    </ConnectButton.Custom>
   );
 };
+
+export default CustomConnectButton;

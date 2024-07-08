@@ -5,14 +5,12 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import '@rainbow-me/rainbowkit/styles.css';
+import { Providers } from '../components/wallet/providers';
+
 import Navbar from "@/components/navbar";
-import { ConnectWallet } from "@/components/wallet/ConnectWallet";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 //import { AppWrapper } from "@/contexts/AddContext";
-import { Connect } from "@/components/wallet/Connect";
-import { ConnectError } from "@/components/wallet/connectionError";
-import { Retry } from "@/components/wallet/Retry";
-import { WalletDetails } from "@/components/wallet/WalletDetails";
 import BotIcon from "@/components/gnosis/botIcon";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LoginPop } from "@/components/auth/loginPop";
