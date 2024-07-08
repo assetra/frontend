@@ -3,12 +3,10 @@ import React, { useContext, useEffect } from "react";
 import localFont from "next/font/local";
 import Card from "./card";
 import Image from "next/image";
-import withAuth from "../auth/withAuth";
 
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
 
 const Market = () => {
-
   const symbols = [
     "BINANCE:BTCUSD",
     "COINBASE:ETHUSD",
@@ -289,4 +287,4 @@ const Market = () => {
   );
 };
 
-export default withAuth(Market);
+export default Market;

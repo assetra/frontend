@@ -2,10 +2,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AdvancedChart } from "react-tradingview-embed";
 import Exchange from "./exchange";
-import withAuth from "../auth/withAuth";
 
 const ExchangePage = () => {
-
   const data = [
     {
       price: 243546.12443536,
@@ -330,4 +328,4 @@ const ExchangePage = () => {
   );
 };
 
-export default withAuth(ExchangePage);
+export default ExchangePage;
