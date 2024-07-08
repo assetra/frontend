@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import '@rainbow-me/rainbowkit/styles.css';
-import { Providers } from '../components/wallet/providers';
 
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -15,7 +14,7 @@ import BotIcon from "@/components/gnosis/botIcon";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LoginPop } from "@/components/auth/loginPop";
 import { SignupPop } from "@/components/auth/signupPop";
-
+import { Providers } from '../components/wallet/providers';
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
   subsets: ["latin"],
@@ -41,20 +40,18 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <AuthProvider>
+          <Providers>
           <ThemeProvider>
             {/*  <AppWrapper>*/}
             <Navbar />
             <BotIcon />
             {children}
-            <ConnectWallet />
-            <Connect />
-            <ConnectError />
-            <Retry />
-            <WalletDetails />
+           
             {/* </AppWrapper>*/}
             <LoginPop />
             <SignupPop />
           </ThemeProvider>
+          </Providers>
         </AuthProvider>
       </body>
     </html>
