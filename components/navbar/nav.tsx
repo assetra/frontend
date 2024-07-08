@@ -3,6 +3,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import MultiLevelDropdown from "./MultiLevelDropdown";
 import { useAuth } from "@/contexts/AuthContext";
+import ConnectWallet from "@/components/wallet/ConnectWallet";
 
 const NavbarAuth = () => {
   const { user, isAuthenticated } = useAuth();
@@ -71,11 +72,7 @@ const NavbarAuth = () => {
               />
             </div>
             <div className="flex relative group justify-center items-center z-1001">
-              <div className="px-6 py-1 block flex-1 border-transparent rounded-full bg-gradient-to-r from-red-600 to-blue-700 text-white sm:text-sm sm:leading-6 cursor-pointer">
-                <label htmlFor="wallet_card" className="cursor-pointer">
-                  Connect Wallet
-                </label>
-              </div>
+              <ConnectWallet/>
             </div>
             <div className="flex flex-row space-x-2 items-center justify-center">
               <div className="dropdown dropdown-end">
