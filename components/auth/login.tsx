@@ -156,70 +156,13 @@ const Login = () => {
         <div className="py-8 text-xs font-light">
           Don’t have an account? &nbsp;
           <span className="font-bold">
-            <Link href="/signup"> Sign Up</Link>
+            <label
+              htmlFor="sign_up"
+              className="cursor-pointer flex items-center text-center hover:border-black w-fit mx-auto mt-2 hover:border-b-2 hover:pb-1"
+            >
+              Sign Up
+            </label>
           </span>
-        </div>
-
-        <div className="flex items-center justify-center gap-4 text-[#6E6E6E] text-center">
-          <hr className="w-40" />{" "}
-          <span className="text-[#6E6E6E] text-xs">or continue with</span>
-          <hr className="w-40" />
-        </div>
-
-        <div className="py-5 flex flex-row gap-8 items-center justify-center">
-          <div className="flex flex-row items-center justify-center gap-3 text-xs border px-5 py-3 rounded-md">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M18.7511 10.1944C18.7511 9.47495 18.6915 8.94995 18.5626 8.40552H10.1797V11.6527H15.1003C15.0011 12.4597 14.4654 13.675 13.2749 14.4916L13.2582 14.6003L15.9087 16.6126L16.0924 16.6305C17.7788 15.1041 18.7511 12.8583 18.7511 10.1944Z"
-                fill="#4285F4"
-              />
-              <path
-                d="M10.1788 18.75C12.5895 18.75 14.6133 17.9722 16.0915 16.6305L13.274 14.4916C12.5201 15.0068 11.5081 15.3666 10.1788 15.3666C7.81773 15.3666 5.81379 13.8402 5.09944 11.7305L4.99473 11.7392L2.23868 13.8295L2.20264 13.9277C3.67087 16.786 6.68674 18.75 10.1788 18.75Z"
-                fill="#22C55E"
-              />
-              <path
-                d="M5.10014 11.7306C4.91165 11.1862 4.80257 10.6028 4.80257 10C4.80257 9.39722 4.91165 8.81391 5.09022 8.26948L5.08523 8.15352L2.29464 6.02966L2.20333 6.07222C1.5982 7.25835 1.25 8.58887 1.25 10C1.25 11.411 1.5982 12.7415 2.20333 13.9277L5.10014 11.7306Z"
-                fill="#FBBC05"
-              />
-              <path
-                d="M10.1787 4.63348C11.7212 4.63348 12.7367 5.27887 13.339 5.83001L16.1588 3.14519C14.6076 1.74519 12.5894 1.25 10.1787 1.25C6.68668 1.25 3.67082 3.21406 2.20259 6.07225L5.08993 8.2695C5.81373 6.15981 7.81768 4.63348 10.1787 4.63348Z"
-                fill="#EA4335"
-              />
-            </svg>{" "}
-            Google
-          </div>
-          <div className="flex flex-row items-center justify-center gap-3 text-xs border px-5 py-3 rounded-md">
-            <svg
-              width="22"
-              height="20"
-              viewBox="0 0 22 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clipPath="url(#clip0_113_1092)">
-                <path
-                  d="M21.7695 10.1758C21.7695 4.55663 16.9092 0 11.0201 0C5.13092 0 0.270584 4.55663 0.270584 10.1758C0.270584 15.1964 3.99678 19.3955 8.74963 20V12.9812H6.40861V10.1758H8.74963V7.93682C8.74963 5.61026 10.2697 4.17756 12.4332 4.17756C13.4688 4.17756 14.5534 4.37027 14.5534 4.37027V6.64867H13.3262C12.1148 6.64867 11.7316 7.3898 11.7316 8.15191V10.1758H14.4404L13.9804 12.9812H11.7316V20C16.4844 19.3955 21.2106 15.1964 21.2106 10.1758H21.7695Z"
-                  fill="#1877F2"
-                />
-                <path
-                  d="M13.9803 12.9811L14.4403 10.1757H11.7315V8.15187C11.7315 7.38977 12.1147 6.64863 13.3262 6.64863H14.5534V4.37023C14.5534 4.37023 13.4688 4.17752 12.4332 4.17752C10.2697 4.17752 8.74963 5.61023 8.74963 7.93679V10.1757H6.40861V12.9811H8.74963V20C9.35747 20.1006 9.98049 20.1501 10.6131 20.1501C11.2458 20.1501 11.8688 20.1006 12.4767 20V12.9811H13.9803Z"
-                  fill="white"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_113_1092">
-                  <rect width="22" height="20" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-            Facebook
-          </div>
         </div>
       </div>
     </div>

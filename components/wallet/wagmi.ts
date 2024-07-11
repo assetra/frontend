@@ -1,4 +1,3 @@
-// rainbowkitConfig.ts
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import {
   arbitrum,

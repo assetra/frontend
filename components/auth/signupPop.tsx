@@ -2,29 +2,42 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const SignupPop: React.FC = () => {
   const [clicked, setClicked] = useState(false);
-  const [username, setUsername] = useState<string | number>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string | number>("");
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-  const logInLabelRef = useRef<HTMLLabelElement>(null);
+  const verificationLabelRef = useRef<HTMLLabelElement>(null);
   const signUpLabelRef = useRef<HTMLLabelElement>(null);
+  const { setUser } = useAuth();
 
   const handleProgrammaticClick = () => {
     signUpLabelRef.current?.click();
-    logInLabelRef.current?.click();
+    verificationLabelRef.current?.click();
   };
 
-  // submit form
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setClicked(true);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (emailRegex.test(email) && username && password) {
+    const { email, username, password } = formData;
+    if (validateEmail(email) && username && password) {
       try {
         const response = await fetch("https://gtx.pythonanywhere.com/signup", {
           method: "POST",
@@ -39,46 +52,42 @@ export const SignupPop: React.FC = () => {
         if (response.ok) {
           try {
             await fetch(
-              "https://digital-astra-gtx-labs-8ff96cdb.koyeb.app/send_email",
+              "https://daily-darelle-claudez-0c3a7986.koyeb.app/send_email",
               {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  email: result.email,
-                  verification_link: result.verification_link,
+                  email: email,
+                  code: result.code,
                 }),
               }
             );
 
-            setEmail("");
-            setPassword("");
-            setUsername("");
+            setFormData({ username: "", email: "", password: "" });
             setFeedbackMessage(
-              "Please verify your email address by clicking the link we sent to your inbox"
+              "Please verify your email address by clicking the link we sent to your inbox."
             );
             setIsSuccess(true);
+            setUser(result.user);
             setTimeout(() => {
-              handleProgrammaticClick(); // Redirect to login page if the response is OK
-            }, 3000);
+              handleProgrammaticClick();
+            }, 1000);
           } catch (error) {
             setFeedbackMessage(
-              "An error occurred while sending verification email. Please try again."
+              "An error occurred while sending the verification email. Please try again."
             );
             setIsSuccess(false);
-            setClicked(false);
           }
         } else {
-          setFeedbackMessage(
-            result.message || "Subscription failed. Please try again."
-          );
+          setFeedbackMessage(result.message || "Subscription failed. Please try again.");
           setIsSuccess(false);
-          setClicked(false);
         }
       } catch (error) {
         setFeedbackMessage("An error occurred. Please try again.");
         setIsSuccess(false);
+      } finally {
         setClicked(false);
       }
     } else {
@@ -93,6 +102,12 @@ export const SignupPop: React.FC = () => {
       <input type="checkbox" id="sign_up" className="modal-toggle" />
       <div className="modal text-black" role="dialog">
         <div className="modal-box bg-white">
+          <label
+            htmlFor="sign_up"
+            className="border-0 focus:border-0 absolute right-8 top-6 text-[1.5rem] cursor-pointer"
+          >
+            X
+          </label>
           <div className="flex justify-between p-4">
             <Image
               src={"/assets/black/logo.png"}
@@ -132,12 +147,12 @@ export const SignupPop: React.FC = () => {
                 </svg>
                 <input
                   type="text"
-                  className="grow"
+                  className="grow text-white"
                   placeholder="Email"
                   name="email"
                   title="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 rounded-full">
@@ -151,14 +166,12 @@ export const SignupPop: React.FC = () => {
                 </svg>
                 <input
                   type="text"
-                  className="grow "
+                  className="grow text-white"
                   name="username"
                   title="Enter your username"
                   placeholder="Username"
-                  value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
+                  value={formData.username}
+                  onChange={handleChange}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 rounded-full">
@@ -177,14 +190,24 @@ export const SignupPop: React.FC = () => {
                 <input
                   type="password"
                   name="password"
-                  className="grow"
+                  className="grow text-white"
                   title="Enter your password"
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
+                  value={formData.password}
+                  onChange={handleChange}
                 />
+              </label>
+              <label className="label cursor-pointer">
+                <input
+                  type="checkbox"
+                  required
+                  className="checkbox checkbox-info"
+                />
+                <span className="label-text text-black">
+                  I agree to the <a href="/policy">Privacy Policy</a>,{" "}
+                  <a href="/terms">Terms & Conditions</a>, and{" "}
+                  <a href="/disclosure">Risk Disclosure</a>.
+                </span>
               </label>
               {clicked ? (
                 <button className="bg-blue-600 py-2 text-white flex items-center justify-center w-1/2 mx-auto rounded-full">
@@ -210,7 +233,11 @@ export const SignupPop: React.FC = () => {
             <label htmlFor="sign_up" ref={signUpLabelRef} className="hidden">
               Connect
             </label>
-            <label htmlFor="login" ref={logInLabelRef} className="hidden">
+            <label
+              htmlFor="verification"
+              ref={verificationLabelRef}
+              className="hidden"
+            >
               Connect
             </label>
           </div>

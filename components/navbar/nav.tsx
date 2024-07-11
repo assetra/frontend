@@ -72,7 +72,7 @@ const NavbarAuth = () => {
               />
             </div>
             <div className="flex relative group justify-center items-center z-1001">
-              <ConnectWallet/>
+              <ConnectWallet />
             </div>
             <div className="flex flex-row space-x-2 items-center justify-center">
               <div className="dropdown dropdown-end">

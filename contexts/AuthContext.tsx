@@ -32,7 +32,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState(() => {
     if (typeof window !== "undefined") {
       const storedUser = localStorage.getItem("user");
-      return storedUser ? JSON.parse(storedUser) : null;
+      if (storedUser) {
+        try {
+          return JSON.parse(storedUser);
+        } catch (error) {
+          console.error("Failed to parse stored user", error);
+          return null;
+        }
+      }
     }
     return null;
   });

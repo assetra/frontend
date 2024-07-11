@@ -2,16 +2,14 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const LoginPop: React.FC = () => {
   const [clicked, setClicked] = useState(false);
-  const [username, setUsername] = useState<string | number>("");
-  const [password, setPassword] = useState<string | number>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-  const router = useRouter();
   const { setUser, setIsAuthenticated } = useAuth();
   const logInLabelRef = useRef<HTMLLabelElement>(null);
   const signUpLabelRef = useRef<HTMLLabelElement>(null);
@@ -45,7 +43,6 @@ export const LoginPop: React.FC = () => {
           setIsAuthenticated(true);
           setTimeout(() => {
             logInLabelRef.current?.click();
-            router.push("/dashboard");
           }, 1000);
         } else {
           setFeedbackMessage(
@@ -57,6 +54,7 @@ export const LoginPop: React.FC = () => {
       } catch (error) {
         setFeedbackMessage("An error occurred. Please try again.");
         setIsSuccess(false);
+        setClicked(false);
       }
     } else {
       setFeedbackMessage("Please enter valid inputs.");
@@ -70,6 +68,12 @@ export const LoginPop: React.FC = () => {
       <input type="checkbox" id="login" className="modal-toggle" />
       <div className="modal text-black" role="dialog">
         <div className="modal-box bg-white">
+          <label
+            htmlFor="login"
+            className="border-0 focus:border-0 absolute right-8 top-6 text-[1.5rem] cursor-pointer"
+          >
+            X
+          </label>
           <div className="flex justify-between p-4">
             <Image
               src={"/assets/black/logo.png"}
@@ -96,49 +100,27 @@ export const LoginPop: React.FC = () => {
               className="grid p-6 max-w-[400px] mx-auto gap-4"
             >
               <label className="input input-bordered flex items-center gap-2 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="white"
-                  className="h-4 w-4 opacity-70"
-                >
-                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
-                </svg>
+                <UserIcon />
                 <input
                   type="text"
-                  className="grow"
+                  className="grow text-white"
                   name="username"
                   title="Enter your username"
                   placeholder="Username"
                   value={username}
-                  onChange={(e) => {
-                    setUsername(e.target.value);
-                  }}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </label>
               <label className="input input-bordered flex items-center gap-2 rounded-full">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  fill="white"
-                  className="h-4 w-4 opacity-70"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <PasswordIcon />
                 <input
                   type="password"
                   name="password"
-                  className="grow"
+                  className="grow text-white"
                   title="Enter your password"
                   placeholder="Password"
                   value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </label>
               {clicked ? (
@@ -174,3 +156,29 @@ export const LoginPop: React.FC = () => {
     </>
   );
 };
+
+const UserIcon: React.FC = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    fill="white"
+    className="h-4 w-4 opacity-70"
+  >
+    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
+  </svg>
+);
+
+const PasswordIcon: React.FC = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 16 16"
+    fill="white"
+    className="h-4 w-4 opacity-70"
+  >
+    <path
+      fillRule="evenodd"
+      d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
+      clipRule="evenodd"
+    />
+  </svg>
+);

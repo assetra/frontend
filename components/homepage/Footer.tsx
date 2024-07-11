@@ -37,6 +37,14 @@ export default function Footer() {
               Company
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
+            <li className="mb-4">
+                <a
+                  href="/"
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
+                  Home
+                </a>
+              </li>
               <li className="mb-4">
                 <a
                   href="#about"
@@ -60,6 +68,14 @@ export default function Footer() {
               Support
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
+              <li className="mb-4">
+                <a
+                  href=""
+                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                >
+                  FAQ
+                </a>
+              </li>
               <li className="mb-4">
                 <a
                   href="mailto:support@gtx.com.co"

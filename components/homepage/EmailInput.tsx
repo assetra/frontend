@@ -15,7 +15,7 @@ const EmailInput: React.FC = () => {
     if (emailRegex.test(email)) {
       try {
         const response = await fetch(
-          "https://gtx.pythonanywhere.com/newsletter",
+          "https://gtx.pythonanywhere.com/subscribe",
           {
             method: "POST",
             headers: {
