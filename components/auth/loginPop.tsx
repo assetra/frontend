@@ -13,6 +13,7 @@ export const LoginPop: React.FC = () => {
   const { setUser, setIsAuthenticated } = useAuth();
   const logInLabelRef = useRef<HTMLLabelElement>(null);
   const signUpLabelRef = useRef<HTMLLabelElement>(null);
+  const verificationLabelRef = useRef<HTMLLabelElement>(null);
 
   const handleProgrammaticClick = () => {
     logInLabelRef.current?.click();
@@ -44,6 +45,42 @@ export const LoginPop: React.FC = () => {
           setTimeout(() => {
             logInLabelRef.current?.click();
           }, 1000);
+        } else if (
+          response.status === 403 &&
+          result.message === "Please verify your email before logging in."
+        ) {
+          try {
+            await fetch(
+              "https://daily-darelle-claudez-0c3a7986.koyeb.app/send_email",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: result.user.email,
+                  code: result.code,
+                }),
+              }
+            );
+            setPassword("");
+            setUsername("");
+            setFeedbackMessage(
+              "Verification code sent. Please check your email and enter the verification code."
+            );
+            setIsSuccess(true);
+            setUser(result.user);
+            setTimeout(() => {
+              logInLabelRef.current?.click();
+              verificationLabelRef.current?.click(); // Redirect to verification page if the response is OK
+            }, 1000);
+          } catch (error) {
+            setFeedbackMessage(
+              "An error occurred while sending verification email. Please try again."
+            );
+            setIsSuccess(false);
+            setClicked(false);
+          }
         } else {
           setFeedbackMessage(
             result.message || "Login failed. Please try again."
@@ -103,7 +140,7 @@ export const LoginPop: React.FC = () => {
                 <UserIcon />
                 <input
                   type="text"
-                  className="grow text-white"
+                  className="grow text-base-content"
                   name="username"
                   title="Enter your username"
                   placeholder="Username"
@@ -148,6 +185,13 @@ export const LoginPop: React.FC = () => {
               Connect
             </label>
             <label htmlFor="login" ref={logInLabelRef} className="hidden">
+              Connect
+            </label>
+            <label
+              htmlFor="verification"
+              ref={verificationLabelRef}
+              className="hidden"
+            >
               Connect
             </label>
           </div>

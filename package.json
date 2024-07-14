@@ -19,6 +19,7 @@
     "@walletconnect/sign-client": "^2.13.3",
     "@walletconnect/universal-provider": "^2.13.3",
     "chart.js": "^4.4.3",
+    "country-list": "^2.3.0",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "encoding": "^0.1.13",
@@ -49,6 +50,7 @@
     "ws": "^8.18.0"
   },
   "devDependencies": {
+    "@types/country-list": "^2.1.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
