@@ -1,21 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import localFont from "next/font/local";
-import { useRouter } from "next/navigation"; // Import useRouter for redirection
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
 const SignUp = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const referrer = searchParams.get("username") ?? "";
   const [clicked, setClicked] = useState(false);
   const [username, setUsername] = useState<string | number>("");
   const [password, setPassword] = useState<string | number>("");
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
-  const router = useRouter(); // Initialize useRouter
   const { setUser, user } = useAuth();
-  const [email, setEmail] = useState<string>(user?.email ?? "");
+  const [email, setEmail] = useState<string>("");
 
   // submit form
   const handleSubmit = async (e: React.FormEvent) => {
@@ -30,7 +32,7 @@ const SignUp = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, email, password }),
+          body: JSON.stringify({ username, email, password, referrer }),
         });
 
         const result = await response.json();

@@ -9,7 +9,7 @@ export const ReferralPop: React.FC = () => {
   const { user } = useAuth();
   const username: string | null = user?.username || null;
   const referralLink = username
-    ? `https://gtx.com.co/referral/${username}`
+    ? `https://gtx.com.co/signup?username=${username}`
     : "";
 
   const [totalReferrals, setTotalReferrals] = useState<number>(0);
