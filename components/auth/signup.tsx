@@ -10,12 +10,12 @@ const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 const SignUp = () => {
   const [clicked, setClicked] = useState(false);
   const [username, setUsername] = useState<string | number>("");
-  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string | number>("");
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
   const router = useRouter(); // Initialize useRouter
-  const { setUser } = useAuth();
+  const { setUser, user } = useAuth();
+  const [email, setEmail] = useState<string>(user?.email ?? "");
 
   // submit form
   const handleSubmit = async (e: React.FormEvent) => {

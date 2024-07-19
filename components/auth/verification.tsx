@@ -205,6 +205,7 @@ export const Verification: React.FC = () => {
           <div className="grid grid-cols-6 gap-4 py-6 px-16 mt-6">
             {code.map((_, index) => (
               <input
+                id="index"
                 key={index}
                 type="text"
                 className="aspect-square border-2 max-w-16 border-green-300 rounded-lg bg-white text-center text-[2rem] font-medium text-blue-300"

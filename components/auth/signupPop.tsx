@@ -5,17 +5,17 @@ import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const SignupPop: React.FC = () => {
+  const { setUser, user } = useAuth();
   const [clicked, setClicked] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
+    email: user?.email ?? "",
     password: "",
   });
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const verificationLabelRef = useRef<HTMLLabelElement>(null);
   const signUpLabelRef = useRef<HTMLLabelElement>(null);
-  const { setUser } = useAuth();
 
   const handleProgrammaticClick = () => {
     signUpLabelRef.current?.click();

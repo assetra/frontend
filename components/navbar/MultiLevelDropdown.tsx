@@ -349,12 +349,12 @@ const MultiLevelDropdown: React.FC = () => {
               </a>
             </li>
             <li>
-              <a
-                href="#"
-                className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-md"
+              <label
+                htmlFor="referral"
+                className="cursor-pointer block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-md"
               >
                 Referral
-              </a>
+              </label>
             </li>
             <li>
               <div

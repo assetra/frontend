@@ -4,7 +4,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
-import withAuth from "./withAuth";
+import withAuth from "../auth/withAuth";
 import { getData } from "country-list";
 
 interface FormData {

@@ -1,13 +1,12 @@
-import Profile from "@/components/profile/profile";
+import VerifyPassword from "@/components/auth/verifyPassword";
 import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: "Reset Password",
 };
-
 const Page = () => {
-  return <Profile />;
+  return <VerifyPassword />;
 };
 
 export default Page;
