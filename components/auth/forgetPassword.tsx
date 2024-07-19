@@ -58,7 +58,7 @@ const ForgetPassword: React.FC = () => {
             setUser(result.user);
             setTimeout(() => {
               router.push("/reset");
-            }, 1000);
+            }, 500);
           } catch (error) {
             setFeedbackMessage(
               "An error occurred while sending verification email. Please try again."

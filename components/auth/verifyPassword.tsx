@@ -122,6 +122,7 @@ const VerifyPassword: React.FC = () => {
         );
         setIsSuccess(true);
         setTimeout(() => {
+          setClicked(false);
           setView(true);
         }, 1000);
       } else {
@@ -209,7 +210,7 @@ const VerifyPassword: React.FC = () => {
 
   return (
     <>
-      {!view ? (
+      {view ? (
         <div className="grid grid-cols-2 min-h-[100svh]">
           <div
             className={` ${microsoft.className} bg-black text-white pb-8 px-6 pt-32`}

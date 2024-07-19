@@ -189,6 +189,12 @@ const Login = () => {
           )}
         </form>
         <div className="py-8 text-xs font-light">
+          Can't remember your password? &nbsp;
+          <span className="font-bold">
+            <Link href="/forget">Forgot Password</Link>
+          </span>
+        </div>
+        <div className="py-8 text-xs font-light">
           Don’t have an account? &nbsp;
           <span className="font-bold">
             <Link href="/signup"> Sign Up</Link>

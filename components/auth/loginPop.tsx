@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
+import { useRouter } from "next/navigation";
 
 export const LoginPop: React.FC = () => {
   const [clicked, setClicked] = useState(false);
@@ -14,10 +15,16 @@ export const LoginPop: React.FC = () => {
   const logInLabelRef = useRef<HTMLLabelElement>(null);
   const signUpLabelRef = useRef<HTMLLabelElement>(null);
   const verificationLabelRef = useRef<HTMLLabelElement>(null);
+  const router = useRouter();
 
   const handleProgrammaticClick = () => {
     logInLabelRef.current?.click();
     signUpLabelRef.current?.click();
+  };
+
+  const handleClick = () => {
+    logInLabelRef.current?.click();
+    router.push("/forget");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -173,11 +180,17 @@ export const LoginPop: React.FC = () => {
                 </button>
               )}
             </form>
+            <div
+              onClick={handleClick}
+              className="cursor-pointer font-light text-[15px] hover:text-red-400"
+            >
+              Forgot Password
+            </div>
           </div>
-          <div className="modal-action justify-center -mt-2">
+          <div className="modal-action justify-center mt-2">
             <div
               onClick={handleProgrammaticClick}
-              className="cursor-pointer font-medium px-2 hover:border-black hover:border-b-2 hover:pb-1"
+              className="cursor-pointer font-medium px-2 border-transparent hover:border-black border-b-2 pb-1"
             >
               Sign Up
             </div>
