@@ -4,16 +4,15 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import "@rainbow-me/rainbowkit/styles.css";
 
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-//import { AppWrapper } from "@/contexts/AddContext";
 import BotIcon from "@/components/gnosis/botIcon";
 import { AuthProvider } from "@/contexts/AuthContext";
 import AuthPopups from "@/components/auth/authPopups";
-import { Providers } from "../components/wallet/providers";
+import { Providers } from "@/components/wallet/providers";
+
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
   subsets: ["latin"],
@@ -38,19 +37,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <AuthProvider>
-          <Providers>
+        <Providers>
+          <AuthProvider>
             <ThemeProvider>
-              {/*  <AppWrapper>*/}
               <Navbar />
               <BotIcon />
-              {children}
-
-              {/* </AppWrapper>*/}
+              <main>{children}</main>
               <AuthPopups />
             </ThemeProvider>
-          </Providers>
-        </AuthProvider>
+          </AuthProvider>
+        </Providers>
       </body>
     </html>
   );
