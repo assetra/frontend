@@ -268,16 +268,21 @@ const Swap: React.FC = () => {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
+    <Card className="w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg">
+      <CardHeader className="mb-4">
         <CardTitle className="text-2xl font-bold text-center">
           Swap Tokens
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="from-token">From</Label>
+            <Label
+              htmlFor="from-token"
+              className="block text-sm font-medium text-gray-500"
+            >
+              From Chain
+            </Label>
             <Select
               value={transferParams.fromChain}
               onValueChange={(value) => {
@@ -288,7 +293,7 @@ const Swap: React.FC = () => {
                 updateFromTokens(swingSDK!, value as ChainSlug);
               }}
             >
-              <SelectTrigger className="w-[120px]">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="From Chain" />
               </SelectTrigger>
               <SelectContent>
@@ -301,7 +306,12 @@ const Swap: React.FC = () => {
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="from-symbol">Symbol</Label>
+            <Label
+              htmlFor="from-symbol"
+              className="block text-sm font-medium text-gray-500"
+            >
+              Token
+            </Label>
             <Select
               value={transferParams.fromToken}
               onValueChange={(value) => {
@@ -312,7 +322,7 @@ const Swap: React.FC = () => {
                 updateBalance();
               }}
             >
-              <SelectTrigger className="w-[120px]">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="From Token" />
               </SelectTrigger>
               <SelectContent>
@@ -326,13 +336,18 @@ const Swap: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex rotate-90 justify-center">
-          <LiaExchangeAltSolid className="text-2xl text-gray-500" />
+        <div className="flex justify-center my-4">
+          <LiaExchangeAltSolid className="text-3xl text-gray-500 transform rotate-90" />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="to-token">To</Label>
+            <Label
+              htmlFor="to-token"
+              className="block text-sm font-medium text-gray-500"
+            >
+              To Chain
+            </Label>
             <Select
               value={transferParams.toChain}
               onValueChange={(value) => {
@@ -343,7 +358,7 @@ const Swap: React.FC = () => {
                 updateToTokens(swingSDK!, value as ChainSlug);
               }}
             >
-              <SelectTrigger className="w-[120px]">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="To Chain" />
               </SelectTrigger>
               <SelectContent>
@@ -356,7 +371,12 @@ const Swap: React.FC = () => {
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="to-symbol">Symbol</Label>
+            <Label
+              htmlFor="to-symbol"
+              className="block text-sm font-medium text-gray-500"
+            >
+              Token
+            </Label>
             <Select
               value={transferParams.toToken}
               onValueChange={(value) =>
@@ -366,7 +386,7 @@ const Swap: React.FC = () => {
                 }))
               }
             >
-              <SelectTrigger className="w-[120px]">
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="To Token" />
               </SelectTrigger>
               <SelectContent>
@@ -380,8 +400,11 @@ const Swap: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="amount" className="text-sm font-medium">
+        <div className="space-y-2 mt-4">
+          <label
+            htmlFor="amount"
+            className="block text-sm font-medium text-gray-500"
+          >
             Amount
           </label>
           <Input
@@ -403,7 +426,7 @@ const Swap: React.FC = () => {
         </div>
 
         {transferRoute && (
-          <div className="text-sm">
+          <div className="mt-4 text-sm text-gray-100">
             {/* <p>Best Route: {transferRoute.quote.integration}</p> */}
             <p>
               Expected Output: {transferRoute.quote.amountUSD}{" "}
@@ -414,7 +437,7 @@ const Swap: React.FC = () => {
 
         {isConnected ? (
           <Button
-            className="w-full"
+            className="w-full mt-4 py-2 bg-blue-600 text-white rounded-lg"
             disabled={isLoading}
             onClick={() => (transferRoute ? startTransfer() : getQuote())}
           >
@@ -428,7 +451,7 @@ const Swap: React.FC = () => {
           </Button>
         ) : (
           <Button
-            className="w-full"
+            className="w-full mt-4 py-2 bg-blue-600 text-white rounded-lg"
             disabled={isLoading}
             onClick={connectWallet}
           >
