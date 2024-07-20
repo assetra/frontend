@@ -4,7 +4,8 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
-import withAuth from "./withAuth";
+import withAuth from "../auth/withAuth";
+import { getData } from "country-list";
 
 interface FormData {
   email: string;
@@ -28,6 +29,7 @@ const Profile: React.FC = () => {
     country: user.country ?? "",
     mobile_number: user.mobile_number ?? "",
   });
+  const countries = getData();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -205,10 +207,11 @@ const Profile: React.FC = () => {
                 <option disabled value="">
                   Choose a country
                 </option>
-                <option value="US">United States</option>
-                <option value="CA">Canada</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
+                {countries.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="w-full">

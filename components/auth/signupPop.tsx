@@ -5,21 +5,20 @@ import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 
 export const SignupPop: React.FC = () => {
+  const { setUser, user } = useAuth();
   const [clicked, setClicked] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
+    email: user?.email ?? "",
     password: "",
   });
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const verificationLabelRef = useRef<HTMLLabelElement>(null);
   const signUpLabelRef = useRef<HTMLLabelElement>(null);
-  const { setUser } = useAuth();
 
   const handleProgrammaticClick = () => {
     signUpLabelRef.current?.click();
-    verificationLabelRef.current?.click();
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,12 +66,13 @@ export const SignupPop: React.FC = () => {
 
             setFormData({ username: "", email: "", password: "" });
             setFeedbackMessage(
-              "Please verify your email address by clicking the link we sent to your inbox."
+              "Verification code sent. Please check your email and enter the verification code."
             );
             setIsSuccess(true);
             setUser(result.user);
             setTimeout(() => {
               handleProgrammaticClick();
+              verificationLabelRef.current?.click();
             }, 1000);
           } catch (error) {
             setFeedbackMessage(
@@ -81,7 +81,9 @@ export const SignupPop: React.FC = () => {
             setIsSuccess(false);
           }
         } else {
-          setFeedbackMessage(result.message || "Subscription failed. Please try again.");
+          setFeedbackMessage(
+            result.message || "Subscription failed. Please try again."
+          );
           setIsSuccess(false);
         }
       } catch (error) {

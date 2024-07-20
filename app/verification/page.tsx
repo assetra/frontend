@@ -1,13 +1,12 @@
-import Profile from "@/components/profile/profile";
+import { Verification } from "@/components/auth/verification";
 import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: "verification",
 };
-
 const Page = () => {
-  return <Profile />;
+  return <Verification />;
 };
 
 export default Page;

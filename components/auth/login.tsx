@@ -44,6 +44,41 @@ const Login = () => {
           setTimeout(() => {
             router.push(redirectPath); // Redirect to intended route if login is successful
           }, 1000);
+        } else if (
+          response.status === 403 &&
+          result.message === "Please verify your email before logging in."
+        ) {
+          try {
+            await fetch(
+              "https://daily-darelle-claudez-0c3a7986.koyeb.app/send_email",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: result.user.email,
+                  code: result.code,
+                }),
+              }
+            );
+            setPassword("");
+            setUsername("");
+            setFeedbackMessage(
+              "Verification code sent. Please check your email and enter the verification code."
+            );
+            setIsSuccess(true);
+            setUser(result.user);
+            setTimeout(() => {
+              router.push("/verification"); // Redirect to verification page if the response is OK
+            }, 1000);
+          } catch (error) {
+            setFeedbackMessage(
+              "An error occurred while sending verification email. Please try again."
+            );
+            setIsSuccess(false);
+            setClicked(false);
+          }
         } else {
           setFeedbackMessage(
             result.message || "Login failed. Please try again."
@@ -145,7 +180,7 @@ const Login = () => {
                   fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
-              </svg>{" "}
+              </svg>
             </button>
           ) : (
             <button type="submit" className="px-3 py-1.5 bg-black text-white">
@@ -154,14 +189,15 @@ const Login = () => {
           )}
         </form>
         <div className="py-8 text-xs font-light">
+          Can't remember your password? &nbsp;
+          <span className="font-bold">
+            <Link href="/forget">Forgot Password</Link>
+          </span>
+        </div>
+        <div className="py-8 text-xs font-light">
           Don’t have an account? &nbsp;
           <span className="font-bold">
-            <label
-              htmlFor="sign_up"
-              className="cursor-pointer flex items-center text-center hover:border-black w-fit mx-auto mt-2 hover:border-b-2 hover:pb-1"
-            >
-              Sign Up
-            </label>
+            <Link href="/signup"> Sign Up</Link>
           </span>
         </div>
       </div>

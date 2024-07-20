@@ -1,19 +1,23 @@
 "use client";
 import React, { useState } from "react";
 import localFont from "next/font/local";
-import { useRouter } from "next/navigation"; // Import useRouter for redirection
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useAuth } from "@/contexts/AuthContext";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
 const SignUp = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const referrer = searchParams.get("username") ?? "";
   const [clicked, setClicked] = useState(false);
   const [username, setUsername] = useState<string | number>("");
-  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string | number>("");
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
-  const router = useRouter(); // Initialize useRouter
+  const { setUser, user } = useAuth();
+  const [email, setEmail] = useState<string>("");
 
   // submit form
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,7 +32,7 @@ const SignUp = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, email, password }),
+          body: JSON.stringify({ username, email, password, referrer }),
         });
 
         const result = await response.json();
@@ -36,15 +40,15 @@ const SignUp = () => {
         if (response.ok) {
           try {
             await fetch(
-              "https://digital-astra-gtx-labs-8ff96cdb.koyeb.app/send_email",
+              "https://daily-darelle-claudez-0c3a7986.koyeb.app/send_email",
               {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                  email: result.email,
-                  verification_link: result.verification_link,
+                  email: email,
+                  code: result.code,
                 }),
               }
             );
@@ -53,12 +57,13 @@ const SignUp = () => {
             setPassword("");
             setUsername("");
             setFeedbackMessage(
-              "Please verify your email address by clicking the link we sent to your inbox"
+              "Verification code sent. Please check your email and enter the verification code."
             );
             setIsSuccess(true);
+            setUser(result.user);
             setTimeout(() => {
-              router.push("/login"); // Redirect to login page if the response is OK
-            }, 3000);
+              router.push("/verification"); // Redirect to verification page if the response is OK
+            }, 1000);
           } catch (error) {
             setFeedbackMessage(
               "An error occurred while sending verification email. Please try again."
@@ -115,7 +120,7 @@ const SignUp = () => {
         )}
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col mx-auto gap-7 py-6 w-full md:w-2/3"
+          className="flex flex-col mx-auto gap-4 py-6 w-full md:w-2/3"
         >
           <div className="flex flex-col items-start">
             <label htmlFor="email" className="text-xs font-semibold">
@@ -156,6 +161,18 @@ const SignUp = () => {
               className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
             />
           </div>
+          <label className="label cursor-pointer">
+            <input
+              type="checkbox"
+              required
+              className="checkbox checkbox-info"
+            />
+            <span className="label-text text-black">
+              I agree to the <a href="/policy">Privacy Policy</a>,
+              <a href="/terms">Terms & Conditions</a>, and
+              <a href="/disclosure">Risk Disclosure</a>.
+            </span>
+          </label>
           {clicked ? (
             <button className="px-3 py-1.5 bg-blue-700 text-white flex items-center justify-center">
               <svg
@@ -185,7 +202,7 @@ const SignUp = () => {
             </button>
           )}
         </form>
-        <div className="py-8 text-xs font-light">
+        <div className="py-5 text-xs font-light">
           Already have an account? &nbsp;
           <span className=" font-bold">
             <Link href="/login"> Log In</Link>

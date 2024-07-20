@@ -1,12 +1,16 @@
 import SignUp from "@/components/auth/signup";
 import { Metadata } from "next";
-import React from "react";
+import React, { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: 'SignUp',
 };
 const Page = () => {
-  return <SignUp />;
+  return (
+    <Suspense>
+      <SignUp />
+    </Suspense>
+  );
 };
 
 export default Page;
