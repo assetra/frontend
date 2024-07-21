@@ -4,7 +4,12 @@ import { HiOutlineRefresh } from "react-icons/hi";
 import styles from "./styles";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import CustomChart from "./customChart";
+import { Toaster } from "../swap/ui/toaster";
 import localFont from "next/font/local";
+import dynamic from "next/dynamic";
+const SwapSDK = dynamic(() => import("../swap/Swap"), {
+  ssr: false,
+});
 
 const sofia = localFont({ src: "../../public/fonts/Sofia Pro Regular.ttf" });
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
@@ -31,7 +36,11 @@ const Exchange = () => {
   };
 
   return (
-    <div
+    <>
+      <SwapSDK />
+      <Toaster />
+
+      {/* <div
       className="flex flex-col text-white px-6 py-4 font-medium bg-[#1E1F25] rounded-xl overflow-hidden"
       style={{ height: "320px" }}
     >
@@ -58,13 +67,13 @@ const Exchange = () => {
         <img src="/images/arrow-right.png" alt="arrow-right" />
         <div className="flex flex-row gap-4 items-center py-1">
           {/* <div className="text-white text-xl font-semibold"> */}
-          <input
+      {/* <input
             className="bg-[#1E1F25] text-[1rem] font-semibold w-24 pl-4"
             value={rate}
             onChange={(e) => setRate(parseFloat(e.target.value))}
-          />
-          {/* </div> */}
-          <div className="text-gtxTextLight text-base">USD</div>
+          /> */}
+      {/* </div> */}
+      {/* <div className="text-gtxTextLight text-base">USD</div>
         </div>
       </div>
       <div className={`flex flex-col gap-2 ${graphik.className} pb-1 mb-1`}>
@@ -87,12 +96,12 @@ const Exchange = () => {
               className="bg-[#1E1F25] rounded-2xl px-4 py-0.5"
               style={{ border: "none", outline: "none" }}
             >
-              <option className="w-full h-[16px]" value="BTC">
-                {/* <img
+              <option className="w-full h-[16px]" value="BTC"> */}
+      {/* <img
                   className="w-full h-[25px]"
                   src="/images/bitcoin-icon-medium.png"
                 /> */}
-                BTC
+      {/* BTC
               </option>
               <option value="ETH">ETH</option>
               <option value="LTC">LTC</option>
@@ -143,7 +152,8 @@ const Exchange = () => {
       >
         <button onClick={onExchange}>Exchange</button>
       </div>
-    </div>
+    </div> */}
+    </>
   );
 };
 

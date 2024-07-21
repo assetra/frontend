@@ -93,7 +93,7 @@ const ExchangePage = () => {
 
   return (
     <div className="flex w-[100svw] h-[100svh] bg-[#000] px-6 pb-4 pt-16 overflow-hidden">
-      <div className="flex flex-col w-[80svw] h-full mr-6 p-1">
+      <div className="flex flex-col w-[70svw] h-full mr-6 p-1">
         <div className="grid grid-cols-4 gap-4 mb-4">
           <div className="flex flex-row items-center h-full p-3 rounded-xl bg-[#1E1F25]">
             <div className="flex flex-row justify-between items-center w-full h-full p-3">
@@ -258,8 +258,8 @@ const ExchangePage = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-[20svw] h-full p-1">
-        <div className="flex w-full mb-4 rounded-xl bg-[#1E1F25]">
+      <div className="flex flex-col w-[30svw] h-full p-1">
+        {/* <div className="flex w-full mb-4 rounded-xl bg-[#1E1F25]">
           <div className="flex flex-col justify-between px-6 py-4 w-full h-full ">
             <div className="flex flex-row justify-between items-center w-full h-[15%] mb-2">
               <div className="text-white">Bitcoin</div>
@@ -319,7 +319,7 @@ const ExchangePage = () => {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="flex w-full min-h-[320px] rounded-xl bg-[#1E1F25]">
           <Exchange />
         </div>
