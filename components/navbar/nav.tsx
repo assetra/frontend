@@ -33,6 +33,13 @@ const NavbarAuth = () => {
         </div>
         <div
           className={`flex flex-row items-center hover:border-white hover:border-b-2 hover:pb-1 ${
+            pathname === "/swaps" ? "font-bold" : "font-normal"
+          }`}
+        >
+          <a href="/swaps">Swaps</a>
+        </div>
+        <div
+          className={`flex flex-row items-center hover:border-white hover:border-b-2 hover:pb-1 ${
             pathname === "/market" ? "font-bold" : "font-normal"
           }`}
         >
