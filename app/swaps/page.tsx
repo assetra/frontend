@@ -1,8 +1,8 @@
-import { Hero } from "../../components/ui/Hero";
+import { Hero } from "../../components/swap/ui/Hero";
 
 export default function Home() {
   return (
-    <div >
+    <div>
       <Hero />
     </div>
   );

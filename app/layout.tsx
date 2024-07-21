@@ -12,6 +12,7 @@ import BotIcon from "@/components/gnosis/botIcon";
 import { AuthProvider } from "@/contexts/AuthContext";
 import AuthPopups from "@/components/auth/authPopups";
 import { Providers } from "@/components/wallet/providers";
+import dynamic from "next/dynamic";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -28,6 +29,9 @@ export const metadata: Metadata = {
     "GTX is a top-tier crypto trading platform providing advanced customization features, designed to meet the unique needs of traders.",
   metadataBase: new URL("https://www.gtx.com.co"),
 };
+const ClientWrapper = dynamic(() => import("@/components/ClientWrapper"), {
+  ssr: false,
+});
 
 export default function RootLayout({
   children,
@@ -35,15 +39,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body className={poppins.className}>
         <Providers>
           <AuthProvider>
             <ThemeProvider>
-              <Navbar />
-              <BotIcon />
-              <main>{children}</main>
-              <AuthPopups />
+              <ClientWrapper>
+                <Navbar />
+                <BotIcon />
+                <main>{children}</main>
+                <AuthPopups />
+              </ClientWrapper>
             </ThemeProvider>
           </AuthProvider>
         </Providers>

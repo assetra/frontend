@@ -3,9 +3,8 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-
 const SwapSDK = dynamic(() => import("../Swap"), {
-  ssr: true,
+  ssr: false,
 });
 
 export function Hero() {
