@@ -5,14 +5,24 @@ import styles from "./styles";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import CustomChart from "./customChart";
 import localFont from "next/font/local";
-
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  PopoverClose,
+} from "@/components/swap/ui/popover";
+import dynamic from "next/dynamic";
+import { Toaster } from "../swap/ui/toaster";
 const sofia = localFont({ src: "../../public/fonts/Sofia Pro Regular.ttf" });
 const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
-
+const SwapSDK = dynamic(() => import("../swap/Swap"), {
+  ssr: false,
+});
 const Exchange = () => {
   const [usd, setUsd] = useState(5000);
   const [btc, setBtc] = useState(0.8511);
   const [rate, setRate] = useState(53260.2);
+  const [open, setOpen] = useState(false);
 
   const onExchange = () => {
     let _usd = usd;
@@ -138,11 +148,19 @@ const Exchange = () => {
         </div>
       </div>
 
-      <div
-        className={`flex justify-center items-center rounded-full cursor-pointer w-full text-white font-semibold bg-black px-8 py-2 my-2 ${sofia.className}`}
-      >
-        <button onClick={onExchange}>Exchange</button>
-      </div>
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <button
+            className={`flex justify-center items-center rounded-full cursor-pointer w-full text-white font-semibold bg-black px-8 py-2 my-2 ${sofia.className}`}
+          >
+            Exchange
+          </button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[30rem] max-w-[90vw]">
+          <SwapSDK />
+        </PopoverContent>
+      </Popover>
+      <Toaster />
     </div>
   );
 };
