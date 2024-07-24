@@ -28,11 +28,13 @@ import RandomCoinWidget from "@/components/widget/randomCoinWidget";
 import RandomCoinScript from "@/components/widget/randomCoinScript";
 import CoinListWidget from "@/components/widget/coinPriceMarqueeWidget";
 import CoinListScript from "@/components/widget/coinPriceMarqueeScript";
-
-
+import ExchangeWidget from "@/components/widget/Dashboard/ExchangeWidget";
+import CustomChartWidget from "@/components/widget/Dashboard/CustomChartWidget";
+import TransactionWidget from "@/components/widget/Dashboard/TransactionWidget";
+import BalanceWidget from "@/components/widget/Dashboard/BalanceWidget";
 interface WidgetPack {
   widget: React.FC;
-  script: React.FC;
+  script: React.FC | null;
   image: string;
 }
 
@@ -166,6 +168,26 @@ const widgetPacks: WidgetPack[] = [
     script: CoinMarketTickerListScript,
     image: "/assets/widget/tickerlist.jpg",
   },
+  {
+    widget: ExchangeWidget,
+    script: null,
+    image: "/assets/widget/exchange.jpg",
+  },
+  {
+    widget: CustomChartWidget,
+    script: null,
+    image: "/assets/widget/customcard.jpg",
+  },
+  {
+    widget: TransactionWidget,
+    script: null,
+    image: "/assets/widget/transaction.png",
+  },
+  {
+    widget: BalanceWidget,
+    script: null,
+    image: "/assets/widget/balance.jpg",
+  },
 ];
 
 const Sidebar: React.FC = () => (
@@ -187,7 +209,7 @@ const Sidebar: React.FC = () => (
 
 interface PackProps {
   widget: React.FC;
-  script: React.FC;
+  script: React.FC | null;
   image: string;
 }
 
@@ -205,7 +227,7 @@ const Pack: React.FC<PackProps> = ({
       backgroundRepeat: "no-repeat",
     }}
   >
-    <ScriptComponent />
+    {ScriptComponent && <ScriptComponent />}
     <div className="opacity-0">
       <WidgetComponent />
     </div>
