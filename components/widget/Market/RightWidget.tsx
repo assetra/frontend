@@ -175,7 +175,7 @@ const RightWidget: React.FC = () => {
   ];
   return (
     <div className="newWidget grid-stack-item">
-      <div className="flex  w-3/4 pl-3 pt-12 pb-4 h-[30rem]">
+      <div className="flex  w-[40rem] pl-3 pt-12 pb-4 h-[30rem]">
         <div className="flex w-full h-full text-white rounded-xl p-6 bg-[#1E1F25]">
           <div className="flex flex-col w-full h-full">
             <div className="flex flex-row justify-between w-full h-[30px]">

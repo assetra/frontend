@@ -34,7 +34,10 @@ import TransactionWidget from "@/components/widget/Dashboard/TransactionWidget";
 import BalanceWidget from "@/components/widget/Dashboard/BalanceWidget";
 import LeftWidget from "@/components/widget/Market/LeftWidget";
 import RightWidget from "@/components/widget/Market/RightWidget";
-
+import RampWidget from "@/components/widget/Exchange/RampWidget";
+import AdvanceChartWidget from "@/components/widget/Exchange/AdvanceChartWidget";
+import OrderWidget from "@/components/widget/Exchange/OrderWidget";
+import HeaderWidget from "@/components/widget/Exchange/HeaderWidget";
 interface WidgetPack {
   widget: React.FC;
   script: React.FC | null;
@@ -200,6 +203,26 @@ const widgetPacks: WidgetPack[] = [
     widget: RightWidget,
     script: null,
     image: "/assets/widget/right.png",
+  },
+  {
+    widget: RampWidget,
+    script: null,
+    image: "/assets/widget/ramp.png",
+  },
+  {
+    widget: AdvanceChartWidget,
+    script: null,
+    image: "/assets/widget/AdvanceChartWidget.png",
+  },
+  {
+    widget: OrderWidget,
+    script: null,
+    image: "/assets/widget/order.png",
+  },
+  {
+    widget: HeaderWidget,
+    script: null,
+    image: "/assets/widget/header.png",
   },
 ];
 
