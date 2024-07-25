@@ -32,6 +32,9 @@ import ExchangeWidget from "@/components/widget/Dashboard/ExchangeWidget";
 import CustomChartWidget from "@/components/widget/Dashboard/CustomChartWidget";
 import TransactionWidget from "@/components/widget/Dashboard/TransactionWidget";
 import BalanceWidget from "@/components/widget/Dashboard/BalanceWidget";
+import LeftWidget from "@/components/widget/Market/LeftWidget";
+import RightWidget from "@/components/widget/Market/RightWidget";
+
 interface WidgetPack {
   widget: React.FC;
   script: React.FC | null;
@@ -187,6 +190,16 @@ const widgetPacks: WidgetPack[] = [
     widget: BalanceWidget,
     script: null,
     image: "/assets/widget/balance.jpg",
+  },
+  {
+    widget: LeftWidget,
+    script: null,
+    image: "/assets/widget/left.png",
+  },
+  {
+    widget: RightWidget,
+    script: null,
+    image: "/assets/widget/right.png",
   },
 ];
 
