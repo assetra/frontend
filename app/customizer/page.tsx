@@ -184,15 +184,11 @@ const widgetPacks: WidgetPack[] = [
     script: null,
     image: "/assets/widget/customcard.jpg",
   },
-  {
-    widget: TransactionWidget,
-    script: null,
-    image: "/assets/widget/transaction.png",
-  },
+ 
   {
     widget: BalanceWidget,
     script: null,
-    image: "/assets/widget/balance.jpg",
+    image: "/assets/widget/balance.png",
   },
   {
     widget: LeftWidget,
@@ -223,6 +219,11 @@ const widgetPacks: WidgetPack[] = [
     widget: HeaderWidget,
     script: null,
     image: "/assets/widget/header.png",
+  },
+  {
+    widget: TransactionWidget,
+    script: null,
+    image: "/assets/widget/transaction.png",
   },
 ];
 
