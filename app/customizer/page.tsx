@@ -38,6 +38,7 @@ import RampWidget from "@/components/widget/Exchange/RampWidget";
 import AdvanceChartWidget from "@/components/widget/Exchange/AdvanceChartWidget";
 import OrderWidget from "@/components/widget/Exchange/OrderWidget";
 import HeaderWidget from "@/components/widget/Exchange/HeaderWidget";
+import SwapWidget from "@/components/widget/Swap/SwapWidget";
 interface WidgetPack {
   widget: React.FC;
   script: React.FC | null;
@@ -184,7 +185,7 @@ const widgetPacks: WidgetPack[] = [
     script: null,
     image: "/assets/widget/customcard.jpg",
   },
- 
+
   {
     widget: BalanceWidget,
     script: null,
@@ -199,6 +200,11 @@ const widgetPacks: WidgetPack[] = [
     widget: RightWidget,
     script: null,
     image: "/assets/widget/right.png",
+  },
+  {
+    widget: SwapWidget,
+    script: null,
+    image: "/assets/widget/swap.png",
   },
   {
     widget: RampWidget,
