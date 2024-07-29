@@ -39,14 +39,95 @@ import AdvanceChartWidget from "@/components/widget/Exchange/AdvanceChartWidget"
 import OrderWidget from "@/components/widget/Exchange/OrderWidget";
 import HeaderWidget from "@/components/widget/Exchange/HeaderWidget";
 import SwapWidget from "@/components/widget/Swap/SwapWidget";
+import ReactDOM from "react-dom";
+
 interface WidgetPack {
   widget: React.FC;
   script: React.FC | null;
   image: string;
+  name: string; // Add a name property to identify widgets
 }
+
+interface WidgetConfig extends GridStackNode {
+  name: string;
+}
+const LAYOUT_STORAGE_KEY = "customizerLayout";
 
 const DraggableContainer: React.FC = () => {
   const gridRef = useRef<GridStack | null>(null);
+
+
+  
+  const saveLayout = useCallback(() => {
+    if (gridRef.current) {
+      const items = gridRef.current.getGridItems();
+      const layout: WidgetConfig[] = items.map((item) => ({
+        name: item.getAttribute('data-widget-name') || '',
+        x: parseInt(item.getAttribute('gs-x') || '0', 10),
+        y: parseInt(item.getAttribute('gs-y') || '0', 10),
+        w: parseInt(item.getAttribute('gs-w') || '1', 10),
+        h: parseInt(item.getAttribute('gs-h') || '1', 10),
+      })).filter(item => item.name && widgetPacks.some(wp => wp.name === item.name));
+
+      console.log('Saving layout:', layout);
+      localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layout));
+    }
+  }, []);
+
+  const loadLayout = useCallback((): WidgetConfig[] => {
+    const savedLayout = localStorage.getItem(LAYOUT_STORAGE_KEY);
+    if (savedLayout) {
+      try {
+        const layout = JSON.parse(savedLayout) as WidgetConfig[];
+        const validLayout = layout.filter(item => 
+          item.name && 
+          widgetPacks.some(wp => wp.name === item.name) &&
+          typeof item.x === 'number' &&
+          typeof item.y === 'number' &&
+          typeof item.w === 'number' &&
+          typeof item.h === 'number'
+        );
+
+        if (validLayout.length !== layout.length) {
+          // If invalid items were removed, update localStorage
+          localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(validLayout));
+        }
+
+        console.log("Loaded layout:", validLayout);
+        return validLayout;
+      } catch (error) {
+        console.error("Failed to parse saved layout:", error);
+      }
+    }
+    return [];
+  }, []);
+
+ 
+  const renderWidget = useCallback((widgetName: string, element: HTMLElement) => {
+    const widgetPack = widgetPacks.find(wp => wp.name === widgetName);
+    if (widgetPack) {
+      const { widget: WidgetComponent, script: ScriptComponent } = widgetPack;
+      const content = document.createElement('div');
+      content.className = 'widget-content';
+      
+      try {
+        const root = (ReactDOM as any).createRoot(content);
+        root.render(
+          <>
+            {ScriptComponent && <ScriptComponent />}
+            <WidgetComponent />
+          </>
+        );
+        
+        element.appendChild(content);
+      } catch (error) {
+        console.error('Error rendering widget:', error);
+      }
+    } else {
+      console.error(`Widget pack not found for name: ${widgetName}`);
+    }
+  }, []);
+
 
   const initializeGrid = useCallback(() => {
     const options: GridStackOptions = {
@@ -57,6 +138,7 @@ const DraggableContainer: React.FC = () => {
     };
 
     // Wait for DOM to be ready
+    
     setTimeout(() => {
       const gridElement = document.querySelector(
         ".grid-stack"
@@ -71,21 +153,43 @@ const DraggableContainer: React.FC = () => {
             helper: "clone",
           });
 
-          grid.load([]);
-
-          grid.on(
-            "added removed change",
-            (event: Event, items: GridStackNode[]) => {
-              const itemsInfo = items
-                .map((item) => `(x,y)=${item.x},${item.y}`)
-                .join(" ");
-              console.log(
-                `${(event as CustomEvent).type} ${
-                  items.length
-                } items: ${itemsInfo}`
-              );
+          const savedLayout = loadLayout();
+          console.log('Initializing grid with layout:', savedLayout);
+          grid.load(savedLayout);
+          
+          // Render saved widgets
+          savedLayout.forEach((widget) => {
+            const element = grid.addWidget({...widget, content: ''});
+            if (element) {
+              renderWidget(widget.name, element);
             }
-          );
+          });
+
+          grid.on('added removed change', (event: Event, items: GridStackNode[]) => {
+            console.log(`Grid event: ${(event as CustomEvent).type}`, items);
+            saveLayout();
+          });
+
+          grid.on('dropped', (event: Event, previousWidget: GridStackNode, newWidget: GridStackNode) => {
+            console.log('Widget dropped:', newWidget);
+            if (newWidget.el) {
+              const widgetElement = newWidget.el as HTMLElement;
+              const contentElement = widgetElement.querySelector('.grid-stack-item-content');
+              const nameElement = contentElement?.querySelector('span');
+              const widgetName = nameElement?.textContent;
+              console.log('Widget name:', widgetName);
+              
+              if (widgetName) {
+                widgetElement.setAttribute('data-widget-name', widgetName);
+                renderWidget(widgetName, widgetElement);
+                saveLayout();
+              } else {
+                console.error('Widget name not found on dropped element');
+              }
+            } else {
+              console.error('Dropped widget element is undefined');
+            }
+          });
         } else {
           console.error("Failed to initialize GridStack");
         }
@@ -94,19 +198,21 @@ const DraggableContainer: React.FC = () => {
       }
     }, 0);
 
+
+
     return () => {
       if (gridRef.current) {
         gridRef.current.destroy();
         gridRef.current = null;
       }
     };
-  }, []);
+  }, [loadLayout, saveLayout,renderWidget]);
   const appContext = useContext(AuthContext);
   useEffect(() => {
     appContext.setNavbarState(true);
     const cleanup = initializeGrid();
     return cleanup;
-  }, [initializeGrid]);
+  }, [initializeGrid, appContext]);
 
   return (
     <>
@@ -129,107 +235,127 @@ const widgetPacks: WidgetPack[] = [
     widget: CoinCompareChartWidget,
     script: CoinCompareChartScript,
     image: "/assets/widget/compare.jpg",
+    name: "CoinCompareChart",
   },
   {
     widget: CoinConverterWidget,
     script: CoinConverterScript,
     image: "/assets/widget/converter.jpg",
+    name: "CoinConverter",
   },
   {
     widget: CoinHeatmapWidget,
     script: CoinHeatmapScript,
     image: "/assets/widget/heatmap.jpg",
+    name: "CoinHeatmap",
   },
   {
     widget: CoinListWidget,
     script: CoinListScript,
     image: "/assets/widget/coinlist.jpg",
+    name: "CoinList",
   },
   {
     widget: CoinPriceChartWidget,
     script: CoinPriceChartScript,
     image: "/assets/widget/pricechart.jpg",
+    name: "CoinPriceChart",
   },
   {
     widget: CoinPriceMarqueeWidget,
     script: CoinPriceMarqueeScript,
     image: "/assets/widget/marquee.jpg",
+    name: "CoinPriceMarquee",
   },
   {
     widget: CoinPriceStaticHeadlineWidget,
     script: CoinPriceStaticHeadlineScript,
     image: "/assets/widget/headline.jpg",
+    name: "CoinPriceStaticHeadline",
   },
   {
     widget: CryptoTickerWidget,
     script: CryptoTickerScript,
     image: "/assets/widget/ticker.jpg",
+    name: "CryptoTicker",
   },
   {
     widget: RandomCoinWidget,
     script: RandomCoinScript,
     image: "/assets/widget/random.jpg",
+    name: "RandomCoin",
   },
   {
     widget: CoinMarketTickerListWidget,
     script: CoinMarketTickerListScript,
     image: "/assets/widget/tickerlist.jpg",
+    name: "CoinMarketTickerList",
   },
   {
     widget: ExchangeWidget,
     script: null,
     image: "/assets/widget/exchange.jpg",
+    name: "Exchange",
   },
   {
     widget: CustomChartWidget,
     script: null,
     image: "/assets/widget/customcard.jpg",
+    name: "CustomChart",
   },
-
   {
     widget: BalanceWidget,
     script: null,
     image: "/assets/widget/balance.png",
+    name: "Balance",
   },
   {
     widget: LeftWidget,
     script: null,
     image: "/assets/widget/left.png",
+    name: "Left",
   },
   {
     widget: RightWidget,
     script: null,
     image: "/assets/widget/right.png",
+    name: "Right",
   },
   {
     widget: SwapWidget,
     script: null,
     image: "/assets/widget/swap.png",
+    name: "Swap",
   },
   {
     widget: RampWidget,
     script: null,
     image: "/assets/widget/ramp.png",
+    name: "Ramp",
   },
   {
     widget: AdvanceChartWidget,
     script: null,
     image: "/assets/widget/AdvanceChartWidget.png",
+    name: "AdvanceChart",
   },
   {
     widget: OrderWidget,
     script: null,
     image: "/assets/widget/order.png",
+    name: "Order",
   },
   {
     widget: HeaderWidget,
     script: null,
     image: "/assets/widget/header.png",
+    name: "Header",
   },
   {
     widget: TransactionWidget,
     script: null,
     image: "/assets/widget/transaction.png",
+    name: "Transaction",
   },
 ];
 
@@ -243,6 +369,7 @@ const Sidebar: React.FC = () => (
           widget={widgetPack.widget}
           script={widgetPack.script}
           image={widgetPack.image}
+          name={widgetPack.name}
         />
       ))}
       <TrashBin />
@@ -254,25 +381,35 @@ interface PackProps {
   widget: React.FC;
   script: React.FC | null;
   image: string;
+  name: string;
 }
+
 
 const Pack: React.FC<PackProps> = ({
   widget: WidgetComponent,
   script: ScriptComponent,
   image,
+  name,
 }) => (
   <div
-    className="flex align-middle items-center rounded w-full aspect-square p-2 mb-2 overflow-hidden"
-    style={{
-      backgroundImage: `url(${image})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-    }}
+    className="newWidget grid-stack-item"
+    data-gs-width="2"
+    data-gs-height="2"
   >
-    {ScriptComponent && <ScriptComponent />}
-    <div className="opacity-0">
-      <WidgetComponent />
+    <div
+      className="grid-stack-item-content flex align-middle items-center rounded w-full aspect-square p-2 mb-2 overflow-hidden"
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <div className="hidden">
+        {ScriptComponent && <ScriptComponent />}
+        <WidgetComponent />
+      </div>
+      <span className="text-white bg-black bg-opacity-50 p-1 rounded">{name}</span>
     </div>
   </div>
 );
