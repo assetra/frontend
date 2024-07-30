@@ -38,7 +38,6 @@ import RampWidget from "@/components/widget/Exchange/RampWidget";
 import AdvanceChartWidget from "@/components/widget/Exchange/AdvanceChartWidget";
 import OrderWidget from "@/components/widget/Exchange/OrderWidget";
 import HeaderWidget from "@/components/widget/Exchange/HeaderWidget";
-import SwapWidget from "@/components/widget/Swap/SwapWidget";
 import ReactDOM from "react-dom";
 
 interface WidgetPack {
@@ -56,87 +55,104 @@ const LAYOUT_STORAGE_KEY = "customizerLayout";
 const DraggableContainer: React.FC = () => {
   const gridRef = useRef<GridStack | null>(null);
 
-
-  
-  
-const saveLayout = useCallback(() => {
-  if (gridRef.current) {
-    const items = gridRef.current.getGridItems();
-    const layout: WidgetConfig[] = items.map((item) => ({
-      name: item.getAttribute('data-widget-name') || '',
-      x: parseInt(item.getAttribute('gs-x') || '0', 10),
-      y: parseInt(item.getAttribute('gs-y') || '0', 10),
-      w: parseInt(item.getAttribute('gs-w') || '1', 10),
-      h: parseInt(item.getAttribute('gs-h') || '1', 10),
-    })).filter(item => item.name && widgetPacks.some(wp => wp.name === item.name));
-
-    console.log('Saving layout:', layout);
-    try {
-      if (layout.length > 0) {
-        localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layout));
-      } else {
-        console.warn('No valid widgets to save. Keeping existing layout in localStorage.');
-      }
-    } catch (error) {
-      console.error("Failed to save layout to localStorage:", error);
-    }
-  }
-}, []);
-
-
-const loadLayout = useCallback((): WidgetConfig[] => {
-  try {
-    const savedLayout = localStorage.getItem(LAYOUT_STORAGE_KEY);
-    if (savedLayout) {
-      const layout = JSON.parse(savedLayout) as WidgetConfig[];
-      const validLayout = layout.filter(item => 
-        item.name && 
-        widgetPacks.some(wp => wp.name === item.name) &&
-        typeof item.x === 'number' &&
-        typeof item.y === 'number' &&
-        typeof item.w === 'number' &&
-        typeof item.h === 'number'
-      );
-
-      if (validLayout.length > 0) {
-        console.log("Loaded layout:", validLayout);
-        return validLayout;
-      } else {
-        console.warn("No valid widgets found in saved layout. Keeping existing layout in localStorage.");
-      }
-    }
-  } catch (error) {
-    console.error("Failed to load layout from localStorage:", error);
-  }
-  return [];
-}, []);
-
  
-  const renderWidget = useCallback((widgetName: string, element: HTMLElement) => {
-    const widgetPack = widgetPacks.find(wp => wp.name === widgetName);
-    if (widgetPack) {
-      const { widget: WidgetComponent, script: ScriptComponent } = widgetPack;
-      const content = document.createElement('div');
-      content.className = 'widget-content';
-      
-      try {
-        const root = (ReactDOM as any).createRoot(content);
-        root.render(
-          <>
-            {ScriptComponent && <ScriptComponent />}
-            <WidgetComponent />
-          </>
+  const saveLayout = useCallback(() => {
+    if (gridRef.current) {
+      const items = gridRef.current.getGridItems();
+      const layout: WidgetConfig[] = items
+        .map((item) => ({
+          name: item.getAttribute("data-widget-name") || "",
+          x: parseInt(item.getAttribute("gs-x") || "0", 10),
+          y: parseInt(item.getAttribute("gs-y") || "0", 10),
+          w: parseInt(item.getAttribute("gs-w") || "1", 10),
+          h: parseInt(item.getAttribute("gs-h") || "1", 10),
+        }))
+        .filter(
+          (item) => item.name && widgetPacks.some((wp) => wp.name === item.name)
         );
-        
-        element.appendChild(content);
+
+      const uniqueLayout = Array.from(
+        new Set(layout.map((a) => JSON.stringify(a)))
+      ).map((e) => JSON.parse(e));
+
+      try {
+        if (uniqueLayout.length > 0) {
+          localStorage.setItem(
+            LAYOUT_STORAGE_KEY,
+            JSON.stringify(uniqueLayout)
+          );
+        } else {
+          console.warn(
+            "No valid widgets to save. Keeping existing layout in localStorage."
+          );
+        }
       } catch (error) {
-        console.error('Error rendering widget:', error);
+        console.error("Failed to save layout to localStorage:", error);
       }
-    } else {
-      console.error(`Widget pack not found for name: ${widgetName}`);
     }
   }, []);
 
+  const loadLayout = useCallback((): WidgetConfig[] => {
+    try {
+      const savedLayout = localStorage.getItem(LAYOUT_STORAGE_KEY);
+      if (savedLayout) {
+        const layout = JSON.parse(savedLayout) as WidgetConfig[];
+        const uniqueLayout = Array.from(
+          new Set(layout.map((a) => JSON.stringify(a)))
+        ).map((e) => JSON.parse(e));
+
+        const validLayout = uniqueLayout.filter(
+          (item) =>
+            item.name &&
+            widgetPacks.some((wp) => wp.name === item.name) &&
+            typeof item.x === "number" &&
+            typeof item.y === "number" &&
+            typeof item.w === "number" &&
+            typeof item.h === "number"
+        );
+
+        if (validLayout.length > 0) {
+          console.log("Loaded layout:", validLayout);
+          return validLayout;
+        } else {
+          console.warn(
+            "No valid widgets found in saved layout. Keeping existing layout in localStorage."
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load layout from localStorage:", error);
+    }
+    return [];
+  }, []);
+
+  const renderWidget = useCallback(
+    (widgetName: string, element: HTMLElement) => {
+      const widgetPack = widgetPacks.find((wp) => wp.name === widgetName);
+      if (widgetPack) {
+        const { widget: WidgetComponent, script: ScriptComponent } = widgetPack;
+        const content = document.createElement("div");
+        content.className = "widget-content";
+
+        try {
+          const root = (ReactDOM as any).createRoot(content);
+          root.render(
+            <>
+              {ScriptComponent && <ScriptComponent />}
+              <WidgetComponent />
+            </>
+          );
+
+          element.appendChild(content);
+        } catch (error) {
+          console.error("Error rendering widget:", error);
+        }
+      } else {
+        console.error(`Widget pack not found for name: ${widgetName}`);
+      }
+    },
+    []
+  );
 
   const initializeGrid = useCallback(() => {
     const options: GridStackOptions = {
@@ -146,8 +162,6 @@ const loadLayout = useCallback((): WidgetConfig[] => {
       margin: 10,
     };
 
-    // Wait for DOM to be ready
-    
     setTimeout(() => {
       const gridElement = document.querySelector(
         ".grid-stack"
@@ -162,43 +176,56 @@ const loadLayout = useCallback((): WidgetConfig[] => {
             helper: "clone",
           });
 
+          grid.removeAll();
+
           const savedLayout = loadLayout();
-          console.log('Initializing grid with layout:', savedLayout);
+          console.log("Initializing grid with layout:", savedLayout);
           grid.load(savedLayout);
-          
-          // Render saved widgets
+
           savedLayout.forEach((widget) => {
-            const element = grid.addWidget({...widget, content: ''});
+            const element = grid.addWidget({ ...widget, content: "" });
             if (element) {
               renderWidget(widget.name, element);
             }
           });
 
-          grid.on('added removed change', (event: Event, items: GridStackNode[]) => {
-            console.log(`Grid event: ${(event as CustomEvent).type}`, items);
-            saveLayout();
-          });
-
-          grid.on('dropped', (event: Event, previousWidget: GridStackNode, newWidget: GridStackNode) => {
-            console.log('Widget dropped:', newWidget);
-            if (newWidget.el) {
-              const widgetElement = newWidget.el as HTMLElement;
-              const contentElement = widgetElement.querySelector('.grid-stack-item-content');
-              const nameElement = contentElement?.querySelector('span');
-              const widgetName = nameElement?.textContent;
-              console.log('Widget name:', widgetName);
-              
-              if (widgetName) {
-                widgetElement.setAttribute('data-widget-name', widgetName);
-                renderWidget(widgetName, widgetElement);
-                saveLayout();
-              } else {
-                console.error('Widget name not found on dropped element');
-              }
-            } else {
-              console.error('Dropped widget element is undefined');
+          grid.on(
+            "added removed change",
+            (event: Event, items: GridStackNode[]) => {
+              console.log(`Grid event: ${(event as CustomEvent).type}`, items);
+              saveLayout();
             }
-          });
+          );
+
+          grid.on(
+            "dropped",
+            (
+              event: Event,
+              previousWidget: GridStackNode,
+              newWidget: GridStackNode
+            ) => {
+              console.log("Widget dropped:", newWidget);
+              if (newWidget.el) {
+                const widgetElement = newWidget.el as HTMLElement;
+                const contentElement = widgetElement.querySelector(
+                  ".grid-stack-item-content"
+                );
+                const nameElement = contentElement?.querySelector("span");
+                const widgetName = nameElement?.textContent;
+                console.log("Widget name:", widgetName);
+
+                if (widgetName) {
+                  widgetElement.setAttribute("data-widget-name", widgetName);
+                  renderWidget(widgetName, widgetElement);
+                  saveLayout();
+                } else {
+                  console.error("Widget name not found on dropped element");
+                }
+              } else {
+                console.error("Dropped widget element is undefined");
+              }
+            }
+          );
         } else {
           console.error("Failed to initialize GridStack");
         }
@@ -207,15 +234,14 @@ const loadLayout = useCallback((): WidgetConfig[] => {
       }
     }, 0);
 
-
-
     return () => {
       if (gridRef.current) {
         gridRef.current.destroy();
         gridRef.current = null;
       }
     };
-  }, [loadLayout, saveLayout,renderWidget]);
+  }, [loadLayout, saveLayout, renderWidget]);
+
   const appContext = useContext(AuthContext);
   useEffect(() => {
     appContext.setNavbarState(true);
@@ -331,12 +357,6 @@ const widgetPacks: WidgetPack[] = [
     name: "Right",
   },
   {
-    widget: SwapWidget,
-    script: null,
-    image: "/assets/widget/swap.png",
-    name: "Swap",
-  },
-  {
     widget: RampWidget,
     script: null,
     image: "/assets/widget/ramp.png",
@@ -393,18 +413,13 @@ interface PackProps {
   name: string;
 }
 
-
 const Pack: React.FC<PackProps> = ({
   widget: WidgetComponent,
   script: ScriptComponent,
   image,
   name,
 }) => (
-  <div
-    className="newWidget grid-stack-item"
-    data-gs-width="2"
-    data-gs-height="2"
-  >
+  <div className="newWidget grid-stack-item">
     <div
       className="grid-stack-item-content flex align-middle items-center rounded w-full aspect-square p-2 mb-2 overflow-hidden"
       style={{
@@ -414,11 +429,13 @@ const Pack: React.FC<PackProps> = ({
         backgroundRepeat: "no-repeat",
       }}
     >
+      {ScriptComponent && <ScriptComponent />}
       <div className="hidden">
-        {ScriptComponent && <ScriptComponent />}
         <WidgetComponent />
       </div>
-      <span className="text-white bg-black bg-opacity-50 p-1 rounded">{name}</span>
+      <span className="text-white bg-black bg-opacity-50 p-1 rounded">
+        {name}
+      </span>
     </div>
   </div>
 );
