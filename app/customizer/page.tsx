@@ -58,49 +58,58 @@ const DraggableContainer: React.FC = () => {
 
 
   
-  const saveLayout = useCallback(() => {
-    if (gridRef.current) {
-      const items = gridRef.current.getGridItems();
-      const layout: WidgetConfig[] = items.map((item) => ({
-        name: item.getAttribute('data-widget-name') || '',
-        x: parseInt(item.getAttribute('gs-x') || '0', 10),
-        y: parseInt(item.getAttribute('gs-y') || '0', 10),
-        w: parseInt(item.getAttribute('gs-w') || '1', 10),
-        h: parseInt(item.getAttribute('gs-h') || '1', 10),
-      })).filter(item => item.name && widgetPacks.some(wp => wp.name === item.name));
+  
+const saveLayout = useCallback(() => {
+  if (gridRef.current) {
+    const items = gridRef.current.getGridItems();
+    const layout: WidgetConfig[] = items.map((item) => ({
+      name: item.getAttribute('data-widget-name') || '',
+      x: parseInt(item.getAttribute('gs-x') || '0', 10),
+      y: parseInt(item.getAttribute('gs-y') || '0', 10),
+      w: parseInt(item.getAttribute('gs-w') || '1', 10),
+      h: parseInt(item.getAttribute('gs-h') || '1', 10),
+    })).filter(item => item.name && widgetPacks.some(wp => wp.name === item.name));
 
-      console.log('Saving layout:', layout);
-      localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layout));
+    console.log('Saving layout:', layout);
+    try {
+      if (layout.length > 0) {
+        localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(layout));
+      } else {
+        console.warn('No valid widgets to save. Keeping existing layout in localStorage.');
+      }
+    } catch (error) {
+      console.error("Failed to save layout to localStorage:", error);
     }
-  }, []);
+  }
+}, []);
 
-  const loadLayout = useCallback((): WidgetConfig[] => {
+
+const loadLayout = useCallback((): WidgetConfig[] => {
+  try {
     const savedLayout = localStorage.getItem(LAYOUT_STORAGE_KEY);
     if (savedLayout) {
-      try {
-        const layout = JSON.parse(savedLayout) as WidgetConfig[];
-        const validLayout = layout.filter(item => 
-          item.name && 
-          widgetPacks.some(wp => wp.name === item.name) &&
-          typeof item.x === 'number' &&
-          typeof item.y === 'number' &&
-          typeof item.w === 'number' &&
-          typeof item.h === 'number'
-        );
+      const layout = JSON.parse(savedLayout) as WidgetConfig[];
+      const validLayout = layout.filter(item => 
+        item.name && 
+        widgetPacks.some(wp => wp.name === item.name) &&
+        typeof item.x === 'number' &&
+        typeof item.y === 'number' &&
+        typeof item.w === 'number' &&
+        typeof item.h === 'number'
+      );
 
-        if (validLayout.length !== layout.length) {
-          // If invalid items were removed, update localStorage
-          localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(validLayout));
-        }
-
+      if (validLayout.length > 0) {
         console.log("Loaded layout:", validLayout);
         return validLayout;
-      } catch (error) {
-        console.error("Failed to parse saved layout:", error);
+      } else {
+        console.warn("No valid widgets found in saved layout. Keeping existing layout in localStorage.");
       }
     }
-    return [];
-  }, []);
+  } catch (error) {
+    console.error("Failed to load layout from localStorage:", error);
+  }
+  return [];
+}, []);
 
  
   const renderWidget = useCallback((widgetName: string, element: HTMLElement) => {
