@@ -38,7 +38,7 @@ import RampWidget from "@/components/widget/Exchange/RampWidget";
 import AdvanceChartWidget from "@/components/widget/Exchange/AdvanceChartWidget";
 import OrderWidget from "@/components/widget/Exchange/OrderWidget";
 import HeaderWidget from "@/components/widget/Exchange/HeaderWidget";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 
 interface WidgetPack {
   widget: React.FC;
@@ -130,6 +130,26 @@ const DraggableContainer: React.FC = () => {
     return [];
   }, []);
 
+  const removeWidgetFromStorage = useCallback((widgetName: string) => {
+    try {
+      const savedLayout = localStorage.getItem(LAYOUT_STORAGE_KEY);
+      if (savedLayout) {
+        const layout = JSON.parse(savedLayout) as WidgetConfig[];
+        const updatedLayout = layout.filter((item) => item.name !== widgetName);
+        
+        if (updatedLayout.length > 0) {
+          localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(updatedLayout));
+          console.log(`Removed widget "${widgetName}" from storage. Updated layout:`, updatedLayout);
+        } else {
+          localStorage.removeItem(LAYOUT_STORAGE_KEY);
+          console.log(`Removed last widget "${widgetName}" from storage. Layout cleared.`);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to remove widget from localStorage:", error);
+    }
+  }, []);
+
   const renderWidget = useCallback(
     (widgetName: string, element: HTMLElement) => {
       const widgetPack = widgetPacks.find((wp) => wp.name === widgetName);
@@ -197,6 +217,14 @@ const DraggableContainer: React.FC = () => {
             "added removed change",
             (event: Event, items: GridStackNode[]) => {
               console.log(`Grid event: ${(event as CustomEvent).type}`, items);
+              if ((event as CustomEvent).type === 'removed') {
+                items.forEach(item => {
+                  const widgetName = item.el?.getAttribute('data-widget-name');
+                  if (widgetName) {
+                    removeWidgetFromStorage(widgetName);
+                  }
+                });
+              }
               saveLayout();
             }
           );
@@ -244,7 +272,7 @@ const DraggableContainer: React.FC = () => {
         gridRef.current = null;
       }
     };
-  }, [loadLayout, saveLayout, renderWidget]);
+  }, [loadLayout, saveLayout, renderWidget,removeWidgetFromStorage]);
 
   const appContext = useContext(AuthContext);
   useEffect(() => {
