@@ -39,6 +39,7 @@ import AdvanceChartWidget from "@/components/widget/Exchange/AdvanceChartWidget"
 import OrderWidget from "@/components/widget/Exchange/OrderWidget";
 import HeaderWidget from "@/components/widget/Exchange/HeaderWidget";
 import ReactDOM from "react-dom/client";
+import { Button } from "@/components/swap/ui/Button";
 
 interface WidgetPack {
   widget: React.FC;
@@ -55,7 +56,6 @@ const LAYOUT_STORAGE_KEY = "customizerLayout";
 const DraggableContainer: React.FC = () => {
   const gridRef = useRef<GridStack | null>(null);
 
- 
   const saveLayout = useCallback(() => {
     if (gridRef.current) {
       const items = gridRef.current.getGridItems();
@@ -68,28 +68,33 @@ const DraggableContainer: React.FC = () => {
           h: parseInt(item.getAttribute("gs-h") || "1", 10),
         }))
         .filter((item) => item.name); // Only filter out items without a name
-  
+
       try {
         const existingLayoutJSON = localStorage.getItem(LAYOUT_STORAGE_KEY);
-        const existingLayout: WidgetConfig[] = existingLayoutJSON 
-          ? JSON.parse(existingLayoutJSON) 
+        const existingLayout: WidgetConfig[] = existingLayoutJSON
+          ? JSON.parse(existingLayoutJSON)
           : [];
-  
+
         // Merge new layout with existing layout
         const mergedLayout = [...existingLayout, ...newLayout];
-  
+
         // Remove duplicates based on name (keeping the last occurrence)
         const uniqueLayout = mergedLayout.reduce((acc, current) => {
-          const x = acc.find(item => item.name === current.name);
+          const x = acc.find((item) => item.name === current.name);
           if (!x) {
             return acc.concat([current]);
           } else {
-            return acc.map(item => item.name === current.name ? current : item);
+            return acc.map((item) =>
+              item.name === current.name ? current : item
+            );
           }
         }, [] as WidgetConfig[]);
-  
+
         if (uniqueLayout.length > 0) {
-          localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(uniqueLayout));
+          localStorage.setItem(
+            LAYOUT_STORAGE_KEY,
+            JSON.stringify(uniqueLayout)
+          );
           console.log("Saved layout:", uniqueLayout);
         } else {
           localStorage.removeItem(LAYOUT_STORAGE_KEY);
@@ -114,12 +119,14 @@ const DraggableContainer: React.FC = () => {
             typeof item.w === "number" &&
             typeof item.h === "number"
         );
-  
+
         if (validLayout.length > 0) {
           console.log("Loaded layout:", validLayout);
           return validLayout;
         } else {
-          console.warn("No valid widgets found in saved layout. Starting with empty layout.");
+          console.warn(
+            "No valid widgets found in saved layout. Starting with empty layout."
+          );
           localStorage.removeItem(LAYOUT_STORAGE_KEY);
         }
       }
@@ -136,13 +143,21 @@ const DraggableContainer: React.FC = () => {
       if (savedLayout) {
         const layout = JSON.parse(savedLayout) as WidgetConfig[];
         const updatedLayout = layout.filter((item) => item.name !== widgetName);
-        
+
         if (updatedLayout.length > 0) {
-          localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(updatedLayout));
-          console.log(`Removed widget "${widgetName}" from storage. Updated layout:`, updatedLayout);
+          localStorage.setItem(
+            LAYOUT_STORAGE_KEY,
+            JSON.stringify(updatedLayout)
+          );
+          console.log(
+            `Removed widget "${widgetName}" from storage. Updated layout:`,
+            updatedLayout
+          );
         } else {
           localStorage.removeItem(LAYOUT_STORAGE_KEY);
-          console.log(`Removed last widget "${widgetName}" from storage. Layout cleared.`);
+          console.log(
+            `Removed last widget "${widgetName}" from storage. Layout cleared.`
+          );
         }
       }
     } catch (error) {
@@ -177,6 +192,14 @@ const DraggableContainer: React.FC = () => {
     },
     []
   );
+
+  const clearAllWidgets = useCallback(() => {
+    if (gridRef.current) {
+      gridRef.current.removeAll();
+      localStorage.removeItem(LAYOUT_STORAGE_KEY);
+      console.log("All widgets cleared from grid and local storage");
+    }
+  }, []);
 
   const initializeGrid = useCallback(() => {
     const options: GridStackOptions = {
@@ -217,9 +240,9 @@ const DraggableContainer: React.FC = () => {
             "added removed change",
             (event: Event, items: GridStackNode[]) => {
               console.log(`Grid event: ${(event as CustomEvent).type}`, items);
-              if ((event as CustomEvent).type === 'removed') {
-                items.forEach(item => {
-                  const widgetName = item.el?.getAttribute('data-widget-name');
+              if ((event as CustomEvent).type === "removed") {
+                items.forEach((item) => {
+                  const widgetName = item.el?.getAttribute("data-widget-name");
                   if (widgetName) {
                     removeWidgetFromStorage(widgetName);
                   }
@@ -272,7 +295,7 @@ const DraggableContainer: React.FC = () => {
         gridRef.current = null;
       }
     };
-  }, [loadLayout, saveLayout, renderWidget,removeWidgetFromStorage]);
+  }, [loadLayout, saveLayout, renderWidget, removeWidgetFromStorage]);
 
   const appContext = useContext(AuthContext);
   useEffect(() => {
@@ -284,16 +307,23 @@ const DraggableContainer: React.FC = () => {
   return (
     <>
       <main className="flex h-[calc(100vh-3rem)] items-center justify-between p-4 mt-12">
-        <GridContainer />
+        <GridContainer  clearAllWidgets={clearAllWidgets} />
         <Sidebar />
       </main>
     </>
   );
 };
 
-const GridContainer: React.FC = () => (
-  <div className="w-[85%] h-full rounded overflow-hidden">
+const GridContainer: React.FC<SidebarProps> = ({ clearAllWidgets }) => (
+  <div className="w-[85%] h-full rounded overflow-hidden relative">
     <div className="grid-stack bg-base-300 shadow w-full min-h-full p-2"></div>
+    <Button
+      onClick={clearAllWidgets}
+      size="sm"
+      className="btn btn-error  absolute top-[0.1rem] right-[0.1rem] transform z-10"
+    >
+      <h6 className="text-sm">Clear All Widgets</h6>
+    </Button>
   </div>
 );
 
@@ -420,6 +450,10 @@ const widgetPacks: WidgetPack[] = [
   },
 ];
 
+interface SidebarProps {
+  clearAllWidgets: () => void;
+}
+
 const Sidebar: React.FC = () => (
   <aside className="bg-base-300 w-[14%] h-full rounded p-2 overflow-hidden">
     <TrashBin />
@@ -433,7 +467,6 @@ const Sidebar: React.FC = () => (
           name={widgetPack.name}
         />
       ))}
-      <TrashBin />
     </div>
   </aside>
 );
