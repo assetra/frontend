@@ -59,7 +59,7 @@ const DraggableContainer: React.FC = () => {
   const saveLayout = useCallback(() => {
     if (gridRef.current) {
       const items = gridRef.current.getGridItems();
-      const layout: WidgetConfig[] = items
+      const newLayout: WidgetConfig[] = items
         .map((item) => ({
           name: item.getAttribute("data-widget-name") || "",
           x: parseInt(item.getAttribute("gs-x") || "0", 10),
@@ -67,24 +67,33 @@ const DraggableContainer: React.FC = () => {
           w: parseInt(item.getAttribute("gs-w") || "1", 10),
           h: parseInt(item.getAttribute("gs-h") || "1", 10),
         }))
-        .filter(
-          (item) => item.name && widgetPacks.some((wp) => wp.name === item.name)
-        );
-
-      const uniqueLayout = Array.from(
-        new Set(layout.map((a) => JSON.stringify(a)))
-      ).map((e) => JSON.parse(e));
-
+        .filter((item) => item.name); // Only filter out items without a name
+  
       try {
+        const existingLayoutJSON = localStorage.getItem(LAYOUT_STORAGE_KEY);
+        const existingLayout: WidgetConfig[] = existingLayoutJSON 
+          ? JSON.parse(existingLayoutJSON) 
+          : [];
+  
+        // Merge new layout with existing layout
+        const mergedLayout = [...existingLayout, ...newLayout];
+  
+        // Remove duplicates based on name (keeping the last occurrence)
+        const uniqueLayout = mergedLayout.reduce((acc, current) => {
+          const x = acc.find(item => item.name === current.name);
+          if (!x) {
+            return acc.concat([current]);
+          } else {
+            return acc.map(item => item.name === current.name ? current : item);
+          }
+        }, [] as WidgetConfig[]);
+  
         if (uniqueLayout.length > 0) {
-          localStorage.setItem(
-            LAYOUT_STORAGE_KEY,
-            JSON.stringify(uniqueLayout)
-          );
+          localStorage.setItem(LAYOUT_STORAGE_KEY, JSON.stringify(uniqueLayout));
+          console.log("Saved layout:", uniqueLayout);
         } else {
-          console.warn(
-            "No valid widgets to save. Keeping existing layout in localStorage."
-          );
+          localStorage.removeItem(LAYOUT_STORAGE_KEY);
+          console.warn("No widgets to save. Cleared layout in localStorage.");
         }
       } catch (error) {
         console.error("Failed to save layout to localStorage:", error);
@@ -97,31 +106,26 @@ const DraggableContainer: React.FC = () => {
       const savedLayout = localStorage.getItem(LAYOUT_STORAGE_KEY);
       if (savedLayout) {
         const layout = JSON.parse(savedLayout) as WidgetConfig[];
-        const uniqueLayout = Array.from(
-          new Set(layout.map((a) => JSON.stringify(a)))
-        ).map((e) => JSON.parse(e));
-
-        const validLayout = uniqueLayout.filter(
+        const validLayout = layout.filter(
           (item) =>
             item.name &&
-            widgetPacks.some((wp) => wp.name === item.name) &&
             typeof item.x === "number" &&
             typeof item.y === "number" &&
             typeof item.w === "number" &&
             typeof item.h === "number"
         );
-
+  
         if (validLayout.length > 0) {
           console.log("Loaded layout:", validLayout);
           return validLayout;
         } else {
-          console.warn(
-            "No valid widgets found in saved layout. Keeping existing layout in localStorage."
-          );
+          console.warn("No valid widgets found in saved layout. Starting with empty layout.");
+          localStorage.removeItem(LAYOUT_STORAGE_KEY);
         }
       }
     } catch (error) {
       console.error("Failed to load layout from localStorage:", error);
+      localStorage.removeItem(LAYOUT_STORAGE_KEY);
     }
     return [];
   }, []);
