@@ -181,7 +181,6 @@ const DraggableContainer: React.FC = () => {
               <WidgetComponent />
             </>
           );
-
           element.appendChild(content);
         } catch (error) {
           console.error("Error rendering widget:", error);
@@ -307,7 +306,7 @@ const DraggableContainer: React.FC = () => {
   return (
     <>
       <main className="flex h-[calc(100vh-3rem)] items-center justify-between p-4 mt-12">
-        <GridContainer  clearAllWidgets={clearAllWidgets} />
+        <GridContainer clearAllWidgets={clearAllWidgets} />
         <Sidebar />
       </main>
     </>
@@ -467,6 +466,7 @@ const Sidebar: React.FC = () => (
           name={widgetPack.name}
         />
       ))}
+      <TrashBin />
     </div>
   </aside>
 );
