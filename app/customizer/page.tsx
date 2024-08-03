@@ -484,23 +484,19 @@ const Pack: React.FC<PackProps> = ({
   image,
   name,
 }) => (
-  <div className="newWidget grid-stack-item">
-    <div
-      className="grid-stack-item-content flex align-middle items-center rounded w-full aspect-square p-2 mb-2 overflow-hidden"
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      {ScriptComponent && <ScriptComponent />}
-      <div className="hidden">
-        <WidgetComponent />
-      </div>
-      <span className="text-white bg-black bg-opacity-50 p-1 rounded">
-        {name}
-      </span>
+  <div
+    className="flex align-middle items-center rounded w-full aspect-square p-2 mb-2 overflow-hidden"
+    style={{
+      backgroundImage: `url(${image})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+    title={name}
+  >
+    {ScriptComponent && <ScriptComponent />}
+    <div className="opacity-0">
+      <WidgetComponent />
     </div>
   </div>
 );
