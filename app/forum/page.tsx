@@ -53,10 +53,10 @@ const Page: React.FC = () => {
   const posts: Post[] = [
     {
       id: 1,
-      image: "/placeholder.svg",
+      image: "/assets/forum/post1.png",
       title: "Blockchain developer best practices on innovationchain",
       tags: ["finance", "bitcoin", "crypto"],
-      authorAvatar: "/placeholder-user.jpg",
+      authorAvatar: "/assets/forum/user1.png",
       authorInitials: "PG",
       authorName: "Pavel Gvay",
       postedAgo: "3 weeks ago",
@@ -66,10 +66,10 @@ const Page: React.FC = () => {
     },
     {
       id: 2,
-      image: "/placeholder.svg",
+      image: "/assets/forum/post2.png",
       title: "How to build a modern website with React",
       tags: ["javascript", "react", "webdev"],
-      authorAvatar: "/placeholder-user.jpg",
+      authorAvatar: "/assets/forum/user2.png",
       authorInitials: "YJ",
       authorName: "Yogesh Jain",
       postedAgo: "1 day ago",
@@ -79,10 +79,10 @@ const Page: React.FC = () => {
     },
     {
       id: 3,
-      image: "/placeholder.svg",
+      image: "/assets/forum/post3.png",
       title: "The future of design and UI/UX",
       tags: ["design", "ui", "ux"],
-      authorAvatar: "/placeholder-user.jpg",
+      authorAvatar: "/assets/forum/user3.png",
       authorInitials: "PG",
       authorName: "Pavel Gvay",
       postedAgo: "1 week ago",
@@ -92,10 +92,10 @@ const Page: React.FC = () => {
     },
     {
       id: 4,
-      image: "/placeholder.svg",
+      image: "/assets/forum/post4.png",
       title: "How to build a modern website with React",
       tags: ["javascript", "react", "webdev"],
-      authorAvatar: "/placeholder-user.jpg",
+      authorAvatar: "/assets/forum/user.png",
       authorInitials: "YJ",
       authorName: "Yogesh Jain",
       postedAgo: "1 day ago",
@@ -105,10 +105,10 @@ const Page: React.FC = () => {
     },
     {
       id: 5,
-      image: "/placeholder.svg",
+      image: "/assets/forum/post1.png",
       title: "The future of design and UI/UX",
       tags: ["design", "ui", "ux"],
-      authorAvatar: "/placeholder-user.jpg",
+      authorAvatar: "/assets/forum/user1.png",
       authorInitials: "PG",
       authorName: "Pavel Gvay",
       postedAgo: "1 week ago",
@@ -118,10 +118,10 @@ const Page: React.FC = () => {
     },
     {
       id: 6,
-      image: "/placeholder.svg",
+      image: "/assets/forum/post2.png",
       title: "How to build a modern website with React",
       tags: ["javascript", "react", "webdev"],
-      authorAvatar: "/placeholder-user.jpg",
+      authorAvatar: "/assets/forum/user2.png",
       authorInitials: "YJ",
       authorName: "Yogesh Jain",
       postedAgo: "1 day ago",
@@ -129,7 +129,6 @@ const Page: React.FC = () => {
       likes: 345,
       comments: 12,
     },
-  
   ];
 
   const postCounts: PostCounts = {
@@ -148,11 +147,23 @@ const Page: React.FC = () => {
         <div className="space-y-4">
           <div className="p-4 bg-gray-800 rounded-xl flex flex-col gap-2">
             {[
-              { title: "Newest and Recent", description: "Find the latest update" },
-              { title: "Popular of the day", description: "Shots featured today by curators" },
-              { title: "Following", description: "Explore from your favorite person" },
+              {
+                title: "Newest and Recent",
+                description: "Find the latest update",
+              },
+              {
+                title: "Popular of the day",
+                description: "Shots featured today by curators",
+              },
+              {
+                title: "Following",
+                description: "Explore from your favorite person",
+              },
             ].map((item, index) => (
-              <div key={index} className="hover:bg-[#2C353D] hover:rounded-xl py-2 px-2">
+              <div
+                key={index}
+                className="hover:bg-[#2C353D] hover:rounded-xl py-2 px-2"
+              >
                 <h2 className="text-sm font-semibold">{item.title}</h2>
                 <p className="text-xs text-gray-400">{item.description}</p>
               </div>
@@ -163,13 +174,21 @@ const Page: React.FC = () => {
           <div className="p-4 bg-gray-800 rounded-xl">
             <h2 className="text-lg font-semibold">Popular Tags</h2>
             {fetchedTags.map((tag) => (
-              <TagGroupItem key={tag} item={tag} postCount={postCounts[tag] || 0} />
+              <TagGroupItem
+                key={tag}
+                item={tag}
+                postCount={postCounts[tag] || 0}
+              />
             ))}
           </div>
           <div className="p-4 bg-gray-800 rounded-lg">
             <h2 className="text-lg font-semibold">Pinned Group</h2>
             {fetchedGroups.map((group) => (
-              <TagGroupItem key={group} item={group} postCount={postCounts[group] || 0} />
+              <TagGroupItem
+                key={group}
+                item={group}
+                postCount={postCounts[group] || 0}
+              />
             ))}
           </div>
         </div>
@@ -177,7 +196,7 @@ const Page: React.FC = () => {
       <main className="flex-1 p-4 space-y-4">
         <div className="flex items-center space-x-4 p-4 gap-4 bg-gray-800 rounded-[16px]">
           <Avatar>
-            <AvatarImage src="/placeholder-user.jpg" alt="User Avatar" />
+            <AvatarImage src="/assets/forum/user.png" alt="User Avatar" />
             <AvatarFallback>YJ</AvatarFallback>
           </Avatar>
           <input
