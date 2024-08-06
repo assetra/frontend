@@ -59,6 +59,13 @@ const NavbarAuth = () => {
         >
           <a href="/exchange">Exchange</a>
         </div>
+        <div
+          className={`flex flex-row items-center hover:border-white hover:border-b-2 hover:pb-1 ${
+            pathname === "/forum" ? "font-bold" : "font-normal"
+          }`}
+        >
+          <a href="/forum">Forum</a>
+        </div>
       </div>
       <div className="flex flex-row space-x-4 items-center font-semibold">
         {isAuthenticated ? (
