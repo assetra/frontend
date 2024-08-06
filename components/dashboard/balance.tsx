@@ -1,77 +1,37 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAccount, useBalance, useChainId } from 'wagmi';
 import PieChart from "./pieChart";
 
 const Balance = () => {
-  const [account, setAccount] = useState<string | null>(null);
-  const [balance, setBalance] = useState<string | null>(null);
-  const [isConnected, setIsConnected] = useState<boolean>(true);
-  const [chainId, setChainId] = useState<string | null>(null);
-  const [currency, setCurrency] = useState<string>("ETH");
+  const { address, isConnected } = useAccount();
+  const chainId = useChainId();
+  const { data: balanceData, isLoading: isBalanceLoading } = useBalance({ 
+    address: address as `0x${string}` | undefined
+  });
   const [usdBalance, setUsdBalance] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchAccountAndBalance = async () => {
-    const accounts: string[] = await window.ethereum.request({
-      method: "eth_accounts",
-    });
-    if (accounts.length > 0) {
-      const account = accounts[0];
-      setAccount(account);
-
-      const balance: string = await window.ethereum.request({
-        method: "eth_getBalance",
-        params: [account, "latest"],
-      });
-
-      const balanceInEther = (parseInt(balance) / Math.pow(10, 18)).toFixed(4);
-      setBalance(balanceInEther);
-
-      const chainId: string = await window.ethereum.request({
-        method: "eth_chainId",
-      });
-      setChainId(chainId);
-      updateCurrency(chainId);
-      fetchUsdBalance(balanceInEther, chainId);
-    } else {
-      setIsConnected(false);
-      setAccount(null);
-      setBalance(null);
-      setChainId(null);
-      setCurrency("ETH");
-      setUsdBalance(null);
-    }
-  };
-
-  const updateCurrency = (chainId: string) => {
-    switch (chainId) {
-      case "0x1":
-        setCurrency("ETH");
-        break;
-      case "0x89":
-        setCurrency("MATIC");
-        break;
-      case "0x38":
-        setCurrency("BNB");
-        break;
-      default:
-        setCurrency("Unknown");
-    }
-  };
-
-  const fetchUsdBalance = async (balanceInEther: string, chainId: string) => {
+  const fetchUsdBalance = async (balance: string, chainId: number) => {
     let coinId = "";
     switch (chainId) {
-      case "0x1":
+      case 1:
         coinId = "ethereum";
         break;
-      case "0x89":
+      case 137:
         coinId = "matic-network";
         break;
-      case "0x38":
+      case 56:
         coinId = "binancecoin";
         break;
       default:
         coinId = "";
+    }
+
+    if (!coinId) {
+      setError('Unsupported network');
+      return;
     }
 
     try {
@@ -79,37 +39,35 @@ const Balance = () => {
         `https://api.coingecko.com/api/v3/simple/price?ids=${coinId}&vs_currencies=usd`
       );
       const usdRate = response.data[coinId].usd;
-      const usdValue = (parseFloat(balanceInEther) * usdRate).toFixed(2);
+      const usdValue = (parseFloat(balance) * usdRate).toFixed(2);
       setUsdBalance(usdValue);
-    } catch (error) {
-      console.error("Error fetching USD balance:", error);
+    } catch (err: any) {
+      console.error("Error fetching USD balance:", err);
+      setError('Failed to fetch USD balance');
     }
   };
 
   useEffect(() => {
-    if (isConnected) {
-      fetchAccountAndBalance();
-    }
-
-    if (typeof window.ethereum !== "undefined") {
-      window.ethereum.on("accountsChanged", fetchAccountAndBalance);
-      window.ethereum.on("chainChanged", (chainId: string) => {
-        setChainId(chainId);
-        updateCurrency(chainId);
-        fetchAccountAndBalance();
-      });
-    }
-
-    return () => {
-      if (typeof window.ethereum !== "undefined") {
-        window.ethereum.removeListener(
-          "accountsChanged",
-          fetchAccountAndBalance
-        );
-        window.ethereum.removeListener("chainChanged", fetchAccountAndBalance);
+    const updateBalance = async () => {
+      setIsLoading(true);
+      setError(null);
+      
+      if (isConnected && balanceData && chainId) {
+        try {
+          await fetchUsdBalance(balanceData.formatted, chainId);
+        } catch (err: any) {
+          console.error('Error updating balance:', err);
+          setError(err.message || 'An error occurred while fetching balance');
+        }
+      } else if (!isConnected) {
+        setUsdBalance(null);
       }
+      
+      setIsLoading(false);
     };
-  }, [isConnected]);
+
+    updateBalance();
+  }, [isConnected, balanceData, chainId]);
 
   return (
     <div className="pr-10.5 bg-[#1E1F25] rounded-xl w-full h-full">
@@ -119,31 +77,46 @@ const Balance = () => {
             <div className="w-full flex justify-between pb-2">
               <h1>Balance</h1>
               <div className="flex justify">
-                <img src="/images/arrow-up-green.png" />
+                <img src="/images/arrow-up-green.png" alt="Arrow up" />
                 <p>2.36%</p>
               </div>
             </div>
             <div>
-              <h1 className="text-3xl font-extrabold">${usdBalance}</h1>
-              <p className="mb-2">
-                {balance} {currency}
-              </p>
+              {isLoading || isBalanceLoading ? (
+                <p>Loading balance...</p>
+              ) : isConnected ? (
+                <>
+                  <h1 className="text-3xl font-extrabold">${usdBalance || '0.00'}</h1>
+                  <p className="mb-2">
+                    {balanceData?.formatted || '0'} {balanceData?.symbol || 'ETH'}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h1 className="text-3xl font-extrabold">$0.00</h1>
+                  <div className="flex gap-4">
+                    <p className="mb-2">0 ETH</p>
+                    <p className="text-yellow-500">Connect wallet to see real balance</p>
+                  </div>
+                </>
+              )}
             </div>
+            {error && <p className="text-red-500 mt-2">{error}</p>}
             <div className="flex flex-row pt-4 w-full">
               <div className="flex flex-col w-1/2 justify-start">
                 <div className="flex flex-row py-2">
-                  <img src="/images/arrow-down-blue-24-bg.png" />
-                  <p className="pl-5">Income</p>
+                  <img src="/images/arrow-down-blue-24-bg.png" alt="Income arrow" />
+                  <p className="pl-5">Received</p>
                 </div>
-                <div>USD ${usdBalance}</div>
+                <div>USD ${isConnected ? usdBalance : '0.00'}</div>
               </div>
               <div className="flex flex-col w-1/2 justify-start pl-5">
                 <div className="flex flex-col border-l-2 px-5 border-[#34384C]">
                   <div className="flex flex-row py-2">
-                    <img src="/images/arrow-up-red-24-bg.png" />
-                    <p className="pl-5">Expenses</p>
+                    <img src="/images/arrow-up-red-24-bg.png" alt="Expenses arrow" />
+                    <p className="pl-5">Sent</p>
                   </div>
-                  <div>USD ${usdBalance}</div>
+                  <div>USD ${isConnected ? usdBalance : '0.00'}</div>
                 </div>
               </div>
             </div>
@@ -163,15 +136,15 @@ const Balance = () => {
             <div className="flex">
               <div>
                 <div className="flex justify py-3">
-                  <img src="/images/arrow-up-green.png" />
+                  <img src="/images/arrow-up-green.png" alt="Arrow up" />
                   <p>2.36%</p>
                 </div>
                 <div className="flex justify  py-3">
-                  <img src="/images/arrow-up-green.png" />
+                  <img src="/images/arrow-up-green.png" alt="Arrow up" />
                   <p>1.36%</p>
                 </div>
                 <div className="flex justify  py-3">
-                  <img src="/images/arrow-up-green.png" />
+                  <img src="/images/arrow-up-green.png" alt="Arrow up" />
                   <p>2.46%</p>
                 </div>
               </div>
