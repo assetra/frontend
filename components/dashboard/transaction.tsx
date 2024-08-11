@@ -29,7 +29,7 @@ export default function Transaction() {
           <img src="/images/arrow-down-white.png" alt="arrow-down-white" />
         </div>
       </div>
-      <div className="overflow-y-auto w-full h-[8rem] mt-4 px-4">
+      <div className="overflow-y-auto w-full h-[10rem] mt-4 px-4">
       {data.map((item, index) => (
               <div
                 key={index}
