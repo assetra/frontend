@@ -132,10 +132,7 @@ const NavbarAuth = () => {
                 <div className="w-8 rounded-full hover:border-[3px] border-blue-300">
                   <img
                     alt="Profile Picture"
-                    src={
-                      user?.profilePicture ||
-                      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    }
+                    src={user?.profilePicture || "/assets/profile.png"}
                   />
                 </div>
               </a>

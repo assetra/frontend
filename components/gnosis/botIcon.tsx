@@ -9,7 +9,7 @@ import promptTemplate from "./promptTemplate";
 const BotIcon: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <div
-      className="tooltip tooltip-left fixed bottom-6 right-6 p-4 rounded-full bg-base-content text-white cursor-pointer shadow-lg"
+      className="tooltip tooltip-left fixed bottom-6 right-6 p-4 rounded-full bg-black text-white cursor-pointer shadow-lg z-[9999]"
       data-tip="Click to chat"
       onClick={onClick}
       aria-label="Open chat"
@@ -104,7 +104,7 @@ const ChatWindow: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 h-[520px] w-[400px] bg-white flex flex-col shadow-lg rounded-xl">
+    <div className="fixed bottom-4 right-4 h-[520px] w-[400px] bg-white flex flex-col shadow-lg rounded-xl z-[9999]">
       <div className="bg-black flex items-center justify-between py-2 px-4 rounded-t-xl">
         <h1 className="text-white">Gnosis</h1>
         <button className="text-white" onClick={onClose}>
