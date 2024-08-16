@@ -3,15 +3,72 @@ import axios from "axios";
 import { useAccount, useBalance, useChainId } from "wagmi";
 import WalletInfo from "./WalletInfo";
 
-const Balance = () => {
+interface Transaction {
+  value: string;
+  from_address: string;
+  to_address: string;
+  block_timestamp: string;
+}
+
+const Balance: React.FC = () => {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
   const { data: balanceData, isLoading: isBalanceLoading } = useBalance({
     address: address as `0x${string}` | undefined,
   });
+
   const [usdBalance, setUsdBalance] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [transactionData, setTransactionData] = useState<{
+    receivedAmount: number;
+    sentAmount: number;
+  }>({ receivedAmount: 0, sentAmount: 0 });
+
+  const fetchTransactions = async () => {
+    const apikey =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImE4NjE5MDFhLWE4NzAtNGU4My04OWJmLTU3YjQ3MGI4NmE4ZSIsIm9yZ0lkIjoiNDA0MzAxIiwidXNlcklkIjoiNDE1NDM1IiwidHlwZUlkIjoiZTc1Mzk0N2EtYzYyMS00YTczLThmMmItZjQyZTU1YzA2ZmE1IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjMzNzgzNDIsImV4cCI6NDg3OTEzODM0Mn0.68iPXXiLc7Mnet7NCLe7YOP1HGizPt12PZHLWFnVm2w";
+    const config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: `https://deep-index.moralis.io/api/v2.2/${address}/verbose?chain=eth&order=DESC`,
+      headers: {
+        accept: "application/json",
+        "X-API-Key": apikey,
+      },
+    };
+
+    let receivedAmount = 0;
+    let sentAmount = 0;
+
+    try {
+      const response = await axios.request(config);
+      const transactions: Transaction[] = response.data.result;
+
+      const currentTime = new Date();
+      const timeLimit = new Date(currentTime.getTime() - 24 * 60 * 60 * 1000);
+
+      transactions.forEach((tx) => {
+        const txTime = new Date(tx.block_timestamp);
+        if (txTime > timeLimit) {
+          const valueInEther = parseFloat(tx.value) / 1e18;
+          if (
+            tx.from_address.toLowerCase() === (address as string).toLowerCase()
+          ) {
+            sentAmount += valueInEther;
+          } else if (
+            tx.to_address.toLowerCase() === (address as string).toLowerCase()
+          ) {
+            receivedAmount += valueInEther;
+          }
+        }
+      });
+
+      setTransactionData({ receivedAmount, sentAmount });
+    } catch (error) {
+      console.error("Error fetching transactions:", error);
+    }
+  };
 
   const fetchUsdBalance = async (balance: string, chainId: number) => {
     let coinId = "";
@@ -55,6 +112,7 @@ const Balance = () => {
       if (isConnected && balanceData && chainId) {
         try {
           await fetchUsdBalance(balanceData.formatted, chainId);
+          await fetchTransactions();
         } catch (err: any) {
           console.error("Error updating balance:", err);
           setError(err.message || "An error occurred while fetching balance");
@@ -76,10 +134,6 @@ const Balance = () => {
           <div className="flex flex-col justify-between border-r-2 border-[#34384C] h-full pr-10">
             <div className="w-full flex justify-between pb-2">
               <h1>Balance</h1>
-              <div className="flex justify">
-                <img src="/images/arrow-up-green.png" alt="Arrow up" />
-                <p>2.36%</p>
-              </div>
             </div>
             <div>
               {isLoading || isBalanceLoading ? (
@@ -116,9 +170,14 @@ const Balance = () => {
                   />
                   <p className="pl-5">Received</p>
                 </div>
-                <div>USD ${isConnected ? usdBalance : "0.00"}</div>
+                <div>
+                  USD $
+                  {isConnected
+                    ? transactionData.receivedAmount.toFixed(4)
+                    : "0.00"}
+                </div>
               </div>
-              <div className="flex flex-col w-1/2 justify-start pl-5">
+              <div className="flex flex-col w-1/2 justify-start">
                 <div className="flex flex-col border-l-2 px-5 border-[#34384C]">
                   <div className="flex flex-row py-2">
                     <img
@@ -127,7 +186,12 @@ const Balance = () => {
                     />
                     <p className="pl-5">Sent</p>
                   </div>
-                  <div>USD ${isConnected ? usdBalance : "0.00"}</div>
+                  <div>
+                    USD $
+                    {isConnected
+                      ? transactionData.sentAmount.toFixed(4)
+                      : "0.00"}
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -8,175 +9,67 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { format } from "date-fns";
-
-const dateFormatter = (dateStr: string) => {
-  const date = new Date(dateStr);
-  return format(date, "MMM dd, yyyy");
-};
-
-const data = [
-  {
-    name: "A",
-    BTC: 4,
-    ETH: 2,
-    USDT: 2,
-    date: "2023-06-01",
-  },
-  {
-    name: "B",
-    BTC: 3,
-    ETH: 1,
-    USDT: 3.2,
-    date: "2023-06-01",
-  },
-  {
-    name: "C",
-    BTC: 2,
-    ETH: 9,
-    USDT: 2.7,
-    date: "2023-06-01",
-  },
-  {
-    name: "D",
-    BTC: 2,
-    ETH: 3,
-    USDT: 4,
-    date: "2023-06-01",
-  },
-  {
-    name: "E",
-    BTC: 1,
-    ETH: 4,
-    USDT: 1,
-    date: "2023-06-01",
-  },
-  {
-    name: "F",
-    BTC: 2,
-    ETH: 3,
-    USDT: 1.5,
-    date: "2023-06-01",
-  },
-  {
-    name: "G",
-    BTC: 3,
-    ETH: 4,
-    USDT: 5,
-    date: "2023-06-01",
-  },
-  {
-    name: "A",
-    BTC: 4,
-    ETH: 2,
-    USDT: 2,
-    date: "2023-06-02",
-  },
-  {
-    name: "B",
-    BTC: 3,
-    ETH: 1,
-    USDT: 3.2,
-    date: "2023-06-02",
-  },
-  {
-    name: "C",
-    BTC: 2,
-    ETH: 9,
-    USDT: 2.7,
-    date: "2023-06-02",
-  },
-  {
-    name: "D",
-    BTC: 2,
-    ETH: 3,
-    USDT: 4,
-    date: "2023-06-02",
-  },
-  {
-    name: "E",
-    BTC: 1,
-    ETH: 4,
-    USDT: 1,
-    date: "2023-06-02",
-  },
-  {
-    name: "F",
-    BTC: 2,
-    ETH: 3,
-    USDT: 1.5,
-    date: "2023-06-02",
-  },
-  {
-    name: "G",
-    BTC: 3,
-    ETH: 4,
-    USDT: 5,
-    date: "2023-06-02",
-  },
-  {
-    name: "A",
-    BTC: 4,
-    ETH: 2,
-    USDT: 2,
-    date: "2023-06-03",
-  },
-  {
-    name: "B",
-    BTC: 3,
-    ETH: 1,
-    USDT: 3.2,
-    date: "2023-06-03",
-  },
-  {
-    name: "C",
-    BTC: 2,
-    ETH: 9,
-    USDT: 2.7,
-    date: "2023-06-03",
-  },
-  {
-    name: "D",
-    BTC: 2,
-    ETH: 3,
-    USDT: 4,
-    date: "2023-06-03",
-  },
-  {
-    name: "E",
-    BTC: 1,
-    ETH: 4,
-    USDT: 1,
-    date: "2023-06-03",
-  },
-  {
-    name: "F",
-    BTC: 2,
-    ETH: 3,
-    USDT: 1.5,
-    date: "2023-06-03",
-  },
-  {
-    name: "G",
-    BTC: 3,
-    ETH: 4,
-    USDT: 5,
-    date: "2023-06-03",
-  },
-];
+import { convertWeiToEther, formatDate } from "@/components/lib/utils";
+import { useAccount } from "wagmi";
+interface TransactionData {
+  name: string;
+  ETH: number;
+  date: string;
+}
 
 export default function App() {
+  const [data, setData] = useState<TransactionData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const address = useAccount();
+  useEffect(() => {
+    const fetchData = async () => {
+      const apikey =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImE4NjE5MDFhLWE4NzAtNGU4My04OWJmLTU3YjQ3MGI4NmE4ZSIsIm9yZ0lkIjoiNDA0MzAxIiwidXNlcklkIjoiNDE1NDM1IiwidHlwZUlkIjoiZTc1Mzk0N2EtYzYyMS00YTczLThmMmItZjQyZTU1YzA2ZmE1IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjMzNzgzNDIsImV4cCI6NDg3OTEzODM0Mn0.68iPXXiLc7Mnet7NCLe7YOP1HGizPt12PZHLWFnVm2w";
+      const config = {
+        method: "get",
+        maxBodyLength: Infinity,
+        url: `https://deep-index.moralis.io/api/v2.2/${address}/verbose?chain=eth&order=DESC`,
+        headers: {
+          accept: "application/json",
+          "X-API-Key": apikey,
+        },
+      };
+
+      try {
+        const response = await axios.request(config);
+        const apiData = response.data.result;
+
+        const formattedData: TransactionData[] = apiData.map(
+          (item: any, index: number) => ({
+            name: String.fromCharCode(65 + index),
+            ETH: convertWeiToEther(item.value),
+            date: formatDate(item.block_timestamp),
+          })
+        );
+
+        setData(formattedData);
+        if (formattedData.length === 0) {
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+  if (!loading) {
+    return <div className="text-white">No data Available...</div>;
+  }
   return (
     <ResponsiveContainer height={270}>
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="4 4" stroke="#5D6588" />
         <XAxis dataKey="name" padding={{ left: 30, right: 30 }} />
-        {/* <XAxis dataKey="date" tickFormatter={dateFormatter} padding={{ left: 30, right: 30 }} /> */}
         <YAxis />
         <Tooltip />
         <Line type="monotone" dataKey="ETH" stroke="#BD47FB" />
-        <Line type="monotone" dataKey="BTC" stroke="#F7931A" />
-        <Line type="monotone" dataKey="USDT" stroke="#1BA27A" />
       </LineChart>
     </ResponsiveContainer>
   );
