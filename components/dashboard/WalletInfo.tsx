@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
 import Image from "next/image";
-import axios from "axios";
+import axios, { Method } from "axios";
 import { useAccount } from "wagmi";
 
 interface TokenData {
@@ -37,7 +37,7 @@ const WalletInfo: React.FC = () => {
       if (!address) return;
 
       let config = {
-        method: "get",
+        method: "get" as Method, // Explicitly typed method
         maxBodyLength: Infinity,
         url: `https://deep-index.moralis.io/api/v2.2/wallets/${address}/tokens?chain=eth`,
         headers: {

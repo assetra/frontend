@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { Method } from "axios";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 
@@ -35,7 +35,7 @@ export default function Transaction() {
 
       try {
         const config = {
-          method: "get",
+          method: "get" as Method, // Explicitly typed method
           url: `https://deep-index.moralis.io/api/v2.2/${address}/verbose?chain=eth&order=DESC`,
           headers: {
             accept: "application/json",
