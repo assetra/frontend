@@ -2,124 +2,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import Image from "next/image";
 import withAuth from "../auth/withAuth";
+import WalletTransaction from "@/components/dashboard/walletTransaction";
 import PriceWidget from "@/components/forum/priceWidget";
-
 const Wallet = () => {
-  const data = [
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-    {
-      icon: "/images/market-icon/BTC.png",
-      type: "BTC",
-      name: "Bitcoin",
-      price: "USD 53,260,20",
-      change: 0.25,
-      graph: "/images/market-graph/BTC.png",
-    },
-    {
-      icon: "/images/market-icon/ETH.png",
-      type: "ETH",
-      name: "Ethereum",
-      price: "USD 53,260,20",
-      change: -4.51,
-      graph: "/images/market-graph/ETH.png",
-    },
-  ];
-
   const summary = [
     {
       type: "BTC",
@@ -172,7 +57,7 @@ const Wallet = () => {
                   <div className="text-[#5D6588] text-[12px]">
                     Exchange Balance
                   </div>
-                  <div className="text-white text-[20px]">0.213435345</div>
+                  <div className="text-white text-[20px]">{"wallet balance"}</div>
                   <div className="text-[#11CABE] text-[16px]">3,897.98 USD</div>
                 </div>
                 <div className="flex flex-col justify-end w-1/3 h-full">
@@ -216,53 +101,7 @@ const Wallet = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row w-full h-[60%] sm:h-2/3 rounded-xl bg-[#1E1F25] p-6">
-          <table className="w-full flex flex-col h-full text-white">
-            <thead className="flex flex-col w-full">
-              <tr className="flex flex-row w-full justify-between pb-6 border-b-2 text-[#5D6588] pr-6">
-                <td className="w-[20%]">Assets</td>
-                <td className="w-[16%]">On Orders</td>
-                <td className="w-[16%]">Available Balance</td>
-                <td className="w-[16%]">Total Balance</td>
-                <td className="w-1/10">24h Market</td>
-              </tr>
-            </thead>
-            <tbody className="flex flex-col w-full overflow-y-auto pr-16 mt-3">
-              {data.map((item, index) => (
-                <tr
-                  key={index}
-                  className="flex flex-row w-full justify-between items-center h-12 py-4"
-                >
-                  <td className="flex flex-row py-2 w-[20%]">
-                    <div className="pr-4">
-                      <img src={item.icon} />
-                    </div>
-                    <div className="pr-9">{item.type}</div>
-                    <div>{item.name}</div>
-                  </td>
-                  <td className="w-[16%]">
-                    <div className="w-full">{item.price}</div>
-                  </td>
-                  <td className="w-[16%]">
-                    <div className="w-full">{item.price}</div>
-                  </td>
-                  <td className="w-[16%]">
-                    <div className="w-full">{item.price}</div>
-                  </td>
-                  <td className="w-1/10">
-                    <div
-                      className={`${
-                        item.change > 0 ? "text-[#30E0A1]" : "text-[#FA2256]"
-                      } w-full`}
-                    >
-                      {Math.abs(item.change) + "%"}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <WalletTransaction />
       </div>
     </div>
   );
