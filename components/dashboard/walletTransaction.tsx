@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios, { Method } from "axios";
-import { useAccount, useChainId } from "wagmi";
+import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 interface Transaction {
   hash: string;
@@ -23,12 +23,9 @@ interface ApiResponse {
   result: ApiTransaction[];
 }
 const walletTransaction: React.FC = () => {
-  const chainId = useChainId();
-
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  //   const { address }= useAccount();
-  const address = "0x5C16Af050a49ECa861348fc07ec5f287aC047237";
+  const { address } = useAccount();
   const apiKey =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImE4NjE5MDFhLWE4NzAtNGU4My04OWJmLTU3YjQ3MGI4NmE4ZSIsIm9yZ0lkIjoiNDA0MzAxIiwidXNlcklkIjoiNDE1NDM1IiwidHlwZUlkIjoiZTc1Mzk0N2EtYzYyMS00YTczLThmMmItZjQyZTU1YzA2ZmE1IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjMzNzgzNDIsImV4cCI6NDg3OTEzODM0Mn0.68iPXXiLc7Mnet7NCLe7YOP1HGizPt12PZHLWFnVm2w";
 
@@ -38,7 +35,7 @@ const walletTransaction: React.FC = () => {
 
       try {
         const config = {
-          method: "get" as Method, // Explicitly typed method
+          method: "get" as Method,
           url: `https://deep-index.moralis.io/api/v2.2/${address}/?chain=eth&order=DESC`,
           headers: {
             accept: "application/json",
@@ -74,7 +71,7 @@ const walletTransaction: React.FC = () => {
 
   return (
     <div>
-      <div className="flex flex-row w-full h-[60%] sm:h-2/3 rounded-xl bg-[#1E1F25] p-6">
+      <div className="flex flex-row w-full h-[55%] sm:h-2/3 rounded-xl bg-[#1E1F25] p-6">
         <table className="w-full flex flex-col h-full text-white">
           <thead className="flex flex-col w-full">
             <tr className="flex flex-row w-full justify-between pb-6 border-b-2 text-[#5D6588] pr-6">
@@ -85,11 +82,15 @@ const walletTransaction: React.FC = () => {
               <td className="w-1/10">24h Market</td>
             </tr>
           </thead>
-          <tbody className="flex flex-col w-full overflow-y-auto pr-16 mt-3">
+          <tbody className="flex flex-col w-full overflow-y-auto min-h-96 pr-16 mt-3">
             {isLoading ? (
-              <div className="text-center">Loading transactions...</div>
+              <div className="text-center  w-full text-whit ">
+                Loading transactions...
+              </div>
             ) : transactions.length === 0 ? (
-              <div className="text-center">No transactions found</div>
+              <div className="text-center  w-full text-white ">
+                No transactions found
+              </div>
             ) : (
               transactions.map((tx) => (
                 <tr
