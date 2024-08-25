@@ -71,7 +71,7 @@ const walletBalance: React.FC = () => {
   }, [isConnected, balanceData, chainId]);
 
   return (
-    <div className="flex flex-row w-full h-[45%] sm:h-1/3  bg-[#1E1F25] rounded-xl mb-4 px-8 py-4">
+    <div className="flex flex-row w-full h-[45%] sm:h-1/3  bg-[#1E1F25] rounded-xl mb-2 px-8 py-4">
       {isLoading || isBalanceLoading ? (
         <p className="text-white">Loading balance...</p>
       ) : isConnected ? (
@@ -174,9 +174,9 @@ const walletBalance: React.FC = () => {
         </>
       ) : (
         <>
-          <h1 className="text-3xl font-extrabold">$0.00</h1>
+          <h1 className="text-3xl font-extrabold text-white">$0.00</h1>
           <div className="flex gap-4">
-            <p className="mb-2">0 ETH</p>
+            <p className="mb-2 text-white">0 ETH</p>
             <p className="text-yellow-500">
               Connect wallet to see real balance
             </p>
