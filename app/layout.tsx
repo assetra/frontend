@@ -14,6 +14,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import AuthPopups from "@/components/auth/authPopups";
 import { Providers } from "@/components/wallet/providers";
 import dynamic from "next/dynamic";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -23,12 +24,12 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    template: "GTX | %s",
-    default: "GTX - Your Customizable Crypto Trading Platform",
+    template: "Assetra | %s",
+    default: "Assetra - The New Asset Frontier",
   },
   description:
-    "GTX is a top-tier crypto trading platform providing advanced customization features, designed to meet the unique needs of traders.",
-  metadataBase: new URL("https://www.gtx.com.co"),
+    "Assetra is a top-tier crypto trading platform providing advanced customization features, designed to meet the unique needs of traders.",
+  metadataBase: new URL("https://www.assetra.xyz"),
 };
 const ClientWrapper = dynamic(() => import("@/components/ClientWrapper"), {
   ssr: false,
@@ -55,6 +56,7 @@ export default function RootLayout({
           </AuthProvider>
         </Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

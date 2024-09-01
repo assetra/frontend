@@ -9,7 +9,7 @@ export const ReferralPop: React.FC = () => {
   const { user } = useAuth();
   const username: string | null = user?.username || null;
   const referralLink = username
-    ? `https://gtx.com.co/signup?username=${username}`
+    ? `https://assetra.xyz/signup?username=${username}`
     : "";
 
   const [totalReferrals, setTotalReferrals] = useState<number>(0);
@@ -26,7 +26,7 @@ export const ReferralPop: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://gtx.pythonanywhere.com/referral",
+          "https://Assetra.pythonanywhere.com/referral",
           {
             method: "POST",
             headers: {
@@ -77,7 +77,7 @@ export const ReferralPop: React.FC = () => {
                   Refer Friends. <br /> Earn Crypto Together.
                 </h1>
                 <p className="mb-[10px] leading-7">
-                  Invite friends to join GTX and earn rewards!
+                  Invite friends to join Assetra and earn rewards!
                 </p>
                 <p className="mb-[10px] leading-7">How It Works: </p>
                 <ul className="m-0 pl-5">
@@ -116,7 +116,7 @@ export const ReferralPop: React.FC = () => {
                 <div className="flex mt-6 sm:justify-center">
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black"
-                    href="https://twitter.com/gtxdotcom"
+                    href="https://twitter.com/Assetradotcom"
                   >
                     <Image
                       width={18}
@@ -127,7 +127,7 @@ export const ReferralPop: React.FC = () => {
                   </a>
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black ms-5"
-                    href="https://www.instagram.com/gtxdotcom/"
+                    href="https://www.instagram.com/Assetradotcom/"
                   >
                     <Image
                       width={18}
@@ -149,7 +149,7 @@ export const ReferralPop: React.FC = () => {
                   </a>
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black ms-5"
-                    href="https://medium.com/@gtxdotcom"
+                    href="https://medium.com/@Assetradotcom"
                   >
                     <Image
                       width={18}
@@ -171,7 +171,7 @@ export const ReferralPop: React.FC = () => {
                   </a>
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black ms-5"
-                    href="https://www.linkedin.com/company/gtxdotcom/"
+                    href="https://www.linkedin.com/company/Assetradotcom/"
                   >
                     <Image
                       width={18}
@@ -182,7 +182,7 @@ export const ReferralPop: React.FC = () => {
                   </a>
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black ms-5"
-                    href="https://t.me/gtxdotcom"
+                    href="https://t.me/Assetradotcom"
                   >
                     <Image
                       width={18}
@@ -204,7 +204,7 @@ export const ReferralPop: React.FC = () => {
                   </a>
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black ms-5"
-                    href="https://www.crunchbase.com/organization/gtx-91c8"
+                    href="https://www.crunchbase.com/organization/Assetra-91c8"
                   >
                     <Image
                       width={18}
@@ -215,7 +215,7 @@ export const ReferralPop: React.FC = () => {
                   </a>
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black ms-5"
-                    href="https://github.com/gtxdotcom"
+                    href="https://github.com/Assetradotcom"
                   >
                     <Image
                       width={18}
@@ -226,7 +226,7 @@ export const ReferralPop: React.FC = () => {
                   </a>
                   <a
                     className="shadow border-2 border-base-content p-2 rounded-md bg-black ms-5"
-                    href="mailto:info@gtx.com.co"
+                    href="mailto:info@Assetra.com.co"
                   >
                     <Image
                       width={18}

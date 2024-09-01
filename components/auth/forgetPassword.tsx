@@ -95,7 +95,7 @@ const ForgetPassword: React.FC = () => {
             Trade securely and with peace of mind.
           </h1>
           <p className="text-[0.8rem] py-4 text-center">
-            "We maintain a constant 1:1 backing of your funds on GTX, and we
+            "We maintain a constant 1:1 backing of your funds on Assetra, and we
             routinely release Proof of Reserve audits to ensure transparency and
             accountability."
           </p>

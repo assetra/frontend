@@ -31,7 +31,7 @@ const page = () => {
           <li className="mb-[10px]">
             <span className="font-semibold">Regulatory Changes:</span> Changes
             in regulatory frameworks in various jurisdictions, including Antigua
-            and Barbuda, where GTX is headquartered, may impact the legality,
+            and Barbuda, where Assetra is headquartered, may impact the legality,
             use, and value of digital assets.
           </li>
           <li className="mb-[10px]">
@@ -51,7 +51,7 @@ const page = () => {
         <p className="mb-[10px] leading-7">
           Investors should carefully consider their financial situation,
           investment objectives, risk tolerance, and seek advice from qualified
-          professionals before participating in digital asset markets. GTX does
+          professionals before participating in digital asset markets. Assetra does
           not provide financial, tax, or legal advice. All investment decisions
           are made at the investor's own risk.
         </p>

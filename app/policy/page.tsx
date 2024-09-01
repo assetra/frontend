@@ -12,7 +12,7 @@ const page = () => {
         <h1 className="text-[24px] mb-5">Privacy Notice</h1>
         <p className="mb-[10px] leading-7">
           Protecting your privacy and maintaining the confidentiality of your
-          personal information is a top priority at GTX. This privacy notice
+          personal information is a top priority at Assetra. This privacy notice
           outlines how we collect, use, disclose, and protect your personal
           information when you use our services:
         </p>
@@ -33,7 +33,7 @@ const page = () => {
             for statistical analysis and business insights.
           </li>
           <li className="mb-[10px]">
-            <span className="font-semibold">Information Sharing:</span> GTX may
+            <span className="font-semibold">Information Sharing:</span> Assetra may
             share your personal information with trusted service providers,
             financial institutions, regulatory authorities, and affiliates as
             necessary to operate our business, process transactions, comply with
@@ -50,7 +50,7 @@ const page = () => {
             <span className="font-semibold">Your Choices and Rights:</span>
             You have the right to access, correct, or delete your personal
             information. You may also have the right to object to or restrict
-            certain processing activities. Please contact us at info@gtx.com.co
+            certain processing activities. Please contact us at info@Assetra.com.co
             if you wish to exercise any of these rights or have questions about
             our privacy practices.
           </li>
@@ -73,15 +73,15 @@ const page = () => {
             If you have questions, concerns, or complaints about our privacy
             practices or this notice, or if you wish to exercise your rights
             regarding your personal information, please contact us at
-            info@gtx.com.co.
+            info@Assetra.com.co.
           </li>
         </ul>
         <p className="mb-[10px] leading-7">
           These expanded versions provide comprehensive information to users
-          about the risks associated with using GTX's services, their rights and
+          about the risks associated with using Assetra's services, their rights and
           responsibilities, and how their personal information is handled and
           protected. It's crucial to review and customize these drafts based on
-          GTX's specific operational practices and legal requirements and seek
+          Assetra's specific operational practices and legal requirements and seek
           guidance from legal professionals to ensure compliance with applicable
           laws and regulations.
         </p>
