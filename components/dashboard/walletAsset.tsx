@@ -1,9 +1,10 @@
+"use client";
 import React, { useEffect, useState } from "react";
-import { Cell, Pie, PieChart, Tooltip } from "recharts";
 import Image from "next/image";
 import axios, { Method } from "axios";
 import { useAccount } from "wagmi";
 import { Avatar } from "../ui/avatar";
+
 interface TokenData {
   name: string;
   value: number;
@@ -24,8 +25,8 @@ interface ApiTokenData {
   balance_formatted: string;
 }
 
-const WalletInfo: React.FC = () => {
-  const [isClient, setIsClient] = useState<boolean>(false);
+const walletAsset = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [tokenData, setTokenData] = useState<TokenData[]>([]);
   const { address } = useAccount();
 
@@ -53,7 +54,7 @@ const WalletInfo: React.FC = () => {
             (a: ApiTokenData, b: ApiTokenData) =>
               parseFloat(b.usd_value) - parseFloat(a.usd_value)
           )
-          .slice(0, 3)
+
           .map((token: ApiTokenData) => {
             const usdValue = parseFloat(token.usd_value);
             const usdValueChange = parseFloat(token.usd_value_24hr_usd_change);
@@ -72,68 +73,48 @@ const WalletInfo: React.FC = () => {
             };
           });
         setTokenData(sortedTokens);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching token data:", error);
+        setIsLoading(false);
       }
     };
 
     fetchTokenData();
   }, [address]);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active && payload && payload.length) {
-      const data = payload[0].payload;
-      return (
-        <div className="bg-transparent p-4 rounded shadow-lg text-xs">
-          <p className="font-bold">{data.full}</p>
-          <p>Balance: {data.balance}</p>
-          <p>Value: ${data.usdValue}</p>
-        </div>
-      );
-    }
-    return null;
-  };
+  const title = ["Name", "Value(USD)", "Change(24h)", "Amount"];
   return (
-    <div className="w-7/12 flex flex-col py-3">
-      <div className="w-full flex justify-between px-6">
-        <p className="text-[1rem]">Wallet</p>
-        <div className="flex">
-          <p className="text-[#A5ADCF] text-[12px]">
-            {tokenData.length} Currencies
-          </p>
-        </div>
-      </div>
-      <div className="w-full px-6">
-        <div className=" px-4 pr-0">
-          <div className="flex gap-10">
-            {isClient && (
-              <PieChart width={260} height={140}>
-                <Pie
-                  data={tokenData}
-                  innerRadius={60}
-                  outerRadius={70}
-                  fill="#8884d8"
-                  paddingAngle={4}
-                  dataKey="value"
-                >
-                  {tokenData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
-            )}
-            <div className="w-full md:w-1/2 ">
-              {tokenData.map((entry, index) => (
-                <div
+    <div>
+      <div className="flex flex-row w-full h-[55%] sm:h-2/3 rounded-xl bg-[#1E1F25] p-6">
+        <table className="w-full flex flex-col h-full text-white">
+          <thead className="flex flex-col w-full">
+            <tr className="flex flex-row w-full justify-between pb-6 border-b-2 text-[#5D6588] pr-6">
+              <td className="w-[15%]">Assets </td>
+              {title.map((item, index) => (
+                <td key={index} className="w-[15%] flex place-content-center">
+                  {item}
+                </td>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="flex flex-col w-full overflow-y-auto min-h-96  mt-3">
+            {isLoading ? (
+              <div className="text-center  w-full text-whit ">
+                Loading Assets...
+              </div>
+            ) : tokenData.length === 0 ? (
+              <div className="text-center  w-full text-white ">
+                No Assets found
+              </div>
+            ) : (
+              tokenData.map((entry, index) => (
+                <tr
                   key={index}
-                  className="flex items-center justify-between  rounded-lg mb-2 pl-6"
+                  className="flex  w-full justify-between items-center h-12 py-4"
                 >
-                  <div className="flex items-center">
-                  {entry.icon === "default" ? (
+                  <td className="flex  py-2 w-[15%]">
+                    <div className="pr-4">
+                      {entry.icon === "default" ? (
                         <Avatar
                           style={{
                             width: 26,
@@ -149,31 +130,44 @@ const WalletInfo: React.FC = () => {
                           height={26}
                           src={entry.icon}
                           alt={`${entry.name} icon`}
-                          className="rounded-full mr-4"
+                          className="rounded-full"
                         />
                       )}
-                    <div>
-                      <p className="font-bold text-sm">{entry.name}</p>
-                      <p className="text-xs text-gray-600">{entry.full}</p>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-semibold text-sm">${entry.usdValue}</p>
-                    <p
-                      className={`text-xs ${parseFloat(entry.percentageChange) >= 0 ? "text-green-500" : "text-red-500"}`}
-                    >
-                      {entry.percentageChange}%
-                    </p>
-                    <p className="text-xs text-gray-500">{entry.balance}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+                    <div>{entry.name && entry.name.slice(0, 6)}</div>
+                  </td>
+                  <td className="w-[24%]">
+                    <div className="w-full flex place-content-center">
+                      {entry.full}
+                    </div>
+                  </td>
+                  <td className="w-[16%]">
+                    <div className="w-full flex place-content-center">
+                      {entry.usdValue}$
+                    </div>
+                  </td>
+                  <td className="w-[20%]">
+                    <div className="w-full">
+                      <p
+                        className={`flex place-content-center font-semibold ${parseFloat(entry.percentageChange) >= 0 ? "text-green-500" : "text-red-500"}`}
+                      >
+                        {entry.percentageChange}%
+                      </p>
+                    </div>
+                  </td>
+                  <td className="w-[20%]">
+                    <div className="flex gap-1 justify-center">
+                      <span className="text-sm">{entry.balance}</span>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
 };
 
-export default WalletInfo;
+export default walletAsset;

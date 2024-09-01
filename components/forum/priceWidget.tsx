@@ -25,7 +25,7 @@ const priceWidget: React.FC = () => {
           </div>
           <div className="flex flex-col w-full overflow-y-auto">
             {symbols.map((symbol, index) => (
-              <div key={index} className="w-full py-4 pr-6">
+              <div key={index} className="w-full py-4 ">
                 <Card cryptoPair={symbol} />
               </div>
             ))}
