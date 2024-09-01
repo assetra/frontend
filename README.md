@@ -1,2 +1,2 @@
-# gtx-frontend
-GTX frontend repo
+# frontend
+
