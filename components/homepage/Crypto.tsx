@@ -16,11 +16,11 @@ export default function Crypto() {
       <div className="max-w-[1024px]">
         <div>
           <p className="text-white text-center font-[700] text-[20px]">
-            WHY GTX?
+            WHY ASSETRA?
           </p>
           <div className="flex justify-center mt-4">
             <p className="text-center text-white text-3xl w-80 md:w-[700px] leading-10">
-              Why Choose GTX for Your Crypto Journey?
+              Why Choose Assetra for Your Crypto Journey?
             </p>
           </div>
         </div>

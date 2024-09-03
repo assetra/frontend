@@ -24,7 +24,7 @@ export default function DigitalAssets() {
 
         <div className="mt-20 flex justify-center">
           <div className="w-96 md:w-[1000px] flex flex-wrap gap-10 md:gap-0 justify-center md:justify-evenly">
-            <a href="https://twitter.com/gtxdotcom">
+            <a href="https://x.com/assetradotxyz">
               <Image
                 width={45}
                 height={40}
@@ -32,7 +32,7 @@ export default function DigitalAssets() {
                 alt="X/Twitter"
               />
             </a>
-            <a href="https://www.instagram.com/gtxdotcom/">
+            <a href="https://www.instagram.com/assetradotxyz">
               <Image
                 width={45}
                 height={40}
@@ -40,7 +40,7 @@ export default function DigitalAssets() {
                 alt="Instagram"
               />
             </a>
-            <a href="https://www.facebook.com/profile.php?id=100094228042198">
+            <a href="https://www.facebook.com/profile.php?id=61565050207514&mibextid=ZbWKwL">
               <Image
                 width={45}
                 height={40}
@@ -48,7 +48,7 @@ export default function DigitalAssets() {
                 alt="Facebook"
               />
             </a>
-            <a href="https://medium.com/@gtxdotcom">
+            <a href="https://medium.com/@assetradotxyz">
               <Image
                 width={45}
                 height={40}
@@ -64,7 +64,7 @@ export default function DigitalAssets() {
                 alt="WhatsApp"
               />
             </a>
-            <a href="https://www.linkedin.com/company/gtxdotcom/">
+            <a href="https://www.linkedin.com/company/assetradotcom/">
               <Image
                 width={45}
                 height={40}
@@ -72,7 +72,7 @@ export default function DigitalAssets() {
                 alt="LinkedIn"
               />
             </a>
-            <a href="https://t.me/gtxdotcom">
+            <a href="https://t.me/assetra_xyz">
               <Image
                 width={45}
                 height={40}
@@ -80,7 +80,7 @@ export default function DigitalAssets() {
                 alt="Telegram"
               />
             </a>
-            <a href="https://discord.gg/dVmMCdf9jx">
+            <a href="https://discord.gg/yUHXSRDSvv">
               <Image
                 width={45}
                 height={40}
@@ -96,7 +96,7 @@ export default function DigitalAssets() {
                 alt="Crunchbase"
               />
             </a>
-            <a href="https://github.com/gtxdotcom">
+            <a href="https://github.com/assetra">
               <Image
                 width={45}
                 height={40}
@@ -104,7 +104,7 @@ export default function DigitalAssets() {
                 alt="Github"
               />
             </a>
-            <a href="mailto:info@gtx.com.co">
+            <a href="mailto:info@assetra.xyz">
               <Image
                 width={45}
                 height={40}
@@ -132,7 +132,7 @@ export default function DigitalAssets() {
 
             <p className="flex justify-center text-center text-[#E5E6ED] mt-6">
               Join the decentralized movement with an ever-expanding network of
-              connected apps powered by GTX.
+              connected apps powered by Assetra.
             </p>
           </div>
         </div>

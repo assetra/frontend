@@ -18,14 +18,16 @@ export default function Footer() {
       <div className="mx-auto w-full max-w-screen-xl p-4 pt-6 lg:pt-8">
         <div className="grid grid-cols-2  md:grid-cols-6 gap-4 text-white mx-auto">
           <div className="m-auto grid">
-            <a href="https://www.gtx.com.co/">
+            <a href="https://www.assetra.xyz">
               <Image
                 width={100}
                 height={60}
                 src="/assets/footer-logo.png"
                 alt="footer-logo"
               />
-              <p className="text-[#6C6C6C] text-[10px]">©2024 GTX Labs Ltd</p>
+              <p className="text-[#6C6C6C] text-[10px]">
+                ©2024 Assetra Trading Group Ltd
+              </p>
             </a>
             <button className="border-2 border-white py-1 px-2 mt-2 rounded flex items-center gap-2">
               <IoGlobeOutline />
@@ -37,7 +39,7 @@ export default function Footer() {
               Company
             </h2>
             <ul className="text-gray-500 dark:text-gray-400 font-medium">
-            <li className="mb-4">
+              <li className="mb-4">
                 <a
                   href="/"
                   className=" hover:border-white hover:border-b-2 hover:pb-1"
@@ -78,7 +80,7 @@ export default function Footer() {
               </li>
               <li className="mb-4">
                 <a
-                  href="mailto:support@gtx.com.co"
+                  href="mailto:info@assetra.xyz"
                   className=" hover:border-white hover:border-b-2 hover:pb-1"
                 >
                   Support center
@@ -89,7 +91,7 @@ export default function Footer() {
                   href="#"
                   className=" hover:border-white hover:border-b-2 hover:pb-1"
                 >
-                  Connect with GTX
+                  Connect with Assetra
                 </a>
               </li>
             </ul>
@@ -141,10 +143,10 @@ export default function Footer() {
         </h2>
 
         <div className="flex mt-6 sm:justify-center">
-          <a href="https://twitter.com/gtxdotcom">
+          <a href="https://x.com/assetradotxyz">
             <Image width={18} height={17} src="/assets/x.png" alt="X/Twitter" />
           </a>
-          <a className="ms-5" href="https://www.instagram.com/gtxdotcom/">
+          <a className="ms-5" href="https://www.instagram.com/assetradotxyz">
             <Image
               width={18}
               height={17}
@@ -154,7 +156,7 @@ export default function Footer() {
           </a>
           <a
             className="ms-5"
-            href="https://www.facebook.com/profile.php?id=100094228042198"
+            href="https://www.facebook.com/profile.php?id=61565050207514&mibextid=ZbWKwL"
           >
             <Image
               width={18}
@@ -163,7 +165,7 @@ export default function Footer() {
               alt="Facebook"
             />
           </a>
-          <a className="ms-5" href="https://medium.com/@gtxdotcom">
+          <a className="ms-5" href="https://medium.com/@assetradotxyz">
             <Image
               width={18}
               height={17}
@@ -184,7 +186,7 @@ export default function Footer() {
           </a>
           <a
             className="ms-5"
-            href="https://www.linkedin.com/company/gtxdotcom/"
+            href="https://www.linkedin.com/company/assetradotcom/"
           >
             <Image
               width={18}
@@ -193,7 +195,7 @@ export default function Footer() {
               alt="LinkedIn"
             />
           </a>
-          <a className="ms-5" href="https://t.me/gtxdotcom">
+          <a className="ms-5" href="https://t.me/assetra_xyz">
             <Image
               width={18}
               height={17}
@@ -201,7 +203,7 @@ export default function Footer() {
               alt="Telegram"
             />
           </a>
-          <a className="ms-5" href="https://discord.gg/dVmMCdf9jx">
+          <a className="ms-5" href="https://discord.gg/yUHXSRDSvv">
             <Image
               width={18}
               height={17}
@@ -220,7 +222,7 @@ export default function Footer() {
               alt="Crunchbase"
             />
           </a>
-          <a className="ms-5" href="https://github.com/gtxdotcom">
+          <a className="ms-5" href="https://github.com/assetra">
             <Image
               width={18}
               height={17}
@@ -228,7 +230,7 @@ export default function Footer() {
               alt="Github"
             />
           </a>
-          <a className="ms-5" href="mailto:info@gtx.com.co">
+          <a className="ms-5" href="mailto:info@assetra.xyz">
             <Image width={18} height={17} src="/assets/email.png" alt="Email" />
           </a>
         </div>
@@ -236,10 +238,10 @@ export default function Footer() {
           <span className="text-sm text-[#484D63] sm:text-center">
             © 2024{" "}
             <a
-              href="https://www.gtx.com.co/"
+              href="https://www.assetra.xyz"
               className=" hover:border-white hover:border-b-2 hover:pb-1"
             >
-              GTX
+              Assetra
             </a>
             . All Rights Reserved.
           </span>

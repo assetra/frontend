@@ -92,9 +92,11 @@ const PopUP: React.FC = () => {
                   height={70}
                   style={{ marginInline: "auto" }}
                 />
-                <h2 className="font-bold text-[1.5rem] mt-4">JOIN TEAM GTX</h2>
+                <h2 className="font-bold text-[1.5rem] mt-4">
+                  JOIN TEAM ASSETRA
+                </h2>
                 <p className="mt-12">
-                  Stay Connected with GTX: Subscribe for Updates
+                  Stay Connected with Assetra: Subscribe for Updates
                 </p>
 
                 <form
@@ -129,12 +131,12 @@ const PopUP: React.FC = () => {
                 )}
 
                 <p className="mt-6">
-                  By subscribing, you consent to receiving emails from GTX. You
-                  can revoke your consent at any time.
+                  By subscribing, you consent to receiving emails from Assetra.
+                  You can revoke your consent at any time.
                 </p>
 
                 <div className="flex mt-6 sm:justify-center mb-12">
-                  <a href="https://twitter.com/gtxdotcom">
+                  <a href="https://x.com/assetradotxyz">
                     <Image
                       width={18}
                       height={17}
@@ -144,7 +146,7 @@ const PopUP: React.FC = () => {
                   </a>
                   <a
                     className="ms-2"
-                    href="https://www.instagram.com/gtxdotcom/"
+                    href="https://www.instagram.com/assetradotxyz"
                   >
                     <Image
                       width={18}
@@ -155,7 +157,7 @@ const PopUP: React.FC = () => {
                   </a>
                   <a
                     className="ms-2"
-                    href="https://www.facebook.com/profile.php?id=100094228042198"
+                    href="https://www.facebook.com/profile.php?id=61565050207514&mibextid=ZbWKwL"
                   >
                     <Image
                       width={18}
@@ -164,7 +166,7 @@ const PopUP: React.FC = () => {
                       alt="Facebook"
                     />
                   </a>
-                  <a className="ms-2" href="https://medium.com/@gtxdotcom">
+                  <a className="ms-2" href="https://medium.com/@assetradotxyz">
                     <Image
                       width={18}
                       height={17}
@@ -185,7 +187,7 @@ const PopUP: React.FC = () => {
                   </a>
                   <a
                     className="ms-2"
-                    href="https://www.linkedin.com/company/gtxdotcom/"
+                    href="https://www.linkedin.com/company/assetradotcom/"
                   >
                     <Image
                       width={18}
@@ -194,7 +196,7 @@ const PopUP: React.FC = () => {
                       alt="LinkedIn"
                     />
                   </a>
-                  <a className="ms-2" href="https://t.me/gtxdotcom">
+                  <a className="ms-2" href="https://t.me/assetra_xyz">
                     <Image
                       width={18}
                       height={17}
@@ -202,7 +204,7 @@ const PopUP: React.FC = () => {
                       alt="Telegram"
                     />
                   </a>
-                  <a className="ms-2" href="https://discord.gg/dVmMCdf9jx">
+                  <a className="ms-2" href="https://discord.gg/yUHXSRDSvv">
                     <Image
                       width={18}
                       height={17}
@@ -221,7 +223,7 @@ const PopUP: React.FC = () => {
                       alt="Crunchbase"
                     />
                   </a>
-                  <a className="ms-2" href="https://github.com/gtxdotcom">
+                  <a className="ms-2" href="https://github.com/assetra">
                     <Image
                       width={18}
                       height={17}
@@ -229,7 +231,7 @@ const PopUP: React.FC = () => {
                       alt="Github"
                     />
                   </a>
-                  <a className="ms-2" href="mailto:info@gtx.com.co">
+                  <a className="ms-2" href="mailto:info@assetra.xyz">
                     <Image
                       width={18}
                       height={17}

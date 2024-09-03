@@ -15,7 +15,7 @@ export default function About() {
     >
       <div className="max-w-[1024px]">
         <div className="text-[#ffffff] font-[700] text-[20px] text-center">
-          ABOUT GTX
+          ABOUT ASSETRA
         </div>
 
         <div className="text-white font-[400] text-3xl md:text-[45px] flex justify-center mt-4 md:mt-0">
@@ -26,9 +26,9 @@ export default function About() {
 
         <div className="flex flex-col md:flex-row gap-10 mt-16 p-4">
           <div className="flex flex-col gap-6 bg-[#1b1b24] rounded-lg p-10">
-            <p className="text-[17px] font-[700] text-white">WHAT IS GTX?</p>
+            <p className="text-[17px] font-[700] text-white">WHAT IS ASSETRA?</p>
             <p className="text-white">
-              "GTX simplifies crypto for all. Our user-friendly ecosystem eases
+              "Assetra simplifies crypto for all. Our user-friendly ecosystem eases
               blockchain interactions, catering to novices and experts alike.
               We're dedicated to creating intuitive tools, making crypto
               investment accessible and efficient."

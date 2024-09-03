@@ -20,7 +20,7 @@ export default function Team() {
           </p>
           <div className="flex justify-center mt-4">
             <p className="text-center text-white text-3xl w-80 md:w-[700px] leading-10">
-              The GTX team excels in innovation and is dedicated to excellence
+              The Assetra team excels in innovation and is dedicated to excellence
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@ export default function Team() {
             </div>
 
             <div className="flex gap-2 mt-4">
-              <a href="https://www.linkedin.com/in/giordano-bertin-maurice-52ba2a236/">
+              <a href="">
                 <Image
                   width={18}
                   height={18}
@@ -102,7 +102,7 @@ export default function Team() {
                   alt="img"
                 />
               </a>
-              <a href="https://twitter.com/Ashmeet70884617">
+              <a href="https://x.com/Ashmeet70884617">
                 <Image width={17} height={17} src="/assets/x.png" alt="img" />
               </a>
             </div>
@@ -115,31 +115,36 @@ export default function Team() {
               <Image
                 width={70}
                 height={70}
-                src="/assets/Mulaye.png"
-                alt="cr-logo"
+                src="/assets/Bob.png"
+                alt="team-logo"
               />
               <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Mulaye Subakanya</p>
+                <p className="text-[16px] font-[700]">Bob Johnson</p>
                 <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Contributor
+                  Chief Marketing Officer
                 </p>
               </div>
             </div>
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                An open-minded developer ready to reinvent the wheel
+                Results-oriented, demand-generation-obsessed CMO with B2B SaaS
+                DNA. Engineering and finance-grounded marketing success at the
+                nexus of where the application meets the network
               </p>
             </div>
 
-            <div className="mt-4">
-              <a href="https://www.linkedin.com/in/mulaye-s-14a5531b6">
+            <div className="flex gap-2 mt-4">
+              <a href="https://www.instagram.com/bobjohn2129/">
                 <Image
                   width={18}
                   height={18}
-                  src="/assets/linkedin.png"
+                  src="/assets/insta.png"
                   alt="img"
                 />
+              </a>
+              <a href="https://x.com/rjj_bob">
+                <Image width={17} height={17} src="/assets/x.png" alt="img" />
               </a>
             </div>
           </div>
@@ -194,41 +199,6 @@ export default function Team() {
               <Image
                 width={70}
                 height={70}
-                src="/assets/Jahmarley.png"
-                alt="cr-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Jahmarley Henry</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Executive Director
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                A WEB3 and blockchain enthusiast that is always researching and
-                keeping up with new trends
-              </p>
-            </div>
-
-            <div className="mt-4">
-              <a href="https://www.linkedin.com/in/jahmarleyhenry/">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
-                  alt="img"
-                />
-              </a>
-            </div>
-          </div>
-
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
                 src="/assets/Yash.png"
                 alt="team-logo"
               />
@@ -269,8 +239,75 @@ export default function Team() {
               </a>
             </div>
           </div>
+          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
+            <div className="flex gap-4">
+              <Image
+                width={70}
+                height={70}
+                src="/assets/Jahmarley.png"
+                alt="cr-logo"
+              />
+              <div className="text-white flex flex-col justify-center">
+                <p className="text-[16px] font-[700]">Jahmarley Henry</p>
+                <p className="text-[14px] text-[#1e68f6] font-[700]">
+                  Executive Director
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-white text-sm">
+                A WEB3 and blockchain enthusiast that is always researching and
+                keeping up with new trends
+              </p>
+            </div>
+
+            <div className="mt-4">
+              <a href="https://www.linkedin.com/in/jahmarleyhenry/">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
+            </div>
+          </div>
         </div>
         <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
+          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
+            <div className="flex gap-4">
+              <Image
+                width={70}
+                height={70}
+                src="/assets/Mulaye.png"
+                alt="cr-logo"
+              />
+              <div className="text-white flex flex-col justify-center">
+                <p className="text-[16px] font-[700]">Mulaye Subakanya</p>
+                <p className="text-[14px] text-[#1e68f6] font-[700]">
+                  Contributor
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-white text-sm">
+                An open-minded developer ready to reinvent the wheel
+              </p>
+            </div>
+
+            <div className="mt-4">
+              <a href="https://www.linkedin.com/in/mulaye-s-14a5531b6">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
+            </div>
+          </div>
           <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
             <div className="flex gap-4 ">
               <div className=" flex w-[70px] p-4 items-center rounded-full bg-[#121212]">
@@ -291,7 +328,8 @@ export default function Team() {
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                I'm Gnosis, your AI trading ally
+                Empowering your trading experience with intelligent insights and
+                real-time support.
               </p>
             </div>
 
