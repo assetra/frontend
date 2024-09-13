@@ -53,23 +53,8 @@ const authors: Author[] = [
     penname: "bob",
     title: "Chief Marketing Officer",
     image: "/assets/Bob.png",
-    about: `Giordano Bertin-Maurice is a technology enthusiast and a prominent voice 
-    in the cryptocurrency world. With years of experience working in tech startups 
-    and leading blockchain initiatives, Giordano has become a go-to expert for insights 
-    on how emerging technologies like Bitcoin are transforming the financial landscape. 
-    In addition to his professional work, Giordano is also passionate about educating the 
-    broader public on cryptocurrency, regularly writing articles and giving talks at conferences.`,
+    about: `Results-oriented, demand-generation-obsessed CMO with B2B SaaS DNA. Engineering and finance-grounded marketing success at the nexus of where the application meets the network`,
     social: [
-      {
-        platform: "X",
-        url: "https://x.com/rjj_bob",
-        icon: "/assets/x.png",
-      },
-      {
-        platform: "Instagram",
-        url: "https://www.instagram.com/bobjohn2129/",
-        icon: "/assets/insta.png",
-      },
       {
         platform: "X",
         url: "https://x.com/rjj_bob",
