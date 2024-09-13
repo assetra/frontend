@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aarc-xyz/fundkit-web-sdk": "^0.0.1",
     "@davzon/react-country-state-city": "^1.0.10",
     "@faker-js/faker": "^7.6.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
