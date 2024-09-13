@@ -20,7 +20,8 @@ export default function Team() {
           </p>
           <div className="flex justify-center mt-4">
             <p className="text-center text-white text-3xl w-80 md:w-[700px] leading-10">
-              The Assetra team excels in innovation and is dedicated to excellence
+              The Assetra team excels in innovation and is dedicated to
+              excellence
             </p>
           </div>
         </div>
@@ -52,7 +53,7 @@ export default function Team() {
             </div>
 
             <div className="flex gap-2 mt-4">
-              <a href="">
+              <a href="linkedin.com/in/giordano-bertin-maurice-676319232">
                 <Image
                   width={18}
                   height={18}
