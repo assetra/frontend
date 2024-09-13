@@ -160,7 +160,7 @@ export const LoginPop: React.FC = () => {
                 <input
                   type="password"
                   name="password"
-                  className="grow text-white"
+                  className="grow text-base-content"
                   title="Enter your password"
                   placeholder="Password"
                   value={password}
