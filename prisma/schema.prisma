@@ -12,28 +12,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
 model User {
-  id              Int          @id @default(autoincrement())
-  email           String       @unique
-  first_name      String?
-  username        String       @unique
-  country         String?
-  created_date    DateTime?
-  dob             DateTime?
-  is_verified     Boolean?
-  last_name       String?
-  mobile_number   String?
-  profile_picture String?
-  customizer      customizer[]
+  id    Int    @id @default(autoincrement())
+  email String @unique
+  layouts WidgetLayout[]
 }
 
-model customizer {
-  id          Int     @id @default(autoincrement())
-  user_id     Int
-  x           Int?
-  y           Int?
-  z           Int?
-  widget_name String?
-  user User @relation(fields: [user_id], references: [id])
+model WidgetLayout {
+  id      Int      @id @default(autoincrement())
+  name    String
+  x       Int
+  y       Int
+  w       Int
+  h       Int
+  userId  Int
+  user    User     @relation(fields: [userId], references: [id])
+    @@unique([userId, name]) 
 }
