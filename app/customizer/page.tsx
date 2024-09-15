@@ -1,5 +1,11 @@
 "use client";
-import React, { useEffect, useCallback, useRef, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useContext,
+} from "react";
 import {
   GridStack,
   GridStackOptions,
@@ -58,16 +64,15 @@ const DraggableContainer: React.FC = () => {
 
   const saveLayout = useCallback(() => {
     if (gridRef.current) {
-      const items = gridRef.current.getGridItems();
-      const newLayout: WidgetConfig[] = items
-        .map((item) => ({
-          name: item.getAttribute("data-widget-name") || "",
-          x: parseInt(item.getAttribute("gs-x") || "0", 10),
-          y: parseInt(item.getAttribute("gs-y") || "0", 10),
-          w: parseInt(item.getAttribute("gs-w") || "1", 10),
-          h: parseInt(item.getAttribute("gs-h") || "1", 10),
+      const currentLayout: WidgetConfig[] = gridRef.current.engine.nodes
+        .map((node) => ({
+          name: node.el?.getAttribute("data-widget-name") || "",
+          x: node.x,
+          y: node.y,
+          w: node.w,
+          h: node.h,
         }))
-        .filter((item) => item.name); // Only filter out items without a name
+        .filter((item) => item.name);
 
       try {
         const existingLayoutJSON = localStorage.getItem(LAYOUT_STORAGE_KEY);
@@ -75,30 +80,29 @@ const DraggableContainer: React.FC = () => {
           ? JSON.parse(existingLayoutJSON)
           : [];
 
-        // Merge new layout with existing layout
-        const mergedLayout = [...existingLayout, ...newLayout];
+        // Create a map of existing widgets for faster lookup
+        const existingWidgetMap = new Map(
+          existingLayout.map((widget) => [widget.name, widget])
+        );
 
-        // Remove duplicates based on name (keeping the last occurrence)
-        const uniqueLayout = mergedLayout.reduce((acc, current) => {
-          const x = acc.find((item) => item.name === current.name);
-          if (!x) {
-            return acc.concat([current]);
-          } else {
-            return acc.map((item) =>
-              item.name === current.name ? current : item
-            );
-          }
-        }, [] as WidgetConfig[]);
+        // Update existing widgets or add new ones
+        currentLayout.forEach((widget) => {
+          existingWidgetMap.set(widget.name, widget);
+        });
 
-        if (uniqueLayout.length > 0) {
+        // Convert the map back to an array
+        const updatedLayout = Array.from(existingWidgetMap.values());
+
+        if (updatedLayout.length > 0) {
           localStorage.setItem(
             LAYOUT_STORAGE_KEY,
-            JSON.stringify(uniqueLayout)
+            JSON.stringify(updatedLayout)
           );
-          console.log("Saved layout:", uniqueLayout);
+          console.log("Saved layout:", updatedLayout);
         } else {
-          localStorage.removeItem(LAYOUT_STORAGE_KEY);
-          console.warn("No widgets to save. Cleared layout in localStorage.");
+          console.warn(
+            "No widgets to save. Layout in localStorage remains unchanged."
+          );
         }
       } catch (error) {
         console.error("Failed to save layout to localStorage:", error);
@@ -209,9 +213,7 @@ const DraggableContainer: React.FC = () => {
     };
 
     setTimeout(() => {
-      const gridElement = document.querySelector(
-        ".grid-stack"
-      ) as GridItemHTMLElement;
+      const gridElement = document.querySelector(".grid-stack") as HTMLElement;
       if (gridElement) {
         const grid = GridStack.init(options, gridElement);
         gridRef.current = grid;
@@ -233,6 +235,10 @@ const DraggableContainer: React.FC = () => {
             if (element) {
               renderWidget(widget.name, element);
             }
+          });
+          grid.on("change", (event: Event, items: GridStackNode[]) => {
+            console.log("Grid event: change", items);
+            saveLayout();
           });
 
           grid.on(
@@ -323,6 +329,15 @@ const GridContainer: React.FC<SidebarProps> = ({ clearAllWidgets }) => (
     >
       <h6 className="text-sm">Clear All Widgets</h6>
     </Button>
+    {/* <Button
+      onClick={() => {
+        window.location.reload();
+      }}
+      size="sm"
+      className="btn btn-error  absolute top-[0.1rem] right-[0.1rem] transform z-10"
+    >
+      Save
+    </Button> */}
   </div>
 );
 
@@ -484,19 +499,23 @@ const Pack: React.FC<PackProps> = ({
   image,
   name,
 }) => (
-  <div
-    className="flex align-middle items-center rounded w-full aspect-square p-2 mb-2 overflow-hidden"
-    style={{
-      backgroundImage: `url(${image})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-    }}
-    title={name}
-  >
-    {ScriptComponent && <ScriptComponent />}
-    <div className="opacity-0">
-      <WidgetComponent />
+  <div className="newWidget grid-stack-item">
+    <div
+      className="grid-stack-item-content flex align-middle items-center rounded w-full aspect-square p-2 mb-2 overflow-hidden"
+      style={{
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {ScriptComponent && <ScriptComponent />}
+      <div className="hidden">
+        <WidgetComponent />
+      </div>
+      <span className="text-white bg-black bg-opacity-50 p-1 rounded">
+        {name}
+      </span>
     </div>
   </div>
 );
