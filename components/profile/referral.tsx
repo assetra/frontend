@@ -26,7 +26,7 @@ export const Referral: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "https://Assetra.pythonanywhere.com/referral",
+          "https://gtx.pythonanywhere.com/referral",
           {
             method: "POST",
             headers: {
