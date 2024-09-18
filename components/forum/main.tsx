@@ -600,7 +600,7 @@ const EditView: React.FC<{
     <div className="p-4 space-y-4">
       <form
         onSubmit={handleSubmit}
-        className="grid grid-rows-6 max-h-[75svh] min-h-[500px] p-4 bg-gray-800 overflow-y-auto rounded-xl gap-4"
+        className="grid grid-rows-6 max-h-[70svh] min-h-[400px] p-4 bg-gray-800 overflow-y-auto rounded-xl gap-4"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         <input type="text" value={id} placeholder="" hidden />
@@ -616,7 +616,7 @@ const EditView: React.FC<{
           onChange={(e) => setContent(e.target.value)}
           className="row-span-4 bg-[#2C353D] rounded-xl p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
           placeholder="Edit your post content..."
-          rows={8}
+          rows={6}
         ></textarea>
         <div className="row-span-1 flex items-center justify-between">
           <div className="flex space-x-2">
@@ -782,6 +782,7 @@ const Main: React.FC = () => {
       setTitle("");
       setContent("");
       setSelectedTags([]);
+      setIsWriting(false);
     } catch (error) {
       console.error("Error creating post:", error);
     }
@@ -1073,7 +1074,7 @@ const Main: React.FC = () => {
             </div>
             <form
               onSubmit={handleSubmit}
-              className="grid grid-rows-6 max-h-[75svh] min-h-[500px] p-4 bg-gray-800 overflow-y-auto rounded-xl gap-4"
+              className="grid grid-rows-6 max-h-[70svh] min-h-[400px] p-4 bg-gray-800 overflow-y-auto rounded-xl gap-4"
               style={{
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
@@ -1092,7 +1093,7 @@ const Main: React.FC = () => {
                 onChange={(e) => setContent(e.target.value)}
                 className="row-span-4 bg-[#2C353D] rounded-xl p-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
                 placeholder="What's on your mind? Start writing your post..."
-                rows={8}
+                rows={6}
               ></textarea>
 
               {/* Tag Selection */}
