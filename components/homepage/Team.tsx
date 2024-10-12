@@ -53,11 +53,11 @@ export default function Team() {
             </div>
 
             <div className="flex gap-2 mt-4">
-              <a href="linkedin.com/in/giordano-bertin-maurice-676319232">
+              <a href="https://jeeordahnoh.wixsite.com/jeeordahnoh">
                 <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
+                  width={17}
+                  height={17}
+                  src="/assets/portfolio.png"
                   alt="img"
                 />
               </a>

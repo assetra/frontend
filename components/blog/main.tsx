@@ -8,8 +8,8 @@ export interface Blog {
   author: string;
   title: string;
   content: string;
-  image?: string;
-  tags?: string;
+  cover_image?: string;
+  tags?: [];
   created_at: string;
 }
 
@@ -21,7 +21,7 @@ const main = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch(`https://gtxadmin.pythonanywhere.com/blogs`);
+      const response = await fetch(`https://gtxadmin.pythonanywhere.com/api/blogs`);
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -56,7 +56,7 @@ const main = () => {
   };
 
   useEffect(() => {
-    fetchPinned();
+    //fetchPinned();
     fetchBlogs();
   }, []);
 
@@ -75,7 +75,7 @@ const main = () => {
   return (
     <div className="p-16">
       <div className="p-4 bg-base-300 rounded-xl">
-        <Carousel pins={pins} />
+        <Carousel pins={blogs} />
       </div>
 
       <div className="mt-4 p-4 bg-base-300 rounded-xl">

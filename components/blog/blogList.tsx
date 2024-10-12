@@ -8,8 +8,8 @@ export interface Blog {
   author: string;
   title: string;
   content: string;
-  image?: string;
-  tags?: string;
+  cover_image?: string;
+  tags?: [];
   created_at: string;
 }
 
@@ -23,12 +23,12 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
       {blogs.map((blog, index) => (
         <a className="card glass" key={index} href={`/blog/${blog.id}`}>
           <figure>
-            <img src={blog.image} alt={blog.title} className="aspect-video" />
+            <img src={`https://gtxadmin.pythonanywhere.com${blog.cover_image}`} alt={blog.title} className="aspect-video" />
           </figure>
           <div className="card-body">
             <div className="flex justify-start">
               {blog.tags &&
-                blog.tags.split(",").map((tag) => (
+                blog.tags.map((tag) => (
                   <span
                     key={tag}
                     className="mr-2 text-[#4B6BFB] badge badge-outline text-[11px]"

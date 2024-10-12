@@ -13,17 +13,17 @@ const TeamUrl: React.FC<DateFormatterProps> = ({ pen }) => {
 
   const teamMembers: TeamMember[] = [
     {
-      pen: "gio",
+      pen: "jeeordahnoh",
       name: "Giordano Bertin-Maurice",
       imageUrl: "/assets/Giordano.png",
     },
     {
-      pen: "ashmeet",
+      pen: "ashmeetsingh98",
       name: "Ashmeet Singh",
       imageUrl: "/assets/Ashmeet.png",
     },
     {
-      pen: "bob",
+      pen: "bobjohn2129",
       name: "Bob Johnson",
       imageUrl: "/assets/Bob.png",
     },
@@ -33,7 +33,7 @@ const TeamUrl: React.FC<DateFormatterProps> = ({ pen }) => {
       imageUrl: "/assets/Claude.png",
     },
     {
-      pen: "yash",
+      pen: "yashj99",
       name: "Yash Jain",
       imageUrl: "/assets/Yash.png",
     },

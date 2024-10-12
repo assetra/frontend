@@ -26,7 +26,7 @@ function getAuthor(penname: string): (typeof authors)[number] | undefined {
 const authors: Author[] = [
   {
     name: "Giordano Bertin-Maurice",
-    penname: "gio",
+    penname: "jeeordahnoh",
     title: "Chief Executive Officer",
     image: "/assets/Giordano.png",
     about: `Giordano Bertin-Maurice is a technology enthusiast and a prominent voice 
@@ -50,7 +50,7 @@ const authors: Author[] = [
   },
   {
     name: "Bob Johnson",
-    penname: "bob",
+    penname: "bobjohn2129",
     title: "Chief Marketing Officer",
     image: "/assets/Bob.png",
     about: `Results-oriented, demand-generation-obsessed CMO with B2B SaaS DNA. Engineering and finance-grounded marketing success at the nexus of where the application meets the network`,

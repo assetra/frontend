@@ -9,8 +9,8 @@ export interface Blog {
   author: string;
   title: string;
   content: string;
-  image?: string;
-  tags?: string;
+  cover_image?: string;
+  tags?: [];
   created_at: string;
 }
 
@@ -85,7 +85,7 @@ const Carousel: React.FC<CarouselProps> = ({ pins }) => {
             <div
               className="h-56 overflow-hidden rounded-xl md:h-96 flex flex-col justify-center items-center text-center p-4"
               style={{
-                backgroundImage: `url(${pin.image})`,
+                backgroundImage: `url(https://gtxadmin.pythonanywhere.com${pin.cover_image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
@@ -94,7 +94,7 @@ const Carousel: React.FC<CarouselProps> = ({ pins }) => {
               <div className="absolute left-16 bottom-6 rounded-xl items-start text-left w-4/5">
                 <div className="flex justify-start mb-2">
                   {pin.tags &&
-                    pin.tags.split(",").map((tag) => (
+                    pin.tags.map((tag) => (
                       <span
                         key={tag}
                         className="mr-2 bg-[#4B6BFB] px-2 py-1 rounded-btn text-sm"

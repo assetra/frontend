@@ -8,8 +8,8 @@ export interface Blog {
   author: string;
   title: string;
   content: string;
-  image?: string;
-  tags?: string;
+  cover_image?: string;
+  tags?: [];
   created_at: string;
 }
 
@@ -21,7 +21,7 @@ export default function Page({ params }: { params: { author: string } }) {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/blogs/by-author?author=${params.author}`
+        `https://gtxadmin.pythonanywhere.com/api/blogs/author/${params.author}/`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");

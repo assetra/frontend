@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import TeamUrl from "./teamUrl";
 import DateFormatter from "./dateFormatter";
 import TeamName from "./teamName";
-import ReactMarkdown from "react-markdown";
 
 type BlogItemProps = {
   id: number;
@@ -14,8 +13,8 @@ export interface Blog {
   author: string;
   title: string;
   content: string;
-  image?: string;
-  tags?: string;
+  cover_image?: string;
+  tags?: [];
   created_at: string;
 }
 
@@ -27,7 +26,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ id }) => {
   const fetchBlog = async () => {
     try {
       const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/blogs/${id}`
+        `https://gtxadmin.pythonanywhere.com/api/blog/${id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -64,7 +63,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ id }) => {
       <div className="py-8 px-20 bg-base-300 rounded-xl">
         <div className="flex justify-start gap-4 mb-2">
           {blog.tags &&
-            blog.tags.split(",").map((tag) => (
+            blog.tags.map((tag) => (
               <span
                 key={tag}
                 className="bg-[#4B6BFB] px-2 py-1 rounded-btn text-sm"
@@ -83,9 +82,9 @@ const BlogItem: React.FC<BlogItemProps> = ({ id }) => {
           </a>
           <DateFormatter datetime={blog.created_at} />
         </div>
-        {blog.image ? (
+        {blog.cover_image ? (
           <img
-            src={blog.image}
+            src={`https://gtxadmin.pythonanywhere.com${blog.cover_image}`}
             alt={blog.title}
             className="rounded-xl aspect-video w-[100%]"
           />
@@ -94,9 +93,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ id }) => {
             No image available
           </div>
         )}
-        <div className="mt-6 prose">
-          <ReactMarkdown>{blog.content}</ReactMarkdown>
-        </div>
+        <div
+          className="mt-6 prose"
+          dangerouslySetInnerHTML={{ __html: blog.content }}
+        />
       </div>
     </div>
   );
