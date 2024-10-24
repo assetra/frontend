@@ -245,26 +245,29 @@ export default function Team() {
               <Image
                 width={70}
                 height={70}
-                src="/assets/Jahmarley.png"
+                src="/assets/David.png"
                 alt="cr-logo"
               />
               <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Jahmarley Henry</p>
+                <p className="text-[16px] font-[700]">David Lam</p>
                 <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Executive Director
+                  Chief Financial Officer
                 </p>
               </div>
             </div>
 
             <div className="mt-4">
               <p className="text-white text-sm">
-                A WEB3 and blockchain enthusiast that is always researching and
-                keeping up with new trends
+                A finance leader with over 17 years of experience, David has
+                excelled in roles at BMO Bank, McDonald's, and City Credit
+                Investment Bank. He holds a Bachelor's degree and an MBA, along
+                with multiple finance certifications, and is a CPA in both
+                Canada and Australia.
               </p>
             </div>
 
             <div className="mt-4">
-              <a href="https://www.linkedin.com/in/jahmarleyhenry/">
+              <a href="https://www.linkedin.com/in/david-lam-345a7528/">
                 <Image
                   width={18}
                   height={18}
@@ -309,6 +312,42 @@ export default function Team() {
               </a>
             </div>
           </div>
+          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
+            <div className="flex gap-4">
+              <Image
+                width={70}
+                height={70}
+                src="/assets/Jahmarley.png"
+                alt="cr-logo"
+              />
+              <div className="text-white flex flex-col justify-center">
+                <p className="text-[16px] font-[700]">Jahmarley Henry</p>
+                <p className="text-[14px] text-[#1e68f6] font-[700]">
+                  Contributor
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <p className="text-white text-sm">
+                A WEB3 and blockchain enthusiast that is always researching and
+                keeping up with new trends
+              </p>
+            </div>
+
+            <div className="mt-4">
+              <a href="https://www.linkedin.com/in/jahmarleyhenry/">
+                <Image
+                  width={18}
+                  height={18}
+                  src="/assets/linkedin.png"
+                  alt="img"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
           <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
             <div className="flex gap-4 ">
               <div className=" flex w-[70px] p-4 items-center rounded-full bg-[#121212]">

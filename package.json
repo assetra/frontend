@@ -78,6 +78,7 @@
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.8",
     "tailwind-merge": "^2.4.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
     "use-debounce": "^10.0.0",
     "vaul": "^0.9.0",

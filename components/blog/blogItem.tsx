@@ -33,7 +33,6 @@ const BlogItem: React.FC<BlogItemProps> = ({ id }) => {
       }
       const data = await response.json();
       setBlog(data);
-      console.log(data, "test");
     } catch (error) {
       setError("Failed to fetch posts");
       console.error("There was a problem with the fetch operation:", error);
