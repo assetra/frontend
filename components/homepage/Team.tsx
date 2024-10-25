@@ -2,379 +2,262 @@ import React from "react";
 import Image from "next/image";
 import Background from "../../public/assets/background.png";
 
+const teamMembers = [
+  {
+    id: 1,
+    name: "Giordano Bertin-Maurice",
+    role: "Chief Executive Officer",
+    description:
+      "A digital asset trader with almost 5 years of experience looking to change the digital asset landscape.",
+    image: "/assets/Giordano.png",
+    socials: [
+      {
+        platform: "portfolio",
+        icon: "/assets/portfolio.png",
+        url: "https://jeeordahnoh.wixsite.com/jeeordahnoh",
+      },
+      {
+        platform: "telegram",
+        icon: "/assets/telegram.png",
+        url: "https://t.me/jeeordahnoh",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: "Ashmeet Singh",
+    role: "Chief Technology Officer",
+    description: "Innovating for Building web3 more secure and adoptable.",
+    image: "/assets/Ashmeet.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/singhashmeet/",
+      },
+      {
+        platform: "twitter",
+        icon: "/assets/x.png",
+        url: "https://x.com/Ashmeet70884617",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: "Bob Johnson",
+    role: "Chief Marketing Officer",
+    description:
+      "Results-oriented, demand-generation-obsessed CMO with B2B SaaS DNA. Engineering and finance-grounded marketing success at the nexus of where the application meets the network",
+    image: "/assets/Bob.png",
+    socials: [
+      {
+        platform: "instagram",
+        icon: "/assets/insta.png",
+        url: "https://www.instagram.com/bobjohn2129/",
+      },
+      {
+        platform: "twitter",
+        icon: "/assets/x.png",
+        url: "https://x.com/rjj_bob",
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: "Claude Zion",
+    role: "Chief Operating Officer",
+    description:
+      "A passionate Software Engineer on an exhilarating journey through the vast cosmos of computer science.",
+    image: "/assets/Claude.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/claudezion/",
+      },
+      {
+        platform: "github",
+        icon: "/assets/github.png",
+        url: "https://github.com/claudezion",
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: "Yash Jain",
+    role: "Full-Stack Developer",
+    description:
+      "Blockchain developer passionate about web 3, AI, and sustainability, driving positive change through technology.",
+    image: "/assets/Yash.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/0xyashjain",
+      },
+      {
+        platform: "github",
+        icon: "/assets/github.png",
+        url: "https://github.com/yashj09",
+      },
+      {
+        platform: "twitter",
+        icon: "/assets/x.png",
+        url: "https://x.com/0xYash_Jain",
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: "David Lam",
+    role: "Chief Financial Officer",
+    description:
+      "A finance leader with 17+ years of experience at BMO Bank, McDonald's, and City Credit Investment Bank. He holds a Bachelor's, an MBA, finance certifications, and CPA credentials in Canada and Australia.",
+    image: "/assets/David.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/david-lam-345a7528/",
+      },
+    ],
+  },
+  {
+    id: 7,
+    name: "Mulaye Subakanya",
+    role: "Contributor",
+    description: "An open-minded developer ready to reinvent the wheel",
+    image: "/assets/Mulaye.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/mulaye-s-14a5531b6",
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: "Jahmarley Henry",
+    role: "Contributor",
+    description:
+      "A WEB3 and blockchain enthusiast that is always researching and keeping up with new trends",
+    image: "/assets/Jahmarley.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/jahmarleyhenry/",
+      },
+    ],
+  },
+  {
+    id: 9,
+    name: "Gnosis",
+    role: "AI Trading Assistant",
+    description:
+      "Empowering your trading experience with intelligent insights and real-time support.",
+    image: "/assets/Gnosis.png",
+    socials: [],
+    isAI: true,
+  },
+];
+
 export default function Team() {
   return (
-    <section
-      className="flex justify-center pt-20 pb-16"
-      style={{
-        backgroundImage: `url(${Background.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
-      <div className="max-w-[1024px]">
-        <div>
-          <p className="text-white text-center font-[700] text-[20px] ">
+    <section className="relative flex justify-center px-4 pt-20 pb-16 min-h-screen overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 animate-gradient-xy" />
+
+      <div
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `url(${Background.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      />
+
+      <div className="relative max-w-[1280px] w-full z-10">
+        <div className="text-center mb-16 animate-fade-in">
+          <h2 className="text-white font-bold text-xl sm:text-2xl tracking-wider mb-4 relative inline-block">
             OUR TEAM
+            <div className="absolute -bottom-2 left-1/2 w-12 h-1 bg-blue-500 transform -translate-x-1/2 rounded-full" />
+          </h2>
+          <p className="text-white/90 text-2xl sm:text-3xl lg:text-4xl mt-4 max-w-2xl mx-auto leading-relaxed font-light">
+            The Assetra team excels in innovation and is dedicated to excellence
           </p>
-          <div className="flex justify-center mt-4">
-            <p className="text-center text-white text-3xl w-80 md:w-[700px] leading-10">
-              The Assetra team excels in innovation and is dedicated to
-              excellence
-            </p>
-          </div>
         </div>
 
-        <div className="flex justify-center flex-col md:flex-row gap-6 md:gap-16 mt-20">
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/Giordano.png"
-                alt="member-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">
-                  Giordano Bertin-Maurice
-                </p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Chief Executive Officer
-                </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {teamMembers.map((member, index) => (
+            <div
+              key={member.id}
+              className="group animate-fade-in"
+              style={{
+                animationDelay: `${index * 150}ms`,
+              }}
+            >
+              <div className="h-full flex flex-col relative backdrop-blur-xl bg-white/[0.08] rounded-2xl border border-white/[0.08] shadow-2xl transition-all duration-300 hover:transform hover:-translate-y-2 hover:bg-white/[0.12]">
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/[0.08] to-purple-500/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                <div className="relative p-6 flex flex-col h-full">
+                  <div className="flex gap-4 items-start">
+                    <div
+                      className={`relative shrink-0 w-20 h-20 rounded-full overflow-hidden group-hover:shadow-lg transition-shadow duration-300 
+                      ${member.isAI ? "bg-[#121212] p-4 flex items-center justify-center" : ""}`}
+                    >
+                      <Image
+                        fill
+                        src={member.image}
+                        alt={`${member.name}'s profile`}
+                        className={`${!member.isAI ? "rounded-full" : ""} object-cover transition-transform duration-300 group-hover:scale-105`}
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center">
+                      <h3 className="text-white font-bold text-lg sm:text-xl tracking-wide group-hover:text-blue-400 transition-colors duration-300">
+                        {member.name}
+                      </h3>
+                      <p className="text-blue-400 font-medium text-sm sm:text-base mt-1">
+                        {member.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  <p className="text-white/80 mt-4 text-sm sm:text-base leading-relaxed flex-grow">
+                    {member.description}
+                  </p>
+
+                  {member.socials.length > 0 && (
+                    <div className="flex gap-3 mt-6 pt-4 border-t border-white/[0.08]">
+                      {member.socials.map((social, index) => (
+                        <a
+                          key={index}
+                          href={social.url}
+                          className="group/icon"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <div
+                            className="bg-white/[0.08] p-2 rounded-full backdrop-blur-sm transition-all duration-300 
+                            hover:bg-white/[0.12] hover:shadow-lg hover:shadow-blue-500/20 transform hover:-translate-y-1"
+                          >
+                            <Image
+                              width={20}
+                              height={20}
+                              src={social.icon}
+                              alt={social.platform}
+                              className="w-5 h-5 transition-transform duration-300 group-hover/icon:scale-110"
+                            />
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                A digital asset trader with almost 5 years of experience looking
-                to change the digital asset landscape.
-              </p>
-            </div>
-
-            <div className="flex gap-2 mt-4">
-              <a href="https://jeeordahnoh.wixsite.com/jeeordahnoh">
-                <Image
-                  width={17}
-                  height={17}
-                  src="/assets/portfolio.png"
-                  alt="img"
-                />
-              </a>
-              <a href="https://t.me/jeeordahnoh">
-                <Image
-                  width={17}
-                  height={17}
-                  src="/assets/telegram.png"
-                  alt="img"
-                />
-              </a>
-            </div>
-          </div>
-
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/Ashmeet.png"
-                alt="cr-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Ashmeet Singh</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Chief Technology Officer
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                Innovating for Building web3 more secure and adoptable.
-              </p>
-            </div>
-
-            <div className="flex gap-2 mt-4">
-              <a href="https://www.linkedin.com/in/singhashmeet/">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
-                  alt="img"
-                />
-              </a>
-              <a href="https://x.com/Ashmeet70884617">
-                <Image width={17} height={17} src="/assets/x.png" alt="img" />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/Bob.png"
-                alt="team-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Bob Johnson</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Chief Marketing Officer
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                Results-oriented, demand-generation-obsessed CMO with B2B SaaS
-                DNA. Engineering and finance-grounded marketing success at the
-                nexus of where the application meets the network
-              </p>
-            </div>
-
-            <div className="flex gap-2 mt-4">
-              <a href="https://www.instagram.com/bobjohn2129/">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/insta.png"
-                  alt="img"
-                />
-              </a>
-              <a href="https://x.com/rjj_bob">
-                <Image width={17} height={17} src="/assets/x.png" alt="img" />
-              </a>
-            </div>
-          </div>
-
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/Claude.png"
-                alt="team-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Claude Zion</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Chief Operating Officer
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                A passionate Software Engineer on an exhilarating journey
-                through the vast cosmos of computer science.
-              </p>
-            </div>
-
-            <div className="flex gap-2 mt-4">
-              <a href="https://www.linkedin.com/in/claudezion/">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
-                  alt="img"
-                />
-              </a>
-              <a href="https://github.com/claudezion">
-                <Image
-                  width={16}
-                  height={16}
-                  src="/assets/github.png"
-                  alt="img"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/Yash.png"
-                alt="team-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Yash Jain</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Full-Stack Developer
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                Blockchain developer passionate about web 3, AI, and
-                sustainability, driving positive change through technology.
-              </p>
-            </div>
-
-            <div className="flex gap-2 mt-4">
-              <a href="https://www.linkedin.com/in/0xyashjain">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
-                  alt="img"
-                />
-              </a>
-              <a href="https://github.com/yashj09">
-                <Image
-                  width={16}
-                  height={16}
-                  src="/assets/github.png"
-                  alt="img"
-                />
-              </a>
-              <a href="https://x.com/0xYash_Jain">
-                <Image width={17} height={17} src="/assets/x.png" alt="img" />
-              </a>
-            </div>
-          </div>
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/David.png"
-                alt="cr-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">David Lam</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Chief Financial Officer
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                A finance leader with over 17 years of experience, David has
-                excelled in roles at BMO Bank, McDonald's, and City Credit
-                Investment Bank. He holds a Bachelor's degree and an MBA, along
-                with multiple finance certifications, and is a CPA in both
-                Canada and Australia.
-              </p>
-            </div>
-
-            <div className="mt-4">
-              <a href="https://www.linkedin.com/in/david-lam-345a7528/">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
-                  alt="img"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/Mulaye.png"
-                alt="cr-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Mulaye Subakanya</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Contributor
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                An open-minded developer ready to reinvent the wheel
-              </p>
-            </div>
-
-            <div className="mt-4">
-              <a href="https://www.linkedin.com/in/mulaye-s-14a5531b6">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
-                  alt="img"
-                />
-              </a>
-            </div>
-          </div>
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4">
-              <Image
-                width={70}
-                height={70}
-                src="/assets/Jahmarley.png"
-                alt="cr-logo"
-              />
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Jahmarley Henry</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  Contributor
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                A WEB3 and blockchain enthusiast that is always researching and
-                keeping up with new trends
-              </p>
-            </div>
-
-            <div className="mt-4">
-              <a href="https://www.linkedin.com/in/jahmarleyhenry/">
-                <Image
-                  width={18}
-                  height={18}
-                  src="/assets/linkedin.png"
-                  alt="img"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="flex justify-center flex-col md:flex-row gap-8 md:gap-16 mt-8">
-          <div className="w-96 md:w-[450px] bg-[#1b1b24] rounded-lg p-8">
-            <div className="flex gap-4 ">
-              <div className=" flex w-[70px] p-4 items-center rounded-full bg-[#121212]">
-                <Image
-                  width={70}
-                  height={70}
-                  src="/assets/Gnosis.png"
-                  alt="cr-logo"
-                />
-              </div>
-              <div className="text-white flex flex-col justify-center">
-                <p className="text-[16px] font-[700]">Gnosis</p>
-                <p className="text-[14px] text-[#1e68f6] font-[700]">
-                  AI Trading Assistant
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <p className="text-white text-sm">
-                Empowering your trading experience with intelligent insights and
-                real-time support.
-              </p>
-            </div>
-
-            <div className="mt-4"></div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

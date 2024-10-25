@@ -11,6 +11,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      animation: {
+        "gradient-xy": "gradient-xy 15s ease infinite",
+        "fade-in": "fade-in 0.6s ease-out forwards",
+      },
       colors: {
         color: {
           1: "#AC6AFF",
@@ -85,7 +89,7 @@ const config: Config = {
   plugins: [
     require("daisyui"),
     [require("tailwindcss-animate")],
-    require('tailwind-scrollbar-hide'),
+    require("tailwind-scrollbar-hide"),
     require("@tailwindcss/typography"),
     plugin(function ({ addBase, addComponents, addUtilities }) {
       addBase({});

@@ -1,11 +1,11 @@
 "use client";
 
-import Nav from "./nav";
+import Newnav from "./newnav";
 
 const Navbar = () => {
   return (
     <div>
-      <Nav />
+      <Newnav />
     </div>
   );
 };

@@ -5,7 +5,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="flex justify-center items-center min-h-[100svh] pt-16"
+      className="flex justify-center items-center min-h-screen w-full px-4 sm:px-6 lg:px-8 py-16"
       style={{
         backgroundImage: `url(${Background.src})`,
         backgroundSize: "cover",
@@ -13,36 +13,59 @@ export default function About() {
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="max-w-[1024px]">
-        <div className="text-[#ffffff] font-[700] text-[20px] text-center">
-          ABOUT ASSETRA
-        </div>
+      <div className="max-w-7xl w-full mx-auto">
+        <div className="space-y-4 md:space-y-6">
+          <h2 className="text-white font-bold text-xl sm:text-2xl text-center">
+            ABOUT ASSETRA
+          </h2>
 
-        <div className="text-white font-[400] text-3xl md:text-[45px] flex justify-center mt-4 md:mt-0">
-          <p className="w-3/4 text-center leading-10 md:leading-[60px]">
-            Unveiling Our Journey, Vision, and Commitment
-          </p>
-        </div>
-
-        <div className="flex flex-col md:flex-row gap-10 mt-16 p-4">
-          <div className="flex flex-col gap-6 bg-[#1b1b24] rounded-lg p-10">
-            <p className="text-[17px] font-[700] text-white">WHAT IS ASSETRA?</p>
-            <p className="text-white">
-              "Assetra simplifies crypto for all. Our user-friendly ecosystem eases
-              blockchain interactions, catering to novices and experts alike.
-              We're dedicated to creating intuitive tools, making crypto
-              investment accessible and efficient."
-            </p>
+          <div className="text-center">
+            <h1 className="text-white font-normal text-2xl sm:text-3xl md:text-4xl lg:text-[45px] leading-tight md:leading-[60px] max-w-4xl mx-auto px-4">
+              Unveiling Our Journey, Vision, and Commitment
+            </h1>
           </div>
 
-          <div className="flex flex-col gap-6 border-[1px] border-white rounded-lg p-10">
-            <p className="text-[17px] font-[700] text-white">OUR MISSION</p>
-            <p className="text-white">
-              Our goal is to empower people to participate in the exciting world
-              of cryptocurrencies with confidence and ease, and to help bridge
-              the gap between traditional finance and the emerging digital
-              economy.
-            </p>
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-10 mt-8 md:mt-16">
+            <div className="group transform hover:scale-[1.02] transition-all duration-300">
+              <div className="relative h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl backdrop-blur-lg border border-white/10 shadow-xl" />
+
+                <div className="relative h-full p-6 sm:p-8 lg:p-10 rounded-xl overflow-hidden">
+                  <div className="space-y-4 md:space-y-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                      WHAT IS ASSETRA?
+                    </h3>
+                    <p className="text-white/90 text-sm sm:text-base leading-relaxed">
+                      "Assetra simplifies crypto for all. Our user-friendly
+                      ecosystem eases blockchain interactions, catering to
+                      novices and experts alike. We're dedicated to creating
+                      intuitive tools, making crypto investment accessible and
+                      efficient."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="group transform hover:scale-[1.02] transition-all duration-300">
+              <div className="relative h-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl backdrop-blur-lg border border-white/10 shadow-xl" />
+
+                <div className="relative h-full p-6 sm:p-8 lg:p-10 rounded-xl overflow-hidden">
+                  <div className="space-y-4 md:space-y-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-white">
+                      OUR MISSION
+                    </h3>
+                    <p className="text-white/90 text-sm sm:text-base leading-relaxed">
+                      Our goal is to empower people to participate in the
+                      exciting world of cryptocurrencies with confidence and
+                      ease, and to help bridge the gap between traditional
+                      finance and the emerging digital economy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const themes = [
   "light",
@@ -140,7 +141,7 @@ const MultiLevelDropdown: React.FC = () => {
                 htmlFor="wallet_card"
                 className="cursor-pointer block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
               >
-                Connect Wallet
+                <ConnectButton showBalance={false} chainStatus="none" />
               </label>
             </li>
             <li className="relative">

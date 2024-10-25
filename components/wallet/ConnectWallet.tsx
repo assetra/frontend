@@ -1,5 +1,5 @@
-import React from 'react';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import React from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const CustomConnectButton: React.FC = () => {
   return (
@@ -16,32 +16,31 @@ const CustomConnectButton: React.FC = () => {
         chainModalOpen,
         connectModalOpen,
       }) => {
-        const ready = mounted && authenticationStatus !== 'loading';
+        const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
           account &&
           chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+          (!authenticationStatus || authenticationStatus === "authenticated");
 
         return (
           <div
             {...(!ready && {
-              'aria-hidden': true,
-              'style': {
+              "aria-hidden": true,
+              style: {
                 opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
+                pointerEvents: "none",
+                userSelect: "none",
               },
             })}
           >
             {(() => {
               if (!connected) {
                 return (
-                  <button 
-                    onClick={openConnectModal} 
+                  <button
+                    onClick={openConnectModal}
                     type="button"
-                    className="px-6 py-1 block flex-1 border-transparent rounded-full bg-gradient-to-r from-red-600 to-blue-700 text-white sm:text-sm sm:leading-6 cursor-pointer"
+                    className="px-4 py-2 w-full sm:w-auto border-transparent rounded-full bg-gradient-to-r from-red-600 to-blue-700 text-white text-base sm:text-sm font-medium hover:from-red-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
                     Connect Wallet
                   </button>
@@ -57,10 +56,10 @@ const CustomConnectButton: React.FC = () => {
               }
 
               return (
-                <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ display: "flex", gap: 12 }}>
                   <button
                     onClick={openChainModal}
-                    style={{ display: 'flex', alignItems: 'center' }}
+                    style={{ display: "flex", alignItems: "center" }}
                     type="button"
                   >
                     {chain?.hasIcon && (
@@ -70,13 +69,13 @@ const CustomConnectButton: React.FC = () => {
                           width: 12,
                           height: 12,
                           borderRadius: 999,
-                          overflow: 'hidden',
+                          overflow: "hidden",
                           marginRight: 4,
                         }}
                       >
                         {chain.iconUrl && (
                           <img
-                            alt={chain.name ?? 'Chain icon'}
+                            alt={chain.name ?? "Chain icon"}
                             src={chain.iconUrl}
                             style={{ width: 12, height: 12 }}
                           />
@@ -90,7 +89,7 @@ const CustomConnectButton: React.FC = () => {
                     {account.displayName}
                     {account.displayBalance
                       ? ` (${account.displayBalance})`
-                      : ''}
+                      : ""}
                   </button>
                 </div>
               );

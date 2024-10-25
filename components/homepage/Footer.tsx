@@ -1,56 +1,113 @@
 import React from "react";
 import Image from "next/image";
-import Background from "../../public/assets/background.png";
 import EmailInput from "./EmailInput";
 import { IoGlobeOutline } from "react-icons/io5";
-
-export default function Footer() {
+const communityLinks = [
+  {
+    href: "https://x.com/assetradotxyz",
+    src: "/assets/x.png",
+    alt: "X/Twitter",
+  },
+  {
+    href: "https://www.instagram.com/assetradotxyz",
+    src: "/assets/insta.png",
+    alt: "Instagram",
+  },
+  {
+    href: "https://www.facebook.com/profile.php?id=61565050207514",
+    src: "/assets/facebook.png",
+    alt: "Facebook",
+  },
+  {
+    href: "https://medium.com/@assetradotxyz",
+    src: "/assets/image-11.png",
+    alt: "Medium",
+  },
+  {
+    href: "https://chat.whatsapp.com/DT7FIAWAJVgIRPHwkCfHfb",
+    src: "/assets/whatsapp.png",
+    alt: "WhatsApp",
+  },
+  {
+    href: "https://www.linkedin.com/company/assetradotcom/",
+    src: "/assets/linkedin.png",
+    alt: "LinkedIn",
+  },
+  {
+    href: "https://t.me/assetra_xyz",
+    src: "/assets/telegram.png",
+    alt: "Telegram",
+  },
+  {
+    href: "https://discord.gg/yUHXSRDSvv",
+    src: "/assets/reddit.png",
+    alt: "Discord",
+  },
+  {
+    href: "https://www.crunchbase.com/organization/gtx-91c8",
+    src: "/assets/cb.png",
+    alt: "Crunchbase",
+  },
+  {
+    href: "https://github.com/assetra",
+    src: "/assets/github.png",
+    alt: "Github",
+  },
+  {
+    href: "mailto:info@assetra.xyz",
+    src: "/assets/email.png",
+    alt: "Email",
+  },
+];
+const Footer = () => {
   return (
     <footer
-      className="pt-16 bg-black"
+      className="relative pt-16 bg-black"
       style={{
-        backgroundImage: `url(${Background.src})`,
+        backgroundImage: "url('/assets/background.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
       }}
     >
-      <div className="mx-auto w-full max-w-screen-xl p-4 pt-6 lg:pt-8">
-        <div className="grid grid-cols-2  md:grid-cols-6 gap-4 text-white mx-auto">
-          <div className="m-auto grid">
-            <a href="https://www.assetra.xyz">
+      <div className="mx-auto w-full max-w-screen-xl px-4 py-6 lg:py-8">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          <div className="flex flex-col items-center sm:items-start">
+            <a href="https://www.assetra.xyz" className="mb-4">
               <Image
                 width={100}
                 height={60}
                 src="/assets/footer-logo.png"
                 alt="footer-logo"
+                className="mx-auto sm:mx-0"
               />
-              <p className="text-[#6C6C6C] text-[10px]">
+              <p className="text-[#6C6C6C] text-xs text-center sm:text-left">
                 ©2024 Assetra Trading Group Ltd
               </p>
             </a>
-            <button className="border-2 border-white py-1 px-2 mt-2 rounded flex items-center gap-2">
-              <IoGlobeOutline />
-              <p>English</p>
+            <button className="flex items-center gap-2 border-2 border-white py-1.5 px-3 rounded hover:bg-white/10 transition-colors">
+              <IoGlobeOutline className="text-white" />
+              <span className="text-white">English</span>
             </button>
           </div>
-          <div className="m-auto">
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+
+          <div className="text-center sm:text-left">
+            <h2 className="mb-4 text-sm font-semibold text-white uppercase">
               Company
             </h2>
-            <ul className="text-gray-500 dark:text-gray-400 font-medium">
-              <li className="mb-4">
+            <ul className="space-y-3 text-gray-400">
+              <li>
                 <a
                   href="/"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Home
                 </a>
               </li>
-              <li className="mb-4">
+              <li>
                 <a
                   href="#about"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   About us
                 </a>
@@ -58,30 +115,31 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Contact us
                 </a>
               </li>
             </ul>
           </div>
-          <div className="m-auto pl-8 md:pl-0 pt-2 md:pt-0">
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+
+          <div className="text-center sm:text-left">
+            <h2 className="mb-4 text-sm font-semibold text-white uppercase">
               Support
             </h2>
-            <ul className="text-gray-500 dark:text-gray-400 font-medium">
-              <li className="mb-4">
+            <ul className="space-y-3 text-gray-400">
+              <li>
                 <a
-                  href=""
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  href="#"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   FAQ
                 </a>
               </li>
-              <li className="mb-4">
+              <li>
                 <a
                   href="mailto:info@assetra.xyz"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Support center
                 </a>
@@ -89,30 +147,31 @@ export default function Footer() {
               <li>
                 <a
                   href="#"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Connect with Assetra
                 </a>
               </li>
             </ul>
           </div>
-          <div className="m-auto pl-20 md:pl-0 pt-2 md:pt-0">
-            <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
+
+          <div className="text-center sm:text-left">
+            <h2 className="mb-4 text-sm font-semibold text-white uppercase">
               Legal
             </h2>
-            <ul className="text-gray-500 dark:text-gray-400 font-medium">
-              <li className="mb-4">
+            <ul className="space-y-3 text-gray-400">
+              <li>
                 <a
                   href="/policy"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Privacy Policy
                 </a>
               </li>
-              <li className="mb-4">
+              <li>
                 <a
                   href="/terms"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Terms &amp; Conditions
                 </a>
@@ -120,133 +179,66 @@ export default function Footer() {
               <li>
                 <a
                   href="/disclosure"
-                  className=" hover:border-white hover:border-b-2 hover:pb-1"
+                  className="hover:text-white hover:underline transition-colors"
                 >
                   Risk Disclosure
                 </a>
               </li>
             </ul>
           </div>
-          <div className="col-span-2 pt-2 md:pt-0">
-            <p className="text-center">
-              Stay updated on cryptocurrency developments to maintain a
-              competitive edge.
-            </p>
-            <EmailInput />
+
+          <div className="col-span-1 sm:col-span-2 lg:col-span-2">
+            <div className="text-center lg:text-left">
+              <p className="text-white mb-4">
+                Stay updated on cryptocurrency developments to maintain a
+                competitive edge.
+              </p>
+              <EmailInput />
+            </div>
           </div>
         </div>
 
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <hr className="my-8 border-gray-700" />
 
-        <h2 className="pt-6 font-semibold text-gray-900 uppercase dark:text-white text-center text-[1rem]">
-          Community
-        </h2>
+        <div className="text-center">
+          <h2 className="mb-6 text-base font-semibold text-white uppercase">
+            Community
+          </h2>
 
-        <div className="flex mt-6 sm:justify-center">
-          <a href="https://x.com/assetradotxyz">
-            <Image width={18} height={17} src="/assets/x.png" alt="X/Twitter" />
-          </a>
-          <a className="ms-5" href="https://www.instagram.com/assetradotxyz">
-            <Image
-              width={18}
-              height={17}
-              src="/assets/insta.png"
-              alt="Instagram"
-            />
-          </a>
-          <a
-            className="ms-5"
-            href="https://www.facebook.com/profile.php?id=61565050207514&mibextid=ZbWKwL"
-          >
-            <Image
-              width={18}
-              height={17}
-              src="/assets/facebook.png"
-              alt="Facebook"
-            />
-          </a>
-          <a className="ms-5" href="https://medium.com/@assetradotxyz">
-            <Image
-              width={18}
-              height={17}
-              src="/assets/image-11.png"
-              alt="Medium"
-            />
-          </a>
-          <a
-            className="ms-5"
-            href="https://chat.whatsapp.com/DT7FIAWAJVgIRPHwkCfHfb"
-          >
-            <Image
-              width={18}
-              height={17}
-              src="/assets/whatsapp.png"
-              alt="WhatsApp"
-            />
-          </a>
-          <a
-            className="ms-5"
-            href="https://www.linkedin.com/company/assetradotcom/"
-          >
-            <Image
-              width={18}
-              height={17}
-              src="/assets/linkedin.png"
-              alt="LinkedIn"
-            />
-          </a>
-          <a className="ms-5" href="https://t.me/assetra_xyz">
-            <Image
-              width={18}
-              height={17}
-              src="/assets/telegram.png"
-              alt="Telegram"
-            />
-          </a>
-          <a className="ms-5" href="https://discord.gg/yUHXSRDSvv">
-            <Image
-              width={18}
-              height={17}
-              src="/assets/reddit.png"
-              alt="Discord"
-            />
-          </a>
-          <a
-            className="ms-5"
-            href="https://www.crunchbase.com/organization/gtx-91c8"
-          >
-            <Image
-              width={18}
-              height={17}
-              src="/assets/cb.png"
-              alt="Crunchbase"
-            />
-          </a>
-          <a className="ms-5" href="https://github.com/assetra">
-            <Image
-              width={18}
-              height={17}
-              src="/assets/github.png"
-              alt="Github"
-            />
-          </a>
-          <a className="ms-5" href="mailto:info@assetra.xyz">
-            <Image width={18} height={17} src="/assets/email.png" alt="Email" />
-          </a>
-        </div>
-        <div className="text-center mt-8">
-          <span className="text-sm text-[#484D63] sm:text-center">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            {communityLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                className="hover:opacity-80 transition-opacity"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image
+                  width={18}
+                  height={17}
+                  src={social.src}
+                  alt={social.alt}
+                  className="w-5 h-5"
+                />
+              </a>
+            ))}
+          </div>
+
+          <div className="text-sm text-[#484D63]">
             © 2024{" "}
             <a
               href="https://www.assetra.xyz"
-              className=" hover:border-white hover:border-b-2 hover:pb-1"
+              className="hover:text-white hover:underline transition-colors"
             >
               Assetra
             </a>
             . All Rights Reserved.
-          </span>
+          </div>
         </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
