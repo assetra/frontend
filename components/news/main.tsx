@@ -155,7 +155,7 @@ const Main = () => {
       />
 
       {/* Main Content */}
-      <div className="container relative z-10 pr-0 pl-0 md:flex justify-between md:h-[100dvh] pb-16 pt-[10%]">
+      <div className="container relative z-10 pr-0 md:flex justify-between md:h-[100dvh] pb-16 pt-[10%]">
         <div className="md:w-1/2 mb-6 md:mb-0">
           <div className="pr-[15%]">
             <h3 className="h4">{articles[0]?.title}</h3>

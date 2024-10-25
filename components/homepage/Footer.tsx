@@ -40,8 +40,13 @@ const communityLinks = [
   },
   {
     href: "https://discord.gg/yUHXSRDSvv",
-    src: "/assets/reddit.png",
+    src: "/assets/discord.png",
     alt: "Discord",
+  },
+  {
+    href: "https://www.reddit.com/r/Assetra",
+    src: "/assets/reddit.png",
+    alt: "Reddit",
   },
   {
     href: "https://www.crunchbase.com/organization/gtx-91c8",
@@ -49,9 +54,9 @@ const communityLinks = [
     alt: "Crunchbase",
   },
   {
-    href: "https://github.com/assetra",
-    src: "/assets/github.png",
-    alt: "Github",
+    href: "https://www.tiktok.com/@assetradotxyz",
+    src: "/assets/tiktok.png",
+    alt: "Tiktok",
   },
   {
     href: "mailto:info@assetra.xyz",

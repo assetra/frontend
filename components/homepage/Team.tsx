@@ -157,7 +157,7 @@ const teamMembers = [
     role: "AI Trading Assistant",
     description:
       "Empowering your trading experience with intelligent insights and real-time support.",
-    image: "/assets/Gnosis.png",
+    image: "/assets/bot.png",
     socials: [],
     isAI: true,
   },
@@ -211,7 +211,7 @@ export default function Team() {
                         fill
                         src={member.image}
                         alt={`${member.name}'s profile`}
-                        className={`${!member.isAI ? "rounded-full" : ""} object-cover transition-transform duration-300 group-hover:scale-105`}
+                        className="rounded-full object-cover transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
                     <div className="flex flex-col justify-center">

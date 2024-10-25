@@ -26,7 +26,7 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-10 mt-8 md:mt-16">
-            <div className="group transform hover:scale-[1.02] transition-all duration-300">
+            <div className="group transform hover:scale-[1.02] transition-all duration-300 animated-block">
               <div className="relative h-full">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl backdrop-blur-lg border border-white/10 shadow-xl" />
 

@@ -43,8 +43,13 @@ export default function DigitalAssets() {
     },
     {
       href: "https://discord.gg/yUHXSRDSvv",
-      src: "/assets/reddit.png",
+      src: "/assets/discord.png",
       alt: "Discord",
+    },
+    {
+      href: "https://www.reddit.com/r/Assetra",
+      src: "/assets/reddit.png",
+      alt: "Reddit",
     },
     {
       href: "https://www.crunchbase.com/organization/gtx-91c8",
@@ -52,9 +57,9 @@ export default function DigitalAssets() {
       alt: "Crunchbase",
     },
     {
-      href: "https://github.com/assetra",
-      src: "/assets/github.png",
-      alt: "Github",
+      href: "https://www.tiktok.com/@assetradotxyz",
+      src: "/assets/tiktok.png",
+      alt: "Tiktok",
     },
     { href: "mailto:info@assetra.xyz", src: "/assets/email.png", alt: "Email" },
   ];
@@ -77,7 +82,7 @@ export default function DigitalAssets() {
         </div>
 
         <div className="mt-12 md:mt-20">
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-11 gap-6 justify-items-center max-w-4xl mx-auto px-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-6 justify-items-center max-w-4xl mx-auto px-4">
             {socialLinks.map((link, index) => (
               <a
                 key={index}

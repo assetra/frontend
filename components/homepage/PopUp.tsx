@@ -208,8 +208,16 @@ const PopUP: React.FC = () => {
                     <Image
                       width={18}
                       height={17}
-                      src="/assets/black/reddit.png"
+                      src="/assets/black/discord.png"
                       alt="Discord"
+                    />
+                  </a>
+                  <a className="ms-2" href=" https://www.reddit.com/r/Assetra">
+                    <Image
+                      width={18}
+                      height={17}
+                      src="/assets/black/reddit.png"
+                      alt="Reddit"
                     />
                   </a>
                   <a
@@ -223,12 +231,12 @@ const PopUP: React.FC = () => {
                       alt="Crunchbase"
                     />
                   </a>
-                  <a className="ms-2" href="https://github.com/assetra">
+                  <a className="ms-2" href="https://www.tiktok.com/@assetradotxyz">
                     <Image
                       width={18}
                       height={17}
-                      src="/assets/black/github.png"
-                      alt="Github"
+                      src="/assets/black/tiktok.png"
+                      alt="Tiktok"
                     />
                   </a>
                   <a className="ms-2" href="mailto:info@assetra.xyz">

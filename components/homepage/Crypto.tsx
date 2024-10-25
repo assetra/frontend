@@ -41,6 +41,7 @@ export default function Crypto() {
         "With a diverse selection of trading pairs for cryptocurrencies, the exchange platform caters to a broad range of traders seeking to invest in different digital assets.",
     },
     {
+      isLast: true,
       icon: "/assets/cr6.png",
       title: "LOW TRADING\nFEES",
       description:
@@ -73,9 +74,13 @@ export default function Crypto() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group transform hover:scale-[1.02] transition-all duration-300"
+                className={`group transform hover:scale-[1.02] transition-all duration-300
+                  ${feature.isLast ? "flex items-center justify-center md:col-span-2 lg:col-span-3" : ""}`}
               >
-                <div className="relative h-full">
+                <div
+                  className={`relative h-full mx-auto
+                  ${feature.isLast ? "md:w-1/2 lg:w-1/3" : ""}`}
+                >
                   <div className="absolute inset-0 bg-gradient-to-br from-[#2F3241]/60 to-[#2F3241]/30 rounded-xl backdrop-blur-md border border-white/10 shadow-xl" />
 
                   <div className="relative h-full p-8 sm:p-10 rounded-xl">
