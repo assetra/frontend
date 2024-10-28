@@ -18,17 +18,23 @@ const newnav = () => {
       <nav className="max-w-10xl w-full flex flex-row bg-white/10 text-white text-xs justify-between items-center px-4 py-5 top-0 fixed max-h-12 z-50 shadow-lg mx-auto  rounded-lg backdrop-blur-lg backdrop-saturate-150 backdrop-filter border border-white/20 ">
         <div className="w-full justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className=" flex items-center">
-                <a href="/">
-                  <Image
-                    src={"/images/logo.png"}
-                    alt="Assetra logo"
-                    width={70}
-                    height={70}
-                  />
-                </a>
-              </div>
+            <div className="flex-shrink-0 flex items-center">
+              <Link href={"/"}>
+                <Image
+                  className="block lg:hidden "
+                  src={"/images/logo.png"}
+                  alt="Assetra logo"
+                  width={70}
+                  height={70}
+                />
+                <Image
+                  className="hidden lg:block "
+                  src={"/images/logo.png"}
+                  alt="Assetra logo"
+                  width={70}
+                  height={70}
+                />
+              </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8 text-gray-400">
               <Link
@@ -81,24 +87,29 @@ const newnav = () => {
                 News
               </Link>
             </div>
-            <div className="hidden sm:ml-6 sm:flex sm:items-center">
+            <div className="hidden  sm:flex sm:gap-4 sm:items-center">
               {isAuthenticated ? (
                 <>
                   <div className="flex relative group justify-center items-center z-1001">
                     <input
+                      id="searchInput"
                       type="text"
-                      className="w-52 px-6 py-1 block flex-1 border-transparent rounded-full bg-[#2F324180] text-white placeholder:text-gtxText focus:ring-transparent focus:border-transparent sm:text-sm sm:leading-6"
-                      placeholder="Search"
-                      aria-label="Search"
+                      className="px-6 py-1 outline-none  bg-white/10 backdrop-blur-md border border-white/20 rounded-lg w-[40px] h-[35px] p-[15px] transition-all duration-500 focus:w-[200px] focus:pl-[30px] focus:ml-4 placeholder:text-white text-white"
+                      placeholder="search here..."
                     />
-                    <Image
-                      className="flex absolute right-6"
-                      src="/images/search-icon.png"
-                      alt="Search icon"
-                      width={16}
-                      height={16}
-                    />
+                    <label
+                      htmlFor="searchInput"
+                      className="flex absolute right-6 cursor-pointer"
+                    >
+                      <Image
+                        src="/images/search-icon.png"
+                        alt="Search icon"
+                        width={16}
+                        height={16}
+                      />
+                    </label>
                   </div>
+
                   <div className="flex relative justify-center items-center z-[1001] w-full sm:w-auto group">
                     <ConnectWallet />
                   </div>
@@ -116,7 +127,7 @@ const newnav = () => {
                           height={70}
                         />
                       </a>
-                      <button className="btn btn-ghost btn-circle">
+                      {/* <button className="btn btn-ghost btn-circle">
                         <div className="indicator">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -134,8 +145,8 @@ const newnav = () => {
                           </svg>
                           <span className="badge badge-xs badge-primary indicator-item"></span>
                         </div>
-                      </button>
-                      <div
+                      </button> */}
+                      {/* <div
                         tabIndex={0}
                         className="mt-3 z-[1] card card-compact dropdown-content w-52 bg-black shadow"
                       >
@@ -143,7 +154,7 @@ const newnav = () => {
                           <span className="font-bold text-lg">8 Items</span>
                           <span className="text-info">Subtotal: $999</span>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <span className="text-white">
                       {user?.username || "username"}
