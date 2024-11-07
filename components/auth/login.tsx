@@ -98,39 +98,45 @@ const Login = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 min-h-[100svh]">
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-[100svh] ">
       <div
-        className={` ${microsoft.className} bg-black text-white pb-8 px-6 pt-32`}
+        className={`${microsoft.className}  bg-gradient-to-r from-black to-gray-800 text-white py-32 px-6 md:py-32 md:px-12 justify-center md:block hidden content-center`}
       >
-        <h1 className="text-3xl font-bold text-center">
-          Trade securely and with peace of mind.
-        </h1>
-        <p className="text-[0.8rem] py-4 text-center">
-          "We maintain a constant 1:1 backing of your funds on Assetra, and we
-          routinely release Proof of Reserve audits to ensure transparency and
-          accountability."
-        </p>
-      </div>
-      <div className="bg-white text-black text-center px-6 pb-8 pt-32">
-        <h1 className="text-xl text-[2rem]">Log In</h1>
-        <div className="mt-2 text-sm text-[#6978A0]">
-          Welcome back, you’ve been missed!
+        <div className="flex flex-col my-auto">
+          <h1 className="text-3xl md:text-4xl font-bold text-center">
+            Trade securely and with peace of mind.
+          </h1>
+          <p className="text-sm md:text-base py-4 text-center">
+            "We maintain a constant 1:1 backing of your funds on Assetra, and we
+            routinely release Proof of Reserve audits to ensure transparency and
+            accountability."
+          </p>
         </div>
+      </div>
+
+      <div className="bg-white text-black text-center px-6 md:px-12 py-12 md:py-32">
+        <h1 className="text-2xl md:text-3xl font-bold">Log In</h1>
+        <p className="mt-2 text-sm md:text-base text-[#6978A0]">
+          Welcome back, you've been missed!
+        </p>
+
         {feedbackMessage && (
           <div
-            className={`mt-2 text-sm ${
-              isSuccess ? "text-green-500" : "text-red-500"
-            }`}
+            className={`mt-4 text-sm md:text-base ${isSuccess ? "text-green-500" : "text-red-500"} transition-all duration-300 ease-in-out`}
           >
             {feedbackMessage}
           </div>
         )}
+
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col mx-auto gap-7 py-6 w-full md:w-2/3"
+          className="flex flex-col mx-auto gap-6 py-6 w-full md:w-2/3"
         >
           <div className="flex flex-col items-start">
-            <label htmlFor="username" className="text-xs font-semibold">
+            <label
+              htmlFor="username"
+              className="text-sm md:text-base font-semibold text-gray-700"
+            >
               Username
             </label>
             <input
@@ -138,14 +144,17 @@ const Login = () => {
               name="username"
               title="Enter your username"
               value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-              className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
+              onChange={(e) => setUsername(e.target.value)}
+              className="border border-gray-300 rounded-lg h-[50px] md:h-[60px] px-5 w-full bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              placeholder="Your username"
             />
           </div>
+
           <div className="flex flex-col items-start">
-            <label htmlFor="password" className="text-xs font-semibold">
+            <label
+              htmlFor="password"
+              className="text-sm md:text-base font-semibold text-gray-700"
+            >
               Password
             </label>
             <input
@@ -153,14 +162,14 @@ const Login = () => {
               name="password"
               title="Enter your password"
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              className="border border-black rounded-[7px] h-[50px] px-5 w-full bg-white"
+              onChange={(e) => setPassword(e.target.value)}
+              className="border border-gray-300 rounded-lg h-[50px] md:h-[60px] px-5 w-full bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+              placeholder="Your password"
             />
           </div>
+
           {clicked ? (
-            <button className="px-3 py-1.5 bg-blue-700 text-white flex items-center justify-center">
+            <button className="px-4 py-2 bg-blue-700 text-white flex items-center justify-center rounded-lg mt-6">
               <svg
                 className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -181,23 +190,28 @@ const Login = () => {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 ></path>
               </svg>
+              Loading...
             </button>
           ) : (
-            <button type="submit" className="px-3 py-1.5 bg-black text-white">
+            <button
+              type="submit"
+              className="px-4 py-2 bg-black text-white rounded-lg mt-6 transition-all duration-300 hover:bg-gray-800"
+            >
               Log In
             </button>
           )}
         </form>
-        <div className="py-8 text-xs font-light">
+
+        <div className="py-4 text-sm md:text-base font-light">
           Can't remember your password? &nbsp;
-          <span className="font-bold">
+          <span className="font-semibold text-blue-600 hover:underline">
             <Link href="/forget">Forgot Password</Link>
           </span>
         </div>
-        <div className="py-8 text-xs font-light">
-          Don’t have an account? &nbsp;
-          <span className="font-bold">
-            <Link href="/signup"> Sign Up</Link>
+        <div className="py-4 text-sm md:text-base font-light">
+          Don't have an account? &nbsp;
+          <span className="font-semibold text-blue-600 hover:underline">
+            <Link href="/signup">Sign Up</Link>
           </span>
         </div>
       </div>

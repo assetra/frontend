@@ -40,7 +40,7 @@ const CustomConnectButton: React.FC = () => {
                   <button
                     onClick={openConnectModal}
                     type="button"
-                    className="px-4 py-2 w-full sm:w-auto border-transparent rounded-full bg-gradient-to-r from-red-600 to-blue-700 text-white text-base sm:text-sm font-medium hover:from-red-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    className="px-4 custom:py-2 w-full sm:w-auto border-transparent rounded-full bg-gradient-to-r from-red-600 to-blue-700 text-white text-base sm:text-sm font-medium hover:from-red-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                   >
                     Connect Wallet
                   </button>

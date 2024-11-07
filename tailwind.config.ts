@@ -11,6 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        custom: "1256px",
+      },
       animation: {
         "gradient-xy": "gradient-xy 15s ease infinite",
         "fade-in": "fade-in 0.6s ease-out forwards",
