@@ -121,9 +121,11 @@ const OTPField = () => {
                         key={i}
                         type="number"
                         disabled={i !== 0}
-                        ref={(el: HTMLInputElement) =>
-                          (inputsRef.current[i] = el)
-                        }
+                        ref={(el: HTMLInputElement | null) => {
+                          if (el) {
+                            inputsRef.current[i] = el;
+                          }
+                        }}
                       />
                     ))}
                 </div>

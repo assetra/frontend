@@ -13,7 +13,12 @@ export interface Blog {
   created_at: string;
 }
 
-export default function Page({ params }: { params: { author: string } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ author: string }>;
+}) {
+  const author = (await params).author;
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +26,7 @@ export default function Page({ params }: { params: { author: string } }) {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/api/blogs/author/${params.author}/`
+        `https://gtxadmin.pythonanywhere.com/api/blogs/author/${author}/`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -55,7 +60,7 @@ export default function Page({ params }: { params: { author: string } }) {
 
   return (
     <div className="py-24 px-[20%]">
-      <AuthorBio penname={params.author} />
+      <AuthorBio penname={author} />
       <AuthorBlogs blogs={blogs} />
     </div>
   );

@@ -5,10 +5,15 @@ export const metadata: Metadata = {
   title: "Patch",
 };
 
-export default function Page({ params }: { params: { id: number } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: number }>;
+}) {
+  const id = (await params).id;
   return (
     <>
-      <Patch id={params.id} />
+      <Patch id={id} />
     </>
   );
 }

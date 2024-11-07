@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.assetra.xyz"),
 };
 const ClientWrapper = dynamic(() => import("@/components/ClientWrapper"), {
-  ssr: false,
+  ssr: true,
 });
 
 export default function RootLayout({

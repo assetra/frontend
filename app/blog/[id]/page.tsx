@@ -1,9 +1,14 @@
 import BlogItem from "@/components/blog/blogItem";
 
-export default function Page({ params }: { params: { id: number } }) {
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ id: number }>;
+}) {
+  const id = (await params).id;
   return (
     <>
-      <BlogItem id={params.id} />
+      <BlogItem id={id} />
     </>
   );
 }
