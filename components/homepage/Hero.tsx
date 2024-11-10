@@ -1,7 +1,5 @@
 import EmailInput from "./EmailInput";
 import Image from "next/image";
-import React from "react";
-import Background from "../../public/assets/background.png";
 import Divider from "./Divider";
 
 export default function DigitalAssets() {
@@ -65,15 +63,7 @@ export default function DigitalAssets() {
   ];
 
   return (
-    <section
-      className="min-h-screen w-full px-4 sm:px-6 lg:px-8 py-8 md:py-16"
-      style={{
-        backgroundImage: `url(${Background.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <section className="min-h-screen w-full px-4 sm:px-6 lg:px-8 py-8 md:py-16">
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <h1 className="text-[#E5E6ED] font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight md:leading-[60px] max-w-4xl mx-auto">

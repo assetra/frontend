@@ -1,17 +1,8 @@
-import React from "react";
-import Background from "../../public/assets/background.png";
-
 export default function About() {
   return (
     <section
       id="about"
       className="flex justify-center items-center min-h-screen w-full px-4 sm:px-6 lg:px-8 py-16"
-      style={{
-        backgroundImage: `url(${Background.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
     >
       <div className="max-w-7xl w-full mx-auto">
         <div className="space-y-4 md:space-y-6">
@@ -26,7 +17,7 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-10 mt-8 md:mt-16">
-            <div className="group transform hover:scale-[1.02] transition-all duration-300 animated-block">
+            <div className="group transform hover:scale-[1.02] transition-all duration-300">
               <div className="relative h-full">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 rounded-xl backdrop-blur-lg border border-white/10 shadow-xl" />
 

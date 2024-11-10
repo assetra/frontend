@@ -1,6 +1,4 @@
-import React from "react";
 import Image from "next/image";
-import Background from "../../public/assets/background.png";
 
 const teamMembers = [
   {
@@ -166,17 +164,9 @@ const teamMembers = [
 export default function Team() {
   return (
     <section className="relative flex justify-center px-4 pt-20 pb-16 min-h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 animate-gradient-xy" />
+      <div className="absolute inset-0 animate-gradient-xy" />
 
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `url(${Background.src})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      />
+      <div className="absolute inset-0 opacity-30" />
 
       <div className="relative max-w-[1280px] w-full z-10">
         <div className="text-center mb-16 animate-fade-in">

@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import EmailInput from "./EmailInput";
 import { IoGlobeOutline } from "react-icons/io5";
@@ -66,15 +65,7 @@ const communityLinks = [
 ];
 const Footer = () => {
   return (
-    <footer
-      className="relative pt-16 bg-black"
-      style={{
-        backgroundImage: "url('/assets/background.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <footer className="relative pt-16">
       <div className="mx-auto w-full max-w-screen-xl px-4 py-6 lg:py-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
           <div className="flex flex-col items-center sm:items-start">

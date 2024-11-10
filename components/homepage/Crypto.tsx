@@ -1,6 +1,4 @@
-import React from "react";
 import Image from "next/image";
-import Background from "../../public/assets/background.png";
 
 export default function Crypto() {
   const features = [
@@ -50,15 +48,7 @@ export default function Crypto() {
   ];
 
   return (
-    <section
-      className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
-      style={{
-        backgroundImage: `url(${Background.src})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
-    >
+    <section className="py-16 sm:py-20 lg:py-24 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center space-y-4">
           <h2 className="text-white font-bold text-lg sm:text-xl lg:text-2xl">
