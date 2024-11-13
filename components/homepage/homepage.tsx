@@ -1,4 +1,4 @@
-import Background from "../../public/assets/background.png";
+import Background from "../../public/assets/bg-image.png";
 import About from "./About";
 import Footer from "./Footer";
 import Hero from "./Hero";

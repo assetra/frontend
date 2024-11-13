@@ -67,17 +67,17 @@ const Footer = () => {
   return (
     <footer className="relative pt-16">
       <div className="mx-auto w-full max-w-screen-xl px-4 py-6 lg:py-8">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
-          <div className="flex flex-col items-center sm:items-start">
+        <div className="grid gap-8 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+          <div className="flex flex-col items-start">
             <a href="https://www.assetra.xyz" className="mb-4">
               <Image
                 width={100}
                 height={60}
                 src="/assets/footer-logo.png"
                 alt="footer-logo"
-                className="mx-auto sm:mx-0"
+                className="mx-0"
               />
-              <p className="text-[#6C6C6C] text-xs text-center sm:text-left">
+              <p className="text-[#6C6C6C] text-xs text-left mt-2">
                 ©2024 Assetra Trading Group Ltd
               </p>
             </a>
@@ -87,7 +87,7 @@ const Footer = () => {
             </button>
           </div>
 
-          <div className="text-center sm:text-left">
+          <div className="text-left">
             <h2 className="mb-4 text-sm font-semibold text-white uppercase">
               Company
             </h2>
@@ -119,7 +119,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
+          <div className="text-left">
             <h2 className="mb-4 text-sm font-semibold text-white uppercase">
               Support
             </h2>
@@ -151,7 +151,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="text-center sm:text-left">
+          <div className="text-left">
             <h2 className="mb-4 text-sm font-semibold text-white uppercase">
               Legal
             </h2>
@@ -183,8 +183,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-span-1 sm:col-span-2 lg:col-span-2">
-            <div className="text-center lg:text-left">
+          <div className="col-span-2 lg:col-span-2">
+            <div className="text-left">
               <p className="text-white mb-4">
                 Stay updated on cryptocurrency developments to maintain a
                 competitive edge.

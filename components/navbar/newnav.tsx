@@ -176,7 +176,7 @@ const newnav = () => {
                 <div className="flex items-center justify-center gap-4 ">
                   <label
                     htmlFor="login"
-                    className="cursor-pointer flex flex-row items-center hover:border-white hover:border-b-2 hover:pb-1"
+                    className="cursor-pointer flex flex-row items-center px-4 py-1.5 text-gray-400  font-semibold"
                   >
                     Log In
                   </label>
@@ -209,18 +209,18 @@ const newnav = () => {
                 </div>
               ) : (
                 <div className="flex items-center justify-between gap-2">
-                  <label
-                    htmlFor="login"
-                    className="cursor-pointer flex flex-row items-center hover:border-white hover:border-b-2 hover:pb-1"
+                  <Link
+                    href="/login"
+                    className="flex flex-row items-center px-4 py-1.5 bg-white text-gray-400 rounded-2xl font-semibold"
                   >
                     Log In
-                  </label>
-                  <label
-                    htmlFor="sign_up"
-                    className="cursor-pointer flex flex-row items-center px-4 py-1.5 bg-white text-black rounded-2xl font-semibold"
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="flex flex-row items-center px-4 py-1.5 bg-white text-black rounded-2xl font-semibold"
                   >
                     Sign Up
-                  </label>
+                  </Link>
                 </div>
               )}
             </div>

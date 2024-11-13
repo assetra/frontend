@@ -15,6 +15,7 @@ import AuthPopups from "@/components/auth/authPopups";
 import { Providers } from "@/components/wallet/providers";
 import dynamic from "next/dynamic";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import ResponsiveNavbar from "@/components/navbar/ResponsiveNavbar";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -47,7 +48,7 @@ export default function RootLayout({
           <AuthProvider>
             <ThemeProvider>
               <ClientWrapper>
-                <Navbar />
+                <ResponsiveNavbar />
                 <BotIcon />
                 <main>{children}</main>
                 <AuthPopups />

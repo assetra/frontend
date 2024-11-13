@@ -63,7 +63,7 @@ const EmailInput: React.FC = () => {
         onSubmit={handleSubmit}
       >
         <input
-          className="ml-2 w-full outline-none bg-transparent text-[#9CA3AF] text-[1rem] md:text-sm max-h-8"
+          className="ml-2 w-full outline-none bg-transparent text-[#9CA3AF] text-xs md:text-sm max-h-8"
           type="text"
           placeholder="Enter your email address"
           value={email}

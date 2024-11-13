@@ -113,3 +113,47 @@
   animation-timeline: view();
   animation-range: entry 0% cover 40%;
 }
+
+#hamburger {
+  display: none;
+
+}
+
+#nav-link {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  #nav-link {
+    display: none;
+  }
+
+  #header {
+    padding-top: 25.84541%;
+  }
+
+  #hamburger {
+    display: block;
+  }
+}
+
+
+#menu-cover {
+  position: absolute;
+  top: 0;
+  width: 100dvw;
+  height: 100dvh;
+  background: #fdfbfb;
+  opacity: 1;
+  z-index: 800;
+}
+
+#menu {
+  padding: 15.78947% 0 19.73684%;
+  padding: 7.89474% 0 9.86842%;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  width: 100dvw;
+  transform: translate(-50%, -50%);
+}

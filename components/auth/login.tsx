@@ -11,7 +11,7 @@ const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 interface LoginProps {
   onSendData: (data: boolean) => void;
 }
-const Login: React.FC<LoginProps> = ({ onSendData  }) => {
+const Login: React.FC<LoginProps> = ({ onSendData }) => {
   const [clicked, setClicked] = useState(false);
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -170,7 +170,9 @@ const Login: React.FC<LoginProps> = ({ onSendData  }) => {
           <div className="mt-4 text-sm md:text-base font-light text-gray-500">
             Can't remember your password? &nbsp;
             <span className="font-semibold text-black hover:underline">
-              <p onClick={handleForgotClick} className="cursor-pointer">Forgot Password</p>
+              <p onClick={handleForgotClick} className="cursor-pointer">
+                Forgot Password
+              </p>
             </span>
           </div>
           <div className="mt-4 text-sm md:text-base font-light text-gray-500">
