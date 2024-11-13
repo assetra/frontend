@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Code from "./Code";
 import Password from "./Password";
 import Login from "./login";
-import ForgetPassword from "./temp";
+import ForgetPassword from "./ForgetPassword";
 
 const LoginProcess = () => {
   const router = useRouter();
