@@ -1,16 +1,20 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import localFont from "next/font/local";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import Image from "next/image";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
-const Login = () => {
+interface LoginProps {
+  onSendData: (data: boolean) => void;
+}
+const Login: React.FC<LoginProps> = ({ onSendData  }) => {
   const [clicked, setClicked] = useState(false);
-  const [username, setUsername] = useState<string | number>("");
-  const [password, setPassword] = useState<string | number>("");
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const router = useRouter();
@@ -25,13 +29,16 @@ const Login = () => {
 
     if (username && password) {
       try {
-        const response = await fetch("https://gtx.pythonanywhere.com/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        });
+        const response = await fetch(
+          "https://gtxadmin.pythonanywhere.com/api/login/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          }
+        );
 
         const result = await response.json();
         if (response.ok) {
@@ -44,51 +51,15 @@ const Login = () => {
           setTimeout(() => {
             router.push(redirectPath); // Redirect to intended route if login is successful
           }, 1000);
-        } else if (
-          response.status === 403 &&
-          result.message === "Please verify your email before logging in."
-        ) {
-          try {
-            await fetch(
-              "https://daily-darelle-claudez-0c3a7986.koyeb.app/send_email",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  email: result.user.email,
-                  code: result.code,
-                }),
-              }
-            );
-            setPassword("");
-            setUsername("");
-            setFeedbackMessage(
-              "Verification code sent. Please check your email and enter the verification code."
-            );
-            setIsSuccess(true);
-            setUser(result.user);
-            setTimeout(() => {
-              router.push("/verification"); // Redirect to verification page if the response is OK
-            }, 1000);
-          } catch (error) {
-            setFeedbackMessage(
-              "An error occurred while sending verification email. Please try again."
-            );
-            setIsSuccess(false);
-            setClicked(false);
-          }
         } else {
-          setFeedbackMessage(
-            result.message || "Login failed. Please try again."
-          );
+          setFeedbackMessage(result.error || "Login failed. Please try again.");
           setIsSuccess(false);
           setClicked(false);
         }
       } catch (error) {
         setFeedbackMessage("An error occurred. Please try again.");
         setIsSuccess(false);
+        setClicked(false);
       }
     } else {
       setFeedbackMessage("Please enter valid inputs.");
@@ -97,10 +68,14 @@ const Login = () => {
     }
   };
 
+  const handleForgotClick = () => {
+    onSendData(true);
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-[100svh] ">
       <div
-        className={`${microsoft.className}  bg-gradient-to-r from-black to-gray-800 text-white py-32 px-6 md:py-32 md:px-12 justify-center md:block hidden content-center`}
+        className={`${microsoft.className}   bg-black text-white text-center px-4 md:px-12 justify-center items-center align-middle md:block hidden content-center`}
       >
         <div className="flex flex-col my-auto">
           <h1 className="text-3xl md:text-4xl font-bold text-center">
@@ -114,105 +89,96 @@ const Login = () => {
         </div>
       </div>
 
-      <div className="bg-white text-black text-center px-6 md:px-12 py-12 md:py-32">
-        <h1 className="text-2xl md:text-3xl font-bold">Log In</h1>
-        <p className="mt-2 text-sm md:text-base text-[#6978A0]">
-          Welcome back, you've been missed!
-        </p>
-
-        {feedbackMessage && (
-          <div
-            className={`mt-4 text-sm md:text-base ${isSuccess ? "text-green-500" : "text-red-500"} transition-all duration-300 ease-in-out`}
-          >
-            {feedbackMessage}
-          </div>
-        )}
-
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col mx-auto gap-6 py-6 w-full md:w-2/3"
-        >
-          <div className="flex flex-col items-start">
-            <label
-              htmlFor="username"
-              className="text-sm md:text-base font-semibold text-gray-700"
-            >
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              title="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="border border-gray-300 rounded-lg h-[50px] md:h-[60px] px-5 w-full bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-              placeholder="Your username"
+      <div className="bg-white text-black text-center px-4 md:px-20 flex justify-center items-center align-middle">
+        <div className="relative border border-black min-h-20 min-w-16 px-6 pt-6 pb-4 rounded-xl">
+          <div className="max-w-6 max-h-6 aspect-square overflow-hidden relative">
+            <Image
+              fill
+              src={"/assets/assetra-logo.jpg"}
+              alt={"logo"}
+              className="object-fill"
             />
           </div>
-
-          <div className="flex flex-col items-start">
-            <label
-              htmlFor="password"
-              className="text-sm md:text-base font-semibold text-gray-700"
+          <h2 className="mt-4 font-semibold text-[20px] text-left">
+            Sign In to Assetra
+          </h2>
+          <p className="mt-1 mb-6 text-left text-gray-500">
+            With just a few clicks, you’re about to embark on a transformative
+            journey where digital assets unlock limitless possibilities.
+          </p>
+          {feedbackMessage && (
+            <div
+              className={`mb-4 text-left text-sm md:text-base ${isSuccess ? "text-green-500" : "text-red-500"} transition-all duration-300 ease-in-out`}
             >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              title="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="border border-gray-300 rounded-lg h-[50px] md:h-[60px] px-5 w-full bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-              placeholder="Your password"
-            />
-          </div>
-
-          {clicked ? (
-            <button className="px-4 py-2 bg-blue-700 text-white flex items-center justify-center rounded-lg mt-6">
-              <svg
-                className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-              Loading...
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="px-4 py-2 bg-black text-white rounded-lg mt-6 transition-all duration-300 hover:bg-gray-800"
-            >
-              Log In
-            </button>
+              {feedbackMessage}
+            </div>
           )}
-        </form>
-
-        <div className="py-4 text-sm md:text-base font-light">
-          Can't remember your password? &nbsp;
-          <span className="font-semibold text-blue-600 hover:underline">
-            <Link href="/forget">Forgot Password</Link>
-          </span>
-        </div>
-        <div className="py-4 text-sm md:text-base font-light">
-          Don't have an account? &nbsp;
-          <span className="font-semibold text-blue-600 hover:underline">
-            <Link href="/signup">Sign Up</Link>
-          </span>
+          <form onSubmit={handleSubmit}>
+            <div className="flex flex-col items-start">
+              <input
+                type="text"
+                name="username"
+                title="Enter your Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                className="border border-gray-300 rounded-lg h-[45px] px-5 w-full bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                placeholder="username"
+              />
+              <input
+                type="text"
+                name="password"
+                title="Enter your Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border border-gray-300 rounded-lg h-[45px] px-5 w-full mt-4 bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
+                placeholder="password"
+              />
+            </div>
+            {clicked ? (
+              <button className="px-4 py-2 w-full bg-blue-700 text-white flex items-center justify-center rounded-lg mt-4">
+                <svg
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                Loading...
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="px-4 py-2 w-full bg-black text-white rounded-lg mt-4 transition-all duration-300 hover:bg-gray-800"
+              >
+                Log In
+              </button>
+            )}
+          </form>
+          <div className="mt-4 text-sm md:text-base font-light text-gray-500">
+            Can't remember your password? &nbsp;
+            <span className="font-semibold text-black hover:underline">
+              <p onClick={handleForgotClick} className="cursor-pointer">Forgot Password</p>
+            </span>
+          </div>
+          <div className="mt-4 text-sm md:text-base font-light text-gray-500">
+            Don't have an account? &nbsp;
+            <span className="font-semibold text-black hover:underline">
+              <Link href="/signup">Sign Up</Link>
+            </span>
+          </div>
         </div>
       </div>
     </div>

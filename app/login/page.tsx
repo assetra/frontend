@@ -1,6 +1,5 @@
-import Login from "@/components/auth/login";
+import LoginProcess from "@/components/auth/LoginProcess";
 import { Metadata } from "next";
-import React from "react";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
@@ -10,7 +9,7 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <Suspense>
-      <Login />
+      <LoginProcess />
     </Suspense>
   );
 };

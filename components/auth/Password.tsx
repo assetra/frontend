@@ -1,65 +1,36 @@
 "use client";
 import { useState } from "react";
 import localFont from "next/font/local";
-import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 const microsoft = localFont({ src: "../../public/fonts/chinese.msyh.ttf" });
 
-interface EmailProps {
+interface PasswordProps {
   onSendData: (data: string) => void;
 }
 
-const Email: React.FC<EmailProps> = ({ onSendData }) => {
-  const router = useRouter();
+const Password: React.FC<PasswordProps> = ({ onSendData }) => {
   const [clicked, setClicked] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
-  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
+  // submit form
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setClicked(true);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (emailRegex.test(email)) {
-      try {
-        const response = await fetch(
-          `https://gtxadmin.pythonanywhere.com/api/email_exists/${email}/`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        if (!data.exists) {
-          onSendData(email);
-        } else {
-          setFeedbackMessage(
-            "An account is already associated with this email address.."
-          );
-          setIsSuccess(false);
-          setClicked(false);
-        }
-        setClicked(false);
-      } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-      }
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    if (passwordRegex.test(password)) {
+      onSendData(password);
     } else {
-      setFeedbackMessage("Please enter a valid email address.");
+      setFeedbackMessage(
+        "Your password must be at least 8 characters long and include uppercase, lowercase letters, a number, and a special character."
+      );
       setIsSuccess(false);
       setClicked(false);
     }
-  };
-
-  const handleLoginClick = () => {
-    router.push("/login");
   };
 
   return (
@@ -89,11 +60,11 @@ const Email: React.FC<EmailProps> = ({ onSendData }) => {
             />
           </div>
           <h2 className="mt-4 font-semibold text-[20px] text-left">
-            Create Your Account
+            Create Your Password
           </h2>
           <p className="mt-1 mb-6 text-left text-gray-500">
-            With just a few clicks, you’re about to embark on a transformative
-            journey where digital assets unlock limitless possibilities.
+            For a secure password, please use at least 8 characters, with a mix
+            of letters, numbers, and special characters.
           </p>
           {feedbackMessage && (
             <div
@@ -106,12 +77,18 @@ const Email: React.FC<EmailProps> = ({ onSendData }) => {
             <div className="flex flex-col items-start">
               <input
                 type="text"
-                name="email"
-                title="Enter your email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                name="password"
+                title="Enter your Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                maxLength={16} // sets maximum length
                 className="border border-gray-300 rounded-lg h-[45px] px-5 w-full bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                placeholder="youremail@example.com"
+                placeholder="Enter your Password"
+              />
+
+              <PasswordStrengthBar
+                password={password}
+                className="w-full mt-4"
               />
             </div>
             {clicked ? (
@@ -146,30 +123,11 @@ const Email: React.FC<EmailProps> = ({ onSendData }) => {
                 Next
               </button>
             )}
-            <button
-              type="button"
-              onClick={handleLoginClick}
-              className="px-4 py-2 w-full bg-white border-black border text-black rounded-lg mt-4 mb-5 transition-all duration-300 hover:bg-slate-100"
-            >
-              Log In
-            </button>
           </form>
-          <p className="text-left text-sm text-gray-500">
-            By clicking Next above, you acknowledge that you have read and agree
-            to our{" "}
-            <Link href="/terms" className="text-black">
-              Terms
-            </Link>{" "}
-            and{" "}
-            <Link href="/policy" className="text-black">
-              Privacy Policy
-            </Link>
-            .
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default Email;
+export default Password;

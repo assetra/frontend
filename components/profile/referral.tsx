@@ -25,24 +25,14 @@ export const Referral: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://gtx.pythonanywhere.com/referral",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username }),
-          }
-        );
+        const response = await fetch(`https://gtxadmin.pythonanywhere.com/api/referrals/${username}/`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("POST request successful", data);
         setTotalReferrals(data.total_referrals);
-        setPendingReferrals(data.pending_referrals);
-        setDoneReferrals(data.done_referrals);
+        setPendingReferrals(data.unsuccessful_referrals);
+        setDoneReferrals(data.successful_referrals);
       } catch (error) {
         console.error("Error making POST request:", error);
       }

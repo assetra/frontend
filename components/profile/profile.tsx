@@ -16,6 +16,17 @@ interface FormData {
   mobile_number: string;
 }
 
+const formatDOB = (dob: string) => {
+  if (!dob) return "";
+
+  const date = new Date(dob);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
 const Profile: React.FC = () => {
   const { user, setUser } = useAuth();
   const [clicked, setClicked] = useState(false);
@@ -25,7 +36,7 @@ const Profile: React.FC = () => {
     email: user.email,
     first_name: user.first_name ?? "",
     last_name: user.last_name ?? "",
-    dob: user.dob ?? "",
+    dob: formatDOB(user.dob) ?? "",
     country: user.country ?? "",
     mobile_number: user.mobile_number ?? "",
   });
@@ -48,20 +59,23 @@ const Profile: React.FC = () => {
 
     if (formData) {
       try {
-        const response = await fetch("https://gtx.pythonanywhere.com/profile", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            first_name: formData.first_name,
-            last_name: formData.last_name,
-            dob: formData.dob,
-            country: formData.country,
-            mobile_number: formData.mobile_number,
-          }),
-        });
+        const response = await fetch(
+          "https://gtxadmin.pythonanywhere.com/api/profile/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              first_name: formData.first_name,
+              last_name: formData.last_name,
+              dob: formData.dob,
+              country: formData.country,
+              mobile_number: formData.mobile_number,
+            }),
+          }
+        );
 
         const result = await response.json();
         if (response.ok) {
@@ -237,8 +251,8 @@ const Profile: React.FC = () => {
                 type="text"
                 id="creation"
                 className="input rounded-full h-12 pl-6 w-full"
-                value={user.created_date}
-                placeholder={user.created_date}
+                value={user.date_joined}
+                placeholder={user.date_joined}
                 disabled
               />
             </div>

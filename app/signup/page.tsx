@@ -1,4 +1,4 @@
-import Email from "@/components/auth/Email";
+import SignupProcess from "@/components/auth/SignupProcess";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <Suspense>
-      <Email />
+      <SignupProcess />
     </Suspense>
   );
 };
