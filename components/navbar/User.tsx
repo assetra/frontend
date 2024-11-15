@@ -14,7 +14,10 @@ const User = () => {
             <div className="w-8 rounded-full hover:border-[3px] border-white">
               <img
                 alt="Profile Picture"
-                src={user?.profilePicture || "/assets/profile.png"}
+                src={
+                  `https://gtxadmin.pythonanywhere.com${user?.profile}` ||
+                  "/assets/profile.png"
+                }
               />
             </div>
           </a>

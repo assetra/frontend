@@ -665,7 +665,7 @@ const Main: React.FC = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch("https://gtxadmin.pythonanywhere.com/posts");
+      const response = await fetch("https://gtx.pythonanywhere.com/posts");
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -683,7 +683,7 @@ const Main: React.FC = () => {
   const fetchPostsByUpvotes = async () => {
     try {
       const response = await fetch(
-        "https://gtxadmin.pythonanywhere.com/posts_by_upvotes"
+        "https://gtx.pythonanywhere.com/posts_by_upvotes"
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -702,7 +702,7 @@ const Main: React.FC = () => {
   const fetchPostsByTag = async (tag: string) => {
     try {
       const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/posts_by_tag?tag=${encodeURIComponent(tag)}`
+        `https://gtx.pythonanywhere.com/posts_by_tag?tag=${encodeURIComponent(tag)}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -752,7 +752,7 @@ const Main: React.FC = () => {
 
     try {
       const response = await fetch(
-        "https://gtxadmin.pythonanywhere.com/create_post",
+        "https://gtx.pythonanywhere.com/create_post",
         {
           method: "POST",
           headers: {
@@ -794,7 +794,7 @@ const Main: React.FC = () => {
       const author_id = user.id;
 
       const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/edit_post/${id}`,
+        `https://gtx.pythonanywhere.com/edit_post/${id}`,
         {
           method: "PUT",
           headers: {
@@ -843,8 +843,8 @@ const Main: React.FC = () => {
     const user_id = user.id;
     const endpoint =
       action === "like"
-        ? `https://gtxadmin.pythonanywhere.com/like_post/${postId}`
-        : `https://gtxadmin.pythonanywhere.com/upvote_post/${postId}`;
+        ? `https://gtx.pythonanywhere.com/like_post/${postId}`
+        : `https://gtx.pythonanywhere.com/upvote_post/${postId}`;
 
     try {
       const response = await fetch(endpoint, {
@@ -891,7 +891,7 @@ const Main: React.FC = () => {
 
     try {
       const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/view_post/${post.id}`,
+        `https://gtx.pythonanywhere.com/view_post/${post.id}`,
         {
           method: "POST",
           headers: {
@@ -937,7 +937,7 @@ const Main: React.FC = () => {
 
     try {
       const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/add_comment/${postId}`,
+        `https://gtx.pythonanywhere.com/add_comment/${postId}`,
         {
           method: "POST",
           headers: {
