@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import MultiLevelDropdown from "./MultiLevelDropdown";
+import posthog from "posthog-js";
 
 const User = () => {
   const { user, isAuthenticated } = useAuth();
@@ -28,12 +29,18 @@ const User = () => {
       ) : (
         <div className="flex items-center justify-between my-auto gap-2">
           <Link
+            onClick={() =>
+              posthog.capture("Login Page Clicked", { property: "value" })
+            }
             href="/login"
             className="flex flex-row items-center px-4 py-1.5 text-gray-400 rounded-2xl font-semibold"
           >
             Log In
           </Link>
           <Link
+            onClick={() =>
+              posthog.capture("signup Page Clicked", { property: "value" })
+            }
             href="/signup"
             className="flex flex-row items-center px-4 py-1.5 bg-white text-black rounded-2xl font-semibold"
           >

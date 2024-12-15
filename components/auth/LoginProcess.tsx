@@ -5,6 +5,7 @@ import Code from "./Code";
 import Password from "./Password";
 import Login from "./login";
 import ForgetPassword from "./ForgetPassword";
+import posthog from "posthog-js";
 
 const LoginProcess = () => {
   const router = useRouter();
@@ -53,6 +54,7 @@ const LoginProcess = () => {
 
         console.log("done");
         if (response.ok) {
+          posthog.capture("Login Done", { property: "value" });
           setComponent(1);
         }
       } catch (error) {

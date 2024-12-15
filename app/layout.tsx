@@ -6,7 +6,7 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "@rainbow-me/rainbowkit/styles.css";
-
+import { CSPostHogProvider } from "@/components/posthog/PosthogProvider";
 import Navbar from "@/components/navbar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import BotIcon from "@/components/gnosis/botIcon";
@@ -50,7 +50,9 @@ export default function RootLayout({
               <ClientWrapper>
                 <ResponsiveNavbar />
                 <BotIcon />
-                <main>{children}</main>
+                <CSPostHogProvider>
+                  <main>{children}</main>/
+                </CSPostHogProvider>
                 <AuthPopups />
               </ClientWrapper>
             </ThemeProvider>
