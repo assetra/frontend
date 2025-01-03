@@ -5,6 +5,7 @@ import Email from "./Email";
 import Code from "./Code";
 import Password from "./Password";
 import Username from "./Username";
+import posthog from "posthog-js";
 
 const SignupProcess = () => {
   const router = useRouter();
@@ -84,6 +85,7 @@ const SignupProcess = () => {
         );
 
         if (response.ok) {
+          posthog.capture("signup Done", { property: "value" });
           if (referrer) {
             handleReferral();
           } else {
