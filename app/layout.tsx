@@ -56,7 +56,7 @@ export default function RootLayout({
                 <UserPerks />
                 <BotIcon />
                 <CSPostHogProvider>
-                  <main>{children}</main>/
+                  <main>{children}</main>
                 </CSPostHogProvider>
                 <AuthPopups />
               </ClientWrapper>
