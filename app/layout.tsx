@@ -54,6 +54,7 @@ export default function RootLayout({
               <ClientWrapper>
                 <ResponsiveNavbar />
                 <UserPerks />
+                <Feedback />
                 <BotIcon />
                 <CSPostHogProvider>
                   <main>{children}</main>
