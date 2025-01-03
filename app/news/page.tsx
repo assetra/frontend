@@ -1,15 +1,13 @@
-import Main from '@/components/news/main'
-import { Metadata } from 'next';
-import React from 'react'
+import Main from "@/components/news/main";
+import { Metadata } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
   title: "News",
 };
 
 const page = () => {
-  return (
-    <Main />
-  )
-}
+  return <Main />;
+};
 
-export default page
+export default page;

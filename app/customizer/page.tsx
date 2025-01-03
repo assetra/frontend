@@ -311,7 +311,7 @@ const DraggableContainer: React.FC = () => {
 
   return (
     <>
-      <main className="flex h-[calc(100vh-3rem)] items-center justify-between p-4 mt-12">
+      <main className="flex h-[calc(100vh-4.5rem)] items-center justify-between p-4 mt-12">
         <GridContainer clearAllWidgets={clearAllWidgets} />
         <Sidebar />
       </main>

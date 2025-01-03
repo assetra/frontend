@@ -4,6 +4,15 @@
   ],
   "hints": {
     "no-inline-styles": "off",
-    "axe/name-role-value": "off"
+    "axe/name-role-value": "off",
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "div[popover]",
+          "button[popover]"
+        ]
+      }
+    ]
   }
 }

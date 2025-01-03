@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import MultiLevelDropdown from "./MultiLevelDropdown";
+import Image from "next/image";
 
 const User = () => {
   const { user, isAuthenticated } = useAuth();
@@ -9,14 +10,24 @@ const User = () => {
     <div className="my-auto">
       {isAuthenticated ? (
         <div className="flex items-center justify-between my-auto gap-2">
-          <span className="text-white">{user?.username || "username"}</span>
+          <a className="avatar w-8 p-2 rounded-full" href="/customizer">
+          <Image
+            src={"/assets/customizer.png"}
+            alt="customizer"
+            width={70}
+            height={70}
+            title="customizer - beta"
+          />
+        </a>
+          <span className="text-gray-300">{user?.username || "username"}</span>
           <a href="/profile" className="avatar">
             <div className="w-8 rounded-full hover:border-[3px] border-white">
               <img
                 alt="Profile Picture"
                 src={
-                  `https://gtxadmin.pythonanywhere.com${user?.profile}` ||
-                  "/assets/profile.png"
+                  user?.profile
+                    ? `https://gtxadmin.pythonanywhere.com${user.profile}`
+                    : "/assets/profile.png"
                 }
               />
             </div>

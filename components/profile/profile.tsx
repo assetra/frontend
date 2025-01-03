@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { useAuth } from "@/contexts/AuthContext";
 import Image from "next/image";
 import withAuth from "../auth/withAuth";
-import { getData } from "country-list";
+import { getData, getCode } from "country-list";
+import { parsePhoneNumberFromString } from "libphonenumber-js";
 
 interface FormData {
   email: string;
@@ -37,8 +38,9 @@ const Profile: React.FC = () => {
     first_name: user.first_name ?? "",
     last_name: user.last_name ?? "",
     dob: formatDOB(user.dob) ?? "",
-    country: user.country ?? "",
-    mobile_number: user.mobile_number ?? "",
+    country: getCode(user.country) ?? "",
+    mobile_number:
+      parsePhoneNumberFromString(user.mobile ?? "")?.format("E.164") ?? "",
   });
   const countries = getData();
 
@@ -110,7 +112,11 @@ const Profile: React.FC = () => {
             <Image
               width={100}
               height={100}
-              src={"/assets/profile.png"}
+              src={
+                user?.profile
+                  ? `https://gtxadmin.pythonanywhere.com${user.profile}`
+                  : "/assets/profile.png"
+              }
               alt="member-logo"
               className="rounded-full"
             />
@@ -131,6 +137,17 @@ const Profile: React.FC = () => {
           </div>
           <div className="text-xl text-base-content p-2 hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-lg">
             Delete Account
+          </div>
+        </div>
+
+        <div className="border-base-content border-[1px] rounded-xl bg-base-200"></div>
+        <div className="mx-auto">
+          <div className="text-2xl font-bold text-base-content">Badges</div>
+          <div>
+          <div className="earlyuserlogo">
+            <img src="/assets/assetra-logo.jpg" alt="Assetra Badge" />
+          </div>
+          <p className="profileBadgeTitle">Assetra Founding Member Badge</p>
           </div>
         </div>
       </div>

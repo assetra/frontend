@@ -80,8 +80,8 @@ const Username: React.FC<UsernameProps> = ({ onSendData }) => {
             Create an Username
           </h2>
           <p className="mt-1 mb-6 text-left text-gray-500">
-            Secure your account with a strong password to protect your digital
-            journey.
+            Choose a unique and secure username to personalize and safeguard
+            your digital experience.
           </p>
           {feedbackMessage && (
             <div
@@ -94,12 +94,12 @@ const Username: React.FC<UsernameProps> = ({ onSendData }) => {
             <div className="flex flex-col items-start">
               <input
                 type="text"
-                name="password"
-                title="Enter your Password"
+                name="username"
+                title="Enter your Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="border border-gray-300 rounded-lg h-[45px] px-5 w-full bg-white focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                placeholder="Enter your Password"
+                placeholder="Enter your Username"
               />
             </div>
             {clicked ? (

@@ -16,6 +16,10 @@ import { Providers } from "@/components/wallet/providers";
 import dynamic from "next/dynamic";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import ResponsiveNavbar from "@/components/navbar/ResponsiveNavbar";
+import LoginStreak from "@/components/auth/LoginStreak";
+import UserPerks from "@/components/banner/UserPerks";
+import Feedback from "@/components/banner/Feedback";
+import EarlySupporter from "@/components/banner/EarlySupporter";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -49,7 +53,11 @@ export default function RootLayout({
             <ThemeProvider>
               <ClientWrapper>
                 <ResponsiveNavbar />
+                <UserPerks />
                 <BotIcon />
+                <Feedback />
+                <LoginStreak />
+                <EarlySupporter />
                 <main>{children}</main>
                 <AuthPopups />
               </ClientWrapper>

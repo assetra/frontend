@@ -1,12 +1,14 @@
 "use client";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { useAuth } from "@/contexts/AuthContext";
 
 const PopUP: React.FC = () => {
   const modalRef = useRef<HTMLDialogElement | null>(null);
   const [email, setEmail] = useState<string>("");
   const [feedbackMessage, setFeedbackMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const { user } = useAuth();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -48,10 +50,14 @@ const PopUP: React.FC = () => {
   };
 
   useEffect(() => {
+    if (user) {
+      return;
+    }
+
     if (modalRef.current) {
       modalRef.current.showModal();
     }
-  }, []);
+  }, [user]);
 
   const closeModal = () => {
     if (modalRef.current) {
@@ -222,16 +228,19 @@ const PopUP: React.FC = () => {
                   </a>
                   <a
                     className="ms-2"
-                    href="https://www.crunchbase.com/organization/gtx-91c8"
+                    href="https://www.youtube.com/@assetradotxyz"
                   >
                     <Image
                       width={18}
                       height={17}
-                      src="/assets/black/cb.png"
-                      alt="Crunchbase"
+                      src="/assets/black/youtube.svg"
+                      alt="YouTube"
                     />
                   </a>
-                  <a className="ms-2" href="https://www.tiktok.com/@assetradotxyz">
+                  <a
+                    className="ms-2"
+                    href="https://www.tiktok.com/@assetradotxyz"
+                  >
                     <Image
                       width={18}
                       height={17}

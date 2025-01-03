@@ -103,8 +103,8 @@ const Login: React.FC<LoginProps> = ({ onSendData }) => {
             Sign In to Assetra
           </h2>
           <p className="mt-1 mb-6 text-left text-gray-500">
-            With just a few clicks, you’re about to embark on a transformative
-            journey where digital assets unlock limitless possibilities.
+            Log in now to step into a world where your digital assets empower
+            endless opportunities and transformative growth.
           </p>
           {feedbackMessage && (
             <div

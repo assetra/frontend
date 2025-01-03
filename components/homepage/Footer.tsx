@@ -48,9 +48,9 @@ const communityLinks = [
     alt: "Reddit",
   },
   {
-    href: "https://www.crunchbase.com/organization/gtx-91c8",
-    src: "/assets/cb.png",
-    alt: "Crunchbase",
+    href: "https://www.youtube.com/@assetradotxyz",
+    src: "/assets/youtube.svg",
+    alt: "YouTube",
   },
   {
     href: "https://www.tiktok.com/@assetradotxyz",

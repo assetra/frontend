@@ -8,7 +8,7 @@ import Crypto from "./Crypto";
 
 const Homepage = () => {
   return (
-    <div className="relative w-[100dvw] h-[100dvh] overflow-hidden">
+    <div className="relative w-[100dvw] h-[calc(100dvh-1.5rem)] overflow-hidden">
       <div className="w-[100dvw] h-[100dvh] z-50 overflow-x-hidden overflow-y-scroll scrollbar-hide">
         <main className="pt-16 mx-auto">
           <PopUp />

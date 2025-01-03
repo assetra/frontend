@@ -1,11 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import DateFormatter from "../blog/dateFormatter";
-
-type ArticleProps = {
-  id: number;
-};
 
 export interface Article {
   id: number;
@@ -15,42 +10,13 @@ export interface Article {
   created_at: string;
 }
 
-const Article: React.FC<ArticleProps> = ({ id }) => {
-  const [article, setArticle] = useState<Article | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const next = Number(id) + 1;
-  const previous = Number(id) - 1;
+type ArticleProps = {
+  article: Article;
+};
 
-  const fetchArticle = async () => {
-    try {
-      const response = await fetch(
-        `https://gtxadmin.pythonanywhere.com/api/article/${id}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setArticle(data);
-    } catch (error) {
-      setError("Failed to fetch posts");
-      console.error("There was a problem with the fetch operation:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchArticle();
-  }, []);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+const Article: React.FC<ArticleProps> = ({ article }) => {
+  const next = article.id + 1;
+  const previous = article.id - 1;
 
   if (!article) {
     return <div>No Article found.</div>;

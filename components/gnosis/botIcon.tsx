@@ -9,14 +9,14 @@ import promptTemplate from "./promptTemplate";
 const BotIcon: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <div
-      className="tooltip tooltip-left fixed bottom-6 right-6 p-4 rounded-full bg-black text-white cursor-pointer shadow-lg z-[9999]"
+      className="tooltip tooltip-left fixed bottom-6 right-6 p-4 rounded-full bg-gradient-to-br from-white/10 to-white/5  backdrop-blur-lg border border-white/10  text-white cursor-pointer shadow-lg z-[9999]"
       data-tip="Click to chat"
       onClick={onClick}
       aria-label="Open chat"
     >
       <Image
-        width={25}
-        height={25}
+        width={16}
+        height={16}
         src="/assets/Gnosis.png"
         alt="Gnosis logo"
       />

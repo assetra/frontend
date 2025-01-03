@@ -31,7 +31,7 @@ const MultiLevelDropdown: React.FC = () => {
   const [isSecondDropdownOpen, setIsSecondDropdownOpen] = useState(false);
   const [isThirdDropdownOpen, setIsThirdDropdownOpen] = useState(false);
   const { theme, setTheme } = useTheme();
-  const { logout } = useAuth();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const handleThemeChange = (themeName: string) => {
     setTheme(themeName);
@@ -118,32 +118,62 @@ const MultiLevelDropdown: React.FC = () => {
           </svg>
         )}
       </div>
-
       {isOpen && (
         <div
           id="multi-dropdown"
-          className="absolute right-0 mr-[1rem] top-10 w-44 rounded-xl shadow-lg bg-base-300"
+          className="absolute right-0 mr-[1rem] top-12 w-44 rounded-xl shadow-lg bg-base-300"
         >
           <ul
             className="p-2 grid grid-cols-1 gap-1"
             aria-labelledby="multiLevelDropdownButton"
           >
-            <li>
-              <a
-                href="/profile"
-                className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
-              >
-                Profile
-              </a>
-            </li>
-            <li>
-              <label
-                htmlFor="wallet_card"
-                className="cursor-pointer block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
-              >
-                <ConnectButton showBalance={false} chainStatus="none" />
-              </label>
-            </li>
+            {/*  <li
+              key={theme}
+              onClick={() =>
+                handleThemeChange(theme === "night" ? "light" : "night")
+              }
+              className="cursor-pointer rounded-xl px-4 py-2 text-center hover:opacity-75 hover:border-base-content border-transparent border-[1px]"
+              data-theme={theme}
+            >
+              {toTitleCase(theme === "night" ? "Light Mode" : "Dark Mode")}
+            </li>*/}
+
+            {isAuthenticated ? (
+              <li>
+                <a
+                  href="/profile"
+                  className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
+                >
+                  Profile
+                </a>
+              </li>
+            ) : null}
+            {isAuthenticated ? (
+              <li>
+                <a
+                  href="/loginstreak"
+                  className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
+                >
+                  <span className="">Login Streak&nbsp;</span>
+                  <span className="text-red-600 ">
+                    {user?.loginstreak < 10
+                      ? `0${user?.loginstreak}`
+                      : user?.loginstreak}
+                    🔥
+                  </span>
+                </a>
+              </li>
+            ) : null}
+            {isAuthenticated ? (
+              <li>
+                <label
+                  htmlFor="wallet_card"
+                  className="cursor-pointer block pl-4 mx-auto text-sm  text-[10px] hover:opacity-75 border-transparent border-[1px] rounded-xl"
+                >
+                  <ConnectButton showBalance={false} chainStatus="none" />
+                </label>
+              </li>
+            ) : null}
             <li className="relative">
               <div
                 id="doubleDropdownButton"
@@ -342,29 +372,34 @@ const MultiLevelDropdown: React.FC = () => {
               )}
             </li>
             <li>
-              <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfdD4R9F11iz4WoXezSU6s8FAQu7B1y595VDRKVzhp1y53Yuw/viewform"
-                className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
-              >
-                Feedback
-              </a>
-            </li>
-            <li>
-              <label
-                htmlFor="referral"
-                className="cursor-pointer block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
-              >
-                Referral
-              </label>
-            </li>
-            <li>
-              <div
-                onClick={logout}
+              <button
+                popoverTarget="feedback-presenter"
+                type="button"
                 className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl hover:cursor-pointer"
               >
-                Sign out
-              </div>
+                Feedback
+              </button>
             </li>
+            {isAuthenticated ? (
+              <li>
+                <label
+                  htmlFor="referral"
+                  className="cursor-pointer block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
+                >
+                  Referral
+                </label>
+              </li>
+            ) : null}
+            {isAuthenticated ? (
+              <li>
+                <div
+                  onClick={logout}
+                  className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl hover:cursor-pointer"
+                >
+                  Sign out
+                </div>
+              </li>
+            ) : null}
           </ul>
         </div>
       )}
