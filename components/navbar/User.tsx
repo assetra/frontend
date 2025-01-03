@@ -2,11 +2,8 @@
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import MultiLevelDropdown from "./MultiLevelDropdown";
-<<<<<<< HEAD
 import Image from "next/image";
-=======
 import posthog from "posthog-js";
->>>>>>> a7f8b50da65a32e67a1eb3c0803fe17305135637
 
 const User = () => {
   const { user, isAuthenticated } = useAuth();
