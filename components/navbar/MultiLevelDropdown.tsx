@@ -154,7 +154,7 @@ const MultiLevelDropdown: React.FC = () => {
                   href="/loginstreak"
                   className="block px-4 py-2 text-sm hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-xl"
                 >
-                  <span className="">Login Streak&nbsp;</span>
+                  <span className="text-[13px]">Login Streak&nbsp;</span>
                   <span className="text-red-600 ">
                     {user?.loginstreak < 10
                       ? `0${user?.loginstreak}`

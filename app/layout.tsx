@@ -20,6 +20,9 @@ import LoginStreak from "@/components/auth/LoginStreak";
 import UserPerks from "@/components/banner/UserPerks";
 import Feedback from "@/components/banner/Feedback";
 import EarlySupporter from "@/components/banner/EarlySupporter";
+import Affiliate from "@/components/banner/Affiliate";
+import Partner from "@/components/banner/Partner";
+import AffiliateProgram from "@/components/banner/AffiliateProgram";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -56,6 +59,9 @@ export default function RootLayout({
                 <UserPerks />
                 <BotIcon />
                 <Feedback />
+                <Affiliate />
+                <AffiliateProgram />
+                <Partner />
                 <LoginStreak />
                 <EarlySupporter />
                 <CSPostHogProvider>

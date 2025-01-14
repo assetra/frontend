@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useAuth } from "@/contexts/AuthContext";
 import { FaUserPlus, FaUserClock, FaUserCheck } from "react-icons/fa";
 import Background from "@/public/assets/referralo.png";
+import withAuth from "../auth/withAuth";
 
 export const Referral: React.FC = () => {
   const { user } = useAuth();
@@ -257,4 +258,4 @@ export const Referral: React.FC = () => {
   );
 };
 
-export default Referral;
+export default withAuth(Referral);
