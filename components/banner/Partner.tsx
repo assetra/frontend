@@ -9,8 +9,8 @@ const Partner = () => {
     <div>
       <button
         popoverTarget="partner-presenter"
-        className="fixed bottom-[14rem] right-6 p-4 rounded-full bg-gradient-to-br from-white/10 to-white/5  backdrop-blur-lg border border-white/10 cursor-pointer text-[#ffd700] shadow-lg z-[9999] test"
-        title="Affiliate Program"
+        className="fixed bottom-[18rem] right-6 p-4 rounded-full bg-gradient-to-br from-white/10 to-white/5  backdrop-blur-lg border border-white/10 cursor-pointer text-[#ffd700] shadow-lg z-[9999] test"
+        title="Announcements"
         type="button"
       >
         <GrAnnounce />

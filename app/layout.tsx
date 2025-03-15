@@ -23,6 +23,7 @@ import EarlySupporter from "@/components/banner/EarlySupporter";
 import Affiliate from "@/components/banner/Affiliate";
 import Partner from "@/components/banner/Partner";
 import AffiliateProgram from "@/components/banner/AffiliateProgram";
+import A4B from "@/components/banner/A4B";
 
 const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
 const poppins = Poppins({
@@ -59,6 +60,7 @@ export default function RootLayout({
                 <UserPerks />
                 <BotIcon />
                 <Feedback />
+                <A4B />
                 <Affiliate />
                 <AffiliateProgram />
                 <Partner />

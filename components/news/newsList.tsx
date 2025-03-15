@@ -106,10 +106,27 @@ const NewsList = () => {
   const limit = searchParams.get("l") ?? "";
   const limitNumber = parseInt(limit, 10) || 10;
 
+  const removeStyles = (html: string) => {
+    return html
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "") // Remove <style> blocks
+      .replace(/\s*style=["'][^"']*["']/gi, "") // Remove inline styles
+      .replace(/\s*class=["'][^"']*["']/gi, "") // Remove class attributes
+      .replace(/<span[^>]*>/gi, "<span>"); // Remove all attributes from <span> tags
+  };
+
+  const sanitizeArticles = (articles: Article[]) => {
+    return articles.map((article) => ({
+      ...article,
+      content: article.content ? removeStyles(article.content) : "",
+    }));
+  };
+
   const fetchArticle = async () => {
     try {
       // Construct the URL with the limit parameter if it exists
-      const url = new URL(`https://gtxadmin.pythonanywhere.com/api/articles`);
+      const url = new URL(
+        `https://gtxadmin.pythonanywhere.com/api/articles_pdfs`
+      );
       if (limit) {
         url.searchParams.append("limit", limit);
       }
@@ -125,7 +142,7 @@ const NewsList = () => {
       }
 
       const data = await response.json();
-      let articles = data;
+      let articles = sanitizeArticles(data as Article[]);
 
       // If fetched articles are less than 10, append from testArticles
       if (articles.length < 10) {

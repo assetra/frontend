@@ -32,7 +32,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
           </p>
           <h6 className="h6 line-clamp-3 mt-2 pr-2">{articles[0]?.title}</h6>
           <p
-            className="line-clamp-6 mt-1 pr-2 prose"
+            className="line-clamp-6 mt-1 pr-2 "
             dangerouslySetInnerHTML={{ __html: articles[0]?.content }}
           ></p>
         </a>
@@ -48,7 +48,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
             <div className="pt-6 pr-[15%]">
               <h3 className="h4 line-clamp-1">{articles[1]?.title}</h3>
               <p
-                className="text-[2.5rem] line-clamp-2 prose"
+                className="text-[2.5rem] line-clamp-2 "
                 dangerouslySetInnerHTML={{ __html: articles[1]?.content }}
               ></p>
               <div className="flex justify-start mt-4">
@@ -83,7 +83,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
           </p>
           <h6 className="h6 line-clamp-2 mt-2 pr-2">{articles[2]?.title}</h6>
           <p
-            className="line-clamp-3 mt-1 pr-2 prose"
+            className="line-clamp-3 mt-1 pr-2 "
             dangerouslySetInnerHTML={{ __html: articles[2]?.content }}
           ></p>
         </a>
@@ -103,7 +103,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
           </p>
           <h6 className="h6 line-clamp-2 mt-2 pr-2">{articles[3]?.title}</h6>
           <p
-            className="line-clamp-3 mt-1 pr-2 prose"
+            className="line-clamp-3 mt-1 pr-2 "
             dangerouslySetInnerHTML={{ __html: articles[3]?.content }}
           ></p>
         </a>
@@ -119,7 +119,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
             <div className="absolute bottom-15 left-6 right-6 pr-[15%]">
               <h3 className="h4 line-clamp-1">{articles[4]?.title}</h3>
               <p
-                className="text-[2.5rem] line-clamp-2 prose"
+                className="text-[2.5rem] line-clamp-2 "
                 dangerouslySetInnerHTML={{ __html: articles[4]?.content }}
               ></p>
               <div className="flex justify-start mt-4">
@@ -154,7 +154,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
           </p>
           <h6 className="h6 line-clamp-2 mt-2 pr-2">{articles[5]?.title}</h6>
           <p
-            className="line-clamp-3 mt-1 pr-2 prose"
+            className="line-clamp-3 mt-1 pr-2 "
             dangerouslySetInnerHTML={{ __html: articles[5]?.content }}
           ></p>
         </a>
@@ -174,7 +174,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
           </p>
           <h6 className="h6 line-clamp-2 mt-2 pr-2">{articles[6]?.title}</h6>
           <p
-            className="line-clamp-3 mt-1 pr-2 prose"
+            className="line-clamp-3 mt-1 pr-2 "
             dangerouslySetInnerHTML={{ __html: articles[6]?.content }}
           ></p>
         </a>
@@ -190,7 +190,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
             <div className="pt-6 pr-[15%]">
               <h3 className="h4 line-clamp-1">{articles[7]?.title}</h3>
               <p
-                className="text-[2.5rem] line-clamp-2 prose"
+                className="text-[2.5rem] line-clamp-2 "
                 dangerouslySetInnerHTML={{ __html: articles[7]?.content }}
               ></p>
               <div className="flex justify-start mt-4">
@@ -225,7 +225,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
           </p>
           <h6 className="h6 line-clamp-2 mt-2 pr-2">{articles[8]?.title}</h6>
           <p
-            className="line-clamp-3 mt-1 pr-2 prose"
+            className="line-clamp-3 mt-1 pr-2 "
             dangerouslySetInnerHTML={{ __html: articles[8]?.content }}
           ></p>
         </a>
@@ -245,7 +245,7 @@ const NewsList3: React.FC<ArticleListProps> = ({ articles }) => {
           </p>
           <h6 className="h6 line-clamp-2 mt-2 pr-2">{articles[9]?.title}</h6>
           <p
-            className="line-clamp-3 mt-1 pr-2 prose"
+            className="line-clamp-3 mt-1 pr-2 "
             dangerouslySetInnerHTML={{ __html: articles[9]?.content }}
           ></p>
         </a>

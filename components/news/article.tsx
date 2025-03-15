@@ -41,9 +41,11 @@ const Article: React.FC<ArticleProps> = ({ article }) => {
                 className="w-full h-64 object-cover rounded-lg"
               />
             ) : (
-              <div className="rounded-xl aspect-video w-[100%] bg-gray-300">
-                No image available
-              </div>
+              <img
+                src={`https://gtxadmin.pythonanywhere.com/media/article_images/assetra_cover.jpg`}
+                alt={article.title}
+                className="w-full h-64 object-cover rounded-lg"
+              />
             )}
           </div>
 

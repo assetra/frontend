@@ -78,7 +78,7 @@ const Footer = () => {
                 className="mx-0"
               />
               <p className="text-[#6C6C6C] text-xs text-left mt-2">
-                ©2024 Assetra Trading Group Ltd
+                ©2025 Assetra Trading Group, Inc
               </p>
             </a>
             <button className="flex items-center gap-2 border-2 border-white py-1.5 px-3 rounded hover:bg-white/10 transition-colors">
@@ -102,7 +102,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="#about"
+                  href="about"
                   className="hover:text-white hover:underline transition-colors"
                 >
                   About us
@@ -222,7 +222,7 @@ const Footer = () => {
           </div>
 
           <div className="text-sm text-[#484D63]">
-            © 2024{" "}
+            © 2025{" "}
             <a
               href="https://www.assetra.xyz"
               className="hover:text-white hover:underline transition-colors"

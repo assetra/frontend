@@ -23,7 +23,7 @@ export interface Patch {
 
 const testArticles: Article[] = [
   {
-    id: 1,
+    id: 10,
     title: "Exploring the Future of AI",
     content:
       "Artificial Intelligence has been at the forefront of technological advancements, and its future seems more promising than ever. In this article, we will delve into the emerging trends, opportunities, and challenges that AI will bring in the coming years, and how it will impact industries across the globe.",
@@ -31,7 +31,7 @@ const testArticles: Article[] = [
     created_at: "2024-10-10T10:30:00Z",
   },
   {
-    id: 2,
+    id: 20,
     title: "The Evolution of Blockchain",
     content:
       "Blockchain technology, once synonymous with cryptocurrencies like Bitcoin, has now expanded far beyond financial applications. It is rapidly transforming sectors such as supply chain management, healthcare, and even governance by providing unparalleled security and transparency.",
@@ -39,7 +39,7 @@ const testArticles: Article[] = [
     created_at: "2024-10-11T09:45:00Z",
   },
   {
-    id: 3,
+    id: 30,
     title: "Sustainability in Tech",
     content:
       "As climate change continues to be a major global concern, the tech industry is stepping up to reduce its carbon footprint. This article explores how companies are adopting sustainable practices through renewable energy sources, greener data centers, and innovations that promote environmental sustainability.",
@@ -47,7 +47,7 @@ const testArticles: Article[] = [
     created_at: "2024-10-12T14:15:00Z",
   },
   {
-    id: 4,
+    id: 40,
     title: "Cybersecurity Trends in 2024",
     content:
       "In a world where cyber threats are evolving rapidly, staying ahead of potential risks is crucial for both businesses and individuals. This piece highlights the top cybersecurity trends of 2024, providing insights on how to protect sensitive data from increasingly sophisticated attacks.",
@@ -58,21 +58,21 @@ const testArticles: Article[] = [
 
 const testPatches: Patch[] = [
   {
-    id: 1,
+    id: 10,
     version: "version 03.96",
     content:
       "Artificial Intelligence has been at the forefront of technological advancements, and its future seems more promising than ever. In this article, we will delve into the emerging trends, opportunities, and challenges that AI will bring in the coming years, and how it will impact industries across the globe.",
     created_at: "2024-10-10T10:30:00Z",
   },
   {
-    id: 2,
+    id: 20,
     version: "version 03.97",
     content:
       "Blockchain technology, once synonymous with cryptocurrencies like Bitcoin, has now expanded far beyond financial applications. It is rapidly transforming sectors such as supply chain management, healthcare, and even governance by providing unparalleled security and transparency.",
     created_at: "2024-10-11T09:45:00Z",
   },
   {
-    id: 3,
+    id: 30,
     version: "version 03.93",
     content:
       "As climate change continues to be a major global concern, the tech industry is stepping up to reduce its carbon footprint. This article explores how companies are adopting sustainable practices through renewable energy sources, greener data centers, and innovations that promote environmental sustainability.",
@@ -85,6 +85,28 @@ const Main = () => {
   const [patches, setPatches] = useState<Patch[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const removeStyles = (html: string) => {
+    return html
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "") // Remove <style> blocks
+      .replace(/\s*style=["'][^"']*["']/gi, "") // Remove inline styles
+      .replace(/\s*class=["'][^"']*["']/gi, "") // Remove class attributes
+      .replace(/<span[^>]*>/gi, "<span>"); // Remove all attributes from <span> tags
+  };
+
+  const sanitizeArticles = (articles: Article[]) => {
+    return articles.map((article) => ({
+      ...article,
+      content: article.content ? removeStyles(article.content) : "",
+    }));
+  };
+
+  const sanitizePatches = (patches: Patch[]) => {
+    return patches.map((patch) => ({
+      ...patch,
+      content: patch.content ? removeStyles(patch.content) : "",
+    }));
+  };
 
   const fetchArticle = async () => {
     try {
@@ -103,8 +125,8 @@ const Main = () => {
       }
 
       const data = await response.json();
-      let articles = data.articles;
-      let patches = data.patches;
+      let articles = sanitizeArticles(data.articles as Article[]);
+      let patches = sanitizePatches(data.patches as Patch[]);
 
       // If fetched articles are less than 4, append from testArticles
       if (articles.length < 4) {
@@ -160,7 +182,7 @@ const Main = () => {
           <div className="pr-[15%]">
             <h3 className="h4">{articles[0]?.title}</h3>
             <p
-              className="text-[2.5rem] line-clamp-2 prose"
+              className="text-[2.5rem] line-clamp-2 "
               dangerouslySetInnerHTML={{ __html: articles[0]?.content }}
             ></p>
             <div className="flex justify-start mt-4">
@@ -191,7 +213,7 @@ const Main = () => {
                 />
               </div>
               <h6
-                className="h6 line-clamp-2 mt-1 pr-2 prose"
+                className="h6 line-clamp-2 mt-1 pr-2 "
                 dangerouslySetInnerHTML={{ __html: articles[1]?.content }}
               ></h6>
               <p>
@@ -212,7 +234,7 @@ const Main = () => {
                 />
               </div>
               <h6
-                className="h6 line-clamp-2 mt-1 pr-2 prose"
+                className="h6 line-clamp-2 mt-1 pr-2 "
                 dangerouslySetInnerHTML={{ __html: articles[2]?.content }}
               ></h6>
               <p>
@@ -233,7 +255,7 @@ const Main = () => {
                 />
               </div>
               <h6
-                className="h6 line-clamp-2 mt-1 pr-2 prose"
+                className="h6 line-clamp-2 mt-1 pr-2"
                 dangerouslySetInnerHTML={{ __html: articles[3]?.content }}
               ></h6>
               <p>
@@ -275,7 +297,7 @@ const Main = () => {
               <div className="pt-4">
                 <h6 className="h6 text-black">{patch.version}</h6>
                 <h6
-                  className="h6 line-clamp-2 pr-4 prose"
+                  className="h6 line-clamp-2 pr-4 "
                   dangerouslySetInnerHTML={{ __html: patch.content }}
                 ></h6>
               </div>

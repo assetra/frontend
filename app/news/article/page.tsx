@@ -1,4 +1,4 @@
-import NewsList from "@/components/news/newsList";
+import ArticleList from "@/components/news/ArticleList";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export interface Article {
 }
 
 const page = () => {
-  return <NewsList />;
+  return <ArticleList />;
 };
 
 export default page;

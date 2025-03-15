@@ -1,19 +1,10 @@
 import Article from "@/components/news/article";
+import Pdf from "@/components/news/Pdf";
 import type { Metadata, ResolvingMetadata } from "next";
 
 type Props = {
   params: Promise<{ id: number }>;
 };
-
-const removeHtml = (html: string) => {
-  return html
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "") 
-    .replace(/\s*style=["'][^"']*["']/gi, "")
-    .replace(/<span[^>]*>(.*?)<\/span>/gi, "$1") 
-    .replace(/<[^>]+>/g, "") 
-    .trim();
-};
-
 
 // Dynamic Metadata Generation
 export async function generateMetadata(
@@ -30,10 +21,10 @@ export async function generateMetadata(
 
   return {
     title: article.title,
-    description: removeHtml(article.content.substring(0, 150)),
+    description: 'This is a PDF article',
     openGraph: {
       title: article.title,
-      description: removeHtml(article.content.substring(0, 150)),
+      description: 'This is a PDF article',
       images: [
         `https://gtxadmin.pythonanywhere.com${article.cover_image}` ||
           "/default-cover.jpg",
@@ -46,13 +37,13 @@ export async function generateMetadata(
 export default async function Page({ params }: Props) {
   const id = (await params).id;
 
-  const article = await fetch(
-    `https://gtxadmin.pythonanywhere.com/api/article/${id}`
+  const pdf = await fetch(
+    `https://gtxadmin.pythonanywhere.com/api/pdf/${id}`
   ).then((res) => res.json());
 
   return (
     <>
-      <Article article={article} />
+      <Pdf pdf={pdf} />
     </>
   );
 }

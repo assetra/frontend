@@ -120,9 +120,64 @@ const teamMembers = [
       },
     ],
   },
+  {
+    id: 7,
+    name: "Mike Davis",
+    role: "Head of Business Development",
+    description:
+      "Growth-focused business leader with expertise in financial services, startups, and tech-driven sales. Skilled in funding, strategic partnerships, and CRM-driven sales acceleration to drive scalable success.",
+    image: "/assets/Mike.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/michaeljdavis1",
+      },
+    ],
+  },
+  {
+    id: 8,
+    name: "Mulaye Subakanya",
+    role: "Contributor",
+    description: "An open-minded developer ready to reinvent the wheel",
+    image: "/assets/Mulaye.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/mulaye-s-14a5531b6",
+      },
+    ],
+  },
+  
+  {
+    id: 9,
+    name: "Jahmarley Henry",
+    role: "Contributor",
+    description:
+      "A WEB3 and blockchain enthusiast that is always researching and keeping up with new trends",
+    image: "/assets/Jahmarley.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/jahmarleyhenry/",
+      },
+    ],
+  },
+  {
+    id: 10,
+    name: "Gnosis",
+    role: "AI Trading Assistant",
+    description:
+      "Empowering your trading experience with intelligent insights and real-time support.",
+    image: "/assets/bot.png",
+    socials: [],
+    isAI: true,
+  },
 ];
 
-export default function Team() {
+const Team = () => {
   return (
     <section className="relative flex justify-center px-4 pt-20 pb-16 min-h-screen overflow-hidden">
       <div className="absolute inset-0 animate-gradient-xy" />
@@ -131,13 +186,15 @@ export default function Team() {
 
       <div className="relative max-w-[1280px] w-full z-10">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-white font-bold text-xl sm:text-2xl tracking-wider mb-4 relative inline-block">
-            OUR TEAM
-            <div className="absolute -bottom-2 left-1/2 w-12 h-1 bg-blue-500 transform -translate-x-1/2 rounded-full" />
-          </h2>
-          <p className="text-white/90 text-2xl sm:text-3xl lg:text-4xl mt-4 max-w-2xl mx-auto leading-relaxed font-light">
-            The Assetra team excels in innovation and is dedicated to excellence
-          </p>
+          <h1 className="text-white/90 title mx-auto leading-relaxed font-light">
+            Assetra is driven by a team of experienced traders, blockchain
+            developers, and fintech innovators, including a seasoned day trader
+            with deep expertise across multiple platforms, blockchain engineers
+            with hands-on Web3 experience, and fintech strategists shaping the
+            future of digital assets. Together, we are building a smarter, more
+            customizable trading platform designed to unlock more opportunities
+            in the evolving digital asset market.
+          </h1>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -155,7 +212,8 @@ export default function Team() {
                 <div className="relative p-6 flex flex-col h-full">
                   <div className="flex gap-4 items-start">
                     <div
-                      className={`relative shrink-0 w-20 h-20 rounded-full overflow-hidden group-hover:shadow-lg transition-shadow duration-300 `}
+                      className={`relative shrink-0 w-20 h-20 rounded-full overflow-hidden group-hover:shadow-lg transition-shadow duration-300 
+                      ${member.isAI ? "bg-[#121212] p-4 flex items-center justify-center" : ""}`}
                     >
                       <Image
                         fill
@@ -209,16 +267,9 @@ export default function Team() {
             </div>
           ))}
         </div>
-        <div className="w-[100%] flex justify-center mt-10">
-          <a
-            href="/about?q=team"
-            className="max-w-32 text-[#FFFFFF] bg-[#1e68f6] px-4 py-[5px] rounded-full text-[1rem] max-h-12 w-[8rem] transition-all duration-300 
-                            hover:bg-[#1e68f6]/[0.12] hover:shadow-lg hover:shadow-blue-500/20 transform hover:-translate-y-1"
-          >
-            Learn More
-          </a>
-        </div>
       </div>
     </section>
   );
-}
+};
+
+export default Team;

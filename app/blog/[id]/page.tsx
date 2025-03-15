@@ -5,6 +5,16 @@ type Props = {
   params: Promise<{ id: number }>;
 };
 
+const removeHtml = (html: string) => {
+  return html
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "") // Remove <style> blocks
+    .replace(/\s*style=["'][^"']*["']/gi, "") // Remove inline styles
+    .replace(/<span[^>]*>(.*?)<\/span>/gi, "$1") // Remove attributes inside span tags but keep the text
+    .replace(/<[^>]+>/g, "") // Remove all remaining HTML tags
+    .trim(); // Trim leading and trailing spaces
+};
+
+
 // Dynamic Metadata Generation
 export async function generateMetadata(
   { params }: Props,
@@ -20,10 +30,10 @@ export async function generateMetadata(
 
   return {
     title: blog.title,
-    description: blog.content.substring(0, 150),
+    description: removeHtml(blog.content.substring(0, 150)),
     openGraph: {
       title: blog.title,
-      description: blog.content.substring(0, 150),
+      description: removeHtml(blog.content.substring(0, 150)),
       images: [
         `https://gtxadmin.pythonanywhere.com${blog.cover_image}` ||
           "/default-cover.jpg",
