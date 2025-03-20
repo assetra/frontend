@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Cell, Pie, PieChart, Tooltip } from "recharts";
+import { Cell, Pie, PieChart, Tooltip, ResponsiveContainer } from "recharts";
 import Image from "next/image";
 import axios, { Method } from "axios";
 import { useAccount } from "wagmi";
 import { Avatar } from "../ui/avatar";
+
 interface TokenData {
   name: string;
   value: number;
@@ -23,7 +24,6 @@ interface ApiTokenData {
   usd_value_24hr_usd_change: string;
   balance_formatted: string;
 }
-
 const WalletInfo: React.FC = () => {
   const [isClient, setIsClient] = useState<boolean>(false);
   const [tokenData, setTokenData] = useState<TokenData[]>([]);
@@ -37,7 +37,7 @@ const WalletInfo: React.FC = () => {
       if (!address) return;
 
       let config = {
-        method: "get" as Method, // Explicitly typed method
+        method: "get" as Method,
         maxBodyLength: Infinity,
         url: `https://deep-index.moralis.io/api/v2.2/wallets/${address}/tokens?chain=eth`,
         headers: {
@@ -83,6 +83,7 @@ const WalletInfo: React.FC = () => {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
@@ -96,71 +97,84 @@ const WalletInfo: React.FC = () => {
     }
     return null;
   };
+
   return (
-    <div className="w-7/12 flex flex-col py-3">
-      <div className="w-full flex justify-between px-6">
-        <p className="text-[1rem]">Wallet</p>
+    <div className="w-full md:w-7/12 flex flex-col py-3">
+      <div className="w-full flex justify-between px-3 md:px-6">
+        <p className="text-sm md:text-base">Wallet</p>
         <div className="flex">
-          <p className="text-[#A5ADCF] text-[12px]">
+          <p className="text-[#A5ADCF] text-xs md:text-sm">
             {tokenData.length} Currencies
           </p>
         </div>
       </div>
-      <div className="w-full px-6">
-        <div className=" px-4 pr-0">
-          <div className="flex gap-10">
+      <div className="w-full px-3 md:px-6">
+        <div className="px-2 md:px-4 pr-0">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-10">
             {isClient && (
-              <PieChart width={260} height={140}>
-                <Pie
-                  data={tokenData}
-                  innerRadius={60}
-                  outerRadius={70}
-                  fill="#8884d8"
-                  paddingAngle={4}
-                  dataKey="value"
-                >
-                  {tokenData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-              </PieChart>
+              <div className="flex justify-center md:block">
+                <div className="h-36 w-36 md:h-auto md:w-auto">
+                  <PieChart width={200} height={140}>
+                    <Pie
+                      data={tokenData}
+                      innerRadius={50}
+                      outerRadius={60}
+                      fill="#8884d8"
+                      paddingAngle={4}
+                      dataKey="value"
+                    >
+                      {tokenData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip content={<CustomTooltip />} />
+                  </PieChart>
+                </div>
+              </div>
             )}
-            <div className="w-full md:w-1/2 ">
+            <div className="w-full">
               {tokenData.map((entry, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between  rounded-lg mb-2 pl-6"
+                  className="flex items-center justify-between rounded-lg mb-2 pl-2 md:pl-6"
                 >
                   <div className="flex items-center">
-                  {entry.icon === "default" ? (
-                        <Avatar
-                          style={{
-                            width: 26,
-                            height: 26,
-                            backgroundColor: entry.color,
-                          }}
-                        >
-                          {entry.name}
-                        </Avatar>
-                      ) : (
-                        <Image
-                          width={26}
-                          height={26}
-                          src={entry.icon}
-                          alt={`${entry.name} icon`}
-                          className="rounded-full mr-4"
-                        />
-                      )}
+                    {entry.icon === "default" ? (
+                      <Avatar
+                        style={{
+                          width: 26,
+                          height: 26,
+                          backgroundColor: entry.color,
+                        }}
+                      >
+                        {entry.name}
+                      </Avatar>
+                    ) : (
+                      <Image
+                        width={26}
+                        height={26}
+                        src={entry.icon}
+                        alt={`${entry.name} icon`}
+                        className="rounded-full mr-2 md:mr-4"
+                      />
+                    )}
                     <div>
-                      <p className="font-bold text-sm">{entry.name}</p>
+                      <p className="font-bold text-xs md:text-sm">
+                        {entry.name}
+                      </p>
                       <p className="text-xs text-gray-600">{entry.full}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-sm">${entry.usdValue}</p>
+                    <p className="font-semibold text-xs md:text-sm">
+                      ${entry.usdValue}
+                    </p>
                     <p
-                      className={`text-xs ${parseFloat(entry.percentageChange) >= 0 ? "text-green-500" : "text-red-500"}`}
+                      className={`text-xs ${
+                        parseFloat(entry.percentageChange) >= 0
+                          ? "text-green-500"
+                          : "text-red-500"
+                      }`}
                     >
                       {entry.percentageChange}%
                     </p>

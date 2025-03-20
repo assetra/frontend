@@ -29,7 +29,7 @@ const Balance: React.FC = () => {
     const apikey =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImE4NjE5MDFhLWE4NzAtNGU4My04OWJmLTU3YjQ3MGI4NmE4ZSIsIm9yZ0lkIjoiNDA0MzAxIiwidXNlcklkIjoiNDE1NDM1IiwidHlwZUlkIjoiZTc1Mzk0N2EtYzYyMS00YTczLThmMmItZjQyZTU1YzA2ZmE1IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MjMzNzgzNDIsImV4cCI6NDg3OTEzODM0Mn0.68iPXXiLc7Mnet7NCLe7YOP1HGizPt12PZHLWFnVm2w";
     const config = {
-      method: "get" as Method, // Explicitly typed method
+      method: "get" as Method,
       maxBodyLength: Infinity,
       url: `https://deep-index.moralis.io/api/v2.2/${address}/verbose?chain=eth&order=DESC`,
       headers: {
@@ -128,10 +128,10 @@ const Balance: React.FC = () => {
   }, [isConnected, balanceData, chainId]);
 
   return (
-    <div className="pr-10.5  bg-[#1E1F25] rounded-xl w-full h-full">
-      <div className="gap-45 flex flex-row w-full text-white h-full">
-        <div className="w-5/12 flex flex-col p-4 h-full">
-          <div className="flex flex-col justify-between border-r-2 border-[#34384C] h-full pr-10">
+    <div className="bg-[#1E1F25] rounded-xl w-full h-full">
+      <div className="flex flex-col md:flex-row w-full text-white h-full">
+        <div className="w-full md:w-5/12 flex flex-col p-4 h-full">
+          <div className="flex flex-col justify-between border-b md:border-b-0 md:border-r-2 border-[#34384C] h-full md:pr-4">
             <div className="w-full flex justify-between pb-2">
               <h1>Balance</h1>
             </div>
@@ -140,7 +140,7 @@ const Balance: React.FC = () => {
                 <p>Loading balance...</p>
               ) : isConnected ? (
                 <>
-                  <h1 className="text-3xl font-extrabold">
+                  <h1 className="text-2xl md:text-3xl font-extrabold">
                     ${usdBalance || "0.00"}
                   </h1>
                   <p className="mb-2">
@@ -150,10 +150,10 @@ const Balance: React.FC = () => {
                 </>
               ) : (
                 <>
-                  <h1 className="text-3xl font-extrabold">$0.00</h1>
-                  <div className="flex gap-4">
+                  <h1 className="text-2xl md:text-3xl font-extrabold">$0.00</h1>
+                  <div className="flex flex-col md:flex-row gap-2 md:gap-4">
                     <p className="mb-2">0 ETH</p>
-                    <p className="text-yellow-500">
+                    <p className="text-yellow-500 text-sm md:text-base">
                       Connect wallet to see real balance
                     </p>
                   </div>
@@ -168,9 +168,9 @@ const Balance: React.FC = () => {
                     src="/images/arrow-down-blue-24-bg.png"
                     alt="Income arrow"
                   />
-                  <p className="pl-5">Received</p>
+                  <p className="pl-2 md:pl-5 text-sm md:text-base">Received</p>
                 </div>
-                <div>
+                <div className="text-sm md:text-base">
                   USD $
                   {isConnected
                     ? transactionData.receivedAmount.toFixed(4)
@@ -178,15 +178,15 @@ const Balance: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-col w-1/2 justify-start">
-                <div className="flex flex-col border-l-2 px-5 border-[#34384C]">
+                <div className="flex flex-col border-l-2 px-2 md:px-5 border-[#34384C]">
                   <div className="flex flex-row py-2">
                     <img
                       src="/images/arrow-up-red-24-bg.png"
                       alt="Expenses arrow"
                     />
-                    <p className="pl-5">Sent</p>
+                    <p className="pl-2 md:pl-5 text-sm md:text-base">Sent</p>
                   </div>
-                  <div>
+                  <div className="text-sm md:text-base">
                     USD $
                     {isConnected
                       ? transactionData.sentAmount.toFixed(4)
