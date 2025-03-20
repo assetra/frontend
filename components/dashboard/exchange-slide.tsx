@@ -2,22 +2,29 @@
 import { MiniChart } from "react-tradingview-embed";
 
 function ExchangeSlide({ cryptoPair }: any) {
+  const symbolName = cryptoPair.split(":")[1].replace("USD", "");
+
   return (
-    <div className="w-[24svw] rounded-[2rem] py-3 px-6">
-      <MiniChart
-        widgetProps={{
-          colorTheme: "dark",
-          symbol: cryptoPair,
-          width: "100%",
-          height: "100%",
-          locale: "en",
-          dateRange: "3M",
-          underLineColor: "rgba(101, 101, 101, 0.36)",
-          isTransparent: false,
-          autosize: false,
-          //noTimeScale: true,
-        }}
-      />
+    <div className="bg-gray-900 rounded-lg py-3 px-3 border border-gray-800">
+      <div className="flex justify-between items-center mb-2">
+        <h4 className="text-white font-medium">{symbolName}</h4>
+      </div>
+
+      <div className="w-full h-40 sm:h-48">
+        <MiniChart
+          widgetProps={{
+            colorTheme: "dark",
+            symbol: cryptoPair,
+            width: "100%",
+            height: "100%",
+            locale: "en",
+            dateRange: "3M",
+            underLineColor: "rgba(101, 101, 101, 0.36)",
+            isTransparent: true,
+            autosize: true,
+          }}
+        />
+      </div>
     </div>
   );
 }
