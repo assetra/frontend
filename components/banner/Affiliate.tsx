@@ -58,12 +58,12 @@ const Affiliate = () => {
             </button>
           </div>
           <button
-            {...({ popovertarget: "affiliate-presenter" } as any)}
+            {...({ popoverTarget: "affiliate-presenter" } as any)}
             type="button"
             ref={buttonRef1}
           ></button>
           <button
-            {...({ popovertarget: "affiliate-program-presenter" } as any)}
+            {...({ popoverTarget: "affiliate-program-presenter" } as any)}
             type="button"
             ref={buttonRef2}
           ></button>

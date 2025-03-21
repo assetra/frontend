@@ -270,7 +270,7 @@ const MarketingFeedback: React.FC = () => {
 
             <div className="flex justify-center gap-4">
               <button
-                {...({ popovertarget: "marketing-feedback-presenter" } as any)}
+                {...({ popoverTarget: "marketing-feedback-presenter" } as any)}
                 type="button"
                 ref={buttonRef}
               >

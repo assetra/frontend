@@ -70,7 +70,7 @@ export default function Transaction() {
   }, [address]);
 
   return (
-    <div className="bg-[#1E1F25] rounded-xl w-full max-w-md px-6 pt-4 text-white">
+    <div className="bg-[#1E1F25] rounded-xl w-full  px-6 pt-4 text-white">
       <div className="flex flex-row justify-between items-start px-4 w-full h-6 mb-4">
         <div className="text-white text-xl font-bold">Transactions</div>
         {/* <div className="flex justify-between items-center text-white text-base border-white border rounded-full w-16 h-8 px-4 py-2 cursor-pointer">

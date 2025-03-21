@@ -41,7 +41,7 @@ const EarlySupporter = () => {
   return (
     <div>
       <button
-        {...{ popovertarget: "supporter-presenter" } as any}
+        {...({ popoverTarget: "supporter-presenter" } as any)}
         type="button"
         ref={buttonRef}
       ></button>
