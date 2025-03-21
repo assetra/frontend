@@ -186,9 +186,9 @@ const Market = () => {
   ];
 
   return (
-    <div className="flex w-[100svw] h-[100svh] bg-[#000] px-11 pt-16">
-      <div className="flex w-full h-full">
-        <div className="flex h-full w-1/4 pr-3">
+    <div className="flex w-[100svw] bg-[#000] px-11 pt-16">
+      <div className="flex w-full h-full flex-col md:flex-row">
+        <div className="flex h-full md:w-1/4 w-full md:pr-3">
           <div className="flex flex-col w-full h-full text-white">
             <div className="flex flex-col pt-12 pb-2">
               <div className="text-base pb-2 text-[#A5ADCF]">
@@ -202,16 +202,16 @@ const Market = () => {
             </div>
             <div className="flex flex-col w-full overflow-y-auto">
               {symbols.map((symbol, index) => (
-                <div key={index} className="w-full py-4 pr-6">
+                <div key={index} className="w-full py-4 md:pr-6">
                   <Card cryptoPair={symbol} />
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="flex h-full w-3/4 pl-3 pt-12 pb-4">
+        <div className="flex h-full md:w-3/4 w-full md:pl-3 pt-12 pb-4">
           <div className="flex w-full h-full text-white rounded-xl p-6 bg-[#1E1F25]">
-            <div className="flex flex-col w-full h-full">
+            <div className="flex flex-col w-full h-[100vh] overflow-y-auto">
               <div className="flex flex-row justify-between w-full h-[30px]">
                 <div>Market Table</div>
                 <div className="text-[#5D6588]">
