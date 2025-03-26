@@ -8,12 +8,12 @@ const symbols = [
   "BINANCE:BNBUSD",
 ];
 
-const priceWidget: React.FC = () => {
+const PriceWidget: React.FC = () => {
   return (
     <>
-      <div className="flex h-full">
+      <div className="flex h-full w-full ">
         <div className="flex flex-col w-full h-full text-white">
-          <div className="flex flex-col pt-8 pb-2">
+          <div className="flex flex-col">
             <div className="text-base pb-2 text-[#A5ADCF]">
               In the past 24 hours
             </div>
@@ -36,4 +36,4 @@ const priceWidget: React.FC = () => {
   );
 };
 
-export default priceWidget;
+export default PriceWidget;
