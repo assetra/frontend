@@ -61,7 +61,11 @@ export default function App() {
   }, []);
 
   if (!loading && data.length === 0) {
-    return <div className="text-white text-center">No data Available...</div>;
+    return (
+      <div className="text-white text-center h-[270px]">
+        No data Available...
+      </div>
+    );
   }
 
   return (

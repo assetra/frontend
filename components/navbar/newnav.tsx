@@ -15,7 +15,7 @@ const newnav = () => {
 
   return (
     <div>
-      <nav className="max-w-10xl w-full flex flex-row bg-white/10 text-white text-xs justify-between items-center px-4 py-5 top-0 fixed max-h-12 z-50 shadow-lg mx-auto  rounded-lg backdrop-blur-lg backdrop-saturate-150 backdrop-filter border border-white/20 ">
+      <nav className="max-w-10xl w-full flex flex-row bg-white/20 text-white text-xs justify-between items-center px-4 py-5 top-0 fixed max-h-12 z-50 shadow-lg mx-auto  rounded-lg backdrop-blur-lg backdrop-saturate-150 backdrop-filter border border-white/20 ">
         <div className="w-full justify-between px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex-shrink-0 flex items-center">

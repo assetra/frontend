@@ -1,7 +1,7 @@
 "use client";
-import ExchangeSlide from "./exchange-slide";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
+import ExchangeSlide from "./exchange-slide";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -13,15 +13,10 @@ function CardSlider() {
     "BINANCE:BNBUSD",
   ];
 
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
-    const handleResize = () => {
-      window.dispatchEvent(new Event("resize"));
-    };
-
-    setTimeout(handleResize, 100);
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    setIsClient(true);
   }, []);
 
   const settings = {
@@ -64,6 +59,11 @@ function CardSlider() {
       },
     ],
   };
+
+  // Prevent rendering on server
+  if (!isClient) {
+    return null;
+  }
 
   return (
     <div className="w-full mt-4 pb-8">

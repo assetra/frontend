@@ -6,7 +6,7 @@ import Hamburger from "./Hamburger";
 
 const ResponsiveNavbar = () => {
   return (
-    <div className="flex justify-between align-middle top-0 fixed w-[100dvw] min-h-12 max-h-12 bg-white/10 text-white text-xs px-4 z-50 shadow-lg mx-auto backdrop-blur-lg backdrop-saturate-150 backdrop-filter border border-white/20">
+    <div className="flex justify-between align-middle top-0 fixed w-[100dvw] min-h-12 max-h-12 bg-white/5 text-black text-xs px-4 z-50 shadow-lg mx-auto backdrop-blur-lg backdrop-saturate-150 backdrop-filter border border-white/10">
       <div className="my-auto">
         <Link href={"/"}>
           <img

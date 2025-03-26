@@ -1,34 +1,28 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const Scroller: React.FC = () => {
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    const scrollers = document.querySelectorAll(".scroller");
+    if (!scrollerRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const scroller = scrollerRef.current;
+    scroller.setAttribute("data-animated", "true");
 
-    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      addAnimation();
-    }
+    const scrollerItems = scroller.querySelector(".scroller-items");
+    if (!scrollerItems) return;
 
-    function addAnimation() {
-      scrollers.forEach((scroller) => {
-        scroller.setAttribute("data-animated", "true");
-
-        const scrollerItems = scroller.querySelector(".scroller-items");
-        if (scrollerItems) {
-          const scrollerContent = Array.from(scrollerItems.children);
-
-          scrollerContent.forEach((item) => {
-            const duplicatedItem = item.cloneNode(true) as HTMLElement;
-            duplicatedItem.setAttribute("aria-hidden", "true");
-            scrollerItems.appendChild(duplicatedItem);
-          });
-        }
-      });
-    }
+    const scrollerContent = Array.from(scrollerItems.children);
+    scrollerContent.forEach((item) => {
+      const duplicatedItem = item.cloneNode(true) as HTMLElement;
+      duplicatedItem.setAttribute("aria-hidden", "true");
+      scrollerItems.appendChild(duplicatedItem);
+    });
   }, []);
 
   return (
-    <div className="scroller">
+    <div ref={scrollerRef} className="scroller">
       <ul className="tag-list scroller-items">
         <li>
           <img src="/assets/logo/bitcoin.svg" alt="Bitcoin" />
