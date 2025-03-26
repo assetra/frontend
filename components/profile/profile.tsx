@@ -7,6 +7,7 @@ import Image from "next/image";
 import withAuth from "../auth/withAuth";
 import { getData, getCode } from "country-list";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
+import { User, Settings, Shield, Trash2, Edit2, Sun, Moon } from "lucide-react";
 
 interface FormData {
   email: string;
@@ -19,12 +20,10 @@ interface FormData {
 
 const formatDOB = (dob: string) => {
   if (!dob) return "";
-
   const date = new Date(dob);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const day = String(date.getDate()).padStart(2, "0");
-
   return `${year}-${month}-${day}`;
 };
 
@@ -33,6 +32,9 @@ const Profile: React.FC = () => {
   const [clicked, setClicked] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [activeSection, setActiveSection] = useState("profile");
+
   const [formData, setFormData] = useState<FormData>({
     email: user.email,
     first_name: user.first_name ?? "",
@@ -42,6 +44,7 @@ const Profile: React.FC = () => {
     mobile_number:
       parsePhoneNumberFromString(user.mobile ?? "")?.format("E.164") ?? "",
   });
+
   const countries = getData();
 
   const handleChange = (
@@ -85,7 +88,6 @@ const Profile: React.FC = () => {
           setIsSuccess(true);
           setClicked(false);
           setUser(result.user);
-          setTimeout(() => {}, 1000);
         } else {
           setFeedbackMessage(
             result.message || "Profile update failed. Please try again."
@@ -104,200 +106,347 @@ const Profile: React.FC = () => {
     }
   };
 
+  const sidebarItems = [
+    {
+      id: "profile",
+      label: "Profile Setup",
+      icon: <User className="mr-2" />,
+    },
+    {
+      id: "crypto",
+      label: "Crypto Addresses",
+      icon: <Settings className="mr-2" />,
+    },
+    {
+      id: "security",
+      label: "Account Security",
+      icon: <Shield className="mr-2" />,
+    },
+    {
+      id: "delete",
+      label: "Delete Account",
+      icon: <Trash2 className="mr-2" color="red" />,
+    },
+  ];
+
   return (
-    <div className="pt-16 bg-base-100 md:flex gap-4 text-base-content">
-      <div className="flex justify-between md:grid gap-5 p-4 self-start mt-2 max-md:pr-5 border-base-content border-[1px] rounded-xl bg-base-200">
-        <div className="grid gap-5 p-4 self-start mt-2 max-md:pr-5">
-          <div className="relative mx-auto hover:border-base-content border-transparent border-[1px] rounded-full">
+    <div
+      className={`mt-12
+        min-h-screen p-4 
+        ${isDarkMode ? "dark bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-900"}
+        transition-colors duration-300 ease-in-out
+        flex flex-col md:flex-row gap-4
+      `}
+    >
+      <div
+        className="
+          w-full md:w-1/4 lg:w-1/5 
+          bg-white/40 dark:bg-black/40 
+          backdrop-blur-lg 
+          rounded-2xl 
+          p-6 
+          shadow-lg 
+          border 
+          border-white/20 
+          dark:border-black/20
+        "
+      >
+        <div className="flex flex-col items-center mb-8">
+          <div className="relative mb-4">
             <Image
-              width={100}
-              height={100}
+              width={120}
+              height={120}
               src={
                 user?.profile
                   ? `https://gtxadmin.pythonanywhere.com${user.profile}`
                   : "/assets/profile.png"
               }
               alt="member-logo"
-              className="rounded-full"
+              className="rounded-full border-4 border-white/50 dark:border-black/50"
             />
+            <div
+              className="
+                absolute bottom-0 right-0 
+                bg-blue-500 text-white 
+                rounded-full p-1
+              "
+            >
+              <Edit2 size={16} />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-base-content">
-            Profile and Settings
-          </div>
-        </div>
-        <div className="">
-          <div className="text-xl text-base-content p-2 hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-lg">
-            Setup your profile
-          </div>
-          <div className="text-xl text-base-content p-2 hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-lg">
-            Crypto addresses
-          </div>
-          <div className="text-xl text-base-content p-2 hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-lg">
-            Account Security
-          </div>
-          <div className="text-xl text-base-content p-2 hover:opacity-75 hover:border-base-content border-transparent border-[1px] rounded-lg">
-            Delete Account
-          </div>
+          <h2 className="text-xl font-bold">{user.username}</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400">
+            {user.email}
+          </p>
         </div>
 
-        <div className="border-base-content border-[1px] rounded-xl bg-base-200"></div>
-        <div className="mx-auto">
-          <div className="text-2xl font-bold text-base-content">Badges</div>
-          <div>
-          <div className="earlyuserlogo">
-            <img src="/assets/assetra-logo.jpg" alt="Assetra Badge" />
-          </div>
-          <p className="profileBadgeTitle">Assetra Founding Member Badge</p>
-          </div>
+        <div className="space-y-2">
+          {sidebarItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => setActiveSection(item.id)}
+              className={`
+                w-full flex items-center p-3 rounded-lg
+                transition-all duration-300
+                ${
+                  activeSection === item.id
+                    ? "bg-blue-500 text-white"
+                    : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                }
+              `}
+            >
+              {item.icon}
+              {item.label}
+            </button>
+          ))}
         </div>
       </div>
-      <div className="flex flex-col px-10 py-6 mt-2 md:w-[75svw] min-h-[87svh] overscroll-y-auto rounded-xl bg-base-200 max-md:px-5 max-md:max-w-full border-base-content border-[1px]">
-        <form onSubmit={handleSubmit} className="my-auto">
-          <div className="grid sm:grid-cols-2 gap-12 mb-4">
-            <div
-              className="w-full tooltip tooltip-warning"
-              data-tip="You cannot change the username..!"
-            >
-              <label htmlFor="username" className="block mb-3 text-left">
-                Username
-              </label>
-              <input
-                type="text"
-                id="username"
-                className="input rounded-full h-12 pl-6 w-full"
-                value={user.username}
-                placeholder={user.username}
-                disabled
-              />
-            </div>
-            <div
-              className="w-full tooltip tooltip-warning"
-              data-tip="You cannot change the email..!"
-            >
-              <label htmlFor="email" className="block mb-3 text-left">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="input rounded-full h-12 pl-6 w-full"
-                placeholder="youremail@gmail.com"
-                disabled
-              />
-            </div>
-            <div className="w-full">
-              <label htmlFor="first_name" className="block mb-3">
-                First name
-              </label>
-              <input
-                type="text"
-                id="first_name"
-                value={formData.first_name}
-                onChange={handleChange}
-                className="input rounded-full h-12 pl-6 w-full"
-                placeholder="First name"
-              />
-            </div>
-            <div className="w-full">
-              <label htmlFor="last_name" className="block mb-3">
-                Last name
-              </label>
-              <input
-                type="text"
-                id="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-                className="input rounded-full h-12 pl-6 w-full"
-                placeholder="Last name"
-              />
-            </div>
-            <div className="col-span-1">
-              <label htmlFor="dob" className="block mb-3">
-                Date of birth
-              </label>
-              <input
-                type="date"
-                id="dob"
-                value={formData.dob}
-                onChange={handleChange}
-                className="input rounded-full h-12 px-6 w-full"
-              />
-            </div>
-            <div className="w-full">
-              <label htmlFor="country" className="block mb-3">
-                Country of residence
-              </label>
-              <select
-                id="country"
-                value={formData.country}
-                onChange={handleChange}
-                className="select rounded-full h-12 px-6 w-full bg-base-100"
-              >
-                <option disabled value="">
-                  Choose a country
-                </option>
-                {countries.map((country) => (
-                  <option key={country.code} value={country.code}>
-                    {country.name}
+
+      <div
+        className="
+          flex-1 
+          bg-white/40 dark:bg-black/40 
+          backdrop-blur-lg 
+          rounded-2xl 
+          p-6 
+          shadow-lg 
+          border 
+          border-white/20 
+          dark:border-black/20
+          overflow-y-auto
+        "
+      >
+        {activeSection === "profile" && (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Username */}
+              <div>
+                <label
+                  htmlFor="username"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Username
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  value={user.username}
+                  className="
+                    w-full p-3 rounded-lg 
+                    bg-white/50 dark:bg-black/50
+                    border border-gray-300 dark:border-gray-700
+                    focus:ring-2 focus:ring-blue-500
+                  "
+                  disabled
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  className="
+                    w-full p-3 rounded-lg 
+                    bg-white/50 dark:bg-black/50
+                    border border-gray-300 dark:border-gray-700
+                    focus:ring-2 focus:ring-blue-500
+                  "
+                  disabled
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="first_name"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  First Name
+                </label>
+                <input
+                  type="text"
+                  id="first_name"
+                  value={formData.first_name}
+                  onChange={handleChange}
+                  className="
+                    w-full p-3 rounded-lg 
+                    bg-white/50 dark:bg-black/50
+                    border border-gray-300 dark:border-gray-700
+                    focus:ring-2 focus:ring-blue-500
+                  "
+                  placeholder="First name"
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="last_name"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Last Name
+                </label>
+                <input
+                  type="text"
+                  id="last_name"
+                  value={formData.last_name}
+                  onChange={handleChange}
+                  className="
+                    w-full p-3 rounded-lg 
+                    bg-white/50 dark:bg-black/50
+                    border border-gray-300 dark:border-gray-700
+                    focus:ring-2 focus:ring-blue-500
+                  "
+                  placeholder="Last name"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="dob" className="block mb-2 text-sm font-medium">
+                  Date of Birth
+                </label>
+                <input
+                  type="date"
+                  id="dob"
+                  value={formData.dob}
+                  onChange={handleChange}
+                  className="
+                    w-full p-3 rounded-lg 
+                    bg-white/50 dark:bg-black/50
+                    border border-gray-300 dark:border-gray-700
+                    focus:ring-2 focus:ring-blue-500
+                  "
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="country"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Country of Residence
+                </label>
+                <select
+                  id="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="
+                    w-full p-3 rounded-lg 
+                    bg-white/50 dark:bg-black/50
+                    border border-gray-300 dark:border-gray-700
+                    focus:ring-2 focus:ring-blue-500
+                  "
+                >
+                  <option disabled value="">
+                    Choose a country
                   </option>
-                ))}
-              </select>
+                  {countries.map((country) => (
+                    <option key={country.code} value={country.code}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label
+                  htmlFor="mobile_number"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Mobile Number
+                </label>
+                <PhoneInput
+                  international
+                  className="
+                    w-full
+                    bg-black
+                    rounded-lg
+                    text-black
+                  "
+                  defaultCountry="US"
+                  value={formData.mobile_number}
+                  onChange={handlePhoneChange}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="creation"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Account Creation Date
+                </label>
+                <input
+                  type="text"
+                  id="creation"
+                  value={user.date_joined}
+                  className="
+                    w-full p-3 rounded-lg 
+                    bg-white/50 dark:bg-black/50
+                    border border-gray-300 dark:border-gray-700
+                    focus:ring-2 focus:ring-blue-500
+                  "
+                  disabled
+                />
+              </div>
             </div>
-            <div className="w-full">
-              <label htmlFor="mobilenumber" className="block mb-3">
-                Mobile Number
-              </label>
-              <PhoneInput
-                international
-                className="PhoneInput rounded-full h-12 px-6 w-full bg-base-100 input"
-                defaultCountry="US"
-                value={formData.mobile_number}
-                onChange={handlePhoneChange}
-              />
-            </div>
-            <div
-              className="w-full tooltip tooltip-warning"
-              data-tip="You cannot change the account creation date..!"
-            >
-              <label htmlFor="creation" className="block mb-3 text-left">
-                Account Creation Date
-              </label>
-              <input
-                type="text"
-                id="creation"
-                className="input rounded-full h-12 pl-6 w-full"
-                value={user.date_joined}
-                placeholder={user.date_joined}
-                disabled
-              />
-            </div>
-          </div>
-          {feedbackMessage && (
-            <div
-              className={`mt-2 text-sm ${
-                isSuccess ? "text-green-500" : "text-red-500"
-              }`}
-            >
-              {feedbackMessage}
-            </div>
-          )}
-          <div className="flex justify-end mt-6">
-            {clicked ? (
-              <button className="btn btn-outline bg-blue-700 text-white rounded-full flex items-center justify-center">
-                <span className="loading loading-spinner loading-md"></span>
-              </button>
-            ) : (
-              <button
-                type="submit"
-                className="btn btn-outline bg-blue-500 hover:bg-sky-500 rounded-full"
+
+            {feedbackMessage && (
+              <div
+                className={`
+                  mt-4 p-3 rounded-lg text-center 
+                  ${
+                    isSuccess
+                      ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                      : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                  }
+                `}
               >
-                Save Changes
-              </button>
+                {feedbackMessage}
+              </div>
             )}
-          </div>
-        </form>
+
+            <div className="flex justify-end mt-6">
+              {clicked ? (
+                <button
+                  disabled
+                  className="
+                    btn btn-primary 
+                    bg-blue-500 
+                    text-white 
+                    rounded-lg 
+                    px-6 py-3 
+                    opacity-50 
+                    cursor-not-allowed
+                  "
+                >
+                  <span className="loading loading-spinner loading-md"></span>
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  className="
+                    btn btn-primary 
+                    bg-blue-500 
+                    hover:bg-blue-600 
+                    text-white 
+                    rounded-lg 
+                    px-6 py-3 
+                    transition-colors 
+                    duration-300
+                  "
+                >
+                  Save Changes
+                </button>
+              )}
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );
