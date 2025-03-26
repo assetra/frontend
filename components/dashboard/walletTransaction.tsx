@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios, { Method } from "axios";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
+
 interface Transaction {
   hash: string;
   action: "Send" | "Receive";
@@ -22,7 +23,8 @@ interface ApiTransaction {
 interface ApiResponse {
   result: ApiTransaction[];
 }
-const walletTransaction: React.FC = () => {
+
+const WalletTransaction: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { address } = useAccount();
@@ -46,6 +48,7 @@ const walletTransaction: React.FC = () => {
         const response = await axios.get<ApiResponse>(config.url, {
           headers: config.headers,
         });
+
         const formattedTransactions: Transaction[] = response.data.result.map(
           (tx) => ({
             hash: tx.hash,
@@ -75,22 +78,25 @@ const walletTransaction: React.FC = () => {
         <table className="w-full flex flex-col h-full text-white">
           <thead className="flex flex-col w-full">
             <tr className="flex flex-row w-full justify-between pb-6 border-b-2 text-[#5D6588] pr-6">
-              <td className="w-[15%]">Assets</td>
-              <td className="w-[24%]">Date & Time</td>
-              {/* <td className="w-[16%]">Value(USD)</td> */}
-              <td className="w-[20%]">Total Balance</td>
-              <td className="w-1/10">24h Market</td>
+              <th className="w-[15%]">Assets</th>
+              <th className="w-[24%]">Date & Time</th>
+              <th className="w-[20%]">Total Balance</th>
+              <th className="w-1/10">24h Market</th>
             </tr>
           </thead>
-          <tbody className="flex flex-col w-full overflow-y-auto min-h-96 pr-16 mt-3">
+          <tbody className="w-full overflow-y-auto min-h-96 mt-3">
             {isLoading ? (
-              <div className="text-center  w-full text-whit ">
-                Loading transactions...
-              </div>
+              <tr>
+                <td className="text-center w-full text-white" colSpan={4}>
+                  Loading transactions...
+                </td>
+              </tr>
             ) : transactions.length === 0 ? (
-              <div className="text-center  w-full text-white ">
-                No transactions found
-              </div>
+              <tr>
+                <td className="text-center w-full text-white" colSpan={4}>
+                  No transactions found
+                </td>
+              </tr>
             ) : (
               transactions.map((tx) => (
                 <tr
@@ -99,20 +105,21 @@ const walletTransaction: React.FC = () => {
                 >
                   <td className="flex flex-row py-2 w-[15%]">
                     <div className="pr-4">
-                      <img src="/images/eth-icon-big.png" />
+                      <img src="/images/eth-icon-big.png" alt="ETH Icon" />
                     </div>
                     <div>ETH</div>
                   </td>
                   <td className="w-[24%]">
                     <div className="w-full">{tx.timestamp}</div>
                   </td>
-                  {/* <td className="w-[16%]">
-                    <div className="w-full">{tx.timestamp}</div>
-                  </td> */}
                   <td className="w-[20%]">
                     <div className="w-full">
                       <div
-                        className={`font-semibold ${tx.action === "Receive" ? "text-green-500" : "text-red-500"}`}
+                        className={`font-semibold ${
+                          tx.action === "Receive"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }`}
                       >
                         {tx.action === "Receive" ? "+" : "-"}
                         {parseFloat(tx.value).toFixed(6)} ETH
@@ -143,4 +150,4 @@ const walletTransaction: React.FC = () => {
   );
 };
 
-export default walletTransaction;
+export default WalletTransaction;

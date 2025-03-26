@@ -19,13 +19,13 @@ interface TokenData {
 interface ApiTokenData {
   symbol: string;
   name: string;
-  thumbnail: string;
+  thumbnail?: string;
   usd_value: string;
   usd_value_24hr_usd_change: string;
   balance_formatted: string;
 }
 
-const walletAsset = () => {
+const WalletAsset = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [tokenData, setTokenData] = useState<TokenData[]>([]);
   const { address } = useAccount();
@@ -35,139 +35,129 @@ const walletAsset = () => {
 
   useEffect(() => {
     const fetchTokenData = async () => {
-      if (!address) return;
-
-      let config = {
-        method: "get" as Method, // Explicitly typed method
-        maxBodyLength: Infinity,
-        url: `https://deep-index.moralis.io/api/v2.2/wallets/${address}/tokens?chain=eth`,
-        headers: {
-          accept: "application/json",
-          "X-API-Key": apiKey,
-        },
-      };
+      if (!address || !apiKey) return;
 
       try {
-        const response = await axios.request(config);
-        const sortedTokens: TokenData[] = response.data.result
-          .sort(
-            (a: ApiTokenData, b: ApiTokenData) =>
-              parseFloat(b.usd_value) - parseFloat(a.usd_value)
-          )
+        const response = await axios.get(
+          `https://deep-index.moralis.io/api/v2.2/wallets/${address}/tokens?chain=eth`,
+          {
+            headers: {
+              accept: "application/json",
+              "X-API-Key": apiKey,
+            },
+          }
+        );
 
-          .map((token: ApiTokenData) => {
-            const usdValue = parseFloat(token.usd_value);
-            const usdValueChange = parseFloat(token.usd_value_24hr_usd_change);
-            const percentageChange =
-              (usdValueChange / (usdValue - usdValueChange)) * 100;
-            const balance = parseFloat(token.balance_formatted);
-            return {
-              name: token.symbol,
-              value: usdValue,
-              color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
-              full: token.name,
-              icon: token.thumbnail || "default",
-              percentageChange: percentageChange.toFixed(2),
-              balance: balance.toFixed(6),
-              usdValue: usdValue.toFixed(3),
-            };
-          });
+        const sortedTokens: TokenData[] =
+          response.data.result
+            ?.sort(
+              (a: ApiTokenData, b: ApiTokenData) =>
+                parseFloat(b.usd_value) - parseFloat(a.usd_value)
+            )
+            .map((token: ApiTokenData) => {
+              const usdValue = parseFloat(token.usd_value);
+              const usdValueChange = parseFloat(
+                token.usd_value_24hr_usd_change
+              );
+              const percentageChange =
+                usdValue !== 0
+                  ? (
+                      (usdValueChange / (usdValue - usdValueChange)) *
+                      100
+                    ).toFixed(2)
+                  : "0.00";
+
+              return {
+                name: token.symbol,
+                value: usdValue,
+                color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+                full: token.name,
+                icon: token.thumbnail || "",
+                percentageChange,
+                balance: parseFloat(token.balance_formatted).toFixed(6),
+                usdValue: usdValue.toFixed(3),
+              };
+            }) || [];
+
         setTokenData(sortedTokens);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching token data:", error);
+      } finally {
         setIsLoading(false);
       }
     };
 
     fetchTokenData();
-  }, [address]);
-  const title = ["Name", "Value(USD)", "Change(24h)", "Amount"];
+  }, [address, apiKey]);
+
+  const headers = ["Name", "Token", "Value (USD)", "Change (24h)", "Balance"];
+
   return (
-    <div>
-      <div className="flex flex-row w-full h-[55%] sm:h-2/3 rounded-xl bg-[#1E1F25] p-6">
-        <table className="w-full flex flex-col h-full text-white">
-          <thead className="flex flex-col w-full">
-            <tr className="flex flex-row w-full justify-between pb-6 border-b-2 text-[#5D6588] pr-6">
-              <td className="w-[15%]">Assets </td>
-              {title.map((item, index) => (
-                <td key={index} className="w-[15%] flex place-content-center">
-                  {item}
-                </td>
-              ))}
-            </tr>
-          </thead>
-          <tbody className="flex flex-col w-full overflow-y-auto min-h-96  mt-3">
-            {isLoading ? (
-              <div className="text-center  w-full text-whit ">
+    <div className="w-full bg-[#1E1F25] rounded-xl p-6">
+      <table className="w-full text-white">
+        <thead>
+          <tr className="border-b-2 text-[#5D6588] text-left">
+            <th className="w-[15%]">Assets</th>
+            {headers.map((header, index) => (
+              <th key={index} className="w-[20%] text-center">
+                {header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {isLoading ? (
+            <tr>
+              <td colSpan={headers.length + 1} className="text-center py-6">
                 Loading Assets...
-              </div>
-            ) : tokenData.length === 0 ? (
-              <div className="text-center  w-full text-white ">
+              </td>
+            </tr>
+          ) : tokenData.length === 0 ? (
+            <tr>
+              <td colSpan={headers.length + 1} className="text-center py-6">
                 No Assets found
-              </div>
-            ) : (
-              tokenData.map((entry, index) => (
-                <tr
-                  key={index}
-                  className="flex  w-full justify-between items-center h-12 py-4"
+              </td>
+            </tr>
+          ) : (
+            tokenData.map((entry, index) => (
+              <tr key={index} className="border-b h-12">
+                <td className="flex items-center gap-2">
+                  {entry.icon ? (
+                    <Image
+                      width={26}
+                      height={26}
+                      src={entry.icon}
+                      alt={`${entry.name} icon`}
+                      className="rounded-full"
+                    />
+                  ) : (
+                    <Avatar
+                      style={{
+                        width: 26,
+                        height: 26,
+                        backgroundColor: entry.color,
+                      }}
+                    >
+                      {entry.name.slice(0, 2)}
+                    </Avatar>
+                  )}
+                  <span>{entry.name}</span>
+                </td>
+                <td className="text-center">{entry.full}</td>
+                <td className="text-center">${entry.usdValue}</td>
+                <td
+                  className={`text-center font-semibold ${parseFloat(entry.percentageChange) >= 0 ? "text-green-500" : "text-red-500"}`}
                 >
-                  <td className="flex  py-2 w-[15%]">
-                    <div className="pr-4">
-                      {entry.icon === "default" ? (
-                        <Avatar
-                          style={{
-                            width: 26,
-                            height: 26,
-                            backgroundColor: entry.color,
-                          }}
-                        >
-                          {entry.name}
-                        </Avatar>
-                      ) : (
-                        <Image
-                          width={26}
-                          height={26}
-                          src={entry.icon}
-                          alt={`${entry.name} icon`}
-                          className="rounded-full"
-                        />
-                      )}
-                    </div>
-                    <div>{entry.name && entry.name.slice(0, 6)}</div>
-                  </td>
-                  <td className="w-[24%]">
-                    <div className="w-full flex place-content-center">
-                      {entry.full}
-                    </div>
-                  </td>
-                  <td className="w-[16%]">
-                    <div className="w-full flex place-content-center">
-                      {entry.usdValue}$
-                    </div>
-                  </td>
-                  <td className="w-[20%]">
-                    <div className="w-full">
-                      <p
-                        className={`flex place-content-center font-semibold ${parseFloat(entry.percentageChange) >= 0 ? "text-green-500" : "text-red-500"}`}
-                      >
-                        {entry.percentageChange}%
-                      </p>
-                    </div>
-                  </td>
-                  <td className="w-[20%]">
-                    <div className="flex gap-1 justify-center">
-                      <span className="text-sm">{entry.balance}</span>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+                  {entry.percentageChange}%
+                </td>
+                <td className="text-center">{entry.balance}</td>
+              </tr>
+            ))
+          )}
+        </tbody>
+      </table>
     </div>
   );
 };
 
-export default walletAsset;
+export default WalletAsset;
