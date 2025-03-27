@@ -1,10 +1,8 @@
 "use client";
-import React, { useContext, useEffect } from "react";
-import localFont from "next/font/local";
+import React, { useState } from "react";
 import Card from "./card";
 import Image from "next/image";
-
-const graphik = localFont({ src: "../../public/fonts/GraphikRegular.otf" });
+import { ChevronUp, ChevronDown } from "lucide-react";
 
 const Market = () => {
   const symbols = [
@@ -184,102 +182,173 @@ const Market = () => {
       graph: "/images/market-graph/OGN.png",
     },
   ];
+  const [darkMode] = useState(true);
+  const [activeTab, setActiveTab] = useState("All Assets");
+
+  const tabs = ["All Assets", "Gainers", "Losers"];
 
   return (
-    <div className="flex w-[100svw] bg-[#000] px-11 pt-16">
-      <div className="flex w-full h-full flex-col md:flex-row">
-        <div className="flex h-full md:w-1/4 w-full md:pr-3">
-          <div className="flex flex-col w-full h-full text-white">
-            <div className="flex flex-col pt-12 pb-2">
-              <div className="text-base pb-2 text-[#A5ADCF]">
-                In the past 24 hours
+    <div
+      className={`
+      ${darkMode ? "dark bg-black text-white" : "bg-white text-black"}
+      min-h-screen w-full transition-colors duration-300
+      font-sans p-4 md:p-6 lg:p-8 mt-6
+    `}
+    >
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <div
+          className={`
+          md:col-span-3 
+          p-6 rounded-2xl 
+          ${
+            darkMode
+              ? "bg-white/5 backdrop-blur-md border border-white/10"
+              : "bg-black/5 backdrop-blur-md border border-black/10"
+          }
+        `}
+        >
+          <div className="space-y-4">
+            <div className="text-sm text-gray-400">In the past 24 hours</div>
+            <h2 className="text-2xl font-bold">
+              Market is up <span className="text-emerald-500">6.73%</span>
+            </h2>
+          </div>
+
+          <div className="mt-6 space-y-4">
+            {symbols.map((symbol, index) => (
+              <div
+                key={index}
+                className={`
+                flex justify-between items-center p-3 rounded-xl
+                ${
+                  darkMode
+                    ? "bg-white/10 hover:bg-white/20"
+                    : "bg-black/10 hover:bg-black/20"
+                }
+                transition-all duration-300
+              `}
+              >
+                <Card cryptoPair={symbol} />
               </div>
-              <div>
-                <h1 className="text-xl font-semibold">
-                  Market is up <span className="text-[#11CABE]">6.73%</span>
-                </h1>
-              </div>
-            </div>
-            <div className="flex flex-col w-full overflow-y-auto">
-              {symbols.map((symbol, index) => (
-                <div key={index} className="w-full py-4 md:pr-6">
-                  <Card cryptoPair={symbol} />
-                </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Market Table Section */}
+        <div
+          className={`
+          md:col-span-9 
+          rounded-2xl p-6
+          ${
+            darkMode
+              ? "bg-white/5 backdrop-blur-md border border-white/10"
+              : "bg-black/5 backdrop-blur-md border border-black/10"
+          }
+        `}
+        >
+          <div className="flex justify-between items-center mb-6">
+            <h3 className="text-xl font-semibold">Market Table</h3>
+            <div className="flex space-x-2">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`
+                  px-4 py-2 rounded-full text-sm transition-all duration-300
+                  ${
+                    activeTab === tab
+                      ? "bg-blue-600 text-white"
+                      : `
+                      ${
+                        darkMode
+                          ? "hover:bg-white/10 text-white/70"
+                          : "hover:bg-black/10 text-black/70"
+                      }
+                    `
+                  }
+                `}
+                >
+                  {tab}
+                </button>
               ))}
             </div>
           </div>
-        </div>
-        <div className="flex h-full md:w-3/4 w-full md:pl-3 pt-12 pb-4">
-          <div className="flex w-full h-full text-white rounded-xl p-6 bg-[#1E1F25]">
-            <div className="flex flex-col w-full h-[100vh] overflow-y-auto">
-              <div className="flex flex-row justify-between w-full h-[30px]">
-                <div>Market Table</div>
-                <div className="text-[#5D6588]">
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
-                    All Assets
-                  </button>
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
-                    Gainers
-                  </button>
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
-                    Lasers
-                  </button>
-                  <button className="hover:bg-[#000] text-base px-4 py-2 rounded-full focus:bg-black focus:text-white">
-                    Tradeable
-                  </button>
-                </div>
-              </div>
-              <div className="overflow-y-auto h-full mt-6">
-                <table className="table table-pin-rows">
-                  <thead>
-                    <tr className="bg-[#1E1F25] border-[#5D6588] text-[#5D6588] text-[14px]">
-                      <th>Asserts</th>
-                      <th></th>
-                      <th>Last Price</th>
-                      <th>Market cap</th>
-                      <th>Change</th>
-                      <th>Chart</th>
-                      <th>Trade</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.map((item, index) => (
-                      <tr key={index} className="hover">
-                        <td className="flex gap-3 mt-2">
-                          <Image
-                            width={18}
-                            height={18}
-                            src={item.icon}
-                            alt="img"
-                          />
-                          <div>{item.type}</div>
-                        </td>
-                        <td>
-                          <div className="text-[#A5ADCF]">{item.name}</div>
-                        </td>
-                        <td>
-                          <div>{item.price}</div>
-                        </td>
-                        <td>
-                          <div>{item.price}</div>
-                        </td>
-                        <td>
-                          <div>{item.change}</div>
-                        </td>
-                        <td>
-                          <img src={item.graph} />
-                        </td>
-                        <td>
-                          <button className="rounded-full border-2 border-[#246CF9] px-4 py-2">
-                            Buy
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+
+          <div className="overflow-x-auto overflow-y-auto max-h-[100svh]">
+            <table className="w-full">
+              <thead
+                className={`
+                ${
+                  darkMode
+                    ? "bg-white/10 text-white/70"
+                    : "bg-black/10 text-black/70"
+                }
+                text-sm
+              `}
+              >
+                <tr>
+                  <th className="p-3 text-left">Assets</th>
+                  <th className="p-3 text-left">Last Price</th>
+                  <th className="p-3 text-left">Change</th>
+                  <th className="p-3 text-left">Chart</th>
+                  <th className="p-3 text-left">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((crypto, index) => (
+                  <tr
+                    key={index}
+                    className={`
+                    hover:${darkMode ? "bg-white/5" : "bg-black/5"}
+                    transition-all duration-300
+                  `}
+                  >
+                    <td className="p-3 flex items-center space-x-3">
+                      <Image
+                        src={crypto.icon}
+                        alt={crypto.type}
+                        width={32}
+                        height={32}
+                        className="rounded-full"
+                      />
+                      <div>
+                        <div className="font-semibold">{crypto.type}</div>
+                        <div className="text-sm text-gray-500">
+                          {crypto.name}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="p-3">${crypto.price}</td>
+                    <td className="p-3">
+                      <div>{crypto.change}</div>
+                    </td>
+                    <td className="p-3">
+                      <Image
+                        src={crypto.graph}
+                        alt="Chart"
+                        width={80}
+                        height={30}
+                      />
+                    </td>
+                    <td className="p-3">
+                      <button
+                        className={`
+                        px-4 py-2 rounded-full
+                        ${
+                          darkMode
+                            ? "bg-blue-600 hover:bg-blue-700 text-white"
+                            : "bg-blue-500 hover:bg-blue-600 text-white"
+                        }
+                        transition-all duration-300
+                      `}
+                      >
+                        Trade
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
