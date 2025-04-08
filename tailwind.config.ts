@@ -12,7 +12,7 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        custom: "1256px",
+        custom: "1025px",
       },
       animation: {
         "gradient-xy": "gradient-xy 15s ease infinite",

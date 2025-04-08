@@ -1,69 +1,57 @@
 "use client";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useState } from "react";
 import posthog from "posthog-js";
+import CustomConnectButton from "../wallet/ConnectWallet";
+import { Menu } from "lucide-react";
 
 const NavLink = () => {
   const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const navItems = [
+    { name: "Dashboard", path: "/dashboard", event: "dashboard" },
+    { name: "Swaps", path: "/swaps", event: "Swaps page" },
+    { name: "Market", path: "/market", event: "market" },
+    { name: "Wallet", path: "/wallet", event: "wallet page" },
+    { name: "Exchange", path: "/exchange", event: "exchange page" },
+    { name: "Forum", path: "/forum", event: "forum page" },
+    { name: "Blog", path: "/blog", event: "blog page" },
+    { name: "News", path: "/news", event: "news page" },
+  ];
+
+  const renderNavLink = (item: {
+    name: string;
+    path: string;
+    event: string;
+  }) => (
+    <Link
+      key={item.path}
+      onClick={() => posthog.capture(item.event, { property: "value" })}
+      href={item.path}
+      className={`${
+        pathname === item.path ? "font-bold text-gray-600" : "font-normal"
+      } hover:border-white hover:border-b-2 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm`}
+    >
+      {item.name}
+    </Link>
+  );
+
   return (
-    <div id="nav-link" className="flex space-x-8 text-gray-600">
-      <Link
-        onClick={() => posthog.capture("dashboard", { property: "value" })}
-        href="/dashboard"
-        className={` ${pathname === "/dashboard" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm 
-             `}
+    <div className="relative">
+      <div
+        className="flex hidden lg:flex space-x-4 xl:space-x-8 text-gray-600 items-center"
       >
-        Dashboard
-      </Link>
-      <Link
-        onClick={() => posthog.capture("Swaps page", { property: "value" })}
-        href="/swaps"
-        className={` ${pathname === "/swaps" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm`}
-      >
-        Swaps
-      </Link>
-      <Link
-        onClick={() => posthog.capture("market", { property: "value" })}
-        href="/market"
-        className={` ${pathname === "/market" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm`}
-      >
-        Market
-      </Link>
-      <Link
-        onClick={() => posthog.capture("wallet page", { property: "value" })}
-        href="/wallet"
-        className={` ${pathname === "/wallet" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm`}
-      >
-        Wallet
-      </Link>
-      <Link
-        onClick={() => posthog.capture("exchange page", { property: "value" })}
-        href="/exchange"
-        className={` ${pathname === "/exchange" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm`}
-      >
-        Exchange
-      </Link>
-      <Link
-        onClick={() => posthog.capture("forum page", { property: "value" })}
-        href="/forum"
-        className={` ${pathname === "/forum" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm`}
-      >
-        Forum
-      </Link>
-      <Link
-        onClick={() => posthog.capture("blog page", { property: "value" })}
-        href="/blog"
-        className={` ${pathname === "/blog" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm`}
-      >
-        Blog
-      </Link>
-      <Link
-        onClick={() => posthog.capture("news page", { property: "value" })}
-        href="/news"
-        className={` ${pathname === "/news" ? "font-bold text-gray-600" : "font-normal"} hover:border-white hover:border-b-2  inline-flex items-center px-1 pt-1 border-b-2 border-transparent  text-sm`}
-      >
-        News
-      </Link>
+        {navItems.map(renderNavLink)}
+        <div className="ml-2">
+          <CustomConnectButton />
+        </div>
+      </div>
     </div>
   );
 };
