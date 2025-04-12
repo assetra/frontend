@@ -137,6 +137,26 @@ const teamMembers = [
   },
   {
     id: 8,
+    name: "Geo Kwai",
+    role: "Business Development Executive",
+    description:
+      "Growth-focused strategist with a passion for forging impactful partnerships and driving the expansion of Web3 ecosystems. Committed to unlocking opportunities at the intersection of innovation, adoption, and long-term value creation.",
+    image: "/assets/Geo.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/geokwai/",
+      },
+      {
+        platform: "twitter",
+        icon: "/assets/x.png",
+        url: "https://x.com/_christiandyor",
+      },
+    ],
+  },
+  {
+    id: 9,
     name: "Mulaye Subakanya",
     role: "Contributor",
     description: "An open-minded developer ready to reinvent the wheel",
@@ -149,9 +169,9 @@ const teamMembers = [
       },
     ],
   },
-  
+
   {
-    id: 9,
+    id: 10,
     name: "Jahmarley Henry",
     role: "Contributor",
     description:
@@ -166,7 +186,7 @@ const teamMembers = [
     ],
   },
   {
-    id: 10,
+    id: 11,
     name: "Gnosis",
     role: "AI Trading Assistant",
     description:

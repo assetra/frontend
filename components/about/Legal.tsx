@@ -24,7 +24,7 @@ const Legal = () => {
               <ul>
                 <li>Delaware</li>
                 <li>Assetra Trading Group, Inc</li>
-                <li>Incorporation Date: 02/28/2021 </li>
+                <li>Incorporation Date: 02/28/2025 </li>
                 <li>Corporation File Number: 10116385</li>
               </ul>
             </div>
