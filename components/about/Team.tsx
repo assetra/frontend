@@ -154,9 +154,24 @@ const teamMembers = [
         url: "https://x.com/_christiandyor",
       },
     ],
+  },{
+    id: 9,
+    name: "Tom Ho",
+    role: "Business Development Executive",
+    description:
+      "Building partnerships that transform innovation into institutional-grade liquidity.",
+    image: "/assets/Ho.png",
+    socials: [
+      {
+        platform: "linkedin",
+        icon: "/assets/linkedin.png",
+        url: "https://www.linkedin.com/in/ho-tom/",
+      },
+      
+    ],
   },
   {
-    id: 9,
+    id: 10,
     name: "Mulaye Subakanya",
     role: "Contributor",
     description: "An open-minded developer ready to reinvent the wheel",
@@ -171,7 +186,7 @@ const teamMembers = [
   },
 
   {
-    id: 10,
+    id: 11,
     name: "Jahmarley Henry",
     role: "Contributor",
     description:
@@ -186,7 +201,7 @@ const teamMembers = [
     ],
   },
   {
-    id: 11,
+    id: 12,
     name: "Gnosis",
     role: "AI Trading Assistant",
     description:
