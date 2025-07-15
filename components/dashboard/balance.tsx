@@ -130,19 +130,19 @@ const Balance: React.FC = () => {
   return (
     <div className="bg-[#1E1F25] rounded-xl w-full h-full">
       <div className="flex flex-col md:flex-row w-full text-white h-full">
-        <div className="w-full md:w-5/12 flex flex-col p-4 h-full">
+        <div className="w-full md:w-6/12 flex flex-col p-4 h-full">
           <div className="flex flex-col justify-between border-b md:border-b-0 md:border-r-2 border-[#34384C] h-full md:pr-4">
             <div className="w-full flex justify-between pb-2">
-              <h1>Balance</h1>
+              <div className={`text-white text-xl font-bold`}>Balance</div>
             </div>
             <div>
               {isLoading || isBalanceLoading ? (
                 <p>Loading balance...</p>
               ) : isConnected ? (
                 <>
-                  <h1 className="text-2xl md:text-3xl font-extrabold">
+                  <div className="text-2xl md:text-3xl font-extrabold">
                     ${usdBalance || "0.00"}
-                  </h1>
+                  </div>
                   <p className="mb-2">
                     {balanceData?.formatted || "0"}{" "}
                     {balanceData?.symbol || "ETH"}
@@ -150,11 +150,10 @@ const Balance: React.FC = () => {
                 </>
               ) : (
                 <>
-                  <h1 className="text-2xl md:text-3xl font-extrabold">$0.00</h1>
+                  <div className="text-2xl md:text-3xl font-extrabold">$0.00</div>
                   <div className="flex flex-col md:flex-row gap-2 md:gap-4">
-                    <p className="mb-2">0 ETH</p>
-                    <p className="text-yellow-500 text-sm md:text-base">
-                      Connect wallet to see real balance
+                    <p className="text-yellow-500 text-xs">
+                      Connect wallet to see the balance
                     </p>
                   </div>
                 </>
@@ -168,9 +167,9 @@ const Balance: React.FC = () => {
                     src="/images/arrow-down-blue-24-bg.png"
                     alt="Income arrow"
                   />
-                  <p className="pl-2 md:pl-5 text-sm md:text-base">Received</p>
+                  <p className="pl-2 md:pl-5 text-xs md:text-sm">Received</p>
                 </div>
-                <div className="text-sm md:text-base">
+                <div className="text-xs md:text-sm m-1">
                   USD $
                   {isConnected
                     ? transactionData.receivedAmount.toFixed(4)
@@ -178,15 +177,15 @@ const Balance: React.FC = () => {
                 </div>
               </div>
               <div className="flex flex-col w-1/2 justify-start">
-                <div className="flex flex-col border-l-2 px-2 md:px-5 border-[#34384C]">
+                <div className="flex flex-col border-l-2 px-2 md:px-3 border-[#34384C]">
                   <div className="flex flex-row py-2">
                     <img
                       src="/images/arrow-up-red-24-bg.png"
                       alt="Expenses arrow"
                     />
-                    <p className="pl-2 md:pl-5 text-sm md:text-base">Sent</p>
+                    <p className="pl-2 md:pl-5 text-xs md:text-sm">Sent</p>
                   </div>
-                  <div className="text-sm md:text-base">
+                  <div className="text-xs md:text-sm m-1">
                     USD $
                     {isConnected
                       ? transactionData.sentAmount.toFixed(4)

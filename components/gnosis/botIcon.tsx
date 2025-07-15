@@ -106,7 +106,7 @@ const ChatWindow: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
     <div className="fixed bottom-4 right-4 h-[520px] w-[400px] bg-white flex flex-col shadow-lg rounded-xl z-[9999]">
       <div className="bg-black flex items-center justify-between py-2 px-4 rounded-t-xl">
-        <h1 className="text-white">Gnosis</h1>
+        <div className="text-white">Gnosis</div>
         <button className="text-white" onClick={onClose}>
           X
         </button>

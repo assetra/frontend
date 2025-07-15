@@ -6,11 +6,7 @@ function ExchangeSlide({ cryptoPair }: any) {
 
   return (
     <div className="bg-gray-900 rounded-lg py-3 px-3 border border-gray-800">
-      <div className="flex justify-between items-center mb-2">
-        <h4 className="text-white font-medium">{symbolName}</h4>
-      </div>
-
-      <div className="w-full h-40 sm:h-48">
+      <div className="w-full h-auto">
         <MiniChart
           widgetProps={{
             colorTheme: "dark",

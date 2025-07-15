@@ -99,7 +99,7 @@ const WalletInfo: React.FC = () => {
   };
 
   return (
-    <div className="w-full md:w-7/12 flex flex-col py-3">
+    <div className="w-full md:w-6/12 flex flex-col py-3">
       <div className="w-full flex justify-between px-3 md:px-6">
         <p className="text-sm md:text-base">Wallet</p>
         <div className="flex">

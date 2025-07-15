@@ -96,21 +96,21 @@ const Exchange = () => {
 
   return (
     <div
-      className="flex flex-col text-white px-3 py-4 font-medium bg-[#1E1F25] rounded-xl overflow-hidden w-full shadow-lg"
-      style={{ minHeight: "320px", height: "100%" }}
+      className="flex flex-col text-white px-3 py-4 font-medium bg-[#1E1F25] rounded-xl overflow-hidden w-full shadow-lg h-auto"
+      //style={{ minHeight: "320px", height: "100%" }}
     >
       {/* Header */}
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between items-center mb-2">
         <h2 className={`text-white text-xl font-bold ${sofia.className}`}>
           Exchange
         </h2>
         <button
           onClick={onSwapCurrencies}
-          className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+          className="hover:bg-gray-800 rounded-full transition-colors mr-2"
           aria-label="Swap currencies"
         >
           <img
-            className="w-6 h-6"
+            className="w-5 h-5"
             src="/images/refresh-icon.png"
             alt="swap currencies"
           />
@@ -118,7 +118,7 @@ const Exchange = () => {
       </div>
 
       {/* Exchange Rate */}
-      <div className="flex items-center justify-between mb-4 bg-[#262830] p-3 rounded-lg">
+      <div className="flex items-center justify-between mb-1 bg-[#262830] p-3 rounded-lg">
         <div className="flex items-center space-x-2">
           <span className="text-base font-semibold">1</span>
           <span className="text-[#5D6588]">BTC</span>
@@ -130,7 +130,7 @@ const Exchange = () => {
         />
         <div className="flex items-center space-x-2">
           <input
-            className="bg-transparent text-base font-semibold w-24 text-right focus:outline-none"
+            className="bg-transparent text-sm font-semibold w-24 text-right focus:outline-none"
             value={rate}
             onChange={handleRateChange}
             type="number"
@@ -143,7 +143,7 @@ const Exchange = () => {
 
       {/* Get Amount */}
       <div className={`mb-4 ${graphik.className}`}>
-        <label className="block text-[#5D6588] text-sm mb-2">Get</label>
+        <label className="block text-[#5D6588] text-xs mb-1">Get</label>
         <div className="flex items-center rounded-full border border-[#2A2D3A] bg-[#1E1F25] p-1">
           <input
             className="flex-grow bg-transparent px-4 py-2 focus:outline-none"
@@ -157,7 +157,7 @@ const Exchange = () => {
           <select
             value={selectedGetCurrency}
             onChange={(e) => setSelectedGetCurrency(e.target.value)}
-            className="bg-[#262830] rounded-full px-3 py-2 text-sm focus:outline-none appearance-none cursor-pointer min-w-[80px] text-center"
+            className="bg-[#262830] rounded-full px-3 py-2 text-xs focus:outline-none appearance-none cursor-pointer min-w-[80px] text-center"
           >
             {cryptocurrencies.map((crypto) => (
               <option key={`get-${crypto}`} value={crypto}>
@@ -170,7 +170,7 @@ const Exchange = () => {
 
       {/* Pay Amount */}
       <div className={`mb-6 ${graphik.className}`}>
-        <label className="block text-[#5D6588] text-sm mb-2">Pay</label>
+        <label className="block text-[#5D6588] text-xs mb-1">Pay</label>
         <div className="flex items-center rounded-full border border-[#2A2D3A] bg-[#1E1F25] p-1">
           <input
             className="flex-grow bg-transparent px-4 py-2 focus:outline-none"
@@ -184,7 +184,7 @@ const Exchange = () => {
           <select
             value={selectedPayCurrency}
             onChange={(e) => setSelectedPayCurrency(e.target.value)}
-            className="bg-[#262830] rounded-full px-3 py-2 text-sm focus:outline-none appearance-none cursor-pointer min-w-[80px] text-center"
+            className="bg-[#262830] rounded-full px-3 py-2 text-xs focus:outline-none appearance-none cursor-pointer min-w-[80px] text-center"
           >
             {cryptocurrencies.map((crypto) => (
               <option key={`pay-${crypto}`} value={crypto}>
@@ -199,7 +199,7 @@ const Exchange = () => {
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <button
-            className={`flex justify-center items-center rounded-full cursor-pointer w-full text-white font-semibold bg-black hover:bg-gray-900 transition-colors px-4 py-3 mt-auto ${sofia.className}`}
+            className={`flex justify-center items-center rounded-full cursor-pointer w-full text-white text-sm font-semibold bg-black hover:bg-gray-900 transition-colors px-4 py-3 mt-auto ${sofia.className}`}
           >
             Exchange
           </button>

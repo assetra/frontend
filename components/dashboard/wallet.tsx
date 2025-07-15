@@ -10,7 +10,7 @@ const Wallet = () => {
   const [toggle, setToggle] = useState<boolean>(true);
   return (
     <div className="flex md:flex-row flex-col-reverse w-full bg-[#000] px-11 pt-16 overflow-hidden">
-      <div className="bg-[#1E1F25]  md:w-1/4 w-full h-full mr-6 p-8 rounded-2xl">
+      <div className="bg-[#1E1F25]  md:w-1/4 w-full md:max-h-[90svh] md:min-h-[85svh] md:overflow-y-auto scrollbar-hide mr-6 p-8 rounded-2xl">
         <PriceWidget />
       </div>
       <div className="flex flex-col w-full h-full pb-4 pt-2">

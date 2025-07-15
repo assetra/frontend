@@ -191,14 +191,16 @@ const Market = () => {
     <div
       className={`
       ${darkMode ? "dark bg-black text-white" : "bg-white text-black"}
-      min-h-screen w-full transition-colors duration-300
-      font-sans p-4 md:p-6 lg:p-8 mt-6
+      w-full transition-colors duration-300
+      font-sans p-4 md:p-6 mt-6
     `}
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:max-h-[90svh] md:overflow-hidden">
         <div
           className={`
           md:col-span-3 
+          md:max-h-[90svh]
+          md:overflow-y-auto
           p-6 rounded-2xl 
           ${
             darkMode
@@ -238,6 +240,8 @@ const Market = () => {
         <div
           className={`
           md:col-span-9 
+          md:max-h-[90svh]
+          md:overflow-hidden
           rounded-2xl p-6
           ${
             darkMode
@@ -274,7 +278,7 @@ const Market = () => {
             </div>
           </div>
 
-          <div className="overflow-x-auto overflow-y-auto max-h-[100svh]">
+          <div className="overflow-x-auto overflow-y-auto max-h-[90svh]">
             <table className="w-full">
               <thead
                 className={`

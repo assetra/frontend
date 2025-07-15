@@ -95,8 +95,8 @@ const ExchangePage = () => {
   ];
 
   return (
-    <div className="dark:bg-[#000] bg-gray-900 min-h-screen w-full overflow-x-hidden mt-12">
-      <div className="flex flex-col lg:flex-row w-full min-h-screen p-2 md:p-4 lg:p-6 space-y-4 lg:space-y-0 lg:space-x-4">
+    <div className="dark:bg-[#000] bg-gray-900  w-full overflow-hidden mt-12">
+      <div className="flex flex-col lg:flex-row w-full p-2 md:p-4 lg:p-6 space-y-4 lg:space-y-0 lg:space-x-4 overflow-hidden">
         {/* Main Content Left Side */}
         <div className="flex flex-col w-full lg:w-[75%] space-y-4">
           {/* Top Information Cards */}
@@ -155,7 +155,7 @@ const ExchangePage = () => {
           </div>
 
           {/* Chart Section */}
-          <div className="bg-[#1E1F25] bg-opacity-50 backdrop-blur-lg rounded-xl p-4 h-[50vh] lg:h-[60vh]">
+          <div className="bg-[#1E1F25] bg-opacity-50 backdrop-blur-lg rounded-xl p-4 h-[50vh] lg:h-[40vh]">
             <div className="flex flex-col h-full">
               {/* Chart Header */}
               <div className="flex flex-col md:flex-row justify-between mb-4">
@@ -312,7 +312,7 @@ const ExchangePage = () => {
         </div>
 
         {/* Right Sidebar */}
-        <div className="flex flex-col w-full lg:w-[25%] space-y-4">
+        <div className="flex flex-col w-full lg:w-[25%] space-y-4 justify-between">
           {/* Bitcoin Wallet Card */}
           <div className="bg-[#1E1F25] bg-opacity-50 backdrop-blur-lg rounded-xl p-4">
             <div className="flex justify-between items-center mb-4">
