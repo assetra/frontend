@@ -313,6 +313,7 @@
     border-radius: 0.5rem;
     display: grid;
     place-self: center;
+    margin-inline: auto;
   }
 }
 
@@ -699,6 +700,7 @@ html::-webkit-scrollbar {
   display: grid;
   place-self: center;
   margin-block: 1.5rem 1rem;
+  margin-inline: auto;
 
   img {
     width: 100%;
@@ -1540,6 +1542,7 @@ h1 {
   gap: 1rem;
   place-self: center;
   max-width: 600px;
+  margin-inline: auto;
 
   .program {
     padding-inline: 1.5rem;
@@ -1570,7 +1573,7 @@ h1 {
 .legal-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 350px));
-  place-self: center;
+  place-content: center;
   gap: 2rem;
 
   .legal-item {

@@ -54,7 +54,7 @@ const Legal = () => {
             </div>
             <div className="flex">
               <a href="/terms" className="mx-auto">
-                READ MORE
+                VIEW
               </a>
             </div>
           </div>
@@ -80,7 +80,7 @@ const Legal = () => {
             </div>
             <div className="flex">
               <a href="/policy" className="mx-auto">
-                READ MORE
+                VIEW
               </a>
             </div>
           </div>
@@ -106,10 +106,63 @@ const Legal = () => {
             </div>
             <div className="flex">
               <a href="/disclosure" className="mx-auto">
-                READ MORE
+                VIEW
               </a>
             </div>
           </div>
+
+          <div className="transform hover:scale-[1.02] transition-all duration-300 text-center legal-item">
+            <h3 className="text-lg sm:text-xl font-bold text-white">
+              Assetra Intelligence White Paper
+            </h3>
+            <div>
+              <div className="flex">
+                <img
+                  src="/assets/Assetra.png"
+                  alt=""
+                  className="m-auto max-w-[175px] aspect-square"
+                />
+              </div>
+              <h3
+                className="text-2xl sm:text-3xl font-bold text-white"
+                style={{ marginTop: "-12px" }}
+              >
+                Assetra
+              </h3>
+            </div>
+            <div className="flex">
+              <a href="https://drive.google.com/file/d/1YgdajeUU_vHGn6xqnZn9R5NmKuvhZcn9/view?usp=drive_link" className="mx-auto">
+                VIEW
+              </a>
+            </div>
+          </div>
+
+          <div className="transform hover:scale-[1.02] transition-all duration-300 text-center legal-item">
+            <h3 className="text-lg sm:text-xl font-bold text-white">
+              Assetra Token White Paper
+            </h3>
+            <div>
+              <div className="flex">
+                <img
+                  src="/assets/Assetra.png"
+                  alt=""
+                  className="m-auto max-w-[175px] aspect-square"
+                />
+              </div>
+              <h3
+                className="text-2xl sm:text-3xl font-bold text-white"
+                style={{ marginTop: "-12px" }}
+              >
+                Assetra
+              </h3>
+            </div>
+            <div className="flex">
+              <a href="Assetra Token Whitepaper: https://drive.google.com/file/d/1gIE68Nr8sDwBnhQIUn6TqtC12fO3cbz_/view?usp=drive_link" className="mx-auto">
+                VIEW
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
