@@ -157,7 +157,7 @@ const Legal = () => {
               </h3>
             </div>
             <div className="flex">
-              <a href="Assetra Token Whitepaper: https://drive.google.com/file/d/1gIE68Nr8sDwBnhQIUn6TqtC12fO3cbz_/view?usp=drive_link" className="mx-auto">
+              <a href="https://drive.google.com/file/d/1gIE68Nr8sDwBnhQIUn6TqtC12fO3cbz_/view?usp=drive_link" className="mx-auto">
                 VIEW
               </a>
             </div>

@@ -1,4 +1,8 @@
+"use client";
+import { useAuth } from "@/contexts/AuthContext";
+import Link from "next/link";
 const UserPerks = () => {
+  const { isAuthenticated } = useAuth();
   return (
     <div>
       <button
@@ -36,7 +40,14 @@ const UserPerks = () => {
             <li>Refer a friend</li>
           </ol>
 
-          <button type="button">Become a Founding Member</button>
+          {isAuthenticated ? (
+
+            <button type="button" popoverTarget="perks-presenter">Become a Founding Member</button>
+          ) : (
+
+            <button type="button" popoverTarget="perks-presenter"><a href="/signup">Get Started</a></button>
+          )}
+
         </div>
       </div>
     </div>
