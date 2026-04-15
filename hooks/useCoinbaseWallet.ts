@@ -24,7 +24,6 @@ export function useCoinbaseWallet(): WalletAdapter | null {
         const coinbaseWallet = new CoinbaseWalletSDK({
           appName,
           appLogoUrl,
-          darkMode: false,
         });
 
         setSdk(coinbaseWallet);
