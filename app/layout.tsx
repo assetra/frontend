@@ -1,0 +1,92 @@
+import { Analytics } from "@vercel/analytics/react";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import { Poppins } from "next/font/google";
+import "./globals.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "@rainbow-me/rainbowkit/styles.css";
+import "react-toastify/dist/ReactToastify.css";
+import { CSPostHogProvider } from "@/components/posthog/PosthogProvider";
+import Navbar from "@/components/navbar";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import BotIcon from "@/components/gnosis/botIcon";
+import { AuthProvider } from "@/contexts/AuthContext";
+import AuthPopups from "@/components/auth/authPopups";
+import { Providers } from "@/components/wallet/providers";
+import { WalletProvider } from "@/components/wallet/WalletProvider";
+import dynamic from "next/dynamic";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import ResponsiveNavbar from "@/components/navbar/ResponsiveNavbar";
+import LoginStreak from "@/components/auth/LoginStreak";
+import UserPerks from "@/components/banner/UserPerks";
+import Feedback from "@/components/banner/Feedback";
+import EarlySupporter from "@/components/banner/EarlySupporter";
+import Affiliate from "@/components/banner/Affiliate";
+import Partner from "@/components/banner/Partner";
+import AffiliateProgram from "@/components/banner/AffiliateProgram";
+import A4B from "@/components/banner/A4B";
+import { ToastContainer } from "react-toastify";
+
+const microsoft = localFont({ src: "../public/fonts/chinese.msyh.ttf" });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
+
+export const metadata: Metadata = {
+  title: {
+    template: "Assetra | %s",
+    default: "Assetra - The New Asset Frontier",
+  },
+  description:
+    "Assetra is a top-tier crypto trading platform providing advanced customization features, designed to meet the unique needs of traders.",
+  metadataBase: new URL("https://www.assetra.xyz"),
+};
+const ClientWrapper = dynamic(() => import("@/components/ClientWrapper"), {
+  ssr: true,
+});
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={poppins.className}>
+        <Providers>
+          <WalletProvider>
+            <AuthProvider>
+              <ThemeProvider>
+                <ClientWrapper>
+                  <ResponsiveNavbar />
+                  <UserPerks />
+                  <BotIcon />
+                  <Feedback />
+                  <A4B />
+                  <Affiliate />
+                  <AffiliateProgram />
+                  <Partner />
+                  <LoginStreak />
+                  <EarlySupporter />
+                  <CSPostHogProvider>
+                    <main>{children}</main>
+                  </CSPostHogProvider>
+                  <AuthPopups />
+                  <ToastContainer
+                    position="bottom-right"
+                    autoClose={4000}
+                    theme="dark"
+                  />
+                </ClientWrapper>
+              </ThemeProvider>
+            </AuthProvider>
+          </WalletProvider>
+        </Providers>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
+  );
+}
